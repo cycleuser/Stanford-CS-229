@@ -1,0 +1,110 @@
+
+; FILE: ~/.emacs -- startup file for emacs
+;=================================================================
+;
+;;; Set text mode to be the default major mode
+(setq default-major-mode 'c-mode)
+(setq auto-mode-alist
+      (append
+       '(("\\.m$"  . matlab-mode)
+	 ("\\.h$"  . c++-mode)
+	  )
+       auto-mode-alist))
+;;; Force emacs to append an end-of-line to the end of a file that
+;;; does not 
+;;; already end in one.
+(setq require-final-newline t)
+
+;;; The backup file is made by copying the original file (instead of 
+;;; renaming it). This prevents the owner & group of the original file
+;;; from changing.
+(setq backup-by-copying t)
+
+;; Set up for text mode
+(setq text-mode-hook
+      '(lambda () (auto-fill-mode 1)))	; turn on auto-fill mode
+
+;;; Set up for C mode
+(setq c-mode-hook
+      '(lambda () (auto-fill-mode 1)))	; turn on auto-fill mode
+(setq c-indent-level 8)
+
+;;; ===============================================================
+;;; FUNCTION DEFINITIONS
+;
+; The problem with emacs is that emacs uses CTR-s for its incremental
+; search. In our system CTR-s hold the screen (and CTR-q release it).
+;
+;;; "has-no-C-S" sets up so that C-4 acts as C-S & C-6 acts as C-Q.
+;;; This is useful on vt100. "has-C-S" cancels this mapping.
+;;; However, with "has-no-C-S", if you work on a terminal/situation
+;;; that allows use of C-S & C-Q (e.g., under X), then you can use both
+;;; C-4 & C-S (same for C-6 & C-Q).
+;;; So there is no reason to call "has-C-S", unless you need C-4 & C-Q 
+;;; to act differently from C-S & C-Q.
+
+(defun has-no-C-S ()	; for vt100 (set C-4 to C-S & C-6 to C-Q)
+  (interactive)
+;      (setq window-min-height 1)
+      ;;create a keyboard translation table and set each key to be
+      ;;itself. later, swap the meaning of ` (backquote) and ESC keys.
+  (let ((the-table (make-string 128 0)))
+    (let ((i 0))
+      (while (< i 128)
+	(aset the-table i i)
+	(setq i (1+ i))))
+    (aset the-table ?\034 ?\023)	;; set C-4 to C-S
+    (aset the-table ?\036 ?\021)	;; set C-6 to C-Q
+    (setq keyboard-translate-table the-table)))
+
+(defun has-C-S ()	; for X (user can use C-S & C-Q)
+  (interactive)
+  (setq keyboard-translate-table nil))
+
+;;; ===============================================================
+;;; KEY DEFINITIONS
+
+(global-set-key "\M-\C-r" 'replace-regexp)
+(global-set-key "\M-\C-q" 'query-replace-regexp)
+
+(has-no-C-S)	; see comments under function definitions
+
+;; show the current line number
+line-number-mode
+;; font-lock
+(require 'font-lock)
+global-font-lock-mode
+;;===========================================================================
+;;	MATLAB
+;;==============================
+(autoload 'matlab-mode "~/matlab" "Enter Matlab mode." t)
+(autoload 'matlab-shell "~/matlab" "Interactive Matlab mode." t)
+       
+
+(defun my-matlab-mode-hook ()
+  (setq matlab-function-indent t)	; if you want function bodies indented
+  (setq fill-column 76)			; where auto-fill should wrap
+    (font-lock-mode 1)
+  (turn-on-auto-fill)
+  (if (not running-xemacs)
+      (matlab-mode-hilit)
+    )
+  )
+(setq matlab-mode-hook 'my-matlab-mode-hook)
+
+(defun my-matlab-shell-mode-hook ()
+  (setq matlab-function-indent t)	; if you want function bodies indented
+  (setq fill-column 76)			; where auto-fill should wrap
+  (font-lock-mode 1)
+  )
+(setq matlab-shell-mode-hook 'my-matlab-shell-mode-hook)
+
+
+
+(custom-set-variables
+ '(tab-stop-list (quote (2 4 8 10 12 14 16 18 20 22 24 26 28 30 32))))
+(custom-set-faces
+ '(font-lock-warning-face ((((class color) (background light)) (:foreground "darkgreen")))))
+
+;;;(load-library "php-mode-102")
+;;;(add-hook 'php-mode-user-hook 'turn-on-font-lock)
