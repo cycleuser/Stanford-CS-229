@@ -4,7 +4,7 @@ CS229 Lecture notes
 
 翻译：[CycleUser](https://zhuanlan.zhihu.com/python-kivy)
 
-监督学习（Supervised learning）
+# 监督学习（Supervised learning）
 
 咱们先来聊几个使用监督学习来解决问题的实例。假如咱们有一个数据集，里面的数据是俄勒冈州波特兰市的 47 套房屋的面积和价格：
 
@@ -22,9 +22,7 @@ CS229 Lecture notes
 
 如果我们要预测的**目标变量**是**连续**的，比如在咱们这个房屋价格-面积的案例中，这种学习问题就被称为**回归问题**。如果 y 只能取一小部分的离散的值（比如给定房屋面积，咱们要来确定这个房子是一个住宅还是公寓），这样的问题就叫做**分类问题**。
 
-Part I
-
-线性回归
+# Part I 线性回归
 
 为了让我们的房屋案例更有意思，咱们稍微对数据集进行一下补充，增加上每一个房屋的卧室数目
 
@@ -50,7 +48,7 @@ Part I
 
 如果之前你接触过线性回归，你会发现这个函数和常规最小二乘法拟合模型中的最小二乘法成本函数非常相似。不管之前接触过没有，咱们都接着往下进行，以后就会发现这是一个更广泛的算法家族中的一个特例。
 
-1 最小均方算法（LMS algorithm）
+# 1 最小均方算法（LMS algorithm）
 
 我们希望选择一个能让 J(θ)最小的  θ  值。怎么做呢，咱们先用一个搜索的算法，从某一个对  θ  的“初始猜测值”，然后对  θ  值不断进行调整，来让 J(θ)逐渐变小，最好是直到我们能够达到一个使 J(θ)最小的  θ。具体来说，咱们可以考虑使用**梯度下降法**（gradient descent algorithm），这个方法就是从某一个  θ  的初始值开始，然后逐渐重复更新：
 
@@ -105,11 +103,11 @@ Part I
 
 
 
-2 法方程（The normal equations）
+# 2 法方程（The normal equations）
 
 上文中的梯度下降法是一种找出 J 最小值的办法。然后咱们聊一聊另一种实现方法，这种方法寻找起来简单明了，而且不需要使用迭代算法。这种方法就是，我们直接利用找对应导数为 0 位置的 θj，这样就能找到 J 的最小值了。我们想实现这个目的，还不想写一大堆代数公式或者好几页的矩阵积分，所以就要介绍一些做矩阵积分的记号。
 
-2.1 矩阵导数（Matrix derivatives）
+## 2.1 矩阵导数（Matrix derivatives）
 
 假如有一个函数 f: Rm×n → R 从 m * n大小的矩阵映射到实数域，那么就可以定义当矩阵为 A 的时候有导函数 f 如下所示：
 
@@ -149,7 +147,7 @@ Part I
 
 
 
-2.2 最小二乘法回顾（Least squares revisited）
+## 2.2 最小二乘法回顾（Least squares revisited）
 
 通过刚才的内容，咱们大概掌握了矩阵导数这一工具，接下来咱们就继续用逼近模型（closed-form）来找到能让 J(θ)最小的  θ  值。首先咱们把 J 用矩阵-向量的记号来重新表述。
 
@@ -183,7 +181,7 @@ Part I
 
 所以让 J(θ) 取值最小的 θ就是![](https://raw.githubusercontent.com/Kivy-CN/CS229-CN/master/中文翻译中/notes/cs229-notes1.fld/image062.png)。_
 
-3 概率解释（Probabilistic interpretation）
+# 3 概率解释（Probabilistic interpretation）
 
 在面对回归问题的时候，可能有这样一些疑问，就是为什么选择线性回归，尤其是为什么而是最小二乘法成本函数 J？在本节里，我们会给出一系列的概率基本假设，基于这些假设，就可以推出最小二乘法回归是一种非常自然的算法。
 
@@ -223,7 +221,7 @@ Part I
 
 另外还要注意，在刚才的讨论中，我们最终对  θ  的选择并不依赖 σ2，而且也确实在不知道 σ2 的情况下就已经找到了结果。稍后我们还要对这个情况加以利用，到时候我们会讨论指数族以及广义线性模型。
 
-4 局部加权线性回归（Locally weighted linear regression）
+# 4 局部加权线性回归（Locally weighted linear regression）
 
 假如问题还是根据从实数域内取值的 x ∈ R 来预测 y。左下角的图显示了使用 y = θ0 + θ1x 来对一个数据集进行拟合。我们明显能看出来这个数据的趋势并不是一条严格的直线，所以用直线进行的拟合就不是好的方法。
 
@@ -267,7 +265,7 @@ Part I
 
 ![](https://raw.githubusercontent.com/Kivy-CN/CS229-CN/master/中文翻译中/notes/cs229-notes1.fld/image082.png) ![](https://raw.githubusercontent.com/Kivy-CN/CS229-CN/master/中文翻译中/notes/cs229-notes1.fld/image084.png) 
 
-Part II_分类和逻辑回归（Classification and logistic regression）
+# Part II_分类和逻辑回归（Classification and logistic regression）
 
 接下来咱们讲一下分类的问题。分类问题其实和回归问题很像，吃不过我们现在要来预测的 y 的值只局限于少数的若干个离散值。眼下咱们首先关注的是二值化分类问题，也就是说咱们要判断的 y 只有两个取值，0 或者 1。（咱们这里谈到的大部分内容也都可以扩展到多种类的情况。）例如，假如要建立一个垃圾邮件筛选器，那么就可以用 x(i) 表示一个邮件中的若干特征，然后如果这个邮件是垃圾邮件，y 就设为1，否则 y 为 0。0 也可以被称为**消极类别（****negative class****）**，而 1 就成为**积极类别（****positive class****）**，有的情况下也分别表示成“-” 和 “+”。对于给定的一个 x(i)，对应的y(i) is也称为训练样本的**标签（****label****）**。
 
@@ -277,7 +275,7 @@ Part II_分类和逻辑回归（Classification and logistic regression）
 
 
 
-5 逻辑回归（Logistic regression）
+# 5 逻辑回归（Logistic regression）
 
 我们当然也可以还按照之前的线性回归的算法来根据给定的 x 来预测 y，只要忽略掉 y 是一个散列值就可以了。然而，这样构建的例子很容易遇到性能问题，这个方法运行效率会非常低，效果很差。而且从直观上来看，hθ(x) 的值如果大于1 或者小于0 就都没有意义了，因为咱们已经实现都确定了 y∈ {0, 1}，就是说 y 必然应当是 0 和 1这两个值当中的一个。
 
@@ -331,7 +329,7 @@ Assuming that the m training examples were generated independently, we can then 
 
 
 
-6 题外话: 感知器学习算法（The perceptron learning algorithm）
+# 6 题外话: 感知器学习算法（The perceptron learning algorithm）
 
 现在咱们来岔开一下话题，简要地聊一个算法，这个算法的历史很有趣，并且之后在我们讲学习理论的时候还要讲到它。设想一下，对逻辑回归方法修改一下，“强迫”它输出的值要么是 0 要么是 1。要实现这个目的，很自然就应该把函数 g 的定义修改一下，改成一个阈值函数（threshold function）：
 
@@ -347,7 +345,7 @@ Assuming that the m training examples were generated independently, we can then 
 
 
 
-7 取 l(θ) 最大值的另外一个算法
+# 7 取 l(θ) 最大值的另外一个算法
 
 再回到用 S 型函数 g(z)来进行逻辑回归的情况，咱们来讲一个让 l(θ) 取最大值的另一个算法。
 
@@ -387,7 +385,7 @@ Part III_广义线性模型 Generalized Linear Models
 
 到目前为止，我们看过了回归的案例，也看了一个分类案例。在回归的案例中，我们得到的函数是 y|x; θ _ N (μ, σ2)；而分类的案例中，函数是 y|x; θ_ Bernoulli(φ)，这里面的μ 和 φ 分别是 x和 θ 的某种函数。在本节，我们会发现这两种方法都是一个更广泛使用的模型的特例，这种更广泛使用的模型就叫做广义线性模型。我们还会讲一下广义线性模型中的其他模型是如何推出的，以及如何应用到其他的分类和回归问题上。
 
-8 指数族 The exponential family
+# 8 指数族 The exponential family
 
 在学习 GLMs 之前，我们要先定义一下指数组分布（exponential family distributions）。如果一个分布能用下面的方式来写出来，我们就说这类分布属于指数族：
 
@@ -423,7 +421,7 @@ Part III_广义线性模型 Generalized Linear Models
 
 
 
-9 构建广义线性模型（Constructing GLMs）
+# 9 构建广义线性模型（Constructing GLMs）
 
 设想你要构建一个模型，来估计在给定的某个小时内来到你商店的顾客人数（或者是你的网站的页面访问次数），基于某些确定的特征 x ，例如商店的促销、最近的广告、天气、今天周几啊等等。我们已经知道泊松分布（Poisson distribution）通常能适合用来对访客数目进行建模。知道了这个之后，怎么来建立一个模型来解决咱们这个具体问题呢？非常幸运的是，泊松分布是属于指数分布族的一个分部，所以我们可以使用一个广义线性模型（Generalized Linear Model，缩写为 GLM）。在本节，我们讲一种对刚刚这类问题来构建广义线性模型的方法。
 
@@ -439,7 +437,7 @@ Part III_广义线性模型 Generalized Linear Models
 
 此外，这类模型对一些关于 y 的分布的不同类型建模来说通常效率都很高；例如，我们下面就将要简单介绍一些逻辑回归以及普通最小二乘法这两者如何作为广义线性模型来推出。
 
-9.1 普通最小二乘法（Ordinary Least Squares）
+## 9.1 普通最小二乘法（Ordinary Least Squares）
 
 我们这一节要讲的是普通最小二乘法实际上是广义线性模型中的一种特例，设想如下的背景设置：目标变量 y（在广义线性模型的术语也叫做**响应变量****response variable**）是连续的，然后我们将给定 x 的 y 的分布以高斯分布 N(μ,σ2) 来建模，其中 μ可以使依赖 x 的一个函数。这样，我们就让上面的指数分布族的(η)分布成为了一个高斯分布。在前面内容中我们提到过，在把高斯分布写成指数分布族的分布的时候，有μ = η。所以就能得到下面的等式：
 
@@ -449,7 +447,7 @@ Part III_广义线性模型 Generalized Linear Models
 
 
 
-9.2 逻辑回归（Logistic Regression）
+## 9.2 逻辑回归（Logistic Regression）
 
 接下来咱们再来看看逻辑回归。这里咱们还是看看二值化分类问题，也就是 y ∈ {0, 1}。给定了 y 是一个二选一的值，那么很自然就选择伯努利分布（Bernoulli distribution）来对给定 x 的y 的分布进行建模了。在我们把伯努利分布写成一种指数族分布的时候，有 φ = 1/ (1 + e_η)。另外还要注意的是，如果有 y|x; θ _ Bernoulli(φ)，那么 E [y|x; θ] = φ。所以就跟刚刚推导普通最小二乘法的过程类似，有以下等式：
 
@@ -461,7 +459,7 @@ Part III_广义线性模型 Generalized Linear Models
 
 注：很多教科书用 g 表示链接函数，而用反函数g_1 来表示响应函数；但是咱们这里用的是反过来的，这是继承了早期的机器学习中的用法，我们这样使用和后续的其他课程能够更好地衔接起来。
 
-9.3 Softmax 回归
+## 9.3 Softmax 回归
 
 咱们再来看一个广义线性模型的例子吧。设想有这样的一个分类问题，其中响应变量 y 的取值可以是 k 个值当中的任意一个，也就是y ∈ {1, 2, ..., k}。例如，我们这次要进行的分类就比把邮件分成垃圾邮件和正常邮件两类这种二值化分类要更加复杂一些，比如可能是要分成三类，例如垃圾邮件、个人邮件、工作相关邮件。这样响应变量依然还是离散的，但取值就不只有两个了。因此咱们就用**多项式分布（****multinomial distribution****）**来进行建模。
 
