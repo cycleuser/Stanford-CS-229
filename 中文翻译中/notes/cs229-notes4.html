@@ -1,0 +1,3059 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns:mv="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta name=标题 content="">
+<meta name=关键词 content="">
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 15">
+<meta name=Originator content="Microsoft Word 15">
+<link rel=File-List href="cs229-notes4.fld/filelist.xml">
+<link rel=Edit-Time-Data href="cs229-notes4.fld/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Yohhon Johnn</o:Author>
+  <o:LastAuthor>Yohhon Johnn</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>662</o:TotalTime>
+  <o:Created>2017-06-01T05:07:00Z</o:Created>
+  <o:LastSaved>2017-06-01T05:07:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>2879</o:Words>
+  <o:Characters>16415</o:Characters>
+  <o:Lines>136</o:Lines>
+  <o:Paragraphs>38</o:Paragraphs>
+  <o:CharactersWithSpaces>19256</o:CharactersWithSpaces>
+  <o:Version>15.0</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+  <o:PixelsPerInch>96</o:PixelsPerInch>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<link rel=themeData href="cs229-notes4.fld/themedata.thmx">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>125</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:PunctuationKerning/>
+  <w:DrawingGridVerticalSpacing>10 磅</w:DrawingGridVerticalSpacing>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>2</w:DisplayVerticalDrawingGridEvery>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-US</w:LidThemeOther>
+  <w:LidThemeAsian>ZH-CN</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:SpaceForUL/>
+   <w:BalanceSingleByteDoubleByteWidth/>
+   <w:DoNotLeaveBackslashAlone/>
+   <w:ULTrailSpace/>
+   <w:DoNotExpandShiftReturn/>
+   <w:AdjustLineHeightInTable/>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:EnableOpenTypeKerning/>
+   <w:DontFlipMirrorIndents/>
+   <w:OverrideTableStyleHps/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="&#45;-"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="false"
+  DefSemiHidden="false" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="382">
+  <w:LsdException Locked="false" Priority="0" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 9"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="header"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footer"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index heading"/>
+  <w:LsdException Locked="false" Priority="35" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of figures"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope return"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="line number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="page number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of authorities"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="macro"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="toa heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 5"/>
+  <w:LsdException Locked="false" Priority="10" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Closing"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Signature"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Message Header"/>
+  <w:LsdException Locked="false" Priority="11" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Salutation"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Date"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Block Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Hyperlink"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="FollowedHyperlink"/>
+  <w:LsdException Locked="false" Priority="22" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Document Map"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Plain Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="E-mail Signature"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Top of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Bottom of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal (Web)"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Acronym"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Cite"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Code"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Definition"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Keyboard"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Preformatted"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Sample"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Typewriter"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Variable"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Table"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation subject"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="No List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Contemporary"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Elegant"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Professional"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Balloon Text"/>
+  <w:LsdException Locked="false" Priority="39" Name="Table Grid"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Theme"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Level 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" QFormat="true"
+   Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" QFormat="true"
+   Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" QFormat="true"
+   Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" QFormat="true"
+   Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" QFormat="true"
+   Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" QFormat="true"
+   Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="TOC Heading"/>
+  <w:LsdException Locked="false" Priority="41" Name="Plain Table 1"/>
+  <w:LsdException Locked="false" Priority="42" Name="Plain Table 2"/>
+  <w:LsdException Locked="false" Priority="43" Name="Plain Table 3"/>
+  <w:LsdException Locked="false" Priority="44" Name="Plain Table 4"/>
+  <w:LsdException Locked="false" Priority="45" Name="Plain Table 5"/>
+  <w:LsdException Locked="false" Priority="40" Name="Grid Table Light"/>
+  <w:LsdException Locked="false" Priority="46" Name="Grid Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="Grid Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="Grid Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="46" Name="List Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="List Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="List Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Mention"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Smart Hyperlink"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Times;
+	panose-1:2 0 5 0 0 0 0 0 0 0;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:宋体;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 680460288 22 0 262145 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:-536870145 1107305727 0 0 415 0;}
+@font-face
+	{font-family:DengXian;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:script;
+	mso-font-pitch:variable;
+	mso-font-signature:-1610612033 953122042 22 0 262159 0;}
+@font-face
+	{font-family:"\@DengXian";
+	mso-font-charset:134;
+	mso-generic-font-family:script;
+	mso-font-pitch:variable;
+	mso-font-signature:-1610612033 953122042 22 0 262159 0;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-536870145 1073786111 1 0 415 0;}
+@font-face
+	{font-family:"\@宋体";
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 680460288 22 0 262145 0;}
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+@font-face
+	{font-family:"\@SimSun";
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 680460288 22 0 262145 0;}
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-536870145 1791491579 134217746 0 131231 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-536870145 1791491579 134217746 0 131231 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	mso-pagination:none;
+	font-size:12.0pt;
+	font-family:DengXian;
+	mso-ascii-font-family:DengXian;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:DengXian;
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:DengXian;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+h1
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"标题 1字符";
+	mso-style-next:正文;
+	margin-top:17.0pt;
+	margin-right:0cm;
+	margin-bottom:16.5pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:240%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:22.0pt;
+	font-family:DengXian;
+	mso-ascii-font-family:DengXian;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:DengXian;
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:DengXian;
+	mso-hansi-theme-font:minor-latin;
+	mso-font-kerning:22.0pt;}
+h2
+	{mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"标题 2字符";
+	mso-style-next:正文;
+	margin-top:13.0pt;
+	margin-right:0cm;
+	margin-bottom:13.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:173%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:16.0pt;
+	font-family:"DengXian Light";
+	mso-ascii-font-family:"DengXian Light";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"DengXian Light";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"DengXian Light";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	mso-font-kerning:1.0pt;}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{mso-style-priority:99;
+	mso-style-link:页眉字符;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:none;
+	tab-stops:center 207.65pt right 415.3pt;
+	layout-grid-mode:char;
+	border:none;
+	mso-border-bottom-alt:solid windowtext .75pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 1.0pt 0cm;
+	font-size:9.0pt;
+	font-family:DengXian;
+	mso-ascii-font-family:DengXian;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:DengXian;
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:DengXian;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{mso-style-priority:99;
+	mso-style-link:页脚字符;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:none;
+	tab-stops:center 207.65pt right 415.3pt;
+	layout-grid-mode:char;
+	font-size:9.0pt;
+	font-family:DengXian;
+	mso-ascii-font-family:DengXian;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:DengXian;
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:DengXian;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	mso-themecolor:hyperlink;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:#954F72;
+	mso-themecolor:followedhyperlink;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoDocumentMap, li.MsoDocumentMap, div.MsoDocumentMap
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-link:文档结构图字符;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	mso-pagination:none;
+	font-size:12.0pt;
+	font-family:宋体;
+	mso-hansi-font-family:DengXian;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+span.MsoPlaceholderText
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-unhide:no;
+	color:gray;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:21.0pt;
+	mso-char-indent-count:2.0;
+	mso-pagination:none;
+	font-size:12.0pt;
+	font-family:DengXian;
+	mso-ascii-font-family:DengXian;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:DengXian;
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:DengXian;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+span.a
+	{mso-style-name:页眉字符;
+	mso-style-priority:99;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:页眉;
+	mso-ansi-font-size:9.0pt;
+	mso-bidi-font-size:9.0pt;}
+span.a0
+	{mso-style-name:页脚字符;
+	mso-style-priority:99;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:页脚;
+	mso-ansi-font-size:9.0pt;
+	mso-bidi-font-size:9.0pt;}
+span.a1
+	{mso-style-name:文档结构图字符;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:文档结构图;
+	font-family:宋体;
+	mso-ascii-font-family:宋体;
+	mso-fareast-font-family:宋体;}
+span.2
+	{mso-style-name:"标题 2字符";
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"标题 2";
+	mso-ansi-font-size:16.0pt;
+	mso-bidi-font-size:16.0pt;
+	font-family:"DengXian Light";
+	mso-ascii-font-family:"DengXian Light";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"DengXian Light";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"DengXian Light";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	font-weight:bold;}
+span.1
+	{mso-style-name:"标题 1字符";
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"标题 1";
+	mso-ansi-font-size:22.0pt;
+	mso-bidi-font-size:22.0pt;
+	mso-font-kerning:22.0pt;
+	font-weight:bold;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-family:DengXian;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;}
+ /* Page Definitions */
+@page
+	{mso-page-border-surround-header:no;
+	mso-page-border-surround-footer:no;
+	mso-footnote-separator:url("cs229-notes4.fld/header.html") fs;
+	mso-footnote-continuation-separator:url("cs229-notes4.fld/header.html") fcs;
+	mso-endnote-separator:url("cs229-notes4.fld/header.html") es;
+	mso-endnote-continuation-separator:url("cs229-notes4.fld/header.html") ecs;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-footer:url("cs229-notes4.fld/header.html") f1;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:1;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1 1 -1 -1 -1 -1 -1 -1 -1 -1;}
+@list l0:level1
+	{mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level2
+	{mso-level-start-at:0;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level3
+	{mso-level-start-at:0;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level4
+	{mso-level-start-at:0;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level5
+	{mso-level-start-at:0;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level6
+	{mso-level-start-at:0;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level7
+	{mso-level-start-at:0;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level8
+	{mso-level-start-at:0;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+@list l0:level9
+	{mso-level-start-at:0;
+	mso-level-text:"";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:0cm;
+	text-indent:0cm;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+table.MsoNormalTable
+	{mso-style-name:普通表格;
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:DengXian;
+	mso-ascii-font-family:DengXian;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:DengXian;
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:DengXian;
+	mso-hansi-theme-font:minor-latin;
+	mso-font-kerning:1.0pt;}
+</style>
+<![endif]-->
+</head>
+
+<body bgcolor=white lang=ZH-CN link="#0563C1" vlink="#954F72" style='tab-interval:
+21.0pt;text-justify-trim:punctuation'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:32.0pt;mso-pagination:widow-orphan;mso-outline-level:1;mso-layout-grid-align:
+none;text-autospace:none'><span lang=EN-US style='font-size:28.0pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>CS229
+Lecture notes</span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:22.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span style='font-size:18.5pt;mso-ascii-font-family:Times;
+mso-hansi-font-family:Times;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>原作者：</span><span lang=EN-US><a href="http://cs229.stanford.edu/"><span
+style='font-size:18.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+mso-font-kerning:0pt'>Andrew Ng</span></a></span><span style='font-size:18.5pt;
+mso-ascii-font-family:Times;mso-hansi-font-family:Times;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>（</span><span lang=EN-US><a
+href="http://open.163.com/movie/2008/1/M/C/M6SGF6VB4_M6SGHFBMC.html"><span
+lang=ZH-CN style='font-size:18.5pt;mso-ascii-font-family:Times;mso-hansi-font-family:
+Times;mso-bidi-font-family:Times;mso-font-kerning:0pt'>吴恩达</span></a></span><span
+style='font-size:18.5pt;mso-ascii-font-family:Times;mso-hansi-font-family:Times;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>）</span><span
+lang=EN-US style='font-size:18.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:22.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span style='font-size:18.5pt;mso-ascii-font-family:Times;
+mso-hansi-font-family:Times;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>翻译：</span><span lang=EN-US><a href="https://zhuanlan.zhihu.com/python-kivy"><span
+style='font-size:18.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+mso-font-kerning:0pt'>CycleUser</span></a></span><span class=MsoHyperlink><span
+lang=EN-US style='font-size:18.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;mso-font-kerning:0pt'><o:p></o:p></span></span></p>
+
+<h1><span lang=EN-US style='font-size:22.5pt;line-height:240%'>Part V</span><span
+lang=EN-US style='font-size:22.5pt;line-height:240%;font-family:"MS Mincho",serif;
+mso-bidi-font-family:"MS Mincho"'> </span><span style='font-size:22.5pt;
+line-height:240%;font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho"'>学</span><span
+style='font-size:22.5pt;line-height:240%;font-family:SimSun;mso-bidi-font-family:
+SimSun'>习</span><span style='font-size:22.5pt;line-height:240%;font-family:
+"MS Mincho",serif;mso-bidi-font-family:"MS Mincho"'>理</span><span
+style='font-size:22.5pt;line-height:240%;font-family:SimSun;mso-bidi-font-family:
+SimSun'>论</span><span style='font-size:22.5pt;line-height:240%;font-family:
+"MS Mincho",serif;mso-bidi-font-family:"MS Mincho"'>（</span><span lang=EN-US>Learning
+Theory</span>） </h1>
+
+<h1><span lang=EN-US>1</span>偏差<span lang=EN-US>/</span>方差的权衡（<span lang=EN-US>Bias/variance
+tradeoff </span>）</h1>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span style='font-size:16.0pt;mso-ascii-font-family:Times;
+mso-hansi-font-family:Times;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>在讲线性回归的时候，我们讨论过这样的问题：拟合数据的时候，选择线性的</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>“y = θ</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>0 </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>+θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x”</span><span
+style='font-size:16.0pt;mso-ascii-font-family:Times;mso-hansi-font-family:Times;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>这样的“简单”模型，还是选择多项式的</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>“y=θ</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>0</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>+θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x+···θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>5</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>5</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>”</span><span
+style='font-size:16.0pt;mso-ascii-font-family:Times;mso-hansi-font-family:Times;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>这种“复杂”模型。如下图所示：</span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="图片_x0020_1" o:spid="_x0000_i1055" type="#_x0000_t75"
+ style='width:398pt;height:108pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image001.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=398 height=108
+src="cs229-notes4.fld/image002.png" v:shapes="图片_x0020_1"><![endif]></span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span style='font-size:16.0pt;mso-ascii-font-family:Times;
+mso-hansi-font-family:Times;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>如最右侧图所示，用一个五次多项式来进行拟合，得到的并不是一个好模型。而且，这个五次多项式对于训练集中的每一个</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'> x</span><span style='font-size:16.0pt;
+mso-ascii-font-family:Times;mso-hansi-font-family:Times;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>（例如之前文中说的居住面积）都给出了非常好的预测的</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'> y </span><span style='font-size:16.0pt;
+mso-ascii-font-family:Times;mso-hansi-font-family:Times;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>值（对应的就是房屋价格），我们也不能指望这个模型能够对训练集之外的点给出靠谱的预测。换句话说，用这种高次多项式来对训练集进行学习得到的模型根本不能扩展运用到其他房屋上面去。一个推测模型（</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>hypothesis</span><span
+style='font-size:16.0pt;mso-ascii-font-family:Times;mso-hansi-font-family:Times;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>）的泛化误差（</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>generalization error</span><span
+style='font-size:16.0pt;mso-ascii-font-family:Times;mso-hansi-font-family:Times;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>，稍后再给出正式定义）正式那些不属于训练集的样本潜在的预期偏差（</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>expected error on examples not
+necessarily in the training set</span><span style='font-size:16.0pt;mso-ascii-font-family:
+Times;mso-hansi-font-family:Times;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'>）。</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span style='font-size:16.0pt;mso-ascii-font-family:Times;
+mso-hansi-font-family:Times;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>上面图中最左边的线性拟合和最右边的高次多项式拟合都有非常大的泛化误差。然而，这两个模型各自出的问题是很不一样的。如果</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'> y </span><span style='font-size:16.0pt;
+mso-ascii-font-family:Times;mso-hansi-font-family:Times;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>和</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> x </span><span style='font-size:16.0pt;
+mso-ascii-font-family:Times;mso-hansi-font-family:Times;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>之间的关系不是线性的，那么即便我们有一个非常大规模的训练集，然后用来进行线性拟合，得到的线性模型都还是不能够准确捕捉到数据的结构。我们粗略地将一个模型的偏差（</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>bias</span><span style='font-size:16.0pt;
+mso-ascii-font-family:Times;mso-hansi-font-family:Times;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>）定义为预期的泛化误差（</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>expected generalization error</span><span
+style='font-size:16.0pt;mso-ascii-font-family:Times;mso-hansi-font-family:Times;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>），即便我们要去拟合的对象是一个非常大的甚至是无限的训练数据集。这样的话，对于上面三幅图中所展示的那个情况来看，最左边的那个线性模型就具有特别大的偏差（</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>bias</span><span style='font-size:16.0pt;
+mso-ascii-font-family:Times;mso-hansi-font-family:Times;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>），可能是对数据欠拟合（也就是说，没有捕捉到数据所体现的结构特征）。</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Apart from bias,
+there’s a second component to the generalization error, consisting of the
+variance of a model fitting procedure. Specifically, when fitting a 5th order
+polynomial as in the rightmost figure, there is a large risk that we’re fitting
+patterns in the data that happened to be present in our small, finite training
+set, but that do not reflect the wider pattern of the relationship between x
+and y. This could be, say, because in the training set we just happened by
+chance to get a slightly more-expensive-than-average house here, and a slightly
+less-expensive-than-average house there, and so on. By fitting these “spurious”
+patterns in the training set, we might again obtain a model with large
+generalization error. In this case, we say the model has large variance.</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>1 <o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:10.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:9.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>1</span><span lang=EN-US style='font-size:13.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>In these notes, we will not try to formalize the definitions of bias and
+variance beyond this discussion. While bias and variance are straightforward to
+define formally for, e.g., linear regression, there have been several proposals
+for the definitions of bias and variance for classification, and there is as
+yet no agreement on what is the “right” and/or the most useful formalism. </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Often, there is a
+tradeoff between bias and variance. If our model is too “simple” and has very
+few parameters, then it may have large bias (but small variance); if it is too
+“complex” and has very many parameters, then it may suffer from large variance
+(but have smaller bias). In the example above, fitting a quadratic function
+does better than either of the extremes of a first or a fifth order polynomial.
+</span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<h1><span lang=EN-US>2 Preliminaries </span></h1>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>In this set of
+notes, we begin our foray into learning theory. Apart from being interesting
+and enlightening in its own right, this discussion will also help us hone our
+intuitions and derive rules of thumb about how to best apply learning
+algorithms in different settings. We will also seek to answer a few questions:
+First, can we make formal the bias/variance tradeoff that was just discussed?
+The will also eventually lead us to talk about model selection methods, which
+can, for instance, automatically decide what order polynomial to fit to a
+training set. Second, in machine learning it’s really generalization error that
+we care about, but most learning algorithms fit their models to the training
+set. Why should doing well on the training set tell us anything about
+generalization error? Specifically, can we relate error on the training set to
+generalization error? Third and finally, are there conditions under which we
+can actually prove that learning algorithms will work well? </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>We start with two simples
+but very useful lemmas. </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Lemma. (The union
+bound). Let A</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>1</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>, A</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>2</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>, . . ., A</span><span lang=EN-US style='font-size:10.5pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>k </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>be k different events (that may not be
+independent). Then </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>P(A</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1 </span><span lang=EN-US style='font-size:16.0pt;font-family:"MS Mincho",serif;
+mso-bidi-font-family:"MS Mincho";color:black;mso-font-kerning:0pt'>∪</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>···</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'>∪</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>A</span><span lang=EN-US style='font-size:
+10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>k</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>)≤P(A</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>)+...+P(A</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>k</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>). </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>In probability
+theory, the union bound is usually stated as an axiom (and thus we won’t try to
+prove it), but it also makes intuitive sense: The probability of any one of k
+events happening is at most the sums of the probabilities of the k different
+events. </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Lemma. (<span
+class=SpellE>Hoeffding</span> inequality) Let Z</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>, <span
+class=GramE>. . . ,</span> Z</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>m </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>be m independent and <span
+class=SpellE>iden</span>- <span class=SpellE>tically</span> distributed (<span
+class=SpellE>iid</span>) random variables drawn from a Bernoulli(φ) <span
+class=SpellE>distri</span>- <span class=SpellE>bution</span>. <span
+class=SpellE><span class=GramE>I.e.,P</span></span>(Z</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>=1)=<span
+class=SpellE>φ,andP</span>(Z</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>i </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>=0)=1−φ. <span class=SpellE>Letφ</span><span
+style='position:relative;top:-4.0pt;mso-text-raise:4.0pt'>ˆ</span>=(1/m)<span
+style='position:relative;top:-12.0pt;mso-text-raise:12.0pt'> </span></span><span
+class=SpellE><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-8.0pt;mso-text-raise:
+8.0pt;mso-font-kerning:0pt'>m</span></span><span lang=EN-US style='font-size:
+10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+position:relative;top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:0pt'>i=1</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>Z</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>be the mean of
+these random variables, and let any γ &gt; 0 be fixed. Then </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>P <span
+class=GramE>( |</span> φ − φ<span style='position:relative;top:-4.0pt;
+mso-text-raise:4.0pt'>ˆ </span>| &gt; γ ) ≤ 2 e x p ( − 2 γ </span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-6.5pt;mso-text-raise:6.5pt;mso-font-kerning:
+0pt'>2 </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>m ) </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>This lemma (which
+in learning theory is also called the <span class=SpellE>Chernoff</span> bound)
+says that if we take φ<span style='position:relative;top:-4.0pt;mso-text-raise:
+4.0pt'>ˆ</span>—the average of m Bernoulli(φ) random variables—to be our
+estimate of φ, then the probability of our being far from the true value is
+small, so long as m is large. Another way of saying this is that if you have a
+biased coin whose chance of landing on heads is φ, then if you toss it m times
+and calculate the fraction of times that it came up heads, that will be a good
+estimate of φ with high probability (if m is large). </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Using just these
+two lemmas, we will be able to prove some of the deepest and most important
+results in learning theory. </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>To simplify our
+exposition, let’s restrict our attention to binary classification in which the
+labels are y </span><span lang=EN-US style='font-size:16.0pt;font-family:"MS Mincho",serif;
+mso-bidi-font-family:"MS Mincho";color:black;mso-font-kerning:0pt'>∈</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'> {0, 1}. Everything we’ll say here
+generalizes to other, including regression and multi-class classification, problems.
+</span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>We assume we are
+given a training set S = {(x</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:0pt'>(i)</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>,y</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>(i)</span><span class=GramE><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>);<span class=SpellE>i</span></span></span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> = 1,...,m} of size m, where the training
+examples (x</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>(i)</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>,y</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>(i)</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>) are drawn <span class=SpellE>iid</span> from some probability
+distribution D. For a hypothesis h, we define the training error (also called
+the empirical risk or empirical error in learning theory) to be </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:4.0pt;mso-text-raise:
+-4.0pt;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="图片_x0020_253"
+ o:spid="_x0000_i1054" type="#_x0000_t75" style='width:268pt;height:68pt;
+ visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image003.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=268 height=68
+src="cs229-notes4.fld/image004.png" v:shapes="图片_x0020_253"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:
+0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>This is just the
+fraction of training examples that h misclassifies. When we want to make
+explicit the dependence of εˆ(h) on the training set S, we may also write this
+a εˆ</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>S</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>(h). We also define the generalization error to be </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_254" o:spid="_x0000_i1053" type="#_x0000_t75" style='width:263pt;
+ height:44pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image005.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=263 height=44
+src="cs229-notes4.fld/image005.png" v:shapes="图片_x0020_254"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>I.e. this is the
+probability that, if we now draw a new example (<span class=GramE>x,y</span>)
+from the distribution D, h will misclassify it. </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Note that we have
+assumed that the training data was drawn from the same distribution D with
+which we’re going to evaluate our hypotheses (in the definition of
+generalization error). This is sometimes also referred to as one of the PAC
+assumptions.</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>2 <o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:10.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:9.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>2</span><span lang=EN-US style='font-size:13.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>PAC stands for “probably approximately correct,” which is a framework and
+set of assumptions under which numerous results on learning theory were proved.
+Of these, the assumption of training and testing on the same distribution, and
+the assumption of the independently drawn training examples, were the most
+important. </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Consider the
+setting of linear classification, and let h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>θ </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>(x) = 1{θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>T </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x ≥ 0}. What’s a
+reasonable way of fitting the parameters θ? One approach is to try to minimize
+the training error, and pick </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_255" o:spid="_x0000_i1052" type="#_x0000_t75" style='width:181pt;
+ height:45pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image006.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=181 height=45
+src="cs229-notes4.fld/image006.png" v:shapes="图片_x0020_255"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>We call this
+process empirical risk minimization (ERM), and the resulting hypothesis output
+by the learning algorithm is h<span style='position:relative;top:-4.0pt;
+mso-text-raise:4.0pt'>ˆ </span>= h</span><span lang=EN-US style='font-size:
+10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+position:relative;top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:0pt'>θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:1.5pt;mso-text-raise:-1.5pt;mso-font-kerning:
+0pt'>ˆ</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>. We think of ERM
+as the most “basic” learning algorithm, and it will be this algorithm that we
+focus on in these notes. (Algorithms such as logistic regression can also be
+viewed as approximations to empirical risk minimization.) </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>In our study of
+learning theory, it will be useful to abstract away from the specific
+parameterization of hypotheses and from issues such as whether we’re using a
+linear classifier. We define the hypothesis class H used by a learning
+algorithm to be the set of all classifiers considered by it. For linear
+classification, H = {<span class=SpellE>h</span></span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>θ </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>: h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>θ</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>(x) = 1{θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>T</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x ≥ 0<span
+class=GramE>},θ</span> </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;
+mso-font-kerning:0pt'>∈</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'> R</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>n+1</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>} is thus the set of all classifiers over X (the domain of the inputs)
+where the decision boundary is linear. More broadly, if we were studying, say,
+neural networks, then we could let H be the set of all classifiers
+representable by some neural network architecture. </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Empirical risk
+minimization can now be thought of as a minimization over the class of
+functions H, in which the learning algorithm picks the hypothesis: </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:10.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:9.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="图片_x0020_256"
+ o:spid="_x0000_i1051" type="#_x0000_t75" style='width:177pt;height:53pt;
+ visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image007.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=177 height=53
+src="cs229-notes4.fld/image007.png" v:shapes="图片_x0020_256"><![endif]></span><span
+lang=EN-US style='font-size:9.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='text-align:left;line-height:14.0pt;
+mso-pagination:widow-orphan;mso-layout-grid-align:none;text-autospace:none'><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_137" o:spid="_x0000_i1050" type="#_x0000_t75" style='width:38pt;
+ height:2pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image008.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=38 height=2
+src="cs229-notes4.fld/image009.png" v:shapes="图片_x0020_137"><![endif]></span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><span style='mso-spacerun:yes'> </span><o:p></o:p></span></p>
+
+<h1><span lang=EN-US>3 The case of finite H </span></h1>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Let’s start by
+considering a learning problem in which we have a finite hypothesis class H = {<span
+class=SpellE>h</span></span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>1</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>, . . ., h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>k</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>} consisting of k
+hypotheses. Thus, H is just a set of k functions mapping from X to {0, 1}, and
+empirical risk minimization selects h<span style='position:relative;top:-4.0pt;
+mso-text-raise:4.0pt'>ˆ </span>to be whichever of these k functions has the
+smallest training error. </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>We would like to
+give guarantees on the generalization error of h<span style='position:relative;
+top:-4.0pt;mso-text-raise:4.0pt'>ˆ</span>. Our strategy for doing so will be in
+two parts: First, we will show that εˆ(h) is a reliable estimate of ε(h) for
+all h. Second, we will show that this implies an upper-bound on the
+generalization error of h<span style='position:relative;top:-4.0pt;mso-text-raise:
+4.0pt'>ˆ</span>. </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Take any one,
+fixed, h</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>i </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;
+mso-font-kerning:0pt'>∈</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'> H. Consider a Bernoulli random variable Z whose distribution is defined
+as follows. We’re going to sample (<span class=GramE>x,y</span>) </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'>∼</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> D. Then, we set Z = 1{h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>(x) ̸= y}. I.e.,
+we’re going to draw one example, and let Z indicate whether h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>misclassifies it.
+Similarly, we also define Z</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>j </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>= 1{h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>(x</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>(j)</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>) ̸= y</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>(j)</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>}. Since our
+training set was drawn <span class=SpellE>iid</span> from D, Z and the Z</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>j</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>’s has the same
+distribution. </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>We see that the
+misclassification probability on a randomly drawn example— that is, ε(h)—is
+exactly the expected value of Z (and Z</span><span lang=EN-US style='font-size:
+10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>j</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>). Moreover, the training error can be
+written </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:4.0pt;mso-text-raise:
+-4.0pt;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="图片_x0020_257"
+ o:spid="_x0000_i1049" type="#_x0000_t75" style='width:175pt;height:76pt;
+ visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image010.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=175 height=76
+src="cs229-notes4.fld/image010.png" v:shapes="图片_x0020_257"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:
+0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Thus, εˆ(h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>) is exactly the
+mean of the m random variables Z</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>j </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>that are drawn <span class=SpellE>iid</span>
+from a Bernoulli distribution with mean ε(h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>). Hence, we can
+apply the <span class=SpellE>Hoeffding</span> inequality, and obtain </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_258" o:spid="_x0000_i1048" type="#_x0000_t75" style='width:394pt;
+ height:36pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image011.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=394 height=36
+src="cs229-notes4.fld/image011.png" v:shapes="图片_x0020_258"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>This shows that,
+for our particular h</span><span lang=EN-US style='font-size:10.5pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>i</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>, training error will be close to
+generalization error with high probability, assuming m is large. But we don’t
+just want to guarantee that ε(h</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>i</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>) will be close to εˆ(h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>) (with high
+probability) for just only one particular h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>. We want to prove
+that this will be true for simultaneously for all h </span><span lang=EN-US
+style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'>∈</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> H. To do so, let A</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>denote the event
+that |ε(h</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>i</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>) − εˆ(h</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>i</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>)| &gt; γ. We’ve already show that, for any particular A</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>, it holds true
+that P(A</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>i</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>) ≤ 2exp(−2γ</span><span lang=EN-US style='font-size:10.5pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:0pt'>2</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>m). Thus, using the union bound, we have that
+<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_259" o:spid="_x0000_i1047" type="#_x0000_t75" style='width:320pt;
+ height:134pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image012.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=320 height=134
+src="cs229-notes4.fld/image013.png" v:shapes="图片_x0020_259"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>If we subtract
+both sides from 1, we find that </span><span lang=EN-US style='font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_260" o:spid="_x0000_i1046" type="#_x0000_t75" style='width:356pt;
+ height:34pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image014.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=356 height=34
+src="cs229-notes4.fld/image015.png" v:shapes="图片_x0020_260"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>(The “¬” symbol
+means “not.”) So, with probability at least 1−2k exp(−2γ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>2</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>m), we have that
+ε(h) will be within γ of εˆ(h) for all h </span><span lang=EN-US
+style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'>∈</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> H. This is called a <span class=SpellE>uni</span>-
+form convergence result, because this is a bound that holds simultaneously for
+all (as opposed to just one) h </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;
+mso-font-kerning:0pt'>∈</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'> H. </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>In the discussion
+above, what we did was, for particular values of m and γ, give a bound on the
+probability that for some h </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;
+mso-font-kerning:0pt'>∈</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'> H, |ε(h) − εˆ(h)| &gt; γ. There are three quantities of interest here: m,
+γ, and the probability of error; we can bound either one in terms of the other
+two. </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>For instance, we
+can ask the following question: Given γ and some δ &gt; 0, how large must m be
+before we can guarantee that with probability at least 1 − δ, training error
+will be within γ of generalization error? By setting δ = 2k exp(−2γ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>2</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>m) and solving <span
+class=SpellE>for m</span>, [you should convince yourself this is the right
+thing to do!], we find that if </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_261" o:spid="_x0000_i1045" type="#_x0000_t75" style='width:164pt;
+ height:71pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image016.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=164 height=71
+src="cs229-notes4.fld/image016.png" v:shapes="图片_x0020_261"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>then with
+probability at least 1 − δ, we have that |ε(h) − εˆ(h)| ≤ γ for all h </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'>∈</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> H. (Equivalently, this shows that the
+probability that |ε(h) − εˆ(h)| &gt; γ for some h </span><span lang=EN-US
+style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'>∈</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> H is at most δ.) This bound tells us how
+many training examples we need in order make a guarantee. The training set size
+m that a certain method or algorithm requires in order to achieve a certain
+level of performance is also called the algorithm’s sample complexity. </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>The key property
+of the bound above is that the number of training examples needed to make this
+guarantee is only logarithmic <span class=SpellE>in k</span>, the number of
+hypotheses in H. This will be important later. </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Similarly, we can
+also hold m and δ fixed and solve for γ in the previous equation, and show
+[again, convince yourself that this is right!] that with probability 1 − δ, we
+have that for all h </span><span lang=EN-US style='font-size:16.0pt;font-family:
+"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;mso-font-kerning:
+0pt'>∈</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'> H, </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center;mso-line-height-alt:
+14.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_262" o:spid="_x0000_i1044" type="#_x0000_t75" style='width:291pt;
+ height:80pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image017.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=291 height=80
+src="cs229-notes4.fld/image017.png" v:shapes="图片_x0020_262"><![endif]></span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_132" o:spid="_x0000_i1043" type="#_x0000_t75" style='width:7pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image018.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=7 height=1
+src="cs229-notes4.fld/image019.png" v:shapes="图片_x0020_132"><![endif]><!--[if gte vml 1]><v:shape
+ id="图片_x0020_131" o:spid="_x0000_i1042" type="#_x0000_t75" style='width:6pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image020.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=6 height=1
+src="cs229-notes4.fld/image020.png" v:shapes="图片_x0020_131"><![endif]></span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Now, let’s assume
+that uniform convergence holds, i.e., that |ε(h)−εˆ(h)| ≤ γ for all h </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'>∈</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> H. What can we prove about the
+generalization of our learning algorithm that picked h<span style='position:
+relative;top:-4.0pt;mso-text-raise:4.0pt'>ˆ </span>= <span class=SpellE>arg</span>
+min</span><span class=SpellE><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;
+mso-font-kerning:0pt'>∈</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>H</span></span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'><span style='mso-spacerun:yes'> </span></span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>εˆ(h)? </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Define h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;
+mso-font-kerning:0pt'>∗</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'> </span></span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>= <span class=SpellE>arg</span> min</span><span class=SpellE><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>h</span><span lang=EN-US style='font-size:10.5pt;font-family:"MS Mincho",serif;
+mso-bidi-font-family:"MS Mincho";color:black;position:relative;top:3.0pt;
+mso-text-raise:-3.0pt;mso-font-kerning:0pt'>∈</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>H</span></span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'><span style='mso-spacerun:yes'> </span></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>ε(h) to be the best possible hypothesis
+in H. Note that h</span><span lang=EN-US style='font-size:10.5pt;font-family:
+"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;position:relative;
+top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:0pt'>∗</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'><span style='mso-spacerun:yes'> </span></span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>is the best that we could possibly do given
+that we are using H, so it makes sense to compare our performance to that of h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;
+mso-font-kerning:0pt'>∗</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>. We have: </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_263" o:spid="_x0000_i1041" type="#_x0000_t75" style='width:221pt;
+ height:106pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image021.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=221 height=106
+src="cs229-notes4.fld/image021.png" v:shapes="图片_x0020_263"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>The first line
+used the fact that | ε <span class=GramE>( h</span><span style='position:relative;
+top:-4.0pt;mso-text-raise:4.0pt'>ˆ </span>) − εˆ ( h<span style='position:relative;
+top:-4.0pt;mso-text-raise:4.0pt'>ˆ </span>) | ≤ γ ( by our uniform convergence
+assumption). The second used the fact that h<span style='position:relative;
+top:-4.0pt;mso-text-raise:4.0pt'>ˆ </span>was chosen to minimize εˆ(h), and
+hence εˆ(h<span style='position:relative;top:-4.0pt;mso-text-raise:4.0pt'>ˆ</span>)
+≤ εˆ(h) for all h, and in particular εˆ(h<span style='position:relative;
+top:-4.0pt;mso-text-raise:4.0pt'>ˆ</span>) ≤ εˆ(h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;
+mso-font-kerning:0pt'>∗</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>). The third line used the uniform convergence assumption again, to show
+that εˆ(h</span><span lang=EN-US style='font-size:10.5pt;font-family:"MS Mincho",serif;
+mso-bidi-font-family:"MS Mincho";color:black;position:relative;top:-5.0pt;
+mso-text-raise:5.0pt;mso-font-kerning:0pt'>∗</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>) ≤ ε(h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;
+mso-font-kerning:0pt'>∗</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>) + γ. So, what we’ve shown is the following: If uniform convergence
+occurs, then the generalization error of h<span style='position:relative;
+top:-4.0pt;mso-text-raise:4.0pt'>ˆ </span>is at most 2γ worse than the best
+possible hypothesis in H! </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Let’s put all this
+together into a theorem.</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;
+mso-font-kerning:0pt'> </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>Theorem. Let |H| = k, and let any m, δ be fixed. Then with probability at </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>least 1 − δ, we
+have that </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:5.5pt;mso-text-raise:
+-5.5pt;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="图片_x0020_264"
+ o:spid="_x0000_i1040" type="#_x0000_t75" style='width:267pt;height:54pt;
+ visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image022.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=267 height=54
+src="cs229-notes4.fld/image023.png" v:shapes="图片_x0020_264"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:5.5pt;mso-text-raise:-5.5pt;mso-font-kerning:
+0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>This is proved by
+letting γ equal the <span style='position:relative;top:-12.0pt;mso-text-raise:
+12.0pt'>√</span></span><span lang=EN-US style='font-size:16.0pt;font-family:
+"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;mso-font-kerning:
+0pt'>  </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>term</span><span
+style='font-size:16.0pt;mso-ascii-font-family:Times;mso-hansi-font-family:Times;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>，</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>using our previous argument that
+uniform convergence occurs with probability at least 1 − δ, and then noting
+that uniform convergence implies ε(h) is at most 2γ higher than ε(h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;
+mso-font-kerning:0pt'>∗</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>) = min</span><span class=SpellE><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;
+mso-font-kerning:0pt'>∈</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>H</span></span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'><span style='mso-spacerun:yes'> </span></span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>ε(h) (as we showed previously). </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>This also
+quantifies what we were saying previously saying about the bias/variance
+tradeoff in model selection. Specifically, suppose we have some hypothesis
+class H, and are considering switching to some much larger hypothesis class H</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Calibri",sans-serif;mso-fareast-font-family:
+Calibri;mso-bidi-font-family:Calibri;color:black;position:relative;top:-5.0pt;
+mso-text-raise:5.0pt;mso-font-kerning:0pt'>′</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'><span style='mso-spacerun:yes'> </span></span><span lang=EN-US
+style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'>⊇</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> H. If we switch to H</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Calibri",sans-serif;mso-fareast-font-family:
+Calibri;mso-bidi-font-family:Calibri;color:black;position:relative;top:-5.0pt;
+mso-text-raise:5.0pt;mso-font-kerning:0pt'>′</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>, then the first term min</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>h </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>ε(h) can only decrease
+(since we’d then be taking a min over a larger set of functions). Hence, by
+learning using a larger hypothesis class, our “bias” can </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>only decrease.
+However, if k increases, then the second 2<span style='position:relative;
+top:-12.0pt;mso-text-raise:12.0pt'>√</span></span><span lang=EN-US
+style='font-size:16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;mso-font-kerning:0pt'> </span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>increase. This increase corresponds to our
+“variance” increasing when we use a larger hypothesis class. </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>8 </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='text-align:left;line-height:14.0pt;
+mso-pagination:widow-orphan;mso-layout-grid-align:none;text-autospace:none'><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_126" o:spid="_x0000_i1039" type="#_x0000_t75" style='width:2pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image024.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=2 height=1
+src="cs229-notes4.fld/image025.png" v:shapes="图片_x0020_126"><![endif]></span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>· term would also <span
+class=GramE>By</span> holding γ and δ fixed and solving <span class=SpellE>for
+m</span> like we did before, we can </span><span lang=EN-US style='font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>also obtain the
+following sample complexity bound:</span><span lang=EN-US style='font-size:
+16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";
+color:black;mso-font-kerning:0pt'> </span><span lang=EN-US style='font-size:
+16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'>Corollary. Let |H| = k, and let any <span class=SpellE><span
+class=GramE>δ,γ</span></span> be fixed. Then for ε(h<span style='position:relative;
+top:-4.0pt;mso-text-raise:4.0pt'>ˆ</span>) ≤ </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>min</span><span
+class=SpellE><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>h</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;
+position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>∈</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>H</span></span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'><span style='mso-spacerun:yes'> </span></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>ε(h) + 2γ to hold with probability at
+least 1 − δ, it suffices <o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_265" o:spid="_x0000_i1038" type="#_x0000_t75" style='width:221pt;
+ height:139pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image026.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=221 height=139
+src="cs229-notes4.fld/image026.png" v:shapes="图片_x0020_265"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<h1><span lang=EN-US>4 The case of infinite H </span></h1>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>We have proved
+some useful theorems for the case of finite hypothesis classes. But many
+hypothesis classes, including any parameterized by real numbers (as in linear
+classification) actually contain an infinite number of functions. Can we prove
+similar results for this setting? </span><span lang=EN-US style='font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Let’s start by
+going through something that is not the “right” argument. Better and more
+general arguments exist, but this will be useful for honing our intuitions
+about the domain. </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Suppose we have an
+H that is parameterized by d real numbers. Since we </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>are using a
+computer to represent real numbers, and IEEE double-precision </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>floating point
+(double’s in C) uses 64 bits to represent a floating point <span class=SpellE>num</span>-
+</span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span class=SpellE><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>ber</span></span><span lang=EN-US style='font-size:16.0pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>,
+this means that our learning algorithm, assuming we’re using double- </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>precision floating
+point, is parameterized by 64d bits. Thus, our hypothesis </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>class really
+consists of at most k = 2</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:0pt'>64d </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>different hypotheses. From the <span
+class=SpellE>Corol</span>- </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span class=SpellE><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>lary</span></span><span lang=EN-US style='font-size:16.0pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'> at
+the end of the previous section, we therefore find that, to guarantee </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>ε(h<span
+style='position:relative;top:-4.0pt;mso-text-raise:4.0pt'>ˆ</span>) ≤ ε(h</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;
+mso-font-kerning:0pt'>∗</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>) + 2γ, with to hold with probability at least 1 − δ, it suffices </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span class=SpellE><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>thatm≥O</span></span><span lang=EN-US style='font-size:16.0pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'> </span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-6.5pt;mso-text-raise:6.5pt;mso-font-kerning:
+0pt'>1 </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>log</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-6.5pt;mso-text-raise:6.5pt;mso-font-kerning:
+0pt'>2</span><span lang=EN-US style='font-size:8.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-9.0pt;mso-text-raise:
+9.0pt;mso-font-kerning:0pt'>64d </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>=O </span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-6.5pt;mso-text-raise:
+6.5pt;mso-font-kerning:0pt'>d </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>log</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-6.5pt;mso-text-raise:
+6.5pt;mso-font-kerning:0pt'>1 </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>=O (d). (<span class=SpellE>The<span class=GramE>γ,δ</span>subscriptsare</span>
+</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>γ</span><span lang=EN-US style='font-size:8.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>2 </span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>δ γ</span><span lang=EN-US style='font-size:8.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>2 </span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>δ </span><span class=SpellE><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>γ,δ</span></span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'> </span><span lang=EN-US style='font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>to indicate that
+the last big-O is hiding constants that may depend on γ and δ.) Thus, the
+number of training examples needed is at most linear in the parameters of the
+model. </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>The fact that we
+relied on 64-bit floating point makes this argument not entirely satisfying,
+but the conclusion is nonetheless roughly correct: If what we’re going to do is
+try to minimize training error, then in order to learn </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='text-align:left;line-height:14.0pt;
+mso-pagination:widow-orphan;mso-layout-grid-align:none;text-autospace:none'><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_125" o:spid="_x0000_i1037" type="#_x0000_t75" style='width:8pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image027.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=8 height=1
+src="cs229-notes4.fld/image028.png" v:shapes="图片_x0020_125"><![endif]></span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><span style='mso-spacerun:yes'> </span><span
+style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="图片_x0020_124" o:spid="_x0000_i1036"
+ type="#_x0000_t75" style='width:6pt;height:1pt;visibility:visible;
+ mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image020.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=6 height=1
+src="cs229-notes4.fld/image020.png" v:shapes="图片_x0020_124"><![endif]></span><span
+style='mso-spacerun:yes'> </span><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_123" o:spid="_x0000_i1035" type="#_x0000_t75" style='width:6pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image029.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=6 height=1
+src="cs229-notes4.fld/image030.png" v:shapes="图片_x0020_123"><![endif]></span><span
+style='mso-spacerun:yes'> </span><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_122" o:spid="_x0000_i1034" type="#_x0000_t75" style='width:3pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image031.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=3 height=1
+src="cs229-notes4.fld/image032.png" v:shapes="图片_x0020_122"><![endif]></span><span
+style='mso-spacerun:yes'> </span><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_121" o:spid="_x0000_i1033" type="#_x0000_t75" style='width:5pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image033.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=5 height=1
+src="cs229-notes4.fld/image033.png" v:shapes="图片_x0020_121"><![endif]></span><span
+style='mso-spacerun:yes'> </span><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_120" o:spid="_x0000_i1032" type="#_x0000_t75" style='width:7pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image034.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=7 height=1
+src="cs229-notes4.fld/image035.png" v:shapes="图片_x0020_120"><![endif]></span><span
+style='mso-spacerun:yes'> </span><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_119" o:spid="_x0000_i1031" type="#_x0000_t75" style='width:5pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image033.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=5 height=1
+src="cs229-notes4.fld/image033.png" v:shapes="图片_x0020_119"><![endif]></span><span
+style='mso-spacerun:yes'> </span><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_118" o:spid="_x0000_i1030" type="#_x0000_t75" style='width:2pt;
+ height:1pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image036.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=2 height=1
+src="cs229-notes4.fld/image037.png" v:shapes="图片_x0020_118"><![endif]></span><span
+style='mso-spacerun:yes'> </span><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>9 </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>“well” using a
+hypothesis class that has d parameters, generally we’re going to need on the
+order of a linear number of training examples in d. </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>(At this point,
+it’s worth noting that these results were proved for an al- <span class=SpellE>gorithm</span>
+that uses empirical risk minimization. Thus, while the linear <span
+class=SpellE>depen</span>- <span class=SpellE>dence</span> of sample complexity
+on d does generally hold for most discriminative learning algorithms that try
+to minimize training error or some <span class=SpellE>approxima</span>- <span
+class=SpellE>tion</span> to training error, these conclusions do not always
+apply as readily to discriminative learning algorithms. Giving good theoretical
+guarantees on many non-ERM learning algorithms is still an area of active
+research.) </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>The other part of
+our previous argument that’s slightly unsatisfying is that it relies on the
+parameterization of H. Intuitively, this doesn’t seem like it should matter: We
+had written the class of linear classifiers as h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>θ</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>(x) = 1{θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>0 </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>+ θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1 </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>+ ···θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>n</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>n </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>≥ 0}, with n + 1
+parameters θ</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>0</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>,...,θ</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>n</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>. But it could also be written h</span><span class=SpellE><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>u,v</span></span><span lang=EN-US style='font-size:16.0pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>(x)
+= 1{(u</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>2</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:0pt'>0 </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>− v</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:
+0pt'>0</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>2</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>) + (u</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>2</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:0pt'>1 </span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>− v</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:
+0pt'>1</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>2</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>)x</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>1 </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>+ ··<span class=GramE>·(</span>u</span><span lang=EN-US style='font-size:
+10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:0pt'>2</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:
+0pt'>n </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>− v</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:4.0pt;mso-text-raise:-4.0pt;mso-font-kerning:
+0pt'>n</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>2</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>)x</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>n </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>≥ 0} with 2n + 2 parameters u</span><span lang=EN-US style='font-size:
+10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:0pt'>i</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>, v</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>i</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>. Yet, both of
+these are just defining the same H: The set of linear classifiers in n
+dimensions. </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>To derive a more
+satisfying argument, let’s define a few more things. </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Given a set S = {x</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>(i)</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>, <span
+class=GramE>. . . ,</span> x</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:0pt'>(d)</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>} (no relation to the training set) of
+points x</span><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:-5.0pt;mso-text-raise:
+5.0pt;mso-font-kerning:0pt'>(i) </span><span lang=EN-US style='font-size:16.0pt;
+font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";color:black;
+mso-font-kerning:0pt'>∈</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'> X, we say that H shatters S if H can realize any labeling on S. I.e., if
+for any set of labels {y</span><span lang=EN-US style='font-size:10.5pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:0pt'>(1)</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'>, . . . , y</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>(d)</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>}, there exists
+some h </span><span lang=EN-US style='font-size:16.0pt;font-family:"MS Mincho",serif;
+mso-bidi-font-family:"MS Mincho";color:black;mso-font-kerning:0pt'>∈</span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'> H so that h(x</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>(i)</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>) = y</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;mso-font-kerning:
+0pt'>(i) </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>for all i =
+1,...d. </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Given a hypothesis
+class H, we then define its <span class=SpellE>Vapnik-Chervonenkis</span>
+dimension, written VC(H), to be the size of the largest set that is shattered
+by H. (If H can shatter arbitrarily large sets, then VC(H) = ∞.) </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>For instance,
+consider the following set of three points: </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_266" o:spid="_x0000_i1029" type="#_x0000_t75" style='width:152pt;
+ height:160pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image038.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=152 height=160
+src="cs229-notes4.fld/image039.png" v:shapes="图片_x0020_266"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Can the set H of
+linear classifiers in two dimensions (h(x) = 1{θ</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>0 </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>+θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>1 </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>+ θ</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>2</span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>x</span><span
+lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:3.0pt;mso-text-raise:-3.0pt;mso-font-kerning:
+0pt'>2 </span><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>≥ 0}) can shatter
+the set above? The answer is yes. Specifically, we see that, for any of the
+eight possible <span class=SpellE>labelings</span> of these points, we can find
+a linear classifier that obtains “zero training error” on them: <o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_267" o:spid="_x0000_i1028" type="#_x0000_t75" style='width:6in;
+ height:218pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image040.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=432 height=218
+src="cs229-notes4.fld/image041.png" v:shapes="图片_x0020_267"><![endif]></span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Moreover, it is
+possible to show that there is no set of 4 points that this hypothesis class
+can shatter. Thus, the largest set that H can shatter is of size 3, and hence
+VC(H) = 3. </span><span lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Note that the VC
+dimension of H here is 3 even though there may be sets of size 3 that it cannot
+shatter. For instance, if we had a set of three points lying in a straight line
+(left figure), then there is no way to find a linear separator for the labeling
+of the three points shown below (right figure): </span><span lang=EN-US
+style='font-size:30.5pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;position:relative;top:15.0pt;mso-text-raise:-15.0pt;mso-font-kerning:
+0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+mso-line-height-alt:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:
+none;text-autospace:none'><span lang=EN-US style='font-size:30.5pt;font-family:
+"Times",serif;mso-bidi-font-family:Times;color:black;position:relative;
+top:15.0pt;mso-text-raise:-15.0pt;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_268" o:spid="_x0000_i1027" type="#_x0000_t75" style='width:302pt;
+ height:127pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image042.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=302 height=127
+src="cs229-notes4.fld/image043.png" v:shapes="图片_x0020_268"><![endif]></span><span
+lang=EN-US style='font-size:30.5pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;position:relative;top:15.0pt;mso-text-raise:-15.0pt;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>In order words,
+under the definition of the VC dimension, in order to prove that VC(H) is at
+least d, we need to show only that there’s at least one set of size d that H
+can shatter. </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>The following
+theorem, due to <span class=SpellE>Vapnik</span>, can then be shown. (This is,
+many would argue, the most important theorem in all of learning theory.) </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>11 </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Theorem. Let H be
+given, and let d = VC(H). Then with probability at least 1−δ, we have that for
+all <span class=SpellE>h<span style='font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho"'>∈</span>H</span>, </span><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_269" o:spid="_x0000_i1026" type="#_x0000_t75" style='width:284pt;
+ height:55pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image044.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=284 height=55
+src="cs229-notes4.fld/image045.png" v:shapes="图片_x0020_269"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Thus, with
+probability at least 1 − δ, we also have that: </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="图片_x0020_270" o:spid="_x0000_i1025" type="#_x0000_t75" style='width:293pt;
+ height:62pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="cs229-notes4.fld/image046.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=293 height=62
+src="cs229-notes4.fld/image047.png" v:shapes="图片_x0020_270"><![endif]></span><span
+lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:
+Times;color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>In other words, if
+a hypothesis class has finite VC dimension, then uniform convergence occurs as
+m becomes large. As before, this allows us to give a bound on ε(h) in terms of
+ε(h</span><span lang=EN-US style='font-size:10.5pt;font-family:"MS Mincho",serif;
+mso-bidi-font-family:"MS Mincho";color:black;position:relative;top:-5.0pt;
+mso-text-raise:5.0pt;mso-font-kerning:0pt'>∗</span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>). We also have the following corollary: </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>Corollary. For
+|ε(h) − εˆ(h)| ≤ γ to hold for all h </span><span lang=EN-US style='font-size:
+16.0pt;font-family:"MS Mincho",serif;mso-bidi-font-family:"MS Mincho";
+color:black;mso-font-kerning:0pt'>∈</span><span lang=EN-US style='font-size:
+16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'> H (and hence ε(h<span style='position:relative;
+top:-4.0pt;mso-text-raise:4.0pt'>ˆ</span>) ≤ ε(h</span><span lang=EN-US
+style='font-size:10.5pt;font-family:"MS Mincho",serif;mso-bidi-font-family:
+"MS Mincho";color:black;position:relative;top:-5.0pt;mso-text-raise:5.0pt;
+mso-font-kerning:0pt'>∗</span><span lang=EN-US style='font-size:16.0pt;
+font-family:"Times",serif;mso-bidi-font-family:Times;color:black;mso-font-kerning:
+0pt'>) + 2γ) with probability at least 1 − δ, it suffices that m = O</span><span
+class=SpellE><span lang=EN-US style='font-size:10.5pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;position:relative;top:3.0pt;mso-text-raise:
+-3.0pt;mso-font-kerning:0pt'>γ,δ</span></span><span lang=EN-US
+style='font-size:16.0pt;font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'>(d). </span><span lang=EN-US
+style='font-family:"Times",serif;mso-bidi-font-family:Times;color:black;
+mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:18.0pt;mso-pagination:widow-orphan;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:16.0pt;font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'>In other words,
+the number of training examples needed to learn “well” using H is linear in the
+VC dimension of H. It turns out that, for “most” hypothesis classes, the VC
+dimension (assuming a “reasonable” parameterization) is also roughly linear in
+the number of parameters. Putting these together, we conclude that (for an
+algorithm that tries to minimize training error) the number of training
+examples needed is usually roughly linear in the number of parameters of H. </span><span
+lang=EN-US style='font-family:"Times",serif;mso-bidi-font-family:Times;
+color:black;mso-font-kerning:0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:12.0pt;text-align:left;
+line-height:26.0pt;mso-pagination:widow-orphan;mso-outline-level:1;mso-layout-grid-align:
+none;text-autospace:none'><span lang=EN-US style='font-family:"Times",serif;
+mso-bidi-font-family:Times;color:black;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+</body>
+
+</html>
