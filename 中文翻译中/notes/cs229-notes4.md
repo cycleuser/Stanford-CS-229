@@ -4,7 +4,7 @@ CS229 Lecture notes
 
 翻译：[*CycleUser*](https://zhuanlan.zhihu.com/python-kivy)
 
-# Part V :学习理论（Learning Theory） 
+# Part V 学习理论（Learning Theory） 
 
 # 1 偏差/方差的权衡（Bias/variance tradeoff ）
 
@@ -152,74 +152,60 @@ Corollary. Let |H| = k, and let any δ,γ be fixed. Then for ε(hˆ) ≤ minh∈
 
 # 4 无限个假设（infinite H）的情况 
 
-We have proved some useful theorems for the case of finite hypothesis classes. But many hypothesis classes, including any parameterized by real numbers (as in linear classification) actually contain an infinite number of functions. Can we prove similar results for this setting?
+我们已经针对有限个假设类的情况证明了一些有用的定理。然而有很多的假设类都包含有无限个函数，其中包括用实数参数化的类（比如线性分类问题）。那针对这种无限个假设的情况，我们能证明出类似的结论么？
 
-Let’s start by going through something that is not the “right” argument. Better and more general arguments exist, but this will be useful for honing our intuitions about the domain.
+我们先从一些不太“准确”论证的内容开始（not the “right” argument）。当然也有更好的更通用的论证，但先从这种不太“准确”的内容除法，将有助于锻炼我们在此领域内的直觉（intuitions about the domain）。
 
-Suppose we have an H that is parameterized by d real numbers. Since we
+若我们有一个假设集合 H，使用 d 个实数来进行参数化（parameterized by d real numbers）。由于我们使用计算机表述实数，而 IEEE 的双精度浮点数（ C 语言里面的 double 类型）使用了 64 bit 来表示一个浮点数（floating-point number,），这就意味着如果我们在学习算法中使用双精度浮点数（double- precision floating point），那我们的算法就由 64 d 个 bit 来进行参数化（parameterized by 64d bits）。这样我们的这个假设类实际上包含的不同假设的个数最多为 k = 264d 。结合上一节的最后一段那个推论（Corollary），我们就能发现，要保证 ε(hˆ) ≤ ε(h∗) + 2γ ，同时还要保证概率至少为 1 − δ ，则需要训练样本规模 m 满足![](cs229-notes4.fld/image023.png)。（这里的 γ，δ 下标表示最后一个大O 可能是一个依赖于γ和δ的隐藏常数。）因此，所需的训练样本规模在模型参数中最多也就是线性的（the number of training examples needed is at most linear in the parameters of the model）。
 
-are using a computer to represent real numbers, and IEEE double-precision
+The fact that we relied on 64-bit floating point makes this argument not entirely satisfying, but the conclusion is nonetheless roughly correct: If what we’re going to do is try to minimize training error, then in order to learn “well” using a hypothesis class that has d parameters, generally we’re going to need on the order of a linear number of training examples in d.
 
-floating point (double’s in C) uses 64 bits to represent a floating point number, this means that our learning algorithm, assuming we’re using double-
+由于我们要依赖 64 bit 浮点数，所以上面的论证还不能完全令人满意，但这个结论大致上是正确的：如果我们试图使训练误差（training error）最小化，那么为了使用具有 d 个参数的假设类（hypothesis class）的学习效果“较好（well）”，通常就需要按照 d 的线性数量来确定训练样本规模。（译者注：这句话的翻译肯定是错的，因为原文的语法我根本不能理解， 我第一次见到动词 need 后面用介词短语，而那个介词短语在此处我也不能确定具体意义，希望大家给提出指正，抱歉了。）
 
-precision floating point, is parameterized by 64d bits. Thus, our hypothesis
+（在这里要注意的是，对于使用经验风险最小化（empirical risk minimization ，ERM）的学习算法，上面这些结论已经被证明适用。因此，样本复杂度（sample complexity）对 d 的线性依赖性通常适用于大多数分类识别学习算法（discriminative learning algorithms），但训练误差或者训练误差近似值的最小化，就未必适用于分类识别了。对很多的非 ERM 学习算法提供可靠的理论论证，仍然是目前很活跃的一个研究领域。）
 
-class really consists of at most k = 264d different hypotheses. From the Corollary at the end of the previous section, we therefore find that, to guarantee
+前面的论证还有另外一部分让人不太满意，就是依赖于对 H 的参数化（parameterization）。根据直觉来看，这个参数化似乎应该不会有太大影响：我们已经把线性分类器（linear classifiers）写成了 hθ(x) = 1{θ0 + θ1x1 + ···θnxn ≥ 0} 的形式，其中有 n+1 个参数 θ0,...,θn 。但也可以写成 hu,v(x) = 1{(u20 − v02) + (u21 − v12)x1 + ··· (u2n − vn2)xn ≥ 0} 的形式，这样就有 2n+2 个参数 ui, vi 了。然而这两种形式都定义了同样的一个 H： 一个 n 维的线性分类器集合。
 
-ε(hˆ) ≤ ε(h∗) + 2γ, with to hold with probability at least 1 − δ, it suffices
+要推导出更让人满意的论证结果，我们需要再额外定义一些概念。
 
-that m≥O 1 log264d =O d log1 =O (d). (The γ,δ subscripts are γ2 δ γ2 δ γ,δ
+给定一个点的集合 S = {x(i), ..., x(d)}（与训练样本集合无关），其中 x(i) ∈ X，如果 H 能够对 集合 S 实现任意的标签化（can realize any labeling on S），则称 H 打散（shatter）了 S。例如，对于任意的标签集合 （set of labels）∂ {y(1), ..., y(d)}，都有 类 H 中的某个函数 h 满足 h(x(i)) = y(i)，其中 i = 1, ...d。（译者注：关于 shattered set 的定义可以参考：[*https://en.wikipedia.org/wiki/Shattered\_set*](https://en.wikipedia.org/wiki/Shattered_set) 更多关于 VC 维 的内容也可以参考：[*https://www.zhihu.com/question/38607822*](https://www.zhihu.com/question/38607822) ）
 
-to indicate that the last big-O is hiding constants that may depend on γ and δ.) Thus, the number of training examples needed is at most linear in the parameters of the model.
+给定一个假设类 H，我们定义其 VC维度（Vapnik-Chervonenkis dimension），写作 VC(H)，这个值也就是能被 H 打散（shatter）的最大的集合规模。（如果 H 能打散任意大的集合（arbitrarily large sets），那么 VC(H) = ∞。）
 
-The fact that we relied on 64-bit floating point makes this argument not entirely satisfying, but the conclusion is nonetheless roughly correct: If what we’re going to do is try to minimize training error, then in order to learn
+例如，若一个集合由下图所示的三个点组成：
 
-![](cs229-notes4.fld/image023.png) ![](cs229-notes4.fld/image017.png) ![](cs229-notes4.fld/image024.png) ![](cs229-notes4.fld/image025.png) ![](cs229-notes4.fld/image026.png) ![](cs229-notes4.fld/image027.png) ![](cs229-notes4.fld/image026.png) ![](cs229-notes4.fld/image028.png)
+![](cs229-notes4.fld/image024.png)
 
-9
+那么二维线性分类器 (h(x) = 1{θ0 +θ1x1 + θ2x2 ≥ 0}) 的集合 H 能否将上图所示的这个集合打散呢？答案是能。具体来看则如下图所示，以下八种分类情况中的任意一个，我们都能找到一种用能够实现 “零训练误差（zero training error）” 的线性分类器（linear classifier）：
 
-“well” using a hypothesis class that has d parameters, generally we’re going to need on the order of a linear number of training examples in d.
+![](cs229-notes4.fld/image025.png)
 
-(At this point, it’s worth noting that these results were proved for an algorithm that uses empirical risk minimization. Thus, while the linear dependence of sample complexity on d does generally hold for most discriminative learning algorithms that try to minimize training error or some approximtion to training error, these conclusions do not always apply as readily to discriminative learning algorithms. Giving good theoretical guarantees on many non-ERM learning algorithms is still an area of active research.)
+此外，这也有可能表明，这个假设类 H 不能打散（shatter）4 个点构成的集合。因此，H 可以打散（shatter）的最大集合规模为 3，也就是说 VC（H）= 3。
 
-The other part of our previous argument that’s slightly unsatisfying is that it relies on the parameterization of H. Intuitively, this doesn’t seem like it should matter: We had written the class of linear classifiers as hθ(x) = 1{θ0 + θ1x1 + ···θnxn ≥ 0}, with n + 1 parameters θ0,...,θn. But it could also be written hu,v(x) = 1{(u20 − v02) + (u21 − v12)x1 + ···(u2n − vn2)xn ≥ 0} with 2n + 2 parameters ui, vi. Yet, both of these are just defining the same H: The set of linear classifiers in n dimensions.
+这里要注意，H 的 VC 维 为3，即便有某些 3 个点的集合不能被 H 打散。例如如果三个点都在一条直线上（如下图左侧的图所示），那就没办法能够用线性分类器来对这三个点的类别进行划分了（如下图右侧所示）。
 
-To derive a more satisfying argument, let’s define a few more things.
+![](cs229-notes4.fld/image026.png)
 
-Given a set S = {x(i), . . . , x(d)} (no relation to the training set) of points x(i) ∈ X, we say that H shatters S if H can realize any labeling on S. I.e., if for any set of labels {y(1), . . . , y(d)}, there exists some h ∈ H so that h(x(i)) = y(i) for all i = 1,...d.
+换个方式来说，在 VC 维 的定义之下，要保证 VC(H) 至少为 D，只需要证明至少有一个规模为 d 的集合能够被 H 打散 就可以了。
 
-Given a hypothesis class H, we then define its Vapnik-Chervonenkis dimension, written VC(H), to be the size of the largest set that is shattered by H. (If H can shatter arbitrarily large sets, then VC(H) = ∞.)
-
-For instance, consider the following set of three points:
-
-![](cs229-notes4.fld/image029.png)
-
-Can the set H of linear classifiers in two dimensions (h(x) = 1{θ0 +θ1x1 + θ2x2 ≥ 0}) can shatter the set above? The answer is yes. Specifically, we see that, for any of the eight possible labelings of these points, we can find a linear classifier that obtains “zero training error” on them:
-
-![](cs229-notes4.fld/image030.png)
-
-Moreover, it is possible to show that there is no set of 4 points that this hypothesis class can shatter. Thus, the largest set that H can shatter is of size 3, and hence VC(H) = 3.
-
-Note that the VC dimension of H here is 3 even though there may be sets of size 3 that it cannot shatter. For instance, if we had a set of three points lying in a straight line (left figure), then there is no way to find a linear separator for the labeling of the three points shown below (right figure):
-
-![](cs229-notes4.fld/image031.png)
-
-In order words, under the definition of the VC dimension, in order to prove that VC(H) is at least d, we need to show only that there’s at least one set of size d that H can shatter.
-
-The following theorem, due to Vapnik, can then be shown. (This is, many would argue, the most important theorem in all of learning theory.)
-
-11
+这样就能够给出下面的定理（theorem）了，该定理来自 Vapnik。（有不少人认为这是所有学习理论中最重要的一个定理。）
 
 Theorem. Let H be given, and let d = VC(H). Then with probability at least 1−δ, we have that for all h∈H,
 
-![](cs229-notes4.fld/image032.png)
+定理：给定 H，设 d = VC(H)。然后对于所有的 h∈H，都有至少为 1−δ 的概率使下面的关系成立：
 
-Thus, with probability at least 1 − δ, we also have that:
+![](cs229-notes4.fld/image027.png)
 
-![](cs229-notes4.fld/image033.png)
+此外，有至少为 1−δ 的概率：
 
-In other words, if a hypothesis class has finite VC dimension, then uniform convergence occurs as m becomes large. As before, this allows us to give a bound on ε(h) in terms of ε(h∗). We also have the following corollary:
+![](cs229-notes4.fld/image028.png)
+
+换句话说，如果一个假设类有有限的 VC 维，那么只要训练样本规模 m 增大，就能够保证联合收敛成立（uniform convergence occurs）。和之前一样，这就能够让我们以 ε(h∗) 的形式来给 ε(h∗) 建立一个约束（bound）。此外还有下面的推论（corollary）：
 
 Corollary. For |ε(h) − εˆ(h)| ≤ γ to hold for all h ∈ H (and hence ε(hˆ) ≤ ε(h∗) + 2γ) with probability at least 1 − δ, it suffices that m = Oγ,δ(d).
 
+推论（Corollary）：对于所有的 h ∈ H 成立的 |ε(h) − εˆ(h)| ≤ γ （因此也有 ε(hˆ) ≤ ε(h∗) + 2γ），则有至少为 1 – δ 的概率，满足 m = Oγ,δ(d)。
+
 In other words, the number of training examples needed to learn “well” using H is linear in the VC dimension of H. It turns out that, for “most” hypothesis classes, the VC dimension (assuming a “reasonable” parameterization) is also roughly linear in the number of parameters. Putting these together, we conclude that (for an algorithm that tries to minimize training error) the number of training examples needed is usually roughly linear in the number of parameters of H.
+
+换个方式来说，要保证使用 假设集合 H 的 机器学习的算法的学习效果“良好（well）”，那么训练集样本规模 m 需要与 H 的 VC 维度 线性相关（linear in the VC dimension of H）。这也表明，对于“绝大多数（most）”假设类来说，（假设是“合理（reasonable）”参数化的）VC 维度也大概会和参数的个数线性相关。把这些综合到一起，我们就能得出这样的一个结论：对于一个试图将训练误差最小化的学习算法来说：训练样本个数 通常都大概与假设类 H 的参数个数 线性相关。
