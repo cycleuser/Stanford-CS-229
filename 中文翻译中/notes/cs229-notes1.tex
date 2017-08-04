@@ -154,7 +154,40 @@
 		
 		\subsection{矩阵导数（Matrix derivatives）}
 		假如有一个函数 $ f : R^{m×n} \longrightarrow R $ 从 $ m * n $ 大小的矩阵映射到实数域，那么就可以定义当矩阵为 $A$ 的时候有导函数$ f $ 如下所示：
-		[]
+		\[ \nabla_{A}f(A)=\begin{bmatrix}
+		\dfrac{\partial f}{\partial A_{11}} & \cdots & \dfrac{\partial f}{\partial A_{1n}}\\
+		\vdots & \ddots & \vdots \\
+		\dfrac{\partial f}{\partial A_{m1}} & \cdots & \dfrac{\partial f}{\partial A_{mn}}\\
+		\end{bmatrix}  \]
+		
+		因此，这个梯度 $ \nabla_{A}f(A) $  本身也是一个 $m*n$ 的矩阵，其中的第 $(i,j)$ 个元素是 $ \partial f / \partial A_{ij} $ 。例如，假如 $ A=\begin{bmatrix}
+		A_{11} & A_{12} \\ A_{21} & A_{22} \\
+		\end{bmatrix} $ 是一个 2*2 矩阵，然后给定的函数 $f : R^{2×2} \longrightarrow R$ 为：
+		
+		\[ f(A) = \frac{3}{2}A_{11} + 5A^{2}_{12} + A_{21}A_{22} \]
+		
+		这里面的 $ A_{ij} $ 表示的意思是矩阵 $A$ 的第$(i,j)$ 个元素。然后就有了梯度：
+		
+		\[ \nabla_{A}f(A) = \begin{bmatrix}
+		\frac{3}{2} & 10A_{12} \\ a_{22} & A_{21}
+		\end{bmatrix} \]
+		
+		然后咱们还要引入 $trace$ 求迹运算，简写为 $tr$。对于一个给定的 $n*n$ 方形矩阵 $A$，它的迹定义为对角项和：
+		
+		\[ trA= \sum^{n}_{i=1}A_{ii} \]
+		
+		假如 $a$ 是一个实数，实际上 $a$ 就可以看做是一个 $1*1$ 的矩阵，那么就有 $a$ 的迹 $tr a = a$。(如果你之前没有见到过这个“运算记号”，就可以把 $A$ 的迹看成是 $tr(A)$，或者理解成为一个对矩阵 $A$ 进行操作的 $trace$ 函数。不过通常情况都是写成不带括号的形式更多一些。) 
+		如果有两个矩阵 $A$ 和 $B$，能够满足 $AB$ 为方阵，$trace$ 求迹运算就有一个特殊的性质： $trAB = trBA$. (自己想办法证明！)在此基础上进行推论，就能得到类似下面这样的等式关系： 
+		
+		\[ trABC = trCAB = trBCA  \]
+		\[ trABCD = trDABC = trCDAB = trBCDA \]
+		
+		下面这些和求迹运算相关的等量关系也很容易证明。其中 $A$ 和 $B$ 都是方形矩阵，$a$ 是一个实数： 
+		
+		\[ trA = trA^{T} \]
+		\[ tr(A+B) = trA + trB\]
+		\[ traA = atrA\]
+		
 		
 		
 		
