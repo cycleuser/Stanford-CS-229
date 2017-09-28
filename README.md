@@ -1,6 +1,8 @@
 # CS229-CN
-A Chinese Translation of Stanford CS229 notes 斯坦福机器学习CS229课程讲义的中文翻译
 
+> 急需校对，请大家踊跃提交 PR。
+
+A Chinese Translation of Stanford CS229 notes 斯坦福机器学习CS229课程讲义的中文翻译
 
 这个又是一个新系列，翻译斯坦福大学机器学习 CS229 课程的课件讲义。
 
