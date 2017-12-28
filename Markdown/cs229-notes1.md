@@ -311,10 +311,10 @@ $$
 
 $$
 \begin{align}
-l(\theta) &=log L(\theta)\\
-&=log \prod ^m _{i=1} \frac 1{\sqrt {2\pi \sigma }} exp(- \frac{(y^{(i)}-\theta^T x^{(i)})^2}{2\sigma^2})\\
+l(\theta) &=\log L(\theta)\\
+&=\log \prod ^m _{i=1} \frac 1{\sqrt {2\pi \sigma }} exp(- \frac{(y^{(i)}-\theta^T x^{(i)})^2}{2\sigma^2})\\
 &= \sum ^m _{i=1} \frac 1{\sqrt {2\pi \sigma }} exp(- \frac{(y^{(i)}-\theta^T x^{(i)})^2}{2\sigma^2})\\
-&= m \times log \frac 1{\sqrt {2\pi \sigma}}- \frac1{\sigma^2}\times \frac12 \sum^m_{i=1} (y^{(i)}-\theta^Tx^{(i)})^2
+&= m \times \log \frac 1{\sqrt {2\pi \sigma}}- \frac1{\sigma^2}\times \frac12 \sum^m_{i=1} (y^{(i)}-\theta^Tx^{(i)})^2
 
 \end{align}
 $$
@@ -335,6 +335,8 @@ $ \frac12 \sum^m _{i=1} (y^{(i)}-\theta^Tx^{(i)})^2$
 
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note1f5.png)
+
+
 那么这次不用直线，而增加一个二次项，用$y = \theta_0 + \theta_1x +\theta_2x^2$ 来拟合。(看中间的图) 很明显，我们对特征补充得越多，效果就越好。不过，增加太多特征也会造成危险的：最右边的图就是使用了五次多项式 $y = \sum^5_{j=0} \theta_jx^j$ 来进行拟合。看图就能发现，虽然这个拟合曲线完美地通过了所有当前数据集中的数据，但我们明显不能认为这个曲线是一个合适的预测工具，比如针对不同的居住面积 x 来预测房屋价格 $y$。先不说这些特殊名词的正规定义，咱们就简单说，最左边的图像就是一个**欠拟合（under fitting）**的例子，比如明显能看出拟合的模型漏掉了数据集中的结构信息；而最右边的图像就是一个**过拟合（over fitting）**的例子。（在本课程的后续部分中，当我们讨论到关于学习理论的时候，会给出这些概念的标准定义，也会给出拟合程度对于一个猜测的好坏检验的意义。）
 
 
@@ -364,7 +366,226 @@ $w^{(i)} = exp(− \frac{(x^{(i)}-x)^T(x^{(i)}-x)}{2\tau^2})$，
 
 
 
+### 第二部分 分类和逻辑回归（Classification and \logistic regression）
 
+
+接下来咱们讲一下分类的问题。分类问题其实和回归问题很像，吃不过我们现在要来预测的 $y$ 的值只局限于少数的若干个离散值。眼下咱们首先关注的是二值化分类问题，也就是说咱们要判断的 y 只有两个取值，$0$ 或者 $1$。（咱们这里谈到的大部分内容也都可以扩展到多种类的情况。）例如，假如要建立一个垃圾邮件筛选器，那么就可以用 $x^{(i)}$ 表示一个邮件中的若干特征，然后如果这个邮件是垃圾邮件，$y$ 就设为$1$，否则 $y$ 为 $0$。$0$ 也可以被称为**消极类别（negative class）**，而 $1$ 就成为**积极类别（positive class**），有的情况下也分别表示成“-” 和 “+”。对于给定的一个 $x^{(i)}$，对应的$y^{(i)}$也称为训练样本的**标签（label）**。
+
+
+#### 5 逻辑回归（\logistic regression）
+
+我们当然也可以还按照之前的线性回归的算法来根据给定的 $x$ 来预测 $y$，只要忽略掉 $y$ 是一个散列值就可以了。然而，这样构建的例子很容易遇到性能问题，这个方法运行效率会非常低，效果很差。而且从直观上来看，$h_\theta(x)$ 的值如果大于$1$ 或者小于$0$ 就都没有意义了，因为咱们已经实现都确定了 $y ∈ \{0, 1\}$，就是说 $y$ 必然应当是 $0$ 和 $1$ 这两个值当中的一个。
+所以咱们就改变一下假设函数$h_\theta (x)$ 的形式，来解决这个问题。比如咱们可以选择下面这个函数：
+
+$ h_\theta(x) = g(\theta^T x) = \frac 1{1+e^{-\theta^Tx}}$
+
+其中有：
+
+$ g(z)= \frac1 {1+e^{-z}}$
+
+这个函数叫做**逻辑函数 （\logistic function）** ，或者也叫**双弯曲S型函数（sigmoid function**）。下图是 $g(z)$ 的函数图像：
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note1f6.png)
+
+注意到没有，当$z\to +\infty$  的时候 $g(z)$ 趋向于$1$，而当$z\to -\infty$ 时$g(z)$ 趋向于$0$。此外，这里的这个 $g(z)$ ，也就是 $h(x)$，是一直在 $0$ 和 $1$ 之间波动的。然后咱们依然像最开始那样来设置 $x_0 = 1$，这样就有了：
+$ \theta^T x =\theta_0 +\sum^n_{j=1}\theta_jx_j$
+
+
+
+现在咱们就把 $g$ 作为选定的函数了。当然其他的从$0$到$1$之间光滑递增的函数也可以使用，不过后面我们会了解到选择 $g$ 的一些原因（到时候我们讲广义线性模型 GLMs，那时候还会讲生成学习算法，generative learning algorithms），对这个逻辑函数的选择是很自然的。再继续深入之前，下面是要讲解的关于这个 S 型函数的导数，也就是 $g′$ 的一些性质：
+
+
+$$
+\begin{align}
+g′(z) & = \frac d{dz} \frac1{1+e^{-z}}\\
+&= \frac 1{(1+e^{-z})^2} \times (e^{-z}))\\
+&= \frac 1{(1+e^{-z})^2} \times (1- \frac1{(1+e^{-z})})\\
+&= g(z)(1-g(z))
+\end{align}
+$$
+
+
+那么，给定了逻辑回归模型了，咱们怎么去拟合一个合适的 $\theta$ 呢？我们之前已经看到了在一系列假设的前提下，最小二乘法回归可以通过最大似然估计来推出，那么接下来就给我们的这个分类模型做一系列的统计学假设，然后用最大似然法来拟合参数吧。
+
+首先假设：
+
+
+$$
+\begin{align}
+P(y=1|x;\theta)=h_{\theta}(x)\\
+P(y=0|x;\theta)=1- h_{\theta}(x)
+\end{align}
+$$
+
+
+更简洁的写法是：
+
+$ p(y|x;\theta)=(h_\theta (x))^y(1- h_\theta (x))^{1-y}$
+
+假设 m 个训练样本都是各自独立生成的，那么就可以按如下的方式来写参数的似然函数：
+
+$$
+\begin{align}
+L(\theta) &= p(\vec{y}| X; \theta)\\
+&= \prod^m_{i=1}  p(y^{(i)}| x^{(i)}; \theta)\\
+&= \prod^m_{i=1} (h_\theta (x^{(i)}))^{y^{(i)}}(1-h_\theta (x^{(i)}))^{1-y^{(i)}} \\
+\end{align}
+$$
+
+然后还是跟之前一样，取个对数就更容易计算最大值：
+
+$$
+\begin{align}
+l(\theta) &=\log L(\theta) \\
+&= \sum^m_{i=1} y^{(i)} \log h(x^{(i)})+(1-y^{(i)})\log (1-h(x^{(i)}))
+\end{align}
+$$
+
+
+怎么让似然函数最大？就跟之前咱们在线性回归的时候用了求导数的方法类似，咱们这次就是用**梯度上升法（gradient ascent）**。还是写成向量的形式，然后进行更新，也就是$ \theta := \theta +\alpha \nabla _\theta l(\theta)$  。（注意更新方程中用的是加号而不是减号，因为我们现在是在找一个函数的最大值，而不是找最小值了。）还是先从只有一组训练样本$(x,y)$ 来开始，然后求导数来退出随机梯度上升规则：
+
+
+
+
+$$
+\begin{align}
+\frac {\partial}{\partial \theta_j} l(\theta) &=(y\times \frac 1 {g(\theta ^T x)}  - (1-y)\times \frac 1 {1- g(\theta ^T x)}   )\frac {\partial}{\partial \theta_j}g(\theta ^Tx) \\
+&= (y\times \frac 1 {g(\theta ^T x)}  - (1-y)\times \frac 1 {1- g(\theta ^T x)}   )  g(\theta^Tx)(1-g(\theta^Tx)) \frac {\partial}{\partial \theta_j}\theta ^Tx \\
+&= (y(1-g(\theta^Tx) ) -(1-y) g(\theta^Tx)) x_j\\
+&= (y-h_\theta(x))x_j
+\end{align}
+$$
+上面的式子里，我们用到了对函数求导的定理 $ g' (z)= g(z)(1-g(z))$  。然后就得到了随机梯度上升规则：
+
+$ \theta_j := \theta_j + \alpha (y^{(i)}-h_\theta (x^{(i)}))x_j^{(i)}$
+
+如果跟之前的 LMS 更新规则相对比，就能发现看上去挺相似的；不过这并不是同一个算法，因为这里的$h_\theta(x^{(i)})$现在定义成了一个 $\theta^Tx^{(i)}$  的非线性函数。尽管如此，我们面对不同的学习问题使用了不同的算法，却得到了看上去一样的更新规则，这个还是有点让人吃惊。这是一个巧合么，还是背后有更深层次的原因呢？在我们学到了 GLM 广义线性模型的时候就会得到答案了。（另外也可以看一下 习题集1 里面 Q3 的附加题。）
+
+
+
+
+
+
+#### 6 题外话: 感知器学习算法（The perceptron learning algorithm）
+
+现在咱们来岔开一下话题，简要地聊一个算法，这个算法的历史很有趣，并且之后在我们讲学习理论的时候还要讲到它。设想一下，对逻辑回归方法修改一下，“强迫”它输出的值要么是 $0$ 要么是 $1$。要实现这个目的，很自然就应该把函数 $g$ 的定义修改一下，改成一个**阈值函数（threshold function）**：
+
+
+$$
+g(z)= \begin{cases} 1, & \text {if $z \geq 0$ } \\
+0, & \text{if $z < 0$} \end{cases}
+$$
+
+如果我们还像之前一样令 $h_\theta(x) = g(\theta^T x)$，但用刚刚上面的阈值函数作为 $g$ 的定义，然后如果我们用了下面的更新规则：
+
+$ \theta_j := \theta_j +\alpha(y^{(i)}-h_\theta (x^{(i)}))x_j^{(i)}$
+
+这样我们就得到了感知器学习算法。
+在 1960 年代，这个“感知器（perceptron）”被认为是对大脑中单个神经元工作方法的一个粗略建模。鉴于这个算法的简单程度，这个算法也是我们后续在本课程中讲学习理论的时候的起点。但一定要注意，虽然这个感知器学习算法可能看上去表面上跟我们之前讲的其他算法挺相似，但实际上这是一个和逻辑回归以及最小二乘线性回归等算法在种类上都完全不同的算法；尤其重要的是，很难对感知器的预测赋予有意义的概率解释，也很难作为一种最大似然估计算法来推出感知器学习算法。
+
+
+#### 7 取 $l(\theta)$ 最大值的另外一个算法
+
+
+
+再回到用 S 型函数 $g(z)$ 来进行逻辑回归的情况，咱们来讲一个让 $l(\theta)$ 取最大值的另一个算法。
+开始之前，咱们先想一下求一个方程零点的牛顿法。假如我们有一个从实数到实数的函数 $f:R \to R$，然后要找到一个 $\theta$ ，来满足 $f(\theta)=0$，其中 $\theta∈R$ 是一个实数。牛顿法就是对 $\theta$ 进行如下的更新：
+
+$\theta := \theta - \frac{f(\theta)}{f'(\theta)}$
+
+这个方法可以通过一个很自然的解释，我们可以把它理解成用一个线性函数来对函数 $f$ 进行逼近，这条直线是 $f$ 的切线，而猜测值是 $\theta$，解的方法就是找到线性方程等于零的点，把这一个零点作为 $\theta$ 设置给下一次猜测，然后依次类推。
+
+下面是对牛顿法的图解：
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note1f7.png)
+
+在最左边的图里面，可以看到函数 $f$ 就是沿着 $y=0$ 的一条直线。这时候是想要找一个 $\theta$ 来让 $f(\theta)=0$。这时候发现这个 $\theta$ 值大概在 $1.3$ 左右。加入咱们猜测的初始值设定为 $\theta=4.5$。牛顿法就是在 $\theta=4.5$ 这个位置画一条切线（中间的图）。这样就给出了下一个 $\theta $猜测值的位置，也就是这个切线的零点，大概是$2.8$。最右面的图中的是再运行一次这个迭代产生的结果，这时候 $\theta$ 大概是$1.8$。就这样几次迭代之后，很快就能接近 $\theta=1.$3。
+
+牛顿法的给出的解决思路是让 $f(\theta) = 0$ 。如果咱们要用它来让函数 $l$ 取得最大值能不能行呢？函数 $l$ 的最大值的点应该对应着是它的导数$l′(\theta)$ 等于零的点。所以通过令$f(\theta) = l′(\theta)$，咱们就可以同样用牛顿法来找到 $l$ 的最大值，然后得到下面的更新规则：
+
+$\theta := \theta - \frac{l'(\theta)}{l''(\theta)}$
+
+
+(扩展一下，额外再思考一下: 如果咱们要用牛顿法来求一个函数的最小值而不是最大值，该怎么修改？)
+
+最后，在咱们的逻辑回归背景中，$\theta$ 是一个有值的向量，所以我们要对牛顿法进行扩展来适应这个情况。牛顿法进行扩展到多维情况，也叫牛顿-拉普森法（Newton-Raphson method），如下所示：
+
+$\theta := \theta - H^{-1}\nabla_\theta l(\theta)$
+
+上面这个式子中的 $\nabla_\theta l(\theta)$和之前的样例中的类似，是关于 $\theta_i$ 的 $l(\theta)$ 的偏导数向量；而 $H$ 是一个 $n\times n$ 矩阵 ,实际上如果包含截距项的话，应该是, $(n + 1)\times (n + 1)$，也叫做 Hessian, 其详细定义是：
+
+$ H_{ij}= \frac{\partial^2 l(\theta)}{\partial \theta_i \partial \theta_j}$
+
+牛顿法通常都能比（批量）梯度下降法收敛得更快，而且达到最小值所需要的迭代次数也低很多。然而，牛顿法中的单次迭代往往要比梯度下降法的单步耗费更多的性能开销，因为要查找和转换一个  $n\times n$的 Hessian 矩阵；不过只要这个 $n$ 不是太大，牛顿法通常就还是更快一些。当用牛顿法来在逻辑回归中求似然函数$l(\theta)$ 的最大值的时候，得到这一结果的方法也叫做Fisher评分（Fisher scoring）。
+
+### 第三部分 广义线性模型 Generalized Linear Models
+
+>注：本节展示的内容受以下两份作品的启发：Michael I. Jordan, Learning in graphical models (unpublished book draft), 以及 McCullagh and Nelder, Generalized Linear Models (2nd ed.)。
+
+
+
+到目前为止，我们看过了回归的案例，也看了一个分类案例。在回归的案例中，我们得到的函数是 $y|x; \theta ∼ N (\mu, \sigma^2)$；而分类的案例中，函数是 $y|x; \theta ∼ Bernoulli(\phi)$，这里面的$\mu$ 和 $\phi$ 分别是 $x$ 和 $\theta$ 的某种函数。在本节，我们会发现这两种方法都是一个更广泛使用的模型的特例，这种更广泛使用的模型就叫做广义线性模型。我们还会讲一下广义线性模型中的其他模型是如何推出的，以及如何应用到其他的分类和回归问题上。
+
+
+#### 8 指数族 The exponential family
+
+
+
+在学习 GLMs 之前，我们要先定义一下指数组分布（exponential family distributions）。如果一个分布能用下面的方式来写出来，我们就说这类分布属于指数族：
+
+$ p(y;\eta) =b(y)exp(\eta^TT(y)-a(\eta)) \tag 6$
+
+上面的式子中，$\eta$ 叫做此分布的自然参数（natural parameter，也叫典范参数 canonical parameter） ； $T(y)$ 叫做充分统计量（sufficient statistic），我们目前用的这些分布中通常 $T (y) = y$；而 $a(\eta)$ 是一个对数分割函数（\log partition function）。$e^{−a(\eta)}$ 这个量本质上扮演了归一化常数（normalization constant）的角色，也就是确保 $p(y; \eta)$ 的总和或者积分等于$1$。
+
+
+对 $T$, $a$ 和 $b$ 的固定选择，就定义了一个用 $\eta$ 进行参数化的分布族（family，或者叫集 set）；通过改变 \eta，我们就能得到这个分布族中的不同分布。
+现在咱们看到的伯努利（Bernoulli）分布和高斯（Gaussian）分布就都属于指数分布族。伯努利分布的均值是$\phi$，也写作 $Bernoulli(\phi)$，确定的分布是 $y ∈ {0, 1}$，因此有 $p(y = 1; \phi) = \phi$; $p(y = 0;\phi) = 1−\phi$。这时候只要修改$\phi$，就能得到一系列不同均值的伯努利分布了。现在我们展示的通过修改$\phi$,而得到的这种伯努利分布，就属于指数分布族；也就是说，只要给定一组 $T$，$a$ 和 $b$，就可以用上面的等式(6)来确定一组特定的伯努利分布了。
+我们这样来写伯努利分布：
+
+
+$\begin{align}
+p(y;\phi) & = \phi ^y(1-\phi)^{1-y}\\
+& = exp(y \log \phi + (1-y)\log(1-\phi))\\
+& = exp( (\log (\frac{\phi}{1-\phi}))y+\log (1-\phi) )\\
+\end{align}$
+
+因此，自然参数（natural parameter）就给出了，即 $\eta = log (\frac  \phi {1 − \phi})$。 很有趣的是，如果我们翻转这个定义，用$\eta$ 来解 $\phi$ 就会得到 $\phi = 1/ (1 + e−\eta )$。这正好就是之前我们刚刚见到过的 S型函数（sigmoid function）！ 在我们把逻辑回归作为一种广义线性模型（GLM）的时候还会遇到这个情况。
+
+$\begin{align}
+T(y) &= y \\
+a( \eta) & = - \log (1- \phi) \\
+& = \log {(1+ e^ \eta)}\\
+b(y)&=1
+\end{align}$
+
+
+上面这组式子就表明了伯努利分布可以写成等式(6)的形式，使用一组合适的$T$， $a$ 和 $b$。
+接下来就看看高斯分布吧。还记得吧，在推导线性回归的时候，$\sigma%^2$ 的值对我们最终选择的 $\theta$ 和 $h_\theta(x)$ 都没有影响。所以我们可以给 $\sigma^2$ 取一个任意值。为了简化推导过程，就令$\sigma^2 = 1$。然后就有了下面的等式：
+
+$\begin{align}
+p(y;\mu) &= \frac1{\sqrt{2\pi}} exp (- \frac 12 (y-\mu)^2) \\
+& =  \frac1{\sqrt{2\pi}} exp (- \frac 12 y^2) \times exp (\mu y -\frac 12 \mu^2) \\
+\end{align}$
+
+注：如果我们把 $\sigma^2$ 留作一个变量，高斯分布就也可以表达成指数分布的形式，其中 $\eta ∈ R^2$ 就是一个二维向量，同时依赖 $\mu$ 和 $\sigma$。然而，对于广义线性模型GLMs方面的用途， $\sigma^2$ 参数就也可以看成是对指数分布族的更泛化的定义： $p(y; \eta, \tau ) = b(a, \tau ) exp((\eta^T T (y) − a(\eta))/c(\tau))$。这里面的$\tau$ 叫做**分散度参数（dispersion parameter）**，对于高斯分布， $c(\tau) = \sigma^2$ ；不过上文中我们已经进行了简化，所以针对我们要考虑的各种案例，就不需要再进行更加泛化的定义了。
+这样，我们就可以看出来高斯分布是属于指数分布族的，可以写成下面这样：
+
+$\begin{align}
+\eta & = \mu \\
+T(y) & = y \\
+a(\eta) & = \mu ^2 /2\\
+& = \eta ^2 /2\\
+b(y) & = (1/ \sqrt {2\pi })exp(-y^2/2)
+\end{align}$
+
+
+指数分布族里面还有很多其他的分布：例如多项式分布（multinomial），这个稍后我们会看到；泊松分布（Poisson），用于对计数类数据进行建模，后面再问题集里面也会看到；$\gamma$和指数分布（the gamma and the exponential），这个用于对连续的、非负的随机变量进行建模，例如时间间隔；$\beta$和狄利克雷分布（the beta and the Dirichlet），这个是用于概率的分布；还有很多啦。在下一节里面，我们就来讲一讲对于建模的一个更通用的“方案”，其中的$y$ (给定 $x$ 和 $\theta$) 可以是上面这些分布中的任意一种。
+
+#### 9 构建广义线性模型（Constructing GLMs）
+
+
+
+设想你要构建一个模型，来估计在给定的某个小时内来到你商店的顾客人数（或者是你的网站的页面访问次数），基于某些确定的特征 x ，例如商店的促销、最近的广告、天气、今天周几啊等等。我们已经知道泊松分布（Poisson distribution）通常能适合用来对访客数目进行建模。知道了这个之后，怎么来建立一个模型来解决咱们这个具体问题呢？非常幸运的是，泊松分布是属于指数分布族的一个分部，所以我们可以使用一个广义线性模型（Generalized Linear Model，缩写为 GLM）。在本节，我们讲一种对刚刚这类问题来构建广义线性模型的方法。 
+进一步泛化，设想一个分类或者回归问题，要预测一些随机变量 y 的值，作为 x 的一个函数。要导出适用于这个问题的广义线性模型，就要对我们的模型、给定 x 下 y 的条件分布来做出以下三个假设：
 
 
 
