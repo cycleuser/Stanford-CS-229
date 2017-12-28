@@ -2,11 +2,12 @@
 CS229 Lecture notes
 
 |原作者|翻译|
-|--|--|
+|---|---|
 |[Andrew Ng  吴恩达](http://www.andrewng.org/)|[CycleUser](https://www.zhihu.com/people/cycleuser/columns)|
 
+
 |相关链接|
-|--|
+|---|
 |[Github 地址](https://github.com/Kivy-CN/Stanford-CS-229-CN)|
 |[知乎专栏](https://zhuanlan.zhihu.com/MachineLearn)|
 |[斯坦福大学 CS229 课程网站](http://cs229.stanford.edu/)|
@@ -20,7 +21,7 @@ CS229 Lecture notes
 咱们先来聊几个使用监督学习来解决问题的实例。假如咱们有一个数据集，里面的数据是俄勒冈州波特兰市的 47 套房屋的面积和价格：
 
 |居住面积（平方英尺）|价格（千美元）|
-|--|--|
+|---|---|
 |2104|400|
 |1600|330|
 |2400|369|
@@ -48,7 +49,7 @@ CS229 Lecture notes
 为了让我们的房屋案例更有意思，咱们稍微对数据集进行一下补充，增加上每一个房屋的卧室数目：
 
 |居住面积（平方英尺）|卧室数目|价格（千美元）|
-|--|--|--|
+|---|---|---|
 |2104|3|400|
 |1600|3|330|
 |2400|3|369|
