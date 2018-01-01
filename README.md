@@ -16,5 +16,5 @@ CS229 Lecture notes
 |[第二章在线阅读地址](http://blog.cycleuser.org/cs229/cs229-notes2.html)|
 
 
-由于公式过多，Gitbook 的阅读体验很差，建议大家还是去 \[Github\]\(https://github.com/Kivy-CN/Stanford-CS-229-CN\) 上面下载 Markdown 或者 HTML 到本地阅读，体验更好很多，起码公式都没问题。
+由于公式过多，Gitbook 的阅读体验很差，建议大家还是去 [Github](https://github.com/Kivy-CN/Stanford-CS-229-CN\) 上面下载 Markdown 或者 HTML 到本地阅读，体验更好很多，起码公式都没问题。
 
