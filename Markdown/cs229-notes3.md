@@ -476,13 +476,9 @@ $$
 
 $$
 \begin{aligned}
-
 K(x,z)&=(\sum^n_{i=1}x_iz_i)(\sum^n_{j=1}x_jz_j)\\
-
 &=\sum^n_{i=1}\sum^n_{j=1}x_ix_jz_iz_j\\
-
 &=\sum^n_{i,j=1}(x_ix_j)(z_iz_j)\\
-
 \end{aligned}
 $$
 
