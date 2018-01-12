@@ -1,0 +1,950 @@
+<!DOCTYPE html><html>
+
+<head>
+<meta charset="utf-8">
+<title>index</title>
+<style>
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;}
+ol,ul{list-style:none}
+table{border-collapse:collapse;border-spacing:0;
+  margin-top: 0;
+  margin-bottom: 0.8em;
+}
+caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
+q,blockquote{quotes:none}
+q:before,q:after,blockquote:before,blockquote:after{content:"";content:none}
+a img{border:none}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary{display:block}
+a{color:#1863a1;word-wrap: break-word; word-break: break-all;}
+a:visited{color:#751590}
+a:focus{color:#0181eb}
+a:hover{color:#0181eb}
+a:active{color:#01579f}
+aside.sidebar a{color:#222}
+aside.sidebar a:focus{color:#0181eb}
+aside.sidebar a:hover{color:#0181eb}
+aside.sidebar a:active{color:#01579f}
+a{-webkit-transition:color 0.3s;-moz-transition:color 0.3s;-o-transition:color 0.3s;transition:color 0.3s}
+
+body,h1,h2,h3,h4,h5,h6,footer{font-family:"PT Sans","Helvetica Neue","Optima","Hiragino Sans GB",sans-serif}
+body{line-height:1.5em;color:#222
+	-webkit-text-size-adjust:none;  min-width: 200px;
+  max-width: 760px;
+  margin: 0 auto; padding: 20px;}
+
+pre,code,tt,p code,li code{font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace}
+
+h1{font-size:2.2em;line-height:1.2em}
+
+h1,h2,h3,h4,h5,h6{text-rendering:optimizelegibility;margin-bottom:1em;font-weight:bold}
+h2,section h1{font-size:1.5em}
+h3,section h2,section section h1{font-size:1.3em}
+h4,section h3,section section h2,section section section h1{font-size:1em}
+h5,section h4,section section h3{font-size:.9em}
+h6,section h5,section section h4,section section section h3{font-size:.8em}
+h3,h4{ padding:20px 0 0px 0;}
+.markdown-body{padding: 0px 4px;}
+.markdown-body h1{position:relative;padding-top:1em;padding-bottom:0.2em;margin-bottom:1em;background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC') bottom left repeat-x}
+.markdown-body  h1 a{text-decoration:none}
+.markdown-body  h1 a:hover{text-decoration:underline}
+
+.markdown-body h2{padding-top:0.8em;padding-bottom:0.2em;background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC') bottom left repeat-x}
+.markdown-body h2:first-child,.markdown-body header+h2{padding-top:4px;}
+.markdown-body h2:first-child,.markdown-body header+h2{background:none}
+
+
+
+p,.markdown-body blockquote,ul,ol{margin-bottom:0.8em; margin-top:0.8em;}
+ul{list-style-type:disc}
+ul ul{list-style-type:circle;margin-bottom:0px}
+ul ul ul{list-style-type:square;margin-bottom:0px}
+ol{list-style-type:decimal}
+ol ol{list-style-type:lower-alpha;margin-bottom:0px}
+ol ol ol{list-style-type:lower-roman;margin-bottom:0px}
+ul,ul ul,ul ol,ol,ol ul,ol ol{margin-left:1.4em}
+ul ul,ul ol,ol ul,ol ol{margin-bottom:0em}
+
+strong{font-weight:bold}
+em{font-style:italic}
+sup,sub{font-size:0.75em;position:relative;display:inline-block;padding:0 .2em;line-height:.8em}
+sup{top:-.5em}
+sub{bottom:-.5em}
+a[rev='footnote']{font-size:.75em;padding:0 .3em;line-height:1}
+q{font-style:italic}
+q:before{content:"\201C"}
+q:after{content:"\201D"}
+em,dfn{font-style:italic}
+strong,dfn{font-weight:bold}
+del,s{text-decoration:line-through}
+abbr,acronym{border-bottom:1px dotted;cursor:help}
+small{font-size:.8em}
+big{font-size:1.2em}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body blockquote{font-style:italic;position:relative;font-size:1.2em;line-height:1.5em;padding-left:1em;border-left:4px solid rgba(170,170,170,0.5)}
+.markdown-body blockquote cite{font-style:italic}
+.markdown-body blockquote cite a{color:#aaa !important;word-wrap:break-word}
+.markdown-body blockquote cite:before{content:'\2014';padding-right:.3em;padding-left:.3em;color:#aaa}
+
+.markdown-body a{white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;white-space:pre-wrap;word-wrap:break-word}
+
+body>header{font-size:1em;padding-top:1.5em;padding-bottom:1.5em}
+.markdown-body{overflow:hidden}
+.markdown-body>div,.markdown-body>article{width:100%}
+aside.sidebar{float:none;padding:0 18px 1px;background-color:#f7f7f7;border-top:1px solid #e0e0e0}
+.flex-content,article img,article video,article .flash-video,aside.sidebar img{max-width:100%;height:auto}
+.basic-alignment.left,article img.left,article video.left,article .left.flash-video,aside.sidebar img.left{float:left;margin-right:1.5em}
+.basic-alignment.right,article img.right,article video.right,article .right.flash-video,aside.sidebar img.right{float:right;margin-left:1.5em}
+.basic-alignment.center,article img.center,article video.center,article .center.flash-video,aside.sidebar img.center{display:block;margin:0 auto 1.5em}
+.basic-alignment.left,article img.left,article video.left,article .left.flash-video,aside.sidebar img.left,.basic-alignment.right,article img.right,article video.right,article .right.flash-video,aside.sidebar img.right{margin-bottom:.8em}
+.toggle-sidebar,.no-sidebar .toggle-sidebar{display:none}
+
+
+.markdown-body img,.markdown-body video,.markdown-body .flash-video{ -webkit-border-radius:0.3em;-moz-border-radius:0.3em;-ms-border-radius:0.3em;-o-border-radius:0.3em;border-radius:0.3em;-webkit-box-shadow:rgba(0,0,0,0.15) 0 1px 4px;-moz-box-shadow:rgba(0,0,0,0.15) 0 1px 4px;box-shadow:rgba(0,0,0,0.15) 0 1px 4px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border:#fff 0.5em solid;}
+
+.markdown-body img,.markdown-body video{max-width: 100%;}
+.markdown-body video,.markdown-body .flash-video{margin:0 auto 1.5em}
+.markdown-body video{display:block;width:100%}
+.markdown-body .flash-video>div{position:relative;display:block;padding-bottom:56.25%;padding-top:1px;height:0;overflow:hidden}
+.markdown-body .flash-video>div iframe,.markdown-body .flash-video>div object,.markdown-body .flash-video>div embed{position:absolute;top:0;left:0;width:100%;height:100%}
+.markdown-body>footer{padding-bottom:2.5em;margin-top:2em}
+.markdown-body>footer p.meta{margin-bottom:.8em;font-size:.85em;clear:both;overflow:hidden}
+
+
+body,pre{ background:#fdf6e3 url('data:image/png;base64,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') top left;}
+body{ background-color: #f8f8f8;}
+pre{-webkit-border-radius:0.4em;-moz-border-radius:0.4em;-ms-border-radius:0.4em;-o-border-radius:0.4em;border-radius:0.4em;border:1px solid #e7dec3;line-height:1.45em;font-size:13px;margin-bottom:2.1em;padding:.8em 1em;color:#586e75;overflow:auto}
+.markdown-body code{background: none;}
+h3.filename+pre{-moz-border-radius-topleft:0px;-webkit-border-top-left-radius:0px;border-top-left-radius:0px;-moz-border-radius-topright:0px;-webkit-border-top-right-radius:0px;border-top-right-radius:0px}
+p code,li code{display:inline-block;white-space:no-wrap;background:#fff;font-size:.8em;line-height:1.5em;color:#555;border:1px solid #ddd;-webkit-border-radius:0.4em;-moz-border-radius:0.4em;-ms-border-radius:0.4em;-o-border-radius:0.4em;border-radius:0.4em;padding:0 .3em;margin:-1px 0}
+p pre code,li pre code{font-size:1em !important;background:none;border:none}
+table td{ word-wrap: break-word !important; word-break: break-all !important; }
+/*
+
+Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fdf6e3;
+  color: #657b83;
+  -webkit-text-size-adjust: none;
+}
+
+.hljs-comment,
+.diff .hljs-header,
+.hljs-doctype,
+.hljs-pi,
+.lisp .hljs-string {
+  color: #93a1a1;
+}
+
+/* Solarized Green */
+.hljs-keyword,
+.hljs-winutils,
+.method,
+.hljs-addition,
+.css .hljs-tag,
+.hljs-request,
+.hljs-status,
+.nginx .hljs-title {
+  color: #859900;
+}
+
+/* Solarized Cyan */
+.hljs-number,
+.hljs-command,
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-rule .hljs-value,
+.hljs-doctag,
+.tex .hljs-formula,
+.hljs-regexp,
+.hljs-hexcolor,
+.hljs-link_url {
+  color: #2aa198;
+}
+
+/* Solarized Blue */
+.hljs-title,
+.hljs-localvars,
+.hljs-chunk,
+.hljs-decorator,
+.hljs-built_in,
+.hljs-identifier,
+.vhdl .hljs-literal,
+.hljs-id,
+.css .hljs-function,
+.hljs-name {
+  color: #268bd2;
+}
+
+/* Solarized Yellow */
+.hljs-attribute,
+.hljs-variable,
+.lisp .hljs-body,
+.smalltalk .hljs-number,
+.hljs-constant,
+.hljs-class .hljs-title,
+.hljs-parent,
+.hljs-type,
+.hljs-link_reference {
+  color: #b58900;
+}
+
+/* Solarized Orange */
+.hljs-preprocessor,
+.hljs-preprocessor .hljs-keyword,
+.hljs-pragma,
+.hljs-shebang,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.diff .hljs-change,
+.hljs-special,
+.hljs-attr_selector,
+.hljs-subst,
+.hljs-cdata,
+.css .hljs-pseudo,
+.hljs-header {
+  color: #cb4b16;
+}
+
+/* Solarized Red */
+.hljs-deletion,
+.hljs-important {
+  color: #dc322f;
+}
+
+/* Solarized Violet */
+.hljs-link_label {
+  color: #6c71c4;
+}
+
+.tex .hljs-formula {
+  background: #eee8d5;
+}
+
+
+</style>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<style> @media print{ .hljs{overflow: visible; word-wrap: break-word !important;} }</style></head><body><div class="markdown-body">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<h1 id="toc_0">CS229 课程讲义中文翻译</h1>
+
+<p>CS229 Lecture notes</p>
+
+<table>
+<thead>
+<tr>
+<th>原作者</th>
+<th>翻译</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://www.andrewng.org/">Andrew Ng  吴恩达</a></td>
+<td><a href="https://www.zh_ihu.com/people/cycleuser/columns">CycleUser</a></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>相关链接</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="https://g_ithub.com/Kivy-CN/Stanford-CS-229-CN">g_ithub 地址</a></td>
+</tr>
+<tr>
+<td><a href="https://zhuanlan.zh_ihu.com/Mach_ineLearn">知乎专栏</a></td>
+</tr>
+<tr>
+<td><a href="http://cs229.stanford.edu/">斯坦福大学 CS229 课程网站</a></td>
+</tr>
+<tr>
+<td><a href="http://open.163.com/movie/2008/1/M/C/M6SGF6VB4_M6SGHFBMC.html">网易公开课中文字幕视频</a></td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="toc_1">第三章</h1>
+
+<h3 id="toc_2">第五部分 支持向量机(Support Vector Mach_ines)</h3>
+
+<p>本章的讲义主要讲述的是 支持向量机( Support Vector Mach_ine ，缩写为 SVM) 学习算法。SVM 算得上是现有的最好的现成的(“off-the-shelf”)监督学习算法之一，很多人实际上认为这里没有“之一”这两个字的必要，认为 SVM 就是最好的现成的监督学习算法。讲这个 SVM 的来龙去脉之前，我们需要先讲一些关于边界的内容，以及对数据进行分割成大的区块(gap)的思路。接下来，我们要讲一下最优边界分类器(optimal marg_in classifier,)，其中还会引入一些关于拉格朗日对偶(Lagrange duality)的内容。然后我们还会接触到核(Kernels)，这提供了一种在非常高的维度(例如无穷维度)中进行 SVM 学习的高效率方法，最终本章结尾部分会讲 SMO 算法，也就是 SVM 算法的一个有效实例。</p>
+
+<h1 id="toc_3">1 边界(Marg_ins):直觉(Intuition)</h1>
+
+<p>咱们这回讲 SVM 学习算法，从边界(marg_ins)开始说起。这一节我们会给出关于边界的一些直观展示(intuitions)，以及过对于我们做出的预测的信心(confidence)；在本章的第三节中，会对这些概念进行更正式化的表述。</p>
+
+<p>考虑逻辑回归，其中的概率分布\(p(y = 1|x;\theta)\) 是基于 h\(_\theta(x) = g(\theta^Tx)\) 而建立的模型。当且仅当 \(h_\theta(x) \geq 0.5\) ，也就是 \(\theta^Tx \geq 0\) 的时候，我们才会预测出“1”。假如有一个正向(Positive)的训练样本(positive tra_ining example)(y = 1)。那么\(\theta^Tx\) 越大，\(h_\theta (x) = p(y = 1|x; w, b)\) 也就越大，我们对预测 Label 为 1 的“信心(confidence)”也就越强。所以如果 y = 1 且 \(\theta^T x &gt;&gt; 0\)(远大于 0)，那么我们就对这时候进行的预测非常有信心，当然这只是一种很不正式的粗略认识。与之类似，在逻辑回归中，如果有 y = 0 且 \(\theta^T x &lt;&lt; 0\)(远小于 0)，我们也对这时候给出的预测很有信心。所以还是以一种非常不正式的方式来说，对于一个给定的训练集，如果我们能找到一个 \(\theta\)，满足当 \(y^{(i)} = 1\) 的时候总有 \(\theta^T x^{(i)} &gt;&gt; 0\)，而 \(y^{(i)} = 0\) 的时候则 \(\theta^T x^{(i)} &lt;&lt; 0\)，我们就说这个对训练数据的拟合很好，因为这就能对所有训练样本给出可靠(甚至正确)的分类。似乎这样就是咱们要实现的目标了，稍后我们就要使用<strong>函数边界记号</strong>(<strong>notion of functional marg_ins</strong>)来用正规的语言来表达该思路。</p>
+
+<p>还有另外一种的直观表示，例如下面这个图当中，画叉的点表示的是正向训练样本，而小圆圈的点表示的是负向训练样本，图中还画出了<strong>分类边界</strong>(<strong>decision boundary</strong>)，这条线也就是通过等式 \(\theta^T x = 0\) 来确定的，也叫做<strong>分类超平面</strong>(<strong>separating hyperplane</strong>)。图中还标出了三个点 A，B 和 C。</p>
+
+<p><img src="https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note3f1.png" alt=""/></p>
+
+<p>可以发现 A 点距离分界线很远。如果我们对 A 点的 y 值进行预测，估计我们会很有信心地认为在那个位置的 y = 1。与之相反的是 C，这个点距离边界线很近，而且虽然这个 C 点也在预测值 y = 1 的一侧，但看上去距离边界线的距离实在是很近的，所以也很可能会让我们对这个点的预测为 y = 0。因此，我们对 A 点的预测要比对 C 点的预测更有把握得多。B 点正好在上面两种极端情况之间，更广泛地说，如果一个点距离<strong>分类超平面</strong>(<strong>separating hyperplane</strong>)比较远，我们就可以对给出的预测很有信心。那么给定一个训练集，如果我们能够找到一个分类边界，利用这个边界我们可以对所有的训练样本给出正确并且有信心(也就是数据点距离分类边界要都很远)的预测，那这就是我们想要达到的状态了。当然上面这种说法还是很不正规，后面我们会使用<strong>几何边界记号</strong>(<strong>notion of geometric marg_ins</strong>)来更正规地来表达。</p>
+
+<h1 id="toc_4">2 记号(Notation)</h1>
+
+<p>在讨论 SVMs 的时候，出于简化的目的，我们先要引入一个新的记号，用来表示分类。假设我们要针对一个二值化分类的问题建立一个线性分类器，其中用来分类的标签(label)为 y，分类特征(feature)为 x。从此以后我们就用 \(y \in \{{-1},1\}\) (而不是之前的 \(\{0, 1\}\)) 来表示这个分类标签了。另外，以后咱们也不再使用向量 \(\theta\) 来表示咱们这个线性分类器的参数了，而是使用参数 w 和 b，把分类器写成下面这样：</p>
+
+<p>\[<br/>
+h_{w,b}(x)=g(w^Tx+b)<br/>
+\]</p>
+
+<p>当 \(z \geq 0\)，则 \(g(z) = 1\)；而反之若 \(z ＜ 0\)，则\(g(z) = -1\)。这里的这个 “w, b” 记号就可以让我们能把截距项(intercept term)b 与其他的参数区别开。(此外我们也不用再像早些时候那样要去设定 \(x_0 = 1\) 这样的一个额外的输入特征向量了。)所以，这里的这个参数 b 扮演的角色就相当于之前的参数 \(\theta_0\) ，而参数 w 则相当于 \([\theta_1 . . . \theta_n]^T\)。</p>
+
+<p>还要注意的是，从我们上面对函数 g 的定义，可以发现我们的分类器给出的预测是 1 或者 -1 (参考 感知器算法 perceptron algorithm)，这样也就不需要先通过中间步骤(intermediate step)来估计 y 为 1 的概率(这就是逻辑回归中的步骤)。</p>
+
+<h1 id="toc_5">3 函数边界和几何边界(Functional and geometric marg_ins)</h1>
+
+<p>咱们来用正规语言来将函数边界和几何边界的记号的概念进行正规化。给定一个训练集 \((x^{(i)}, y^{(i)})\)，我们用下面的方法来定义对应该训练集的函数边界 (w, b)：</p>
+
+<p>\[<br/>
+\hat\gamma^{(i)}=y^{(i)}(w^Tx+b)<br/>
+\]</p>
+
+<p>要注意，如果 \(y^{(i)} = 1\)，那么为了让函数边界很大(也就是说，我们的预测很可信并且很正确)，我们就需要 \(w^T x + b\) 是一个很大的正数。与此相对，如果 \(y^{(i)} = -1\)，那么为了让函数边界很大，我们就需要\(w^T x + b\) 是一个很大(绝对值)的负数。而且，只要满足 \(y^{(i)}(w^T x + b) \ge 0\)，那我们针对这个样本的预测就是正确的。(自己检验证明吧。)因此，一个大的函数边界就表示了一个可信且正确的预测。</p>
+
+<p>对于一个线性分类器，选择上面给定的函数 g (取值范围为{-1, 1})，函数边界的一个性质却使得这个分类器并不具有对置信度的良好量度。例如上面给定的这个函数 g，我们会发现，如果用 2w 替换掉 w，然后用 2b 替换 b，那么由于有 \(g(w^Tx + b) = g(2w^Tx + 2b)\)，所以这样改变也并不会影响 \(h_{w,b}(x)\)。也就是说，函数 g 以及 \(h_{w,b}(x)\) 只取决于 \(w^T x + b\) 的正负符号(sign)，而不受其大小(magnitude)的影响。然而，把(w, b) 翻倍成 (2w,2b) 还会导致函数距离也被放大了 2 倍。因此，这样看来就是只要随意去调整 w 和 b 的范围，我们就可以人为调整函数边界到足够大了，而不用去改变任何有实际意义的变量。直观地看，这就导致我们有必要引入某种归一化条件，例如使 \(||w||_2 = 1\)；也就是说，我们可以将 (w, b) 替换成 \((w/||w||_2,b/||w||_2)\)，然后考虑对应 \((w/||w||_2,b/||w||_2)\) 的函数边界。我们稍后再详细讨论这部分内容。</p>
+
+<p>给定一个训练集 S = {(x<sup>{(i)},y<sup>{(i)});</sup></sup> i = 1, ..., m}，我们将对应 S 的函数边界 (w, b) 定义为每个训练样本的函数边界的最小值。记作 \hat \gamma，可以写成：</p>
+
+<p>\[<br/>
+\hat\gamma= \min_{i=1,...,m}\hat\gamma^{(i)}<br/>
+\]</p>
+
+<p>接下来，咱们要讲的是几何边界(geometric marg_ins)。例如下图所示：</p>
+
+<p><img src="https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note3f2.png" alt=""/></p>
+
+<p>图中给出了对应 (w, b) 的分类边界，其倾斜方向(即法线方向)为向量 w 的方向。这里的向量 w 是与<strong>分类超平面</strong>垂直的(orthogonal，即夹角为 90°)。(你需要说服自己现实情况一定是这样的。)假设有图中所示的一个点 A，此点表示的是针对某训练样本的输入特征为 \(x^{(i)}\) ，对应的标签(label)为 \(y^{(i)} = 1\)。然后这个点到分类边界的距离 \(\gamma^{(i)}\), 就通过 AB 之间的线段能够获得。</p>
+
+<p>怎么找到的 \(\gamma^{(i)}\) 值呢？这样，w/||w|| 是一个单位长度的向量，指向与 w 相同的方向。因为这里 A 点表示的是 x<sup>{(i)}，所以就能找到一个点</sup> B，其位置为 \(x^{(i)} - \gamma^{(i)} \times w/||w||\)。这个 B 点正好位于分类边界线上面，而这条线上的所有 x 都满足等式 \(w^T x + b = 0\) ，所以有：</p>
+
+<p>\[<br/>
+w^T(x^{(i)}-\gamma^{(i)}\frac{w}{||w||})+b=0<br/>
+\]</p>
+
+<p>通过上面的方程解出来的 \(\gamma^{(i)}\) 为：</p>
+
+<p>\[<br/>
+\gamma^{(i)}=\frac{w^Tx^{(i)}+b}{||w||}=(\frac{w}{||w||})^Tx^{(i)}+\frac{b}{||w||}<br/>
+\]</p>
+
+<p>这个解是针对图中 A 处于训练样本中正向部分这种情况，这时候位于“正向(positive)”一侧就是很理想的情况。如果更泛化一下，就可以定义对应训练样本 \((x^{(i)}, y^{(i)})\) 的几何边界 (w, b) 为：</p>
+
+<p>\[<br/>
+\gamma^{(i)}=y^{(i)}((\frac{w}{||w||})^Tx^{(i)}+\frac{b}{||w||})<br/>
+\]</p>
+
+<p>这里要注意，如果 \(||w|| = 1\)，那么函数边界(functional marg_in)就等于几何边界(geometric marg_in)——我们可以用这种方法来将两个边界记号联系起来。此外，几何边界是不受参数缩放的影响的；也就是说，如果我们把 w 改为 2w，b 改为 2b，那么几何边界并不会改变。稍后这个性质就会派上用场了。特别要注意的是，由于这个与参数缩放的无关性，当试图对某个数据集的 w 和 b 进行拟合的时候，我们就可以倒入一个任意设置的缩放参数来约束 w，而不会改变什么重要项；例如，我们可以设置 \(||w|| = 1\)，或者 \(|w_1| = 5\)，或者 \(|w_1 +b|+|w_2| = 2\)，等等都可以，这些都只需要对 w 和 b 进行缩放就可以满足了。</p>
+
+<p>最后，给定一个训练集 \(S = \{(x^{(i)}, y^{(i)}); i = 1, ..., m\}\)，我们也可以我们将对应 S 的几何边界 (w, b) 定义为每个训练样本的几何边界的最小值：</p>
+
+<p>\[<br/>
+\gamma=\min_{i=1,...,m}\gamma^{(i)}<br/>
+\]</p>
+
+<h1 id="toc_6">4 最优边界分类器(optimal marg_in classifier)</h1>
+
+<p>给定一个训练集，根据咱们前文的讨论，似乎很自然地第一要务就是要尝试着找出一个分类边界，使(几何)边界能够最大，因为这会反映出对训练集进行的一系列的置信度很高的分类预测，也是对训练数据的一个良好“拟合(fit)”。这样生成的一个分类器，能够把正向和负向的训练样本分隔开，中间有一个“空白区(gap)”，也就是几何边界。</p>
+
+<p>到目前为止，我们都是假定给定的训练集是线性可分(linearly separable)的；也就是说，能够在正向和负向的样本之间用某种分类超平面来进行划分。那要怎样找到能够得到最大几何边界的那一组呢？我们可以提出下面的这样一个优化问题(optimization problem)：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+max_(\gamma,w,b) &amp; \gamma \\<br/>
+s.t.  y^{(i)}(w^Tx^{(i)}+b) &amp;\geq \gamma,i=1,...,m\\<br/>
+||w||&amp;=1 \\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>也就是说，我们要让 \(\gamma\) 取最大值，使得每一个训练样本的函数边界都至少为 \(\gamma\)(having functional marg_in at least \(\gamma\))。另外 \(||w|| = 1\) 这个约束条件还能保证函数边界与几何边界相等，所以我们就还能够保证所有的几何边界都至少为 \(\gamma\)。因此，对上面这个优化问题进行求解，就能得出对应训练集的最大可能几何边界(largest possible geometric marg_in)的 (w, b)。</p>
+
+<p>如果解出来上面的优化问题，那就全都搞定了。但 “\(||w|| = 1\)” 这个约束条件很讨厌，是非凸的(non-convex)，而且这个优化问题也明显不是那种我们随便扔给某些标准优化软件(standard optimization software)就能解决的。所以我们要把这个问题进行改善，让它更好解。例如：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+max_(\gamma,w,b) &amp; \frac{\hat \gamma}{||w||} \\<br/>
+s.t.  y^{(i)}(w^Tx^{(i)}+b) &amp;\geq \gamma,i=1,...,m\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>这时候，我们要让 \(\hat \gamma/||w||\) 的取值最大，使得函数边界都至少为 \(\hat \gamma\)。由于几何边界和函数边界可以通过 \(\gamma = \hat \gamma/||w||\) 来联系起来，所以这样就能得到我们想要的结果了。而且，这样还能摆脱掉 \(||w|| = 1\) 这个讨厌的约束条件。然而，悲剧的是我们以现在就有了一个很讨厌的(还是非凸的)目标函数 \(\hat \gamma/||w||\)；而且，我们还是没有什么现成的软件(off-the-shelf software)能够解出来这样的一个优化问题。</p>
+
+<p>那接着看吧。还记得咱们之前讲过的可以对 w 和 b 设置任意的一个缩放约束参数，而不会改变任何实质性内容。咱们现在就要用到这个重要性质了。下面咱们就来引入一个缩放约束参数，这样针对训练集的函数边界 w, b 的这个参数就可以设置为 1(scaling constra_int that the functional marg_in of w, b with respect to the tra_ining set must be 1)：</p>
+
+<p>\[<br/>
+\hat \gamma =1<br/>
+\]</p>
+
+<p>对 w 和 b 使用某些常数来进行翻倍，结果就是函数边界也会以相同的常数进行加倍，这就确实是一个缩放约束了，而且只要对 w 和 b 进行缩放就可以满足。把这个性质用到咱们上面的优化问题中去，同时要注意到当 \hat \gamma/||w|| = 1/||w|| 取得最大值的时候，||w||2 取得最小值，所以就得到了下面的这个优化问题：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+max_(\gamma,w,b) &amp; \frac{1}{2}||w||^2 \\<br/>
+s.t.  y^{(i)}(w^Tx^{(i)}+b) &amp;\geq \gamma,i=1,...,m\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>通过上面这样的转换，这个问题就变得容易解决了。上面的问题有一个凸二次对象(a convex quadratic objective)，且仅受线性约束(only linear constra_ints)。对这个问题进行求解，我们就能得到最优边界分类器(optimal marg_in classifier)。这个优化问题的求解可以使用商业二次规划(commercial quadratic programming ，缩写QP)代码。1</p>
+
+<p>1可能你更熟悉的是线性规划(linear programming)，这种方法适用的优化问题是有线性对象(linear objectives)和线性约束(linear constra_ints)。QP 软件的适用范围也很广泛，其中就包括这种凸二次对象(convex quadratic objectives)和线性约束的情况。</p>
+
+<p>这样，差不多就可以说问题已经得到了解决，接下来咱们就要岔开话题，聊一聊拉格朗日对偶性(Lagrange duality)。这样就会引出我们这个优化问题的对偶形式(dual form)，这种形式会在我们后续要使用核(kernels)的过程中扮演重要角色，核(kernels)可以有效地对极高维度空间中的数据建立最优边界分类器。通过这种对偶形式，我们还能够推出一种非常有效的算法，来解决上面这个优化问题，而且通常这个算法那还能比通用的 QP 软件更好用。</p>
+
+<h1 id="toc_7">5 拉格朗日对偶性(Lagrange duality)</h1>
+
+<p>咱们先把 SVMs 以及最大化边界分类器都放到一边，先来谈一下约束优化问题的求解。</p>
+
+<p>例如下面这样的一个问题：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+min_w &amp; f(w)&amp; \\<br/>
+s.t.  h_i(w)&amp; =\gamma,i=1,...,l\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>可能有的同学还能想起来这个问题可以使用拉格朗日乘数法(method of Lagrange multipliers)来解决。(没见过也不要紧哈。)在这个方法中，我们定义了一个拉格朗日函数(Lagrang_ian)为：</p>
+
+<p>\[<br/>
+L(w,\beta)=f(w)+\sum^l_{i=1}\beta_i h_i(w)<br/>
+\]</p>
+
+<p>上面这个等式中，这个 \(\beta_i\) 就叫做拉格朗日乘数(Lagrange multipliers)。然后接下来让 对 L 取偏导数，使其为零：</p>
+
+<p>\[<br/>
+\frac{\partial L }{\partial w_i} =0; \frac{\partial L }{\partial \beta_i} =0;<br/>
+\]</p>
+
+<p>然后就可以解出对应的 w 和 \(\beta\) 了。在本节，我们对此进行一下泛化，扩展到约束优化(constra_ined optimization)的问题上，其中同时包含不等约束和等式约束。由于篇幅限制，我们在本课程不能讲清楚全部的拉格朗日对偶性(do the theory of Lagrange duality justice)，但还是会给出主要的思路和一些结论的，这些内容会用到我们稍后的最优边界分类器的优化问题(optimal marg_in classifier’s optimization problem)。</p>
+
+<p>2 对拉格朗日对偶性该兴趣的读者如果想要了解更多，可以参考阅读 R. T. Rockefeller (1970) 所作的《凸分析》(Convex Analysis)，普林斯顿大学出版社(Princeton University Press)。</p>
+
+<p>下面这个，我们称之为主最优化问题(primal optimization problem)：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+min_w &amp; f(w)&amp; \\<br/>
+s.t.  g_i(w)&amp; =\gamma,i=1,...,k\\<br/>
+h_i(w)&amp; =\gamma,i=1,...,l\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>要解决上面这样的问题，首先要定义一下<strong>广义拉格朗日函数(generalized Lagrang_ian)：</strong></p>
+
+<p>\[<br/>
+L(w,\alpha,\beta))=f(w)+\sum^k_{i=1}\alpha_ig_i(w)+\sum^l_{i=1}\beta_ih_i(w)<br/>
+\]</p>
+
+<p>上面的式子中， \alpha_i 和 \beta_i 都是<strong>拉格朗日乘数(Lagrange multipliers)</strong>。设有下面这样一个量(quantity)：</p>
+
+<p>\[<br/>
+\theta_{P}(w)=\max_{\alpha,\beta:\alpha_i \geq 0}Lw,\alpha,\beta()<br/>
+\]</p>
+
+<p>上式中的 “P” 是对 “primal” 的简写。设已经给定了某些 w。如果 w 不能满足某些主要约束，(例如对于某些 i 存在 \(g_i(w)\) &gt; 0\( 或者 \)h_i(w) \neq 0$)，那么咱们就能够证明存在下面的等式关系：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\theta_P(w)&amp;=\max_{\alpha,\beta:\alpha_i \geq 0} f(w)+\sum^k_{i=1}\alpha_ig_i(w)+\sum^l_{i=1}\beta_ih_i(w) &amp;\text{(1)}\\<br/>
+&amp;= \infty &amp;\text{(2)}\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>与之相反，如果 w 的某些特定值确实能满足约束条件，那么则有 \(\theta_P(w) = f(w)\)。因此总结一下就是：</p>
+
+<p>\[<br/>
+\theta_P(w)= \begin{cases} f(w) &amp; \text {if w satisfies primal constra_ints} \\<br/>
+\infty &amp; \text{otherwise} \end{cases}<br/>
+\]</p>
+
+<p>因此，如果 w 的所有值都满足主要约束条件，那么\theta_P的值就等于此优化问题的目标量(objective in our problem)，而如果约束条件不能被满足，那 \(\theta_P\)的值就是正无穷了(positive infinity)。所以，进一步就可以引出下面这个最小化问题(minimization problem)：</p>
+
+<p>\[<br/>
+\min_w \theta_P(w)=\min_w \max_{\alpha,\beta:\alpha_i\geq0} L(w,\alpha,\beta)<br/>
+\]</p>
+
+<p>这个新提出的问题与之前主要约束问题有一样的解，所以还是同一个问题。为了后面的一些内容，我们要在这里定义一个目标量的最优值(optimal value of the objective)\(p \ast = min_w \theta_P (w)\)；我们把这个值称为 主要优化问题的值(value of the primal problem)。</p>
+
+<p>接下来咱们来看一个稍微不太一样的问题。我们定义下面这个 \(\theta_D\)：</p>
+
+<p>\[<br/>
+\theta_D(\alpha,\beta)=\min_w L(w,\alpha,\beta)<br/>
+\]</p>
+
+<p>上面的式子中，“D” 是 “dual” 的缩写。这里要注意，在对\(\theta_P\) 的定义中，之前是对 \(\alpha\), \(\beta\) 进行优化(找最大值)，这里则是找 w 的最小值。</p>
+
+<p>现在我们就能给出这个对偶优化问题了：</p>
+
+<p>\[<br/>
+\max_{\alpha,\beta:\alpha_i\geq 0} \theta_D(\alpha,\beta)  = \max_{\alpha,\beta:\alpha_i\geq 0} \min_w L(w,\alpha,\beta)<br/>
+\]</p>
+
+<p>这个形式基本就和我们之前看到过的主要约束问题(primal problem)是一样的了，唯一不同是这里的“max” 和 “min” 互换了位置。我们也可以对这种对偶问题对象的最优值进行定义，即 \(d\ast = max\alpha,\beta:\alpha_i\geq 0 \theta_D(w)\)。</p>
+
+<p>主要约束问题和这里的对偶性问题是怎么联系起来的呢？通过下面的关系就很容易发现</p>
+
+<p>\[<br/>
+d\ast = \max_{\alpha,\beta:\alpha_i\geq 0}\min_w L(w,\alpha,\beta) \leq \min_w \max_{\alpha,\beta:\alpha_i\geq 0}L(w,\alpha,\beta)  =p\ast<br/>
+\]</p>
+
+<p>(你可以自己证明一下，这里以及以后的一个函数的最大的最小值“max min”总是小于等于最小的最大值“min max”。)不过在某些特定的情况下，就会有二者相等的情况：</p>
+
+<p>\[<br/>
+d\ast =p\ast<br/>
+\]</p>
+
+<p>这样就可以解对偶问题来代替原来的主要约束问题了。接下来咱们就来看看导致上面二者相等的特定条件是什么。</p>
+
+<p>假设 f 和 \(g_i\) 都是凸的(convex\(^3\))，\(h_i\) 是仿射的(affine\(^4\))。进一步设 g 是严格可行的(strictly feasible)；这就意味着会存在某个 w，使得对所有的 i 都有 \(g_i(w) &lt; 0\)。</p>
+
+<p>3 当 f 有一个海森矩阵(Hessian matrix)的时候，那么当且仅当这个海森矩阵(Hessian matrix)是半正定矩阵，f 才是凸的。例如，\(f (w) = w^T w\) 就是凸的；类似的，所有的线性linear(以及仿射affine)函数也都是凸的。(不可微differentiable的函数 f 也可以是凸的，不过在哪买还不需要在这里对凸性进行那么泛化的扩展定义了。)</p>
+
+<p>4 例如，存在 \(a_i\)和 \(b_i\) 满足 \(h_i(w) = a^T_i w + b_i\)。仿射(Affine)的意思大概就跟线性 linear 差不多，不同的就是在矩阵进行了线性变换的基础上还增加了一个截距项(extra intercept term)\(b_i\)。</p>
+
+<p>基于上面的假设，可知必然存在 \(w\ast\)，\(\alpha\ast\)， \(\beta\ast\) 满足\(w\ast\) 为主要约束问题(primal problem)的解，而\(\alpha\ast\)，\(\beta\ast\) 为对偶问题的解，此外存在一个 \(p\ast = d\ast = L(w\ast,\alpha\ast, \beta\ast)\)。另外，\(w\ast\)，\(\alpha\ast\)， \(\beta\ast\)这三个还会满足卡罗需-库恩-塔克条件(Karush-Kuhn-Tucker conditions, 缩写为 KKT)，如下所示：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\frac{\partial}{\partial w_i}L(w\ast,\alpha\ast,\beta\ast) &amp;= 0,i=1,...,n &amp; \text{(3)}\\<br/>
+\frac{\partial}{\partial \beta_i}L(w\ast,\alpha\ast,\beta\ast)&amp;= 0 ,i=1,...,l &amp;  \text{(4)}\\<br/>
+\alpha_i\ast g_i(w\ast)&amp;= 0,i=1,...,k &amp; \text{(5)}\\<br/>
+g_i(w\ast)&amp;\leq 0,i=1,...,k &amp; \text{(6)}\\<br/>
+\alpha_i\ast &amp;\geq 0,i=1,...,k &amp;\text{(7)}\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>反过来，如果某一组 \(w\ast,\alpha\ast,\beta\ast\) 满足 KKT 条件，那么这一组值就也是主要约束问题(primal problem)和对偶问题的解。</p>
+
+<p>这里咱们要注意一下等式(5)，这个等式也叫做 KKT 对偶互补条件(dual complementarity condition)。这个等式暗示，当\(\alpha_i\ast \geq 0\) 的时候，则有 \(g_i(w\ast) = 0\)。(也就是说，\(g_i(w) \leq 0\) 这个约束条件存在的话，则应该是相等关系，而不是不等关系。)后面的学习中，这个等式很重要，尤其对于表明 SVM 只有少数的“支持向量(Support Vectors)”；在学习 SMO 算法的时候，还可以用 KKT 对偶互补条件来进行收敛性检测(convergence test)。</p>
+
+<h1 id="toc_8">6 最优边界分类器(Optimal marg_in classifiers )</h1>
+
+<p>在前面的内容中，我们讲到了下面这种(主要约束)优化问题(optimization problem)，用于寻找最优边界分类器(optimal marg_in classifier)：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+min(\gamma,w,b) &amp; \frac12 ||w||^2\\<br/>
+&amp;\\<br/>
+s.t.&amp;y^{(i)}(w^Tx^{(i)}+b)\geq 1,i=1,...,m\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>这里的约束条件(constra_ints)可以写成下面的形式：</p>
+
+<p>\[<br/>
+g_i(w)=-y^{(i)}(w^Tx^{(i)}+b)+1\leq 0<br/>
+\]</p>
+
+<p>对于训练集中的每一个样本，都有这样的一个约束条件。要注意，通过 KKT 对偶互补条件可知，只有训练样本的函数边界确定为 1 的情况下，才有 \(\alpha_i \geq  0\) (这些样本对应的约束条件关系都是等式关系，也就是对应的 \(g_i(w) = 0\))。如下图所示，其中用实线所表示的就是最大间隔分界超平面(maximum marg_in separating hyperplane)。</p>
+
+<p><img src="https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note3f3.png" alt=""/></p>
+
+<p>具有最小边界的样本点(points with the smallest marg_ins)正好就是距离分类边界(decision boundary;)最近的那些点；图中所示，一共有三个这样的点，一个是空心圆的负值，两个是叉号的正值，他们所处的位置有虚线与分类边界线(即实线)相平行。因此，在这个优化问题中的最优解里面，只有这三个样本点所对应的 \alpha_i 是非零的。这种现象就是，支持向量的规模(number of support vectors)可以比整个训练集的规模(size of the tra_ining set)更小，这在稍后的内容中会用到。</p>
+
+<p>接着往下来。我们已经给出了问题的对偶形式，那么一个关键的思路就是，接下来我们需要把算法写成仅包含内积的形式 \(((x^{(i)},x^{(j)})\) ，也可以理解为 \((x^{(i)})^Tx^{(j)})\)，即输入特征空间中的点相乘得到的内积。当使用核技巧(kernel trick)的时候，把算法用内积的形式表达就非常重要了。</p>
+
+<p>在构建优化问题的拉格朗日函数(Lagrang_ian)的时候，有下面的等式：</p>
+
+<p>\[<br/>
+L(w,b,\alpha )=\frac{1}{2}||w||^2 - \sum^m_{i=1}\alpha_i [y^{(i)}(w^Tx^{(i)}+b)-1]  \text{      (8)}<br/>
+\]</p>
+
+<p>注意这里的拉格朗日乘数(Lagrange multipliers)中只有“\(\alpha_i\)” 而没有 “\(\beta_i\)”，因为这时候问题还只有不等式约束条件(inequality constra_ints)。</p>
+
+<p>接下来咱们找一下这个问题的对偶性是。首先就要使 \(L(w,b,\alpha)\) 取最小值，调整 w 和 b，而使 \(\alpha\) 固定，这样就能得到 \(\theta_D\)，具体方法也就是令 L 关于 w 和 b 的导数(derivatives)为零。接下来得到下面的等式：</p>
+
+<p>\(\nabla_WL(w,b,\alpha)=w-\sum^m_{i=1}\alpha_i y^{(i)}x^{(i)} =0\)</p>
+
+<p>改写一下形式也就得到了：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+w=\sum^m_{i=1}\alpha_i y^{(i)}x^{(i)}\text{      (9)}<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>关于 b 的导数为零，就有：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\frac{\partial}{\partial b}L()=\sum^m_{i=1}\alpha_i y^{(i)}=0 &amp;     \text{      (10)}<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>通过上面的等式 (9)取得 w 的一种定义方式，然后把这个代入到拉格朗日函数，也就是等式(8) 中，然后简化一下，就得到：</p>
+
+<p>\(L(w,b,\alpha)=\sum^m_{i=1}\alpha_i-\frac12 \sum^m_{i,j=1} y^{(i)}y^{(j)}\alpha_i\alpha_j(x^{(i)})^Tx^{(j)}-b\sum^m_{i=1}\alpha_i y^{(i)}\)</p>
+
+<p>然后根据上面的等式 (10) 就能知道最后一项必然是 0，所以可以进一步简化得到：</p>
+
+<p>\(L(w,b,\alpha)=\sum^m_{i=1}\alpha_i-\frac12 \sum^m_{i,j=1} y^{(i)}y^{(j)}\alpha_i\alpha_j(x^{(i)})^Tx^{(j)}\)</p>
+
+<p>还记得之前我们得到的关于 w 和 b 来取 L 最小值的等式吧。把这些与约束条件 \(\alpha_i \geq 0\) (这个一直都成立的)结合起来，然后再结合等式 (10)，就得到了下面的对偶优化问题了：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+max_\alpha &amp; W(\alpha) =\sum^m_{i=1}\alpha_i-\frac12\sum^m_{i,j=1}y^{(i)}y^{(j)}\alpha_i\alpha_j\langle x^{(i)} x^{(j)} \rangle\\<br/>
+s.t.&amp;  \alpha_i \geq 0,i=1,...,m\\<br/>
+&amp; \sum^m_{i=1} \alpha_iy^{(i)}=0<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>你应该能够证明我们这个优化问题的条件是满足 \(p\ast = d\ast\) 和 KKT 条件的(等式 (3-7))。这样，我们就可以通过解这个对偶问题来解决掉原来的主优化问题。具体来说，就是我们构建了一个以 \(\alpha_i\) 作为参数的取最大值问题(maximization problem)，如果能把这个问题解出来(也就是说找到 \(\alpha\) ，使得 \(W(\alpha)\) 取最大值，且满足约束条件)那么就可以利用等式 (9) 来返回到问题中，找到最优的 w，作为一个关于 \(\alpha\) 的函数。得到了 \(w\ast\) 之后，再考虑主优化问题，就能直接找到截距项 b 的最优值了：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+b\ast =- \frac{  \max_{i:y^{(i)}=-1}w\ast^Tx^{(i)}+\min_{i:y^{(i)}=-1}w\ast^Tx^{(i)}               }{2} &amp;     \text{          (11)}\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>(自己证明一下这个过程吧。)在继续之前，咱们再回头看一看等式 (9)，其中以 \alpha (最优值的)形式来表达了 w 的最优值。加入咱们已经使用一个训练集对模型的参数进行了拟合，然后接下来要对一个新输入的 x 的目标值进行预测。就要对 w<sup>T</sup> x + b 进行计算，如果得到的值大于 0，就预测 y = 1。通过利用等式 (9)，这个性质也可以写成：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+w^Tx+b&amp;= (\sum^m_{i=1}\alpha_i y^{(i)}x^{(i)})^Tx+b &amp; \text{          (12)}\\<br/>
+&amp;= \sum^m_{i=1}\alpha_i y^{(i)}\langle x^{(i)},x \rangle+b &amp; \text{          (13)}\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>这样的话，要进行一个预测，如果已经找到了 \(\alpha_i\)，那就必须要计算一个值，该值只依赖新的输入特征 x 与训练集中各个 点 的内积。另外，之前我们就已经发现所有支持向量(support vectors)的 \(\alpha_i\) 的值都是 0。这样上面的求和项目中的很多项就都是 0 了，接下来咱们就只需要找到 x 与支持向量(support vectors)的内积(这样实际用于计算的只有一小部分，而不是整个的训练集)，然后就可以计算等式 (13)，得到结果，就可以用于预测了。</p>
+
+<p>通过检验优化问题的对偶形式，我们对要解决的问题的结构有了深入的了解，并且还根据输入特征向量之间的内积来编写整个算法。 在下一节中，我们将充分利用这些内容，然后对我们的分类问题使用核(kernels)方法。 最终得到的算法，月就是支持向量机(support vector mach_ines)算法，将能够在非常高的维度空间中有效地学习。</p>
+
+<h1 id="toc_9">7 核(Kernels )</h1>
+
+<p>咱们之前讲线性回归的时候，遇到过这样一个问题，其中输入的特征 x 是一个房屋的居住面积，然后我们考虑使用特征 \(x\)，\(x^2\) 以及 \(x^3\) 来进行拟合得到一个立方函数(cub_ic function)。要区分出两组数据集，我们把“原始”的输入值称为一个问题的输入属性(input attributes)，例如住房面积 x。当这些值映射到另外的一些数据集来传递给学习算法的时候，这些新的数据值就称为输入特征(input features)。(很无奈，不同的作者经常用不同的名词来描述这两者，不过在咱们这个讲义里面，我们会争取保持所用术语的一致性。)然后我们还要用 \(\phi\) 来表示特征映射(feature mapping)，这种特征映射也就是从输入的属性(input attributes)到传递给学习算法的输入特征(input features)之间的映射关系。例如，还说刚刚这个居住面积 x 的例子，这里面的特征映射就可以表述为：</p>
+
+<p>\[<br/>
+\phi(x)=\left[ \begin{aligned}&amp; x\\ &amp; x^2\\ &amp; x^3 \end{aligned}\right]<br/>
+\]</p>
+
+<p>现在我们就不再简单直接地利用 SVM(支持向量机算法)来处理原始的输入属性 x 了，而是可以尝试着利用映射产生的新的特征 \phi(x)。那么，我们只需要简单回顾一下之前的算法，然后把所有的 x 替换成 \phi(x)。</p>
+
+<p>由于上面的算法可以整个用 \(\langle x,z\rangle\) 的内积形式写出，这就意味着我们只需要把上面的所有内积都替换成 \(\langle\phi(x),\phi(z)\rangle\) 的内积。更简洁地说，给定一个特征映射 \(\phi\)，那么就可以定义一个对应的核(Kernel)，如下所示：</p>
+
+<p>\[<br/>
+K(x,z)=\phi(x)^T\phi(z)<br/>
+\]</p>
+
+<p>然后，只需要把上面的算法里用到的 \(\langle x, z\rangle\) 全部替换成 \(K(x, z)\)，这样就可以了，我们的算法就开始使用特征映射 \(\phi\) 来进行机器学习了。</p>
+
+<p>现在，给定一个特征映射 \(\phi\)，很容易就可以找出 \(\phi(x)\) 和 \(\phi(z)\)，然后取一下内积，就能计算 \(K (x, z)\)了。不过还不仅如此，更有意思的是，通常情况下对这个\(K (x,z)\) 的计算往往都会非常容易(very inexpensive)，甚至即便 \(\phi(x)\) 本身很不好算的时候(可能是由于向量维度极高)也如此。在这样的背景下，给定一个特征映射 \(\phi\)，我们就可以使用 SVM(支持向量机算法)来对高纬度特征空间进行机器学习，而可能根本不用麻烦地区解出来对应的向量 \(\phi(x)\)。</p>
+
+<p>接下来就看一个例子吧。假设有 \(x, z \in Rn\)，设有：</p>
+
+<p>\[<br/>
+K(x,z)= (x^Tz)^2<br/>
+\]</p>
+
+<p>这个也可以写成下面的形式：</p>
+
+<p>$$<br/>
+\begin{aligned}</p>
+
+<p>K(x,z)&amp;=(\sum<sup>n_{i=1}x_iz_i)(\sum<sup>n_{j=1}x_jz_j)\</sup></sup></p>
+
+<p>&amp;=\sum<sup>n_{i=1}\sum<sup>n_{j=1}x_ix_jz_iz_j\</sup></sup></p>
+
+<p>&amp;=\sum<sup>n_{i,j=1}(x_ix_j)(z_iz_j)\</sup></p>
+
+<p>\end{aligned}<br/>
+$$</p>
+
+<p>因此，可见 \(K (x, z) = \phi(x)^T \phi(z)\)，其中特征映射 \(\phi\) 给出如下所示(这个例子中的 n = 3) ：</p>
+
+<p>\[<br/>
+\phi(x)= \left[ \begin{aligned} &amp;x_1x_1\\&amp;x_1x_2\\&amp;x_1x_3\\&amp;x_2x_1\\&amp;x_2x_2\\&amp;x_2x_3\\ &amp;x_3x_1\\&amp;x_3x_2\\&amp;x_3x_3 \end{aligned}   \right]<br/>
+\]</p>
+
+<p>到这里就会发现，计算高维度的 \(\phi(x)\) 需要的计算量是 O (\(n^2\)) 级别的，而计算 \(K (x, z)\) 则只需要 O (n) 级的时间，也就是与输入属性的维度呈线性相关关系。</p>
+
+<p>与之相关的核(Kernel)可以设为：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+K(x,z)&amp;= (x^Tz+c)^2 \\<br/>
+&amp;= \sum^n_{i,j=1}(x_ix_j)(z_iz_j)+\sum^n_{i=1}(\sqrt{2c}x_i)(\sqrt{2c}z_i)+c^2\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>(自己检验。)对应的特征映射为(此处依然以 n = 3 为例)：</p>
+
+<p>\[<br/>
+\phi(x)= \left[ \begin{aligned} &amp;x_1x_1\\&amp;x_1x_2\\&amp;x_1x_3\\&amp;x_2x_1\\&amp;x_2x_2\\&amp;x_2x_3\\ &amp;x_3x_1\\&amp;x_3x_2\\&amp;x_3x_3\\&amp; \sqrt{2c}x_1\\&amp; \sqrt{2c}x_2\\&amp; \sqrt{2c}x_3\\&amp;c\end{aligned}   \right]<br/>
+\]</p>
+
+<p>其中 参数 c 控制了第一组 \(x_i\) 和第二组 \(x_ix_j\) 的相对权重(relative weighting)。</p>
+
+<p>在此基础上进一步扩展，核(Kernel)\(K (x, z) = (x^T z + c)^d\)，就对应了一个\(\left( \begin{aligned} n&amp;+d \\ &amp;d  \end{aligned} \right)\)维度的特征空间的特征映射，对应所有从 \(x_{i1},x_{i2}, ...,x_{ik}\) 一直到 d 这种形式的所有多项式(monomials)。然而，即便是针对这种 \(O(n^d)\) 维度的高维度空间，计算 \(K (x, z)\) 让然只需要 O (n) 级的时间。所以我们就不需要在这个非常高的维度特征空间中对特征向量进行具体的表示。</p>
+
+<p>现在，咱们来从另外一个角度来看一下核(Kernel)。凭直觉来看(这种直觉可能还有些错误，不过不要紧，先不用管)，如果 \phi(x) 和 \(\phi(z)\) 非常接近(close together)，那么就可能会认为 \(K (x, z) = \phi(x)^T\phi(z)\) 就可能会很大。与之相反，如果 \(\phi(x)\) 和 \(\phi(z)\) 距离很远，比如近似正交(nearly orthogonal)，那么\(K (x, z) = \phi(x)^T\phi(z)\) 就可能会很小。这样，我们就可以把核 K (x, z) 理解成对\(\phi(x)\) 和 \(\phi(z)\) 的近似程度的一种度量手段，或者也可以说是对 x 和 z 的近似程度的一种度量手段。</p>
+
+<p>有了这种直观认识之后，假如你正在尝试某些学习算法，并且已经建立了某个函数 \(K (x, z)\)，然后你想着也许可以用这个函数来对 x 和 z 的近似程度进行衡量。例如，假如你就选择了下面这个函数：</p>
+
+<p>\[<br/>
+K(x,z)=\exp (- \frac{||x-z||^2}{2\sigma^2 })<br/>
+\]</p>
+
+<p>这个函数是对 x 和 z 的近似程度的一个很好的衡量，二者相近的时候函数值接近 1，而二者远离的时候函数值接近 0。那咱们能不能用这样定义的一个函数 K 来作为一个 SVM(支持向量计算法)里面的核(Kernel)呢？在这个特定的样例里面，答案是可以的。(这个核(Kernel)也叫做 高斯核，对应的是一个无穷维度的特征映射 \(\phi\)。)那么接下来进一步推广一下，给定某个函数 K，我们该怎样能够确定这个函数是不是一个有效的核(valid kernel)呢？例如，我们能否说如果存在着某一个特征映射 \phi，则对于所有的 x 和 z 都有 \(K (x, z) = \phi(x)^T \phi(z)\)？</p>
+
+<p>现在暂时假设 K 就是一个有效的核，对应着某种特征映射 \(\phi\)。然后，考虑某个有 m 个点的有限集合 \(\{x^{(1)},...,x^{(m)}\}\)(这个集合并不一定就必须是训练集)，然后设一个方形的 m\times m 矩阵 K，定义方式为矩阵的第 (i, j) 个值 \(K_{ij} = K (x^{(i)} , x^{(j)})\)。这个矩阵就叫做核矩阵(Kernel matrix)。注意到没有，这里对符号 K 进行了重复使用，既指代了\(K(x,z)\) 这个核函数(kernel function)，也指代了核矩阵 K，这是由于这两者有非常明显的密切关系。</p>
+
+<p>如果 K 是一个有效的核(Kernel)，那么就有\(K_{ij} = K (x^{(i)}, x^{(j)}) = \phi(x^{(i)})^T \phi(x^{(j)}) = \phi(x^{(j)})^T \phi(x^{(i)}) = K(x^{(j)}, x^{(i)}) = K_{ji}\)，这就说明 K 是一个对称矩阵。此外，设 \(\phi_k(x)\) 表示向量 \(\phi(x)\) 的第 k 个坐标值(k-th coordinate)，挥发性对于任意的向量 z，都有：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+z^TKz&amp;=   \sum_i\sum_j z_iK_{ij}z_j \\<br/>
+&amp;=   \sum_i\sum_j z_i\phi(x^{(i)})\phi(x^{(j)})z_j\\<br/>
+&amp;=   \sum_i\sum_jz_i\sum_k \phi_k(x^{(i)})\phi_k(x^{(j)})z_j\\<br/>
+&amp;=   \sum_k\sum_i\sum_j z_i\phi_k(x^{(i)})\phi_k(x^{(j)})z_j\\<br/>
+&amp;= \sum_k(\sum_i z_i\phi_k(x^{(i)}))^2\\<br/>
+&amp;\geq 0 \\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>上面的推到中从第二步到最后一步都用到了习题集1第一题(Problem set 1 Q1)中的同样技巧。，由于 z 是任意的，这就表明了矩阵 K 是正半定(positive semi-definite)的矩阵(\(K \geq 0\))。</p>
+
+<p>这样，我们就证明了，如果 K 是一个有效核函数(例如，假设该函数对应某种特征映射 \(\phi\) )，那么对应的核矩阵(Kernel Matrix)\(K \in R^{m\times m}\) 就是一个对称正半定矩阵(symmetric positive semidefinite)。进一步扩展，这就不仅仅是一个 K 是一个有效核函数的必要条件(necessary)，还成了充分条件(sufficient)，这个核函数也叫做默瑟核(Mercer kernel)。下面要展示的结果都是源自于 Mercer(due to Mercer)。</p>
+
+<p>\(^5\)很多教材对默瑟定理(Mercer’s theorem)的描述都要更加复杂一些，里面牵涉到了 L2 函数，但如果输入属性(input attributes)只在实数域 Rn 中取值，那么这里给出的这种表述也是等价的(equivalent.)。</p>
+
+<p>默瑟定理(Mercer’s theorem)：设给定的 \(K: R^n \times  R^n \rightarrow   R\)。然后要使 K 为一个有效的默瑟核(valid Mercer kernel)，其充分必要条件为：对任意的 \(\{x^{(1)},...,x^{(m)}\, (m &lt; \infty)\)，都有对应的核矩阵(kernel matrix)为对称半正定矩阵(symmetric positive semi-definite)。</p>
+
+<p>对于一个给定的函数 K，除了之前的找出对应的特征映射 \phi 之外，上面的定理还给出了另外一种方法来验证这个函数是否为有效核函数(valid kernel)。在习题集2(problem set 2) 里面有很多联系，大家可以尝试一下。</p>
+
+<p>在课程中，我们也简要讲了核(Kernel)的若干样例。例如，手写数字识别问题当中，给定了一个手写数字(0-9)的图像(16x16 像素)，目的是要认出写的是哪个数字。选用的要么是简单的多项式核(polynomial kernel) \(K (x, z) = (x^T z)^d\) 或者 高斯核(Gaussian kernel)，SVM(支持向量机算法)在这个样例中表现出了非常出色的性能。这个结果挺让人吃惊的，因为输入属性 x 是一个 256 维的向量，也就是待识别图像的像素密度值向量，而系统之前并没有对于视觉判断的预备知识，甚至对像素彼此间是否相邻都不了解。课堂上的另一个案例中，用于分类的目标 x 是字符串，例如x 可以使一系列的氨基酸(amino acids)，然后连接在一起形成了蛋白质(protein)；要构建一个适用于大多数机器学习算法的合理又足够“小规模”的特征集，是很困难的，而字符串的长度还各自不同，这就更增加了难度。然而也有解决方案，设 \(\phi(x)\) 为一个特征向量，计算了 x 当中每一个 k 长度的字符串的出现次数(number of occurrences of each length-k substring in x)。如果考虑英语字母组成给的字符串，那么这样就存在 \(26^k\) 个这样的字符。这样的话，\(\phi(x)\) 就是一个 \(26^k\) 维的向量；这时候，即便 k 的值并不算太大，这个值也会变得特别大，难以有效计算。(例如 \(26^4 \approx 460000\)。)不过，如果使用(动态编程风格，dynamic programming-ish)的字符串匹配算法，就可以有效率地计算 \(K(x,z ) = \phi(x)^T\phi(z)\)，也就是说，我们就能够对 \(26^k\) 维的特征空间进行隐式处理，而根本不用去特地计算这个空间中的特征向量。</p>
+
+<p>关于在支持向量机算法(support vector mach_ines)中核(kernels)的使用，我们讲得已经够清楚了，所以就不在这里多做赘述了。不过有一个思路还是值得记住的，就是核(Kernel)的用法远远不仅限于 SVM 算法当中。具体来说，只要你的学习算法，能够写成仅用输入属性向量的内积来表达的形式，那么就可以通过引入 核K(Kernel)，替换成 \(K(x,z)\)，来对你的算法“强力”加速，使之能够在与 K 对应的高维度特征空间中有效率地运行。核(Kernel)与感知器(Perceptron)相结合，还可以产生内核感知器算法(kernel perceptron algorithm)。后文我们要学到的很多算法，也都可以适用于这样的处理，这个方法也就成为“核技巧(kernel trick)”</p>
+
+<h1 id="toc_10">8 正则化和不可区分的情况(Regularization and the non-separable case)</h1>
+
+<p>到目前为止，咱们对 SVM(支持向量机算法)进行的推导，都是基于一个假设，也就是所有的数据都是线性可分的。在通过特征映射 \phi 来将数据映射到高维度特征空间的过程，通常会增加数据可分割的概率，但我们还是不能保证数据一直可以区分。而且，在某些案例中，查找一个分类超平面还不一定是我们的目的所在，因为也可能很容易就出现异常值。例如，如下图所示的是一个最优边界分类器(optimal marg_in classifier)，如果有一个单独的异常值投到了右上方的区域(如右图所示)，这就会导致分界线出现显著的偏移，还会导致分类器的边界缩小了很多。</p>
+
+<p><img src="https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note3f4.png" alt=""/></p>
+
+<p><img src="https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note3f5.png" alt=""/></p>
+
+<p>要想让算法能够适用于非线性可分的数据集，并且使其对待异常值的敏感度降低一些，那就要把咱们的优化方法进行重构(reformulate)(使用 l1 正则化)，如下所示：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+min_{\gamma,w,b}&amp; \frac 12 ||w||^2+C\sum^m_{}\xi_i \\<br/>
+s.t.&amp; y^{(i)}(w^Tx^{(i)}+b) \geq1-\xi_i,i=1,...,m\\<br/>
+&amp; \xi_i \geq 0 ,i=1,...,m<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>这样就允许数据集里面有(函数)边界小于1 的情况了，然后如果一个样本的函数边界为 \(1 - \xi_i\) (其中 \(\xi \geq  0\))，这就需要我们给出 \(C\xi_i\) 作为<strong>目标函数成本函数的降低值</strong>(cost of the objective function being increased)。C 是一个参数，用于控制相对权重，具体的控制需要在一对目标之间进行考量，一个是使得 \(||w||^2\) 取最小值(前面章节中的案例可以看到这样能够让边界最大化)，另一个是确保绝大部分的样本都有至少为 1 的函数边界。</p>
+
+<p>然后按照惯例，给出拉格朗日函数(Lagrang_ian)：</p>
+
+<p>\[<br/>
+L(w,b,\xi,\alpha,r)=\frac12w^Tw+C\sum^m_{i=1}\xi_i-\sum^m_{i=1}\alpha_i[y^{(i)}(x^Tw+b)-1+\xi_i]-\sum^m_{i=1}r_i\xi_i<br/>
+\]</p>
+
+<p>上面的式子中的 \alpha_i 和 ri 都是拉格朗日乘数(Lagrange multipliers 被限制为非负数，\geq 0)。这次我们就不再对对偶形式进行详细推导了，不过如往常一样设 关于 w 和 b 的导数为零，然后再代回去进行简化，这样就能够得到下面的该问题的对偶形式：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\max_\alpha &amp; W(\alpha) =\sum^m_{i=1}\alpha_i y^{(i)}y^{(j)}\alpha_i\alpha_j \langle  x^{(i)},x^{(j)} \rangle \\<br/>
+ s.t. &amp; 0\leq \alpha_i \leq C,i=1,...,m\\<br/>
+ &amp; \sum^m_{i=1}\alpha_iy^{(i)}=0  \\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>跟以前一样，我们还是可以把 w 用 \alpha_i 来进行表述，如同等式 (9) 所示，所以解完了对偶问题之后，我们就可以接下来使用等式 (13) 来给出我们的预测。这里要注意，有一点很神奇，就是在加入了 l1 正则化之后，对对偶问题的唯一改变只是约束从原来的 0 \leq \alpha_i 现在变成了 0 \leq \alpha_i \leq C。这里对 b\ast 的计算也受到了影响而有所变动(等式 11 不再成立了(no longer valid))；具体内容参考下一节，或者阅读 Platt 的可以不问，</p>
+
+<p>另外，KKT 对偶互补条件(dual complementarity condition，这个在下一节要用来测试 SMO 算法的收敛性)为：</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\alpha_i&amp;= 0 &amp;\implies y^{(i)}(w^Tx^{(i)}+b)\ge 1 &amp;\text{(14)}\\<br/>
+\alpha_i&amp;= C &amp;\implies y^{(i)}(w^Tx^{(i)}+b)\le 1 &amp;\text{(15)}\\<br/>
+0\leq \alpha_i&amp; \leq C &amp;\implies y^{(i)}(w^Tx^{(i)}+b) = 1 &amp;\text{(16)}\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>现在，剩下的问题就只是给出一个算法来具体地解这个对偶问题了，我们下一节就来讲这个问题。</p>
+
+<h1 id="toc_11">9 SMO 优化算法</h1>
+
+<p>SMO 优化算法是对 sequential minimal optimization(意为序列最小化优化)的缩写，此算法于 1998 年由 John Platt 在微软研究院提出，对于从 SVM(支持向量机算法)推导出的对偶问题，这一算法提供了一种有效的解法。然后我们要先讲一下坐标上升算法(coordinate ascent algorithm)，这个算法很有趣，而且也是用来推导出 SMO 优化算法的一步。</p>
+
+<h2 id="toc_12">9.1 坐标上升算法(Coordinate ascent )</h2>
+
+<p>假如要解决下面这样的无约束优化问题：</p>
+
+<p>\[<br/>
+\max_\alpha W(\alpha_1,\alpha_2,...,\alpha_m)<br/>
+\]</p>
+
+<p>这里的 W 就是关于参数 \alpha_i 的某种函数，此处暂时忽略掉这个问题和支持向量机算法(SVM)的任何关系。更早之前咱们就已经学过了两种优化算法了，梯度下降法和牛顿法。下面这个新的优化算法，就叫做坐标上升算法(coordinate ascent)：</p>
+
+<p>循环直至收敛：{<br/>
+    For \(i=1,...,m\)</p>
+
+<p>\[<br/>
+\alpha_i:= \arg \max_{\hat \alpha_i}W(\alpha_1,...,\alpha_{i-1},\hat\alpha_i,\alpha_{i+1},...,\alpha_m)<br/>
+\]</p>
+
+<p>}</p>
+
+<p>所以如上式中所示，算法最内层的循环(innermost loop)中，会对除了某些特定的 \(\alpha_i\) 之外的所有变量进行保存，然后重新优化 W 来调整参数 \(\alpha_i\)。这里给出的这个版本的算法那，最内层循环对变量重新优化的顺序是按照变量排列次序 \(\alpha_1, \alpha_2, . . ., \alpha_m, \alpha_1, \alpha_2, . . ..\) 进行的， 更复杂的版本可能还会选择其他的排列熟悉怒；例如，我们可以根据预测哪个变量可以使 \(W(\alpha)\) 增加最多，来选择下一个更新的变量(we may choose the next variable to update according to wh_ich one we expect to allow us to make the largest increase in \(W(\alpha)\))。</p>
+
+<p>如果在函数 W 中，最内层循环中的 “\(\arg \max\)” 可以很有效地运行，那么坐标上升算法(coordinate ascent)就成了一个相当有效率的算法了。下面是一个坐标上升算法的示意图：</p>
+
+<p><img src="https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note3f6.png" alt=""/></p>
+
+<p>上图中的椭圆形就是我们要优化的二次函数的轮廓线。坐标上升算法的初始值设置为 (2, -2)，此外图中还标示了到全局最大值的路径。要注意，坐标上升法的每一步中，移动的方向都是平行于某个坐标轴的(parallel to one of the axes)，因为每次都只对一个变量进行了优化。</p>
+
+<h2 id="toc_13">9.2 SMO 优化算法</h2>
+
+<p>接下来，我们来简单推导一下 SMO 算法，作为 SVM(支持向量机算法)相关讨论的收尾。一些具体的细节就省略掉了，放到作业里面了，其他的一些内容可以参考课堂上发的纸质材料。</p>
+
+<p>下面就是一个(对偶)优化问题：</p>
+
+<p>$$<br/>
+\begin{aligned}</p>
+
+<p>\max_\alpha &amp; W(\alpha)= \sum<sup>m_{i=1}\alpha_i-\frac12</sup> \sum<sup>m_{i,j=1}y<sup>{(i)}y<sup>{(j)}\alpha_i\alpha_j\langle</sup></sup></sup> x<sup>{(i)},x<sup>{(j)}\rangle</sup></sup> &amp; \text{(17)}\<br/>
+s.t.&amp; 0\leq \alpha_i \leq C,i=1,...,m&amp; \text{(18)}\<br/>
+&amp; \sum<sup>m_{i=1}\alpha_iy<sup>{(i)}=0&amp;</sup></sup> \text{(19)}\</p>
+
+<p>\end{aligned}<br/>
+$$</p>
+
+<p>我们假设有一系列满足约束条件 (18-19) 的 \alpha_i 构成的集合。接下来，假设我们要保存固定的 \alpha_2, ..., \alpha_m 的值，然后进行一步坐标上升，重新优化对应 \alpha_1的目标值(re-optimize the objective with respect to \alpha1)。这样能解出来么？很不幸，不能，因为约束条件 (19) 就意味着：</p>
+
+<p>\[<br/>
+\alpha_1y^{(1)}=-\sum^m_{i=2}\alpha_iy^{(i)}<br/>
+\]</p>
+
+<p>或者，也可以对等号两侧同时乘以 \(y^{(1)}\) ，然后会得到下面的等式，与上面的等式是等价的：</p>
+
+<p>\[<br/>
+\alpha_1=-y^{(1)}\sum^m_{i=2}\alpha_iy^{(i)}<br/>
+\]</p>
+
+<p>(这一步用到了一个定理，即 \(y^{(1)} \in {-1, 1}\)，所以\((y^{(1)})2 = 1\))可见 \(\alpha_1\) 是由其他的 \(\alpha_i\) 决定的，这样如果我们保存固定的 \(\alpha_2, ..., \alpha_m\) 的值，那就根本没办法对 \(\alpha_1\) 的值进行任何修改了，否则不能满足优化问题中的约束条件 (19) 了。</p>
+
+<p>所以，如果我们要对 \alpha_i 当中的一些值进行更新的话，就必须至少同时更新两个，这样才能保证满足约束条件。基于这个情况就衍生出了 SMO 算法，简单来说内容如下所示：</p>
+
+<p>重复直到收敛 {</p>
+
+<ol>
+<li><p>选择某一对的 \(\alpha_i\) 和 \(\alpha_j\) 以在下次迭代中进行更新 (这里需要选择那种能朝全局最大值方向最大程度靠近的一对值，using a heuristic that tries to pick the two that will allow us to make the b_iggest progress towards the global maximum)。 </p></li>
+<li><p>使用对应的 \(\alpha_i\) 和 \(\alpha_j\) 来重新优化(Re-optimize) \(W(\alpha)\) ，而保持其他的 \(\alpha_k\) 值固定(\(k\neq i,j\))。</p></li>
+</ol>
+
+<p>}</p>
+
+<p>我们可以检查在某些收敛公差参数 <em>tol</em> 范围内，KKT 对偶互补条件能否被满足，以此来检验这个算法的收敛性。这里的 <em>tol</em> 是收敛公差参数(convergence tolerance parameter)，通常都是设定到大概 0.01 到 0.001。(更多细节内容参考文献以及伪代码。)</p>
+
+<p>SMO 算法有效的一个关键原因是对 \alpha_i, \alpha_j 的更新计算起来很有效率。接下来咱们简要介绍一下推导高效率更新的大概思路。</p>
+
+<p>假设我们现在有某些 \(\alpha_i\) 满足约束条件 (18-19)，如果我们决定要保存固定的 \(\alpha_3, ..., \alpha_m\) 值，然后要使用这组 \(\alpha_1\) 和 \(\alpha_2\) 来重新优化 \(W (\alpha_1, \alpha_2, ..., \alpha_m)\) ，这样成对更新也是为了满足约束条件。根据约束条件 (19)，可以得到：</p>
+
+<p>\[<br/>
+\alpha_1y^{(1)} + \alpha_2y^{(2)} = -\sum^m_{i=3}\alpha_iy^{(i)}<br/>
+\]</p>
+
+<p>等号右边的值是固定的，因为我们已经固定了\(\alpha_3, ..., \alpha_m\) 的值，所以就可以把等号右边的项目简写成一个常数 \(\zeta\):</p>
+
+<p>\[<br/>
+\alpha_1y^{(1)} + \alpha_2y^{(2)} = \zeta \text{(20)}<br/>
+\]</p>
+
+<p>然后我们就可以用下面的图来表述对 \(\alpha_1\) 和 \(\alpha_2\) 的约束条件：</p>
+
+<p><img src="https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note3f7.png" alt=""/></p>
+
+<p>根据约束条件(18)，可知 必须在图中 \(\alpha_1\)和 \(\alpha_2\) 必须在 \([0, C] \times  [0, C]\) 所构成的方框中。另外图中还有一条线 \(\alpha1y^{(1)} +\alpha_2y^{(2)}  = \zeta\)，而我们知道\(\alpha_1\)和 \(\alpha_2\) 必须在这条线上。还需要注意的是，通过上面的约束条件，还能知道 \(L \leq \alpha_2 \leq H\)；否则 (\(\alpha_1,\alpha_2\)) 就不能同时满足在方框内并位于直线上这两个约束条件。在上面这个例子中，\(L = 0\)。但考虑到直线 \(\alpha1y^{(1)} + \alpha_2y^{(2)}  = \zeta\) 的形状方向，这个 \(L = 0\) 还未必就是最佳的；不过通常来讲，保证\(\alpha_1, \alpha_2\) 位于 \([0, C] \times  [0, C]\) 方框内的 \(\alpha_2\) 可能的值，都会有一个下界 L 和一个上界 H。</p>
+
+<p>利用等式(20)，我们还可以把 \(\alpha_1\) 写成 \(\alpha_2\) 的函数的形式：</p>
+
+<p>\[<br/>
+\alpha_1=(\zeta-\alpha_2y^{(2)})y^{(1)}<br/>
+\]</p>
+
+<p>(自己检查一下这个推导过程吧；这里还是用到了定理：\(y^{(1)} \in {-1, 1}\)，所以 \((y^{(1)})^2 = 1\)。)所以目标函数 \(W(\alpha)\) 就可以写成：</p>
+
+<p>\[<br/>
+W(\alpha_1,\alpha_2,...,\alpha_m)=W((\zeta-\alpha_2y^{(2)})y^{(1),\alpha_2,...,\alpha_m})<br/>
+\]</p>
+
+<p>把 \(\alpha_3, ..., \alpha_m\) 当做常量，你就能证明上面这个函数其实只是一个关于 \(\alpha_2\) 的二次函数。也就是说，其实也可以写成 \(a\alpha_2 + b\alpha_2 + c\) 的形式，其中的 a, b, c 参数。如果我们暂时忽略掉方框约束条件(18)(也就是说 \(L \leq \alpha_2 \leq H)\)，那就很容易通过使导数为零来找出此二次函数的最大值，继而进行求解。我们设 \(\alpha_2^{new, unclipped}\) 表示为 \(\alpha\) 的结果值。你需要自己证明，如果我们要使关于 \(\alpha_2\) 的函数 W取最大值，而又受到方框约束条件的限制，那么就可以把 \(\alpha_2^{new, unclipped}\)的值“粘贴”到[L, H] 这个间隔内(taking \(\alpha_2^{new, unclipped}\) and “clipping” it to lie in the [L, H] interval)，这样来找到最优值结果，就得到了：</p>
+
+<p>\[<br/>
+\alpha_2^{new}= \begin{cases}  H &amp; if \alpha_2^{new, unclipped}&gt; H\\ \alpha_2^{new, unclipped} &amp; if  L\leq \alpha_2^{new, unclipped}\leq H\\  L &amp; if  \alpha_2^{new, unclipped} &lt;L\\ \end{cases} <br/>
+\]</p>
+
+<p>最终，找到了 \(\alpha_2^{new}\) 之后，就可以利用等式(20)来代回这个结果，就能得到 \(\alpha_1^{new}\) 的最优值。</p>
+
+<p>此外还有一些其他的细节，也都挺简单，不过这里就不讲了，你自己去读一下 Platt 的论文吧：一个是用于对后续用于更新的 \(\alpha_i, \alpha_j\) 启发式选择; 另一个是如何在 SMO算法 运行的同时来对 b 进行更新。</p>
+
+</div></body>
+
+</html>
