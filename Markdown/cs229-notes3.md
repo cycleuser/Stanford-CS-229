@@ -622,7 +622,7 @@ $$
 
 
 
-跟以前一样，我们还是可以把 w 用 \alpha_i 来进行表述，如同等式 (9) 所示，所以解完了对偶问题之后，我们就可以接下来使用等式 (13) 来给出我们的预测。这里要注意，有一点很神奇，就是在加入了 l1 正则化之后，对对偶问题的唯一改变只是约束从原来的 0 \leq \alpha_i 现在变成了 0 \leq \alpha_i \leq C。这里对 b\ast 的计算也受到了影响而有所变动(等式 11 不再成立了(no longer valid))；具体内容参考下一节，或者阅读 Platt 的可以不问，
+跟以前一样，我们还是可以把 w 用 $\alpha_i$ 来进行表述，如同等式 (9) 所示，所以解完了对偶问题之后，我们就可以接下来使用等式 (13) 来给出我们的预测。这里要注意，有一点很神奇，就是在加入了 l1 正则化之后，对对偶问题的唯一改变只是约束从原来的 $0 \leq \alpha_i$ 现在变成了 $0 \leq \alpha_i \leq C$。这里对 $b\ast$ 的计算也受到了影响而有所变动(等式 11 不再成立了(no longer valid))；具体内容参考下一节，或者阅读 Platt 的论文，
 
 另外，KKT 对偶互补条件(dual complementarity condition，这个在下一节要用来测试 SMO 算法的收敛性)为：
 
@@ -680,15 +680,13 @@ $$
 
 $$
 \begin{aligned}
-
 \max_\alpha & W(\alpha)= \sum^m_{i=1}\alpha_i-\frac12 \sum^m_{i,j=1}y^{(i)}y^{(j)}\alpha_i\alpha_j\langle x^{(i)},x^{(j)}\rangle & \text{(17)}\\
 s.t.& 0\leq \alpha_i \leq C,i=1,...,m& \text{(18)}\\
 & \sum^m_{i=1}\alpha_iy^{(i)}=0& \text{(19)}\\
-
 \end{aligned}
 $$
 
-我们假设有一系列满足约束条件 (18-19) 的 \alpha_i 构成的集合。接下来，假设我们要保存固定的 \alpha_2, ..., \alpha_m 的值，然后进行一步坐标上升，重新优化对应 \alpha_1的目标值(re-optimize the objective with respect to \alpha1)。这样能解出来么？很不幸，不能，因为约束条件 (19) 就意味着：
+我们假设有一系列满足约束条件 (18-19) 的 $\alpha_i$ 构成的集合。接下来，假设我们要保存固定的 $\alpha_2, ..., \alpha_m$ 的值，然后进行一步坐标上升，重新优化对应 $\alpha_1$的目标值(re-optimize the objective with respect to $\alpha_1$)。这样能解出来么？很不幸，不能，因为约束条件 (19) 就意味着：
 
 
 $$
@@ -717,7 +715,7 @@ $$
 
 我们可以检查在某些收敛公差参数 *tol* 范围内，KKT 对偶互补条件能否被满足，以此来检验这个算法的收敛性。这里的 *tol* 是收敛公差参数(convergence tolerance parameter)，通常都是设定到大概 0.01 到 0.001。(更多细节内容参考文献以及伪代码。)
 
-SMO 算法有效的一个关键原因是对 \alpha_i, \alpha_j 的更新计算起来很有效率。接下来咱们简要介绍一下推导高效率更新的大概思路。
+SMO 算法有效的一个关键原因是对 $\alpha_i, \alpha_j$ 的更新计算起来很有效率。接下来咱们简要介绍一下推导高效率更新的大概思路。
 
 假设我们现在有某些 $\alpha_i$ 满足约束条件 (18-19)，如果我们决定要保存固定的 $\alpha_3, ..., \alpha_m$ 值，然后要使用这组 $\alpha_1$ 和 $\alpha_2$ 来重新优化 $W (\alpha_1, \alpha_2, ..., \alpha_m)$ ，这样成对更新也是为了满足约束条件。根据约束条件 (19)，可以得到：
 
