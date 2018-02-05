@@ -17,7 +17,7 @@ CS229 Lecture notes
 由于公式过多，Gitbook 的阅读体验很差，建议大家还是去 [Github](https://github.com/Kivy-CN/Stanford-CS-229-CN) 上面下载 Markdown 或者 HTML 到本地阅读，体验更好很多，起码公式都没问题。
 
 
-[我（@CycleUser）的身体状况短期内无法分散精力来继续 Markdown 的制作(https://zhuanlan.zhihu.com/p/33593066)]，而 @飞龙 不断翻译新内容才更是一种有利于广大朋友获取新技能新知识的好思路，他的精力如果用于对旧文档的维护，则是相当的浪费，很不划算。
+我（@CycleUser）的身体状况短期内无法分散精力来继续 Markdown 的制作(https://zhuanlan.zhihu.com/p/33593066)，而 @飞龙 不断翻译新内容才更是一种有利于广大朋友获取新技能新知识的好思路，他的精力如果用于对旧文档的维护，则是相当的浪费，很不划算。
 
 所以现在将剩余章节 Markdown 文档的制作任务，留给有志于探索和分享的其他伙伴们了。
 
