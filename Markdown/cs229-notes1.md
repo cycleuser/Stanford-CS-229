@@ -323,7 +323,7 @@ l(\theta) &=\log L(\theta)\\
 \end{aligned}
 $
 
-因此，对 $l(\theta)￥ 取得最大值也就意味着下面这个子式取到最小值：
+因此，对 $l(\theta)$ 取得最大值也就意味着下面这个子式取到最小值：
 
 $ \frac 12 \sum^m _{i=1} (y^{(i)}-\theta^Tx^{(i)})^2$
 
