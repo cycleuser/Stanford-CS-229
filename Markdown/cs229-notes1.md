@@ -272,7 +272,7 @@ $
 
 $ X^TX\theta =X^T\vec{y}$
 
-所以让 $J(\theta)$ 取值最小的 θ 就是$\theta = (X^TX)^{-1}\vec{y}$
+所以让 $J(\theta)$ 取值最小的 θ 就是$\theta = (X^TX)^{-1}X^T\vec{y}$
 
 #### 3 概率解释（Probabilistic interpretation）
 
