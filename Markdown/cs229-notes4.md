@@ -5,9 +5,9 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
 # CS229 课程讲义中文翻译
 CS229 Lecture notes
 
-|原作者|翻译|
-|---|---|
-|[Andrew Ng  吴恩达](http://www.andrewng.org/)|[CycleUser](https://www.zhihu.com/people/cycleuser/columns)|
+|原作者|翻译| 校对 |
+|---|---| --- |
+|[Andrew Ng  吴恩达](http://www.andrewng.org/)|[CycleUser](https://www.zhihu.com/people/cycleuser/columns)| [LY2015](https://github.com/LIUYOU2015) |
 
 
 |相关链接|
