@@ -1,9 +1,0 @@
-$name=cs229-notes4
-
-match	replacement
-
-media\/			${name}.fld/
-{width[^}]*}	\ 
-image(\d)\.		image00${1}.
-image(\d\d)\.	image0${1}.
-image(\d\d\d)\.	image${1}.
