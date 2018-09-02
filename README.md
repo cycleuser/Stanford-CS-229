@@ -24,3 +24,11 @@ CS229 Lecture notes
 如果你有兴趣来加入到我们中才参与翻译和维护以及探索更多，请通过 github 发起 pull request 来参与进来！
 
 这个世界，需要更多的英雄。
+
+## 贡献指南
+
+本项目需要从 Word 转换为 Markdown。
+
+1.  下载[每一章的 Word 格式](%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AF%91%E4%B8%AD)。
+2.  转换为 Markdown 格式，并将公式排版好。
+3.  提交到[`Markdown`目录](Markdown)。
