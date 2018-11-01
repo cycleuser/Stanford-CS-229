@@ -1,9 +1,4 @@
-<script type="text/javascript"
-src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
 # CS229 课程讲义中文翻译
-CS229 Lecture notes
 
 |原作者|翻译| 校对 |
 |---|---| --- |

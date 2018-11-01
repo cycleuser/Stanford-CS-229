@@ -1,5 +1,4 @@
 # CS229 课程讲义中文翻译
-CS229 Lecture notes
 
 |原作者|翻译|
 |---|---|
@@ -15,6 +14,7 @@ CS229 Lecture notes
 
 
 # 第五章
+
 ### 第七部分 正则化与模型选择
 
 设想一个机器学习的问题，我们要从一系列不同的模型中进行挑选。例如，我们可能是用一个多项式回归模型 (polynomial regression model) $h_\theta (x)=g(\theta_0+\theta_1x+\theta_2x^2+\cdots+\theta_kx^k)$ 想要判定这里的多项式次数 $k$ 应该是多少，0, 1, …, 或者10。那么我们怎么才能自动选择一个能够在偏差 (bias)/方差(variance)之间进行权衡的模型呢? [^1]
