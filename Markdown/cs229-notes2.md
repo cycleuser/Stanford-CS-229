@@ -1,8 +1,8 @@
 # CS229 课程讲义中文翻译
 
-|原作者|翻译|
-|---|---|
-|[Andrew Ng  吴恩达](http://www.andrewng.org/)|[CycleUser](https://www.zhihu.com/people/cycleuser/columns)|
+| 原作者 | 翻译 | 校对 |
+| --- | --- | --- |
+| [Andrew Ng  吴恩达](http://www.andrewng.org/) | [CycleUser](https://www.zhihu.com/people/cycleuser/columns) | [XiaoDong_Wang](https://github.com/Dongzhixiao) |
 
 
 |相关链接|

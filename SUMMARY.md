@@ -4,3 +4,5 @@
 +   [第五部分 支持向量机](Markdown/cs229-notes3.md)
 +   [第六部分 学习理论](Markdown/cs229-notes4.md)
 +   [第七部分 正则化与模型选择](Markdown/cs229-notes5.md)
++   [感知器和大型边界分类器](Markdown/cs229-notes6.md)
++   [K 均值聚类算法](Markdown/cs229-notes7a.md)
