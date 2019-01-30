@@ -31,3 +31,8 @@
 2.  转换为 Markdown 格式，并将公式排版好。
 3.  提交到[`Markdown`目录](Markdown)。
 
+## 其它人的笔记
+
++ [stdcoutzyx](https://github.com/Kivy-CN/Stanford-CS-229-CN/files/2343330/cs229-stdcoutzyx.pdf)
++ [JerryLead](https://github.com/Kivy-CN/Stanford-CS-229-CN/files/2343386/cs229-JerryLead.pdf)
++ [黄海广](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes)
