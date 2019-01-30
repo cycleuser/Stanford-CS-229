@@ -10,3 +10,4 @@
 +   [第九部分 期望最大化算法](Markdown/cs229-notes8.md)
 +   [第十部分 因子分析](Markdown/cs229-notes9.md)
 +   [第十一部分 主成分分析](Markdown/cs229-notes10.md)
++   [第十二部分 独立成分分析](Markdown/cs229-notes11.md)
