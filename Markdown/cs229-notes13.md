@@ -22,7 +22,7 @@ CS229 Lecture notes
 上面三个名词的英文原版分别为:
 1. Linear Quadratic Regulation,缩写为LQR;
 2. Differential Dynamic Programming,缩写为DDP;
-3. 3Linear Quadratic Gaussian,缩写为LQG.
+3. Linear Quadratic Gaussian,缩写为LQG.
 
 ## 1 有限范围马尔科夫决策过程(Finite-horizon MDPs)
 
@@ -174,13 +174,13 @@ $$
 
 接下来就可以定义这个线性二次调节(LQR)模型的假设了,这个LQR算法包含两步骤:
 
-### 第一步
+#### 第一步
 
 设矩阵$A,B,\Sigma$都是未知的.那就得估计他们,可以利用强化学习课件中的值估计(Value Approximation)部分的思路.首先是从一个任意策略(policy)收集转换(collect transitions).然后利用线性回归找到$\arg\min_{A,B}\sum^m_{i=1}\sum^{T-1}_{t=0}||s^{(i_)}_{t+1}- ( As^{(i)}_t +Ba^{(i)}_t)||^2$.最后利用高斯判别分析(Gaussian Discriminant Analysis,缩写为GDA)中的方法来学习$\Sigma$.
 
 **(译者注:原文这里第一步的第二行公式中用的是$U_T$,应该是写错了,结合上下文公式推导来看,分明应该是$U_t$)**
 
-### 第二步
+#### 第二步
 
 假如模型参数已知了,比如可能是给出了,或者用上面第一步估计出来了,就可以使用动态规划(dynamic programming)来推导最优策略(optimal policy)了.
    
@@ -315,3 +315,225 @@ $$
 
 如果我们的目标就是保持在某个状态$s^*$,上面的方法都能够很适合所选情景(比如倒立摆或者一辆车保持在车道中间).不过有时候我们的目标可能要更复杂很多.
 
+本节要讲的方法适用于要符合某些轨道的系统(比如火箭发射).这个方法将轨道离散化称为若干离散的时间步骤,然后运用前面的方法创建中间目标!这个方法就叫做微分动态规划(Differential Dynamic Programming,缩写为DDP).主要步骤包括:
+
+#### 第一步
+
+利用简单控制器(naive controller)创建一个标称轨道(nominal trajectory),对要遵循轨道进行近似.也就是说,我们的控制器可以用如下方法来近似最佳轨道:
+
+$$
+s^*_0,a^*_0\rightarrow s^*_1,a^*_1\rightarrow...
+$$
+
+#### 第二步
+
+在每个轨道点(trajectory point)$s^*_t$将模型线性化,也就是:
+
+$$
+s_{t+1}\approx F(s^*_t,a^*_t)+\nabla_s F(s^*_t,a^*_t)(s_t-s^*_t)+\nabla_aF(s^*_t,a^*_t)(a_t-a^*_t)
+$$
+
+上面的$s_t,a_t$是当前的状态和行为.现在已经在每个轨道点都有了线性估计了,就可以使用前面的方法将其改写成:
+
+$$
+s_{t+1}=A_t\cdot s_t+B_t\cdot a_t
+$$
+
+(要注意在这个情况下,我们可以使用在本章江一开头所说到的非稳定模型背景.)
+
+注意,这里我们可以对奖励函数(reward)$R^{(t)}$推导一个类似的积分(derivation),使用一个二阶泰勒展开(second-order Taylor expansion)就可以了.
+
+$$
+\begin{aligned}
+R(s_t,a_t)& \approx R(s^*_t,a^*_t)+\nabla_s R(s^*_t,a^*_t)(s_t-s^*_t) +\nabla_a R(s^*_t,a^*_t)(a_t-a^*_t) \\
+& + \frac{1}{2}(s_t-s^*_t)^TH_{ss}(s_t-s^*_t)+(s_t-s^*_t)^TH_{sa}(a_t-a^*_t)\\
+&  + \frac{1}{2}(a_t-a^*_t)^TH_{aa}(a_t-a^*_t) \\
+\end{aligned}
+$$
+
+上式中的$H_{xy}$表示的R的海森矩阵(Hessian)项,对应的$x$和$y$是在$(s^*_t,a^*_t)$中得到的(略去不表).这个表达式可以重写成:
+
+$$
+R_t(s_t,a_t)= -s_t^TU_ts_t-a_t^TW_ta_t
+$$
+
+对于某些矩阵$U_t,W_t$,可以再次使用扩展维度的方法.注意:
+
+$$
+\begin{pmatrix} 1&x \end{pmatrix}\cdot \begin{pmatrix} a& b\\c&d \end{pmatrix} \cdot \begin{pmatrix} 1\\x \end{pmatrix} = a+2bx+cx^2
+$$
+
+#### 第三步
+
+现在你就能够相信这个问题可以严格写成LQR框架的形式了吧.然后就可以利用线性二次调节(LQR)来找到最优策略$\pi_t$.这样新的控制器就会更好些!
+
+注意:如果LQR轨道和线性近似的轨道偏离太远,可能会出现一些问题,不过这些都可以通过调节奖励函数形态来进行修正...
+
+#### 第四步
+
+现在就得到了一个新的控制器了(新的策略$\pi_t$),使用这个新控制器来产生一个新的轨道:
+
+$$
+s^*_0,\pi_0(s^*_0)\rightarrow s^*_1,\pi_1(s^*_1)\rightarrow \quad \rightarrow s^*_T
+$$
+
+注意当我们生成了这个新的轨道的时候,使用真实的$F$而不是其线性估计来计算变换,这就意味着:
+
+$$
+s^*_{t+1}=F(s^*_t,a^*_t)
+$$
+
+然后回到第二步,重复,直到达到某个停止条件(stopping criterion).
+
+## 4 线性二次高斯分布(Linear Quadratic Gaussian,缩写为LQG)
+
+在现实是集中我们可能没办法观测到全部的状态$s_t$.例如一个自动驾驶的汽车只能够从一个相机获取一个图像,这就是一次观察了,而不是整个世界的全部状态.目前为止都是假设所有状态都可用.可是在现实世界的问题中并不见得总是如此,我们需要一个新工具来对这种情况进行建模:部分观测的马尔科夫决策过程(Partially Observable MDPs,缩写为POMDP).
+
+POMDP是一个带有了额外观察层的马尔科夫决策过程(MDP).也就是说要加入一个新变量$o_t$,在给定的当前状态下这个$o_t$遵循某种条件分布:
+
+$$
+o_t|s_t\sim O(o|s)
+$$
+
+最终,一个有限范围的部分观测的马尔科夫决策过程(finite-horizon POMDP)就是如下所示的一个元组(tuple):
+
+$$
+(S,O,A,P_{sa},T,R)
+$$
+
+在这个框架下,整体的策略就是要在观测$o_1,o_2,...,o_t$的基础上,保持一个置信状态(belief state,对状态的分布).这样在PDMDP中的策略就是从置信状态到行为的映射.
+
+在本节,我们队LQR进行扩展以适应新的环境.假设我们观测的是$y_t\in R^m$,其中的$m<n$,且有:
+
+$$
+\begin{cases}
+y_t &= C\cdot s_t +v_t\\
+s_{t+1} &=  A\cdot s_t+B\cdot a_t+ w_t\\
+\end{cases}
+$$
+
+上式中的$C\in R^{m\times n}$是一个压缩矩阵(compression matrix),而$v_t$是传感器噪音(和$w_t$类似也是高斯分布的).要注意这里的奖励函数$R^{(t)}$是左侧不变的,因为是关于状态(而不是观察)和行为的函数.另外,由于分布都是高斯分布,置信状态就也将是高斯分布的.在这样的新框架下,看看找最优策略的方法:
+
+#### 第一步
+
+首先计算可能装填(置信状态)的分布,以已有观察为基础.也就是说要计算下列分布的均值$s_{t|t}$以及协方差$\Sigma_{t|t}$:
+
+$$
+s_t|y_1 ,..., y_t \sim N(s_{t|t},\Sigma_{t|t})
+$$
+
+为了进行时间效率高的计算,这里要用到卡尔曼滤波器算法(Kalman Filter algorithm)(阿波罗登月舱上就用了这个算法).
+
+#### 第二步
+
+然后就有了分布了,接下来就用均值$s_{t|t}$来作为对$s_t$的最佳近似.
+
+#### 第三步
+
+然后设置行为$a_t:= L_ts_{t|t}$,其中的$L_t$来自正规线性二次调节算法(regular LQR algorithm).
+
+从直觉来理解,这样做为啥能管用呢?要注意到$s_{t|t}$是滴$s_t$的有噪音近似(等价于在LQR的基础上增加更多噪音),但我们已经证明过了LQR是独立于噪音的!
+
+第一步就需要解释一下.这里会给出一个简单情境,其中在我们的方法里没有行为依赖性(但整体上这个案例遵循相同的思想).设有:
+
+$$
+\begin{cases}
+s_{t+1}  &= A\cdot s_t+w_t,\quad w_t\sim N(0,\Sigma_s)\\
+y_t  &= C\cdot s_t+v_t,\quad v_t\sim N(0,\Sigma_y)\\
+\end{cases}
+$$
+
+由于噪音是高斯分布的,可以很明显证明联合分布也是高斯分布:
+
+$$
+\begin{pmatrix}
+s_1\\
+...\\
+s_t\\
+y_1\\
+..\\
+y_t
+\end{pmatrix} \sim N(\mu,\Sigma) \quad\text{for some } \mu,\Sigma
+$$
+
+然后利用高斯分布的边缘方程(参考因子分析(Factor Analysis)部分的讲义),就得到了:
+
+$$
+s_t|y_1,...,y_t\sim N(s_{t|t},\Sigma_{t|t})
+$$
+
+可是这里使用这些方程计算边缘分布的参数需要很大的算力开销!因为这需要对规模为$t\times t$的矩阵进行运算.还记得对一个矩阵求逆需要的运算时$O(t^3)$吧,这要是在时间步骤数目上进行重复,就需要$O(t^4)$的算力开销!
+
+卡尔曼滤波器算法(Kalman filter algorithm)提供了计算均值和方差的更好的方法,只用在时间t上以一个固定的时间(constant time)来更新!卡尔曼滤波器算法有两个基础步骤.加入我们知道了分布$s_t|y_1,...,y_t$:
+
+$$
+\begin{aligned}
+\text{预测步骤(predict step) 计算} & s_{t+1}|y_1,...,y_t
+\\
+\text{更新步骤(update step) 计算} & s_{t+1}|y_1,...,y_{t+1}
+\end{aligned}
+$$
+
+然后在时间步骤上迭代!预测和更新这两个步骤的结合就更新了我们的置信状态,也就是说整个过程大概类似:
+
+$$
+s_{t}|y_1,...,y_t\rightarrow^{predict} s_{t+1}|y_1,...,y_t
+ \rightarrow^{update} s_{t+1}|y_1,...,y_{t+1}\rightarrow^{predict}
+$$
+
+#### 预测步骤
+
+加入我们已知分布:
+
+$$
+s_{t}|y_1,...,y_t\sim N(s_{t|t},\Sigma_{t|t})
+$$
+
+然后在下一个状态上的分布也是一个高斯分布:
+
+
+$$
+s_{t+1}|y_1,...,y_t\sim N(s_{t+1|t},\Sigma_{t+1|t})
+$$
+
+其中有:
+
+$$
+\begin{cases}
+s_{t+1|t}&=  A\cdots_{t|t}\\
+\Sigma_{t+1|t} &= A\cdot \Sigma_{t|t}+\Sigma_s
+\end{cases}
+$$
+
+
+#### 更新步骤
+
+给定了$s_{t+1|t}$和$\Sigma_{t+1|t}$,则有:
+
+$$
+s_{t+1}|y_1,...,y_t\sim N(s_{t+1|t},\Sigma_{t+1|t})
+$$
+可以证明有:
+
+$$
+s_{t+1}|y_1,...,y_{t+1}\sim N(s_{t+1|t+1},\Sigma_{t+1|t+1})
+$$
+
+其中有:
+
+$$
+\begin{cases}
+s_{t+1|t+1}&= s_{t+1|t}+K_t(y_{t+1}-Cs_{t+1|t})\\
+\Sigma_{t+1|t+1} &=\Sigma_{t+1|t}-K_t\cdot C\cdot \Sigma_{t+1|t}
+\end{cases}
+$$
+
+上式中的
+
+$$
+K_t:= \Sigma_{t+1|t} C^T (C \Sigma_{t+1|t} C^T + \Sigma_y)^{-1}
+$$
+
+这个矩阵$K_t$就叫做卡尔曼增益(Kalman gain).
+
+现在如果我们仔细看看方程就会发现根本不需要对时间步骤t有观测先验.更新步骤只依赖与前面的分布.综合到一起,这个算法最开始向前运行传递计算$K_t,\Sigma_{t|t},s_{t|t}$(有时候可能值得是$\hat s$).然后就向后运行(进行LQR更新)来计算变量$\Phi_t,\Psi_t,L_t$了,最终就得到了最优策略$a^*_t=L_Ts_{t|t}$.
