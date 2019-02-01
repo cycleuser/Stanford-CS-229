@@ -178,6 +178,8 @@ $$
 
 设矩阵$A,B,\Sigma$都是未知的.那就得估计他们,可以利用强化学习课件中的值估计(Value Approximation)部分的思路.首先是从一个任意策略(policy)收集转换(collect transitions).然后利用线性回归找到$\arg\min_{A,B}\sum^m_{i=1}\sum^{T-1}_{t=0}||s^{(i_)}_{t+1}- ( As^{(i)}_t +Ba^{(i)}_t)||^2$.最后利用高斯判别分析(Gaussian Discriminant Analysis,缩写为GDA)中的方法来学习$\Sigma$.
 
+**(译者注:原文这里第一步的第二行公式中用的是$U_T$,应该是写错了,结合上下文公式推导来看,分明应该是$U_t$)**
+
 ### 第二步
 
 假如模型参数已知了,比如可能是给出了,或者用上面第一步估计出来了,就可以使用动态规划(dynamic programming)来推导最优策略(optimal policy)了.
@@ -264,4 +266,52 @@ $$
 3. 从$t=T-1,...,0$开始迭代,借助离散里卡蒂方程(Discrete Ricatti equations)来利用$\Phi_{t+1},\Psi_{t+1}$来更新$\Phi_{t},\Psi_{t}$,如果存在一个策略能朝着0方向推导状态,收敛就能得到保证.
 
 利用定理3,我们知道最优策略不依赖与$\Psi_t$而只依赖$\Phi_t$,这样我们就可以只更新$\Phi_t$,从而让算法运行得更快一点!
+
+## 3 从非线性方法(non-linear dynamics)到线性二次调节(LQR)
+
+很多问题都可以化简成线性二次调节(LDR)的形式,包括非线性的模型.LQR是一个很好的方程,因为我们能够得到很好的精确解,但距离通用还有一段距离.我们以倒立摆(inverted pendulum)为例.状态的变换如下所示:
+
+$$
+\begin{pmatrix}
+x_{t+1}\\
+\dot x_{t+1}\\
+\theta_{t+1}\\
+\dot \theta_{t+1}
+\end{pmatrix}=F\begin{pmatrix} \begin{pmatrix} x_t\\
+ \dot x_t\\
+  \theta_t\\
+   \dot\theta_t \end{pmatrix},a_t\end{pmatrix}
+$$
+
+其中的函数$F$依赖于角度余弦等等.然后这个问题就成了:我们能将这个系统线性化么?
+
+### 3.1 模型的线性化(Linearization of dynamics)
+
+假设某个时间$t$上,系统的绝大部分时间都处在某种状态$\bar s_t$上,而我们要选取的行为大概就在$\bar a_t$附近.对于倒立摆问题,如果我们达到了某种最优状态,就会满足:行为很小并且和竖直方向的偏差不大.
+
+这就要用到泰勒展开(Taylor expansion)来将模型线性化.简单的情况下状态是一维的,这时候转换函数F就不依赖于行为,这时候就可以写成:
+
+$$
+s_{t+1}=F(s_t)\approx F(\bar s_t)+ F'(\bar s_t)\cdot (s_t-\bar s_t)
+$$
+
+对于更通用的情景,方程看着是差不多的,只是用梯度(gradients)替代简单的导数(derivatives):
+
+$$
+s_{t+1}\approx F(\bar s,\bar a)+\nabla _sF(\bar s,\bar a)\cdot (s_t-\bar s_t)+\nabla_aF(\bar s_t,\bar a_t)\cdot (a_t-\bar a_t) \qquad \text{(3)}
+$$
+
+现在$s_{t+1}$就是关于$s_t,a_t$的线性函数了,因为可以将等式(3)改写成下面的形式:
+
+$$
+s_{t+1}\approx As_t+Ba_t+k
+$$
+
+**(译者注:原文这里的公式应该是写错了,写成了$s_{t+1}\approx As_t+Bs_t+k$)**
+
+上式中的$k$是某个常数,而A,B都是矩阵.现在这个写法就和在LQR里面的假设非常相似了.这时候只要摆脱掉常数项$k$就可以了!结果表明只要任意增长一个维度就可以将常数项吸收进$s_t$中区.这和我们在线性回归的课程里面用到的办法一样.
+
+### 3.2 微分动态规划(Differential Dynamic Programming,缩写为DDP)
+
+如果我们的目标就是保持在某个状态$s^*$,上面的方法都能够很适合所选情景(比如倒立摆或者一辆车保持在车道中间).不过有时候我们的目标可能要更复杂很多.
 
