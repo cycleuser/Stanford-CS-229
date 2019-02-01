@@ -144,3 +144,124 @@ $$
 
 
 ## 2 线性二次调节(Linear Quadratic Regulation,缩写为LQR)
+
+
+在本节,我们要讲一个上一节所提到的有限范围(finite-horizon)背景下精确解(exact solution)很容易处理的特例.这个模型在机器人领域用的特别多,也是在很多问题中将方程化简到这一框架的常用方法.
+
+首先描述一下模型假设.考虑一个连续背景,都用实数集了:
+
+$$
+S=R^n, A=R^d
+$$
+
+然后设有噪音(noise)的线性转换(linear transitions):
+
+$$
+s_{t+1}=A_ts_t+B_ta_t+w_t
+$$
+
+上式中的$A_t\in R^{n\times n},B_t\in R^{n\times d}$实矩阵,而$w_t\sim N(0,\Sigma_t)$是某个高斯分布的噪音(均值为0).我们接下来要讲的内容就表明:只要噪音的均值是0,就不会影响最优化策略.
+
+另外还要假设一个二次奖励函数(quadratic rewards):
+
+$$
+R^{(t)}(s_t,a_t)=-s_t^TU_ts_t-a_t^TW_ta_t
+$$
+
+上式中的$U_t\in R^{n\times n},W_t\in R^{n\times d}$都是正定矩阵(positive definite matrices),这就意味着奖励函数总是负的(negative).
+
+要注意这里的奖励函数的二次方程(quadratic formulation)就等价于无论奖励函数是否更高我们都希望能接近原始值(origin).例如,如果$U_t=I_n$就是n阶单位矩阵(identity matrix),而$W_t=I_d$为一个d阶单位矩阵,那么就有$R_t=-||s_t||^2-||a_t||^2-$,也就意味着我们要采取光滑行为(smooth actions)($a_t$的范数(norm)要小)来回溯到原始状态($s_t$的范数(norm)要小).这可以模拟一辆车保持在车道中间不发生突发运动.
+
+接下来就可以定义这个线性二次调节(LQR)模型的假设了,这个LQR算法包含两步骤:
+
+### 第一步
+
+设矩阵$A,B,\Sigma$都是未知的.那就得估计他们,可以利用强化学习课件中的值估计(Value Approximation)部分的思路.首先是从一个任意策略(policy)收集转换(collect transitions).然后利用线性回归找到$\arg\min_{A,B}\sum^m_{i=1}\sum^{T-1}_{t=0}||s^{(i_)}_{t+1}- ( As^{(i)}_t +Ba^{(i)}_t)||^2$.最后利用高斯判别分析(Gaussian Discriminant Analysis,缩写为GDA)中的方法来学习$\Sigma$.
+
+### 第二步
+
+假如模型参数已知了,比如可能是给出了,或者用上面第一步估计出来了,就可以使用动态规划(dynamic programming)来推导最优策略(optimal policy)了.
+   
+也就是说,给出了:
+
+$$
+\begin{cases}
+s_{t+1} &= A_ts_t+B_ta_t+w_t\\
+R^{(t)}(s_t,a_t)&= -s_t^TU_ts_t-a^T_tW_ta_t
+\end{cases}
+$$
+
+然后要计算出$V^*$.如果回到第一步,就可以利用动态规划,就得到了:
+
+1. 初始步骤(Initialization step)对最后一次步骤T,
+   
+   $$
+   \begin{aligned}
+   V^*_T(s_T)&=\max_{a_T\in A}R_T(s_T,a_T)\\
+   &=\max_{a_T\in A}-s^T_TU_ts_T - a^T_TW_ta_T\\
+   &= -s^T_TU_ts_T\quad \text{对}a_T=0\text{最大化}
+   \end{aligned}
+   $$
+
+2. 递归步骤(Recurrence step)
+   设$t<T$.加入已经知道了$V^*_{t+1}$.
+
+   定理1:很明显如果$V^*_{t+1}$是$s_t$的一个二次函数,则$V^*$也应该是$s_t$的一个二次函数.也就是说,存在某个矩阵$\Phi$以及某个标量$\Psi$满足:
+
+   $$
+   \begin{aligned}
+   \text{if} \quad V^*_{t+1}(s_{t+1}) &= s^T_{t+1}\Phi_{t+1}s_{t+1}+\Psi_{t+1}\\
+   \text{then} \quad V^*_t(s_t)&=s^T_t\Phi_ts_t+\Psi_t
+   \end{aligned}
+   $$
+
+   对时间步骤$t=T$,则有$\Phi_t=-U_T,\Psi_T=0$.
+
+   定理2:可以证明最优策略是状态的一个线性函数.
+
+   已知$V^*_{t+1}$就等价于知道了$\Phi_{t+1},\Psi_{t+1}$,所以就只需要解释如何从$\Phi_{t+1},\Psi_{t+1}$去计算$\Phi_{t},\Psi_{t}$,以及问题中的其他参数.
+
+   $$
+   \begin{aligned}
+   V^*_t(s_t)&=  s_t^T\Phi_ts_t+\Psi_t \\
+   &= \max_{a_t}[R^{(t)}(s_t,a_t)+E_{s_{t+1}\sim P^{(t)}_{s_t,a_t}[V^*_{t+1}(s_{t+1})]}]  \\
+   &= \max_{a_t}[-s_t^TU_ts_t-a_t^TV_ta_t+E_{s_{t+1}\sim N(A_ts_t+B_ta_t,\Sigma_t)}  [s_{t+1}^T\Phi_{t+1}s_{t+1}+\Psi_{t+1}] ]  \\
+   \end{aligned}
+   $$
+
+   上式中的第二行正好就是最优值函数(optimal value function)的定义,而第三行是通过代入二次假设和模型方法.注意最后一个表达式是一个关于$a_t$的二次函数,因此很容易就能优化掉.(注释:这里用到了恒等式(identity)$E[w_t^T\Phi_{t+1}w_t] =Tr(\Sigma_t\Phi_{t+1}),\quad \text{其中} w_t\sim N(0,\Sigma_t)$).)然后就能得到最优行为(optimal action)$a^*_t$:
+
+   $$
+   \begin{aligned}
+   a^*_t&= [(B_t^T\Phi_{t+1}B_t-V_t)^{-1}B_t\Phi_{t+1}A_t]\cdot s_t\\
+   &= L_t\cdot s_t\\
+   \end{aligned}
+   $$
+
+   上式中的
+
+   $$
+   L_t= [(B_t^T\Phi_{t+1}B_t-V_t)^{-1}B_t\Phi_{t+1}A_t]
+   $$
+
+   这是一个很值得注意的结果(impressive result):优化策略(optimal policy)是关于状态$s_t$的线性函数.对于给定的$a_t^*$,我们就可以解出来$\Phi_t$和$\Psi_t$.最终就得到了离散里卡蒂方程(Discrete Ricatti equations):
+
+   $$
+   \begin{aligned}
+   \Phi_t&= A^T_t(\Phi_{t+1}-\Phi_{t+1}B_t(B^T_t\Phi_{t+1}B_t-W_t)^{-1}B_t\Phi_{t+1})A_t-U_t\\
+   \Psi_t&= -tr(\Sigma_t\Phi_{t+1})+\Psi_{t+1}\\
+   \end{aligned}
+   $$
+
+
+   定理3:要注意$\Phi_t$既不依赖$\Psi_t$也不依赖噪音项$\Sigma_t$!由于$L_t$是一个关于$A_t,B_t,\Phi_{t+1}$的函数,这就暗示了最优策略也不依赖噪音!(但$\Psi_t$是依赖$\Sigma_t$的,这就暗示了最优值函数$V^*_t$也是依赖噪音$\Sigma_t$的.)
+
+
+然后总结一下,线性二次调节(LQR)算法就如下所示:
+
+1. 首先,如果必要的话,估计参数$A_t,B_t,\Sigma_t$.
+2. 初始化$\Phi_T:=-U_T,\quad \Psi_T=0$.
+3. 从$t=T-1,...,0$开始迭代,借助离散里卡蒂方程(Discrete Ricatti equations)来利用$\Phi_{t+1},\Psi_{t+1}$来更新$\Phi_{t},\Psi_{t}$,如果存在一个策略能朝着0方向推导状态,收敛就能得到保证.
+
+利用定理3,我们知道最优策略不依赖与$\Psi_t$而只依赖$\Phi_t$,这样我们就可以只更新$\Phi_t$,从而让算法运行得更快一点!
+
