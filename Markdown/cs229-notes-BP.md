@@ -3,7 +3,7 @@ CS229 Lecture notes
 
 |原作者|翻译|
 |---|---|
-|Dan Boneh , [Andrew Ng  吴恩达](http://www.andrewng.org/)|[CycleUser](https://www.zhihu.com/people/cycleuser/columns)|
+| [Andrew Ng  吴恩达](http://www.andrewng.org/),Kian Katanforoosh |[CycleUser](https://www.zhihu.com/people/cycleuser/columns)|
 
 
 |相关链接|
