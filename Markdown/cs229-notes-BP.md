@@ -98,7 +98,7 @@ $$
 (译者注:为了方便我直接把上面链接中的代码贴到下面了.)
 
 
-```Python
+```ython
 #http://cs229.stanford.edu/notes/backprop.py
 import numpy as np
 from copy import copy
