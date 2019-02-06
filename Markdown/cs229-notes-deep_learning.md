@@ -124,10 +124,13 @@ $$
 
 $$
 \begin{aligned}
-\begin{bmatrix} z^{[1]}_1 \\ ...\\...\\ z^{[1]}_4 \end{bmatrix} &=\begin{bmatrix}-&{W{[1]}_1}^T - \\ -&{W{[1]}_2}^T -\\&...\\ -&{W{[1]}_4}^T -\end{bmatrix}\begin{bmatrix}x_1\\x_2\\x_3 \end{bmatrix} + \begin{bmatrix} b^{[1]}_1 \\ b^{[1]}_2 \\...\\ b^{[1]}_4\end{bmatrix}  \quad\text{(2.4)}\\
-z^{[1]}&\in  R^{4\times 1}\\
-W^{[1]}&\in  R^{4\times 3}\\
-b^{[1]}&\in  R^{4\times 1}\\
+\underbrace{  \begin{bmatrix} z^{[1]}_1 \\ ...\\...\\ z^{[1]}_4 \end{bmatrix} }_{z^{[1]} \in  R^{4\times 1}}
+
+=\underbrace{  \begin{bmatrix}-&{W{[1]}_1}^T - \\ -&{W{[1]}_2}^T -\\&...\\ -&{W{[1]}_4}^T -\end{bmatrix}}_{W^{[1]}\in  R^{4\times 3}}
+
+\underbrace{ \begin{bmatrix}x_1\\x_2\\x_3 \end{bmatrix}}_{x\in  R^{3\times 1}} + 
+
+\underbrace{ \begin{bmatrix} b^{[1]}_1 \\ b^{[1]}_2 \\...\\ b^{[1]}_4\end{bmatrix}  }_{b^{[1]}\in  R^{4\times 1}}\quad\text{(2.4)}
 \end{aligned}
 $$
 
@@ -148,11 +151,10 @@ $$
 总结一下目前位置对神经网络的了解,给定一个输入特征$x\in R^3$,就可以利用$z^{[1]}=W^{[1]}x+b^{[1]}$和$a^{[1]}=g(z^{[1]})$计算隐藏层的激活,要计算输出层的激活状态(也就是神经网络的输出),要用:
 
 $$\begin{aligned}
-z^{[2]}&=W^{[2]} a^{[1]}+b^{[2]}\quad,\quad a^{[2]}&=g(z^{[2]})\quad\text{(2.7)}\\
-z^{[2]}&\in  R^{1\times 1}\\
-W^{[2]}&\in  R^{1\times 4}\\
-a^{[1]}&\in  R^{4\times 1}\\
-b^{[2]}&\in  R^{1\times 1}\\
+
+\underbrace{ z^{[2]} } _{ 1\times 1}
+
+&=\underbrace{ W^{[2]} } _{ 1\times 4} \underbrace{ a^{[1]}} _{ 4\times 1} +\underbrace{ b^{[2]} } _{ 1\times 1}\quad,\quad \underbrace{  a^{[2]}} _{ 1\times 1}&=g(\underbrace{  z^{[2]} } _{ 1\times 1})\quad\text{(2.7)}
 \end{aligned}
 $$
 
@@ -331,18 +333,180 @@ $$
 \quad \text{(3.23)}
 $$
 
+我们已知$a^{[3]}$和$z^{[3]}$直接相关.
 
 $$  
+\frac{\partial L}{\partial W^{[2]}} = \frac{\partial L}{\partial a^{[3]}}  \frac{\partial a^{[3]}}{\partial z^{[3]}}  \frac{\partial z^{[3]}}  {?} \frac{?}{\partial W^{[2]}}
 \quad \text{(3.24)}
 $$
 
+接下来,我们知道$z^{[3]}$和$a^{[2]}$直接相关.要注意不能使用$W^{[2]}$或者$b^{[2]}$,因为$a^{[2]}$十字等式(3.5)和(3.6)之间唯一的共有元素(common element).在反向传播(Backpropagation)中需要用共有元素.
 
 $$  
+\frac{\partial L}{\partial W^{[2]}} = \frac{\partial L}{\partial a^{[3]}}  \frac{\partial a^{[3]}}{\partial z^{[3]}}  \frac{\partial z^{[3]}} {\partial a^{[2]}}  \frac{\partial a^{[2]}}  {?} \frac{?}{\partial W^{[2]}}
 \quad \text{(3.25)}
 $$
 
+再次用到$a^{[2]}$和$z^{[2]}$直接相关,而$z^{[2]}$直接依赖于$W^{[2]}$,这使得我们可以计算整个链:
+
+$$  
+\frac{\partial L}{\partial W^{[2]}} = \frac{\partial L}{\partial a^{[3]}}  \frac{\partial a^{[3]}}{\partial z^{[3]}}  \frac{\partial z^{[3]}} {\partial a^{[2]}}  \frac{\partial a^{[2]}}  {\partial z^{[2]}} \frac{\partial z^{[2]}}{\partial W^{[2]}}
+\quad \text{(3.26)}
+$$
+
+回忆一下之前的$\frac{\partial L} {\partial W^{[3]}}$:
+
+$$
+\frac{\partial L} {\partial W^{[3]}} = (a^{[3]}-y){a^{[2]}}^T  \quad \text{(3.27)}
+$$
+
+因为我们首先计算出了$\frac{\partial L} {\partial W^{[3]}}$,就知道了$a^{[2]}= \frac{\partial z^{[3]}} {\partial W^{[3]}}$.类似地就也有$(a^{[3]}-y)=\frac{\partial L} {\partial W^{[3]}}$.这些可以帮我们计算出$\frac{\partial L} {\partial W^{[2]}}$.将这些值带入到等式(3.26).这就得到了:
+
+$$  
+\frac{\partial L}{\partial W^{[2]}} = 
+
+\underbrace{ 
+    \frac{\partial L}{\partial a^{[3]}}  \frac{\partial a^{[3]}}{\partial z^{[3]}} 
+}_{(a^{[3]}-y)} 
+
+\underbrace{  
+    \frac{\partial z^{[3]}} {\partial a^{[2]}} 
+}_{W^{[3]}} 
+
+\underbrace{  
+     \frac{\partial a^{[2]}}  {\partial z^{[2]}}
+}_{g'(z^{[2]})} 
+
+\underbrace{ 
+    \frac{\partial z^{[2]}}{\partial W^{[2]}}
+}_{a^{[1]}} 
+    
+    
+ =(a^{[3]}-y)W^{[3]}g'(z^{[2]})a^{[1]}
+\quad \text{(3.28)}
+$$
+
+虽然已经大幅度简化了这个过程,但还没有完成.因为要计算更高维度的导数(derivatives),要计算等式(3.28)所要求的矩阵乘法的确切的次序(order)还不清楚.必须在等式(3.28)中对各个项目进行重排列,使其维度相符合(align).首先将每个项目的维度标记出来:
+
+$$
+\underbrace{ 
+    \frac{\partial L}{\partial W^{[2]}} 
+}_{2\times3}
+ =  
+ \underbrace{ (a^{[3]}-y)
+ }_{1\times1}
+ 
+ \underbrace{ W^{[3]}
+ }_{1\times2}
+ 
+\underbrace{  g'(z^{[2]})
+ }_{2\times1}
+ 
+ \underbrace{ a^{[1]}
+ }_{3\times1}
+\quad \text{(3.29)}
+$$
+
+要注意上面各项目并没有根据形状进行妥善排列.因此必须利用矩阵线性代数的形制将其重排列,使矩阵运算能够产生一个有正确形态的输出结果.正确的排序如下所示:
+
+
+$$
+\underbrace{ 
+    \frac{\partial L}{\partial W^{[2]}} 
+}_{2\times3}
+ =  
+ 
+  \underbrace{ {W^{[3]}}^T
+ }_{2\times1}
+
+ \circ 
+ 
+\underbrace{  g'(z^{[2]})
+ }_{2\times1}
+
+ 
+ \underbrace{ (a^{[3]}-y)
+ }_{1\times1}
+ 
+ \underbrace{ {a^{[1]}}^T
+ }_{1\times3}
+\quad \text{(3.30)}
+$$
+
+
+其余的梯度计算就作为练习交给读者自行完成了.在计算剩余参数的梯度的嘶吼,利用已经计算的$\frac{\partial L}{\partial W^{[2]}}$和$\frac{\partial L}{\partial W^{[3]}}$作为中介结果是很重要的,因为这两者都可以直接用于梯度计算中.
+
+回到优化上,我们之前讨论过随机梯度下降法(stochastic gradient descent,缩写为SGD)了.接下来要将的是梯度下降(gradient descent).对任意一个单层$l$,更新规则的定义为:
+
+$$
+W^{[l]}=W^{[l]}-\alpha \frac{\partial J}{\partial W^{[l]}}\quad \text{(3.31)}
+$$
+
+上式中的$J$是成本函数(cost function)$J=\frac{1}{m}\sum^m_{i=1}L^{(i)}$,而其中的$L^{(i)}$是对单个样本的损失函数值(loss).梯度下降更新规则和随机梯度下降更新规则的区别是成本函数$j$给出的是更精确的梯度,而损失函数$L^{(i)}$可能是有噪音的.随机梯度下降法视图从全部梯度下降中对梯度进行近似.梯度下降的弱点是很难在依次向前或向后传播阶段(phase)中计算所有样本的所有状态函数.
+
+在实践中,研究和应用一般都使用小批量梯度下降(mini-batch gradient descent).这个方法是梯度下降和随机梯度下降之间的一个折中方案.在这个方法中,成本函数$J_{mb}$定义如下:
+
+$$
+J_{mb}=\frac{1}{B}\sum^B_{i=1}L^{(i)}\quad \text{(3.32)}
+$$
+
+上式中的$B$是指最小批量(mini-batch)中的样本数目.
+
+还有一种优化方法叫做动量优化(momentum optimization).设想最小批量随机梯度下降.对于任意个单一层$l$,更新规则如下所示:
+
+$$
+\begin{cases}
+v_{dW^{[l}} &= \beta v_{dW^{[l}} +(1-\beta) \frac{\partial J}{\partial W^{[l}}\\
+W^{[l]}   &= W^{[l]}  -\alpha v_{dW^{[l}}
+\end{cases}
+\quad \text{(3.33)}
+$$
+
+注意这里的更新规则有两步,而不是之前的单步了.权重(weight)的更新现在依赖于在这一更新步骤的成本函数$J$以及速度(velocity)$v_{dW^{[l}}$.相对重要程度(relative importance)受到$\beta$的控制.设想模拟一个人开车.在懂得时候,汽车有栋梁(momentum).如果踩了刹车或者油门,汽车由于有动量会继续移动.回到优化上,速度(velocity)$v_{dW^{[l}}$就会在时间上跟踪梯度.这个技巧对训练阶段的神经网络有很大帮助.
+
 ### 3.3 参数分析(Analyzing the Parameters)
+
+这时候已经初始化过参数了,并且也优化出了这些参数.加入我们对训练出来的模型进行应用评估发现在训练集商贸能够达到96%的准确率,但在测试集上准确率只有64%.解决的思路包括:收集更多数据,进行规范化,或者让模型更浅(shallower).下面简单讲解一下规范化的技术.
 
 #### 3.3.1 L2规范化(Regularization)
 
+设下面的$W$表示的是一个模型中的所有参数.在神经网络中,你可能会想到对所有层权重$W^{[l]}$添加第二项.为了简单,就简写成$W$.对成本函数进行$L2$规范化街上另一项就得到了:
+
+$$
+\begin{aligned}
+J_{L2}&= J+\frac{\lambda}{2} ||W||^2   \quad\text{(3.34)} \\  
+&=J+\frac{\lambda}{2}  \sum_{ij}|W_{ij}|^2      \quad\text{(3.35)} \\  
+&=J+\frac{\lambda}{2}   W^TW     \quad\text{(3.36)} \\  
+\end{aligned}
+$$
+
+上式中的$J$是前文提到过的标准成本函数,$\lambda$是一个任意值,越大表示更加规范化,而$W$包含所有的权重矩阵(weight matrices),等式(3.34)(3.35)(3.36)是完全等价的.这样L2规范化的更新规则就成了:
+$$
+\begin{aligned}
+ W &=   W-\alpha\frac{\partial J}{\partial W}  -\alpha\frac{\lambda}{2}    \frac{\partial W^TW}{\partial W}      \quad\text{(3.37)} \\  
+ &= (1-\alpha\lambda)W-\alpha \frac{\partial J}{\partial W}        \quad\text{(3.38)} \\  
+\end{aligned}
+$$
+
+当使用梯度下降更新参数的时候,并没有$(1-\alpha\lambda)W$这一项.这就意味着通过L2规范化,每个更新会泽都会加入某一个惩罚项(penalization),这个惩罚项依赖于$W$.这个惩罚项(penalization)会增加成本函数(cost)$J$的值,这样可以鼓励单个参数值在程度上(in magnitude)尽量缩小,这是一种降低过拟合(overfitting)发生概率的办法.
+
 #### 3.3.2 参数共享(Parameter Sharing)
+
+回忆一下逻辑回归(logistic regression).也可以表示成一个神经网络,如图3所示.参数向量$\theta = (\theta_1,...,\theta_n)$必须和输入向量$x=(x_1,...,x_n)$有同样的元素个数.在检测图像中是否包含足球这个例子中,这就意味着$\theta_1$必须总要查看图像的左上角的像素.不过我们知道足球可能出现在图像的任意一个区域而不一定总在中心位置.很可能$\theta_1$从没被选镰刀图片左上角有足球.结果就是在测试的时候,只要一个图像中足球出现在左上角,逻辑回归就很可能预测没有足球.这就是个问题了.
+
+因此我们就要试试卷积神经网络(convolutional neural networks).设$\theta$不再是一个向量而本身就是一个矩阵.比如在足球这个样例中,设$\theta=R^{4\times4}$.
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notedlf6.png)
+
+
+为了简单起见,我们展示一个$64\times 64$的图像但还记得图像实际上是三维的包含了三个通道.现在将参数矩阵$\theta$分散(slide)在图像上.这就如上图中所示在图像左上角位置的加粗方框.要计算激活函数$a$,就要计算$\theta$和$x_{1:4,1:4}$按元素求积(element-wise product),其中x的下标表示的是从图像x的左上方$4\times4$个像素中取值.然后将按元素求积得到的所有元素加到一起来将矩阵压缩(collapse)成一个单独标量.具体形式为:
+
+$$ 
+a=\sum^4_{i=1}\sum^4_{j=1}\theta_{ij}x_{ij}\quad\text{(3.39)} 
+$$
+
+然后将这个窗口向图像右侧轻微移动,然后重复上面的国产.一旦到达了行尾了,就从第二行的开头部位开始.
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notedlf7.png)
+
+一旦到达了图像末尾,参数$\theta$就已经"检视"过了图片的全部像素了:$\theta_1$就不再只是和左上像素相关联了.结果就是,如论足球出现的位置是图像的右下角或者左上角,神经网络都可以成功探测到.
