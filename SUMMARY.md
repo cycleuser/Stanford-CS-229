@@ -14,3 +14,6 @@
 +   [线性二次调节，微分动态规划，线性二次高斯分布](Markdown/cs229-notes13.md)
 +   [深度学习](Markdown/cs229-notes-deep_learning.md)
 +   [反向传播](Markdown/cs229-notes-BP.md)
++   [决策树](Markdown/cs229-notes-dt.md)
++   [集成学习](Markdown/cs229-notes-ensemble.md)
+
