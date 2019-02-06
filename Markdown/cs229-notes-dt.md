@@ -45,7 +45,66 @@ $$
 
 ## 2 区域选择(Selecting Regions)
 
+通常来说,选择最有区域是很难的(intractable).决策树会生通过贪心法,从头到尾,递归分区(greedy, top-down, recursive partitioning)成一种近似的解决方案.这个方法是从头到尾(top-down)是因为是从原始输入空间$X$开始,先利用单一特征为阈值切分成两个子区域.然后对两个子区域选择一个再利用一个新阈值来进行分区.然后以递归模式来持续对模型的训练,总是选择一个叶节点(leaf node),一个特征(feature),以及一个阈值(threshold)来生成新的分割(split).严格来说,给定一个父区域$R_p$,一个特征索引$j$以及一个阈值$t\in R$,就可以得到两个子区域$R_1,R_2$,如下所示:
+
+$$
+\begin{aligned}
+R_1 &= \{ X|X_j<t,X\in R_p\}\\
+R_2 &= \{ X|X_j< \ge t,X\in R_p\}\\
+\end{aligned}
+$$
+
+下面就着滑雪数据集来应用上面这样的过程.在步骤a当中,将输入空间$X$根据地理位置特征切分,阈值设置的是15,然后得到了子区域$R_1,R_2$.在步骤b,选择一个子区域(例子中选的是$R_2$)来递归进行同样的操作,选择时间特征,阈值设为3,然后生成了二级子区域$R_{21},R_{22}.在步骤c,对剩下的叶节点($R_1,R_{21},R_{22}$)任选一饿,然后继续上面的过程,知道遇到了一个给定的停止条件(stop criterion,这个稍后再介绍),然后再预测每个节点上的主要类别.
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notedtf2.png)
+
 ## 3 定义损失函数(Defining a Loss Function)
+
+这时候很自然的一个问题就是怎么去选择分割.首先要定义损失函数$L$,这个函数是在区域$R$上的一个集合函数(set function).对一个父区域切分成两个子区域$R_1,R_2$之后,可以计算福区域的损失函数$L(R_p)$,也可以计算子区域的基数加权(cardinality-weighted)损失函数$\frac{|R_1|L(R_1)+|R_2|L(R_2)}{|R_1|+|R_2|}$.在贪心分区框架(greedy partitioning framework)下,我们想要选择能够最大化损失函数减少量(decrease)的叶区域/特征和阈值:
+
+$$
+L(R_p)-\frac{|R_1|L(R_1)+|R_2|L(R_2)}{|R_1|+|R_2|}
+$$
+
+对一个分类问题,我们感兴趣的是误分类损失函数(misclassification loss)$L_{misclass}$.对于一个区域$R$,设$\hat p_c$是归于类别$c$的R中样本的分区.在R上的误分类损失函数可以写为:
+
+$$
+L_{misclass}(R)=1-\max_c(\hat p_c)
+$$
+
+这个可以理解为在预测区域$R$上的主要类别中发生错误分类的样本个数.虽然误分类损失函数是我们关心的最终值,但这个指标的对类别概率的变化并不敏感.举个例子,如下图所示的二值化分类.我们明确描述了父区域$R_p$,也描述了每个区域上的正负值的个数.
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notedtf3.png)
+
+第一个切分就是讲搜有的正值分割开来,但要注意到:
+
+$$
+L(R_p)=\frac{|R_1|L(R_1)+|R_2|L(R_2)}{|R_1|+|R_2|}=\frac{|R_1'|L(R_1')+|R_2'|L(R_2')}{|R_1'|+|R_2'|}=100
+$$
+
+这样不仅能使两个切分的损失函数相同,还能使得任意一个分割都不会降低在父区域上的损失函数.(Thus, not only can we not only are the losses of the two splits identical, but neither of the splits decrease the loss over that of the parent.)
+
+因此我们有兴趣去定义一个更敏感的损失函数.前面已经给出过一些损失函数了,这里要用到的是交叉熵(cross-entropy)$L_{cross}$:
+
+$$
+L_{cross}(R)=-\sum_c \hat p_c \log_2 \hat p_c
+$$
+
+如果$\hat p_c=0$,则$\hat p_c \log_2 \hat p_c=0$.从信息论角度来看,交叉熵要衡量的是给定已知分布的情况下要确定输出所需要的位数(number of bits).更进一步说,从父区域到子区域的损失函数降低也就是信息获得(information gain).
+
+要理解交叉熵损失函数比误分类损失函数相对更敏感,我们来看一下对同样一个二值化分类案例这两种损失函数的投图.从这些案例中,我们能够对损失函数进行简化,使之仅依赖一个区域$R_i$中正值分区的样本$\hat p_i$:
+
+$$
+\begin{aligned}
+L_{misclass}(R)= L_{misclass}(\hat p)=1-\max(\hat p,1-\hat p)\\
+
+L_{cross}(R)=L_{cross}(\hat p)=- \hat p\log \hat p -(1-\hat p)\log(1-\hat p)\\
+\end{aligned}
+$$
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notedtf4.png)
+
+
 
 ## 4 其他考虑(Other Considerations)
 
