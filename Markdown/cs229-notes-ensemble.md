@@ -15,6 +15,7 @@ CS229 Lecture notes
 
 # 集成学习(Ensembling Methods)
 
+现在要讲的方法可以来整合训练模型的输出.这里要用到偏差-方差(Bias-Variance)分析,以及决策树的样本来探讨一下每一种方法所做的妥协权衡.
 
 ## 1 自助聚合 (Boostrap Aggregation)
 
