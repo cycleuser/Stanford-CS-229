@@ -16,13 +16,13 @@
 
 ### 第七部分 正则化与模型选择
 
-设想一个机器学习的问题，我们要从一系列不同的模型中进行挑选。例如，我们可能是用一个多项式回归模型 (polynomial regression model) $h_\theta (x)=g(\theta_0+\theta_1x+\theta_2x^2+\cdots+\theta_kx^k)$ 想要判定这里的多项式次数 $k$ 应该是多少，0, 1, …, 或者10。那么我们怎么才能自动选择一个能够在偏差 (bias)/方差(variance)$^1$之间进行权衡的模型呢? 或者换一个说法，假如我们希望能够自动选出来一个带宽参数 (bandwidth parameter) $\tau$ 来用于局部加权回归(locally weighted regression，所谓为 LWR，参考 note1的第2节)，或 者要自动选出一个参数 $C$ 用于拉格朗日正则化的支持向量机算法(l1-regularized SVM)。怎么来实现呢? 
+设想一个机器学习的问题，我们要从一系列不同的模型中进行挑选。例如，我们可能是用一个多项式回归模型 (polynomial regression model) $h_\theta (x)=g(\theta_0+\theta_1x+\theta_2x^2+\cdots+\theta_kx^k)$ 想要判定这里的多项式次数 $k$ 应该是多少，$0, 1, …, 或者10$。那么我们怎么才能自动选择一个能够在偏差 (bias)/方差(variance)$^1$之间进行权衡的模型呢? 或者换一个说法，假如我们希望能够自动选出来一个带宽参数 (bandwidth parameter) $\tau$ 来用于局部加权回归(locally weighted regression，所谓为 LWR，参考 note1的第2节)，或 者要自动选出一个参数 $C$ 用于拉格朗日正则化的支持向量机算法(l1-regularized SVM)。怎么来实现呢? 
 
 >1 考虑到前面的讲义中我们已经提到过偏差(bias)/方差(variance)这两个概念很大区别，有的读者可能觉得是不是应该把它们叫做一对“孪生 (twin)”魔鬼(evils)。或许可以把它们俩当做是一对异卵双胞胎(non-identical twins)。理解概念差别就好了，怎么说什么的都不要紧的。
 
 为了具体一些，咱们这一系列讲义中都假设备选集合的模型个数有限 $M = \{M_1,\cdots,M_d\}$。例如，在我们上面刚刚随便举的本章第一个例子中，$M_i$ 就是一个 $i$次多项式拟合模型(i-th order polynomial regression model)。(其实把 $M$ 扩展到无穷集合 也不难的。$^2$)换个说法就是，如果我们要从支持向量机算法 (SVM)、神经网络算法(neural network)、逻辑回归算法(logistic regression)当中三选一，那么这里的 $M$ 就应该都 包含了这些模型了。 
 
->2 如果我们要从一个无穷的模型集合中进行选取一个，假如说要选取一个带宽参数 $\tau\in \mathbb R+$ (正实数)的某个可能的值，可以将 $\tau$ 离散化，而只考虑 有限的一系列值。更广泛来说，我们要讲到的大部分算法都可以看做在模型空间(space of models) 中进行优化搜索 (performing optimization search)的 问题，这种搜索也可以在无穷模型类(infinite model classes)上进行。 
+>2 如果我们要从一个无穷的模型集合中进行选取一个，假如说要选取一个带宽参数 $\tau\in \mathbb R^+$ (正实数)的某个可能的值，可以将 $\tau$ 离散化，而只考虑 有限的一系列值。更广泛来说，我们要讲到的大部分算法都可以看做在模型空间(space of models) 中进行优化搜索 (performing optimization search)的 问题，这种搜索也可以在无穷模型类(infinite model classes)上进行。 
 
 #### 1 交叉验证（Cross Validation）
 
@@ -43,7 +43,7 @@
 
 还有另外一种备选方法，就是在第三步的时候，也可以换做选 择与最小估计经验误差 $\hat\epsilon_{S_{cv}}(h_i)$ 对应的模型 $M_i$ ，然后对整 个训练样本数据集 $S$ 使用 $M_i$ 来进行再次训练。(这个思路通常都不错，但有一种情景例外，就是学习算法对初始条件和数据的扰动(perturbations of the initial conditions and/or data) 非常敏感的情况。在这样的方法中，适用于 $S_{train}$ 的模型未必就能够同样适用于 $S_{cv}$，这样就最好还是放弃再训练的步骤 (forgo this retraining step)。) 
 
-使用保留交叉验证集(hold out cross validation set)的一个弊端就是“浪费(waste)”了训练样本数据集的 30% 左右。甚至即便我们使用了备选的那个针对整个训练集使用模型进行 重新训练的步骤，也还不成，因为这无非是相当于我们只尝试在一个 $0.7m$ 规模的训练样本集上试图寻找一个好的模型来解决一个机器学习问题，而并不是使用了全部的 $m$ 个训练样 本，因为我们进行测试的都是每次在仅 $0.7m$ 规模样本上进 行训练而得到的模型。当然了，如果数据非常充足，或者是很廉价的话，也可以用这种方法，而如果训练样本数据本身就很 稀缺的话（例如说只有 20 个样本），那就最好用其他方法了。 
+使用保留交叉验证集(hold out cross validation set)的一个弊端就是“浪费(waste)”了训练样本数据集的 30% 左右。甚至即便我们使用了备选的那个针对整个训练集使用模型进行 重新训练的步骤，也还不成，因为这无非是相当于我们只尝试在一个 $0.7m$ 规模的训练样本集上试图寻找一个好的模型来解决一个机器学习问题，而并不是使用了全部的 $m$ 个训练样 本，因为我们进行测试的都是每次在仅 $0.7m$ 规模样本上进 行训练而得到的模型。当然了，如果数据非常充足，或者是很廉价的话，也可以用这种方法，而**如果训练样本数据本身就很 稀缺的话（例如说只有 20 个样本），那就最好用其他方法了。** 
 
 下面就是一种这样的方法，名字叫 **k-折交叉验证**（k-fold cross validation），这样每次的用于验证的保留数据规模都更小:  
 
@@ -69,7 +69,7 @@
 
 模型选择(model selection)的一个非常重要的特殊情况就是特征选择(feature selection)。设想你面对一个监督学习问题 (supervised learning problem)，其中特征值的数量 $n$ 特别大 (甚至可能比训练样本集规模还大，即$n >> m$)，然而你怀疑可能只有一小部分的特征 (features) 是与学习任务“相关 (relevant)”的。甚至即便是针对 $n$ 个输入特征值使用一个简单的线性分类器 (linear classifier，例如感知器 perceptron)，你的假设类(hypothesis class)的 $VC$ 维(VC dimension) 也依然能达到 $O(n)$，因此有过拟合 (overfitting) 的潜在风险，除非训练样本集也足够巨大 (fairly large)。 
 
-在这样的一个背景下，你就可以使用一个特征选择算法，来降 低特征值的数目。假设有 $n$ 个特征，那么就有 $2^n$ 种可能的特征子集 (因为 $n$ 个特征中的任意一个都可以被某个特征子集(feature subsets)包含或者排除)，因此特征选择(feature selection)就可以看做是一个对 $2^n$ 种可能的模型进行选择 (model selection problem)的形式。对于特别大的 n，要是彻底枚举(enumerate)和对比全部 $2^n$ 种模型，成本就太高了， 所以通常的做法都是使用某些启发式的搜索过程(heuristic search procedure)来找到一个好的特征子集。下面的搜索过程叫做向前搜索(forward search) ：
+在这样的一个背景下，你就可以使用一个特征选择算法，来降 低特征值的数目。假设有 $n$ 个特征，那么就有 $2^n$ 种可能的特征子集 (因为 $n$ 个特征中的任意一个都可以被某个特征子集(feature subsets)包含或者排除)，因此特征选择(feature selection)就可以看做是一个对 $2^n$ 种可能的模型进行选择 (model selection problem)的形式。对于特别大的 $n$，要是彻底枚举(enumerate)和对比全部 $2^n$ 种模型，成本就太高了， 所以通常的做法都是使用某些启发式的搜索过程(heuristic search procedure)来找到一个好的特征子集。下面的搜索过程叫做**向前搜索(forward search) ：**
 
 1. 初始化一个集合为空集 $\mathcal F=\emptyset$
 
@@ -77,7 +77,7 @@
 
    (a) 对于 $i=1,\cdots,n$ 如果 $i\notin \mathcal F$，则令 $\mathcal F_i=\mathcal F\cup \{i\}$，然后使用某种交叉验证来评估特征 $\mathcal F_i$ 
 
-   (b) 令 $\mathcal F$ 为（a）中最佳特征子集
+   (b) 令 $\mathcal F$ 为(a)中最佳特征子集
 
    }
 
@@ -89,9 +89,9 @@
 
 这种包装器特征选择算法(Wrapper feature selection algorithms)通常效果不错，不过对算力开销也很大，尤其是要对学习算法进行多次调用。实际上，完整的向前搜索 (forward search，也就是 $\mathcal F$ 从空集开始，到最终达到整个样本集规模，即 $\mathcal F =\{1, ..., n\}$ 终止)将要对学习算法调用约 $O(n^2)$ 次。 
 
-**过滤器特征选择(Filter feature selection methods)** 给出的特征子集选择方法更具有启发性(heuristic)，而且在算力上的开销成本也更低。这里的一个思路是，计算一个简单的分数 $S(i)$，用来衡量每个特征 $x_i$ 对分类标签(class labels) $y$ 所能体现的信息量。然后，只需找到最大信息量扽书 $S(i)$ 的一组，选择使用其中的 $k$ 个特征。 
+**过滤器特征选择(Filter feature selection methods)** 给出的特征子集选择方法更具有启发性(heuristic)，而且在算力上的开销成本也更低。这里的一个思路是，计算一个简单的分数 $S(i)$，用来衡量每个特征 $x_i$ 对分类标签(class labels) $y$ 所能体现的信息量。然后，只需根据需要选择最大分数 $S(i)$ 的 $k$ 个特征。 
 
-怎么去定义用于衡量信息量的分值 $S(i)$ 呢?一种思路是使用 $x_i$ 和 $y$ 之间的相关系数的值(或其绝对值)，这可以在训练 样本数据中算出。这样我们选出的就是与分类标签(class labels)的关系最密切的特征值(features)。实践中，通常（尤其当特征 $x_i$ 为离散值(discrete-valued features)）选择 $x_i$ 和 $y$ 的互信息( mutual information, ${\rm{MI}}(x_i, y)$ ) 来作为 $S(i)$ 。 
+怎么去定义用于衡量信息量的分值 $S(i)$ 呢?一种思路是使用 $x_i$ 和 $y$ 之间的相关系数的值(或其绝对值)，这可以在训练 样本数据中算出。这样我们选出的就是与分类标签(class labels)的关系最密切的特征值(features)。实践中，通常（尤其当特征 $x_i$ 为离散值(discrete-valued features)）选择 $x_i$ 和 $y$ 的**互信息( mutual information, ${\rm{MI}}(x_i, y)$ )** 来作为 $S(i)$ 。 
 
 $$
 {\rm{MI}}(x_i, y)=\sum_{x_i\in\{0, 1\}}\sum_{y\in\{0,1\}}p(x_i,y)\log\frac{p(x_i,y)}{p(x_i)p(y)}
@@ -105,7 +105,7 @@ $$
 {\rm{MI}}(x_i,y)={\rm KL}(p(x_i,y)\,\|\,p(x_i)p(y))
 $$
 
-在下一节当中，你会与 $KL$ 散度进行更多的接触，这里比较通俗地说，这个概念对 $p(x_i,y)$ 和 $p(x_i)p(y)$ 的概率分布的差异程度给出一个衡量。如果 $x_i$ 和 $y$ 是两个独立的随机变量，那么必然有 $p(x_i, y) = p(x_i)p(y)$，而两个分布之间的 $KL$ 散度就应该是 0。这也符合下面这种很自然的认识：如果 $x_i$ 和 $y$ 相互独立，那么 $x_i$ 很明显对 $y$ 是“完全无信息量”(non-informative)，因此对应的信息量分值 $S(i)$ 就应该很小。与之相反地，如果 $x_i$ 对 $y$ “有很大的信息量 (informative)”，那么这两者的互信息 ${\rm MI}(x_i,y)$ 就应该很大。  
+在下一节当中，你会与 $KL$ 散度进行更多的接触，这里比较通俗地说，这个概念对 $p(x_i,y)$ 和 $p(x_i)p(y)$ 的概率分布的差异程度给出一个衡量。如果 $x_i$ 和 $y$ 是两个独立的随机变量，那么必然有 $p(x_i, y) = p(x_i)p(y)$，而两个分布之间的 $KL$ 散度就应该是 $0$。这也符合下面这种很自然的认识：如果 $x_i$ 和 $y$ 相互独立，那么 $x_i$ 很明显对 $y$ 是“完全无信息量”(non-informative)，因此对应的信息量分值 $S(i)$ 就应该很小。与之相反地，如果 $x_i$ 对 $y$ “有很大的信息量 (informative)”，那么这两者的互信息 ${\rm MI}(x_i,y)$ 就应该很大。  
 
 最后一个细节：现在你已经根据信息量分值 $S(i)$ 的高低来对特征组合(features)进行了排序，那么要如何选择特征个数 $k$ 呢?一个标准办法就是使用交叉验证(cross validation)来从可能的不同 $k$ 值中进行筛选。例如，在对文本分类(text classification)使用朴素贝叶斯方法(naive Bayes)，这个问题中的词汇规模(vocabulary size) $n$ 通常都会特别大，使用 交叉验证的方法来选择特征子集(feature subset)，一般都 提高分类器精度。 
 
@@ -143,7 +143,7 @@ $$
 
 在上面这个等式中，$p(\theta|S)$ 来自等式 (1)。例如，如果目标是要根据给定的 $x$ 来预测对应的 $y$ 的值，那就可以输出$^4$: 
 
->4 如果 y 是一个离散值(discrete-valued)，那么此处的积分(integral)就用求和(summation)来替代。  
+>4 如果 $y$ 是一个离散值(discrete-valued)，那么此处的积分(integral)就用求和(summation)来替代。  
 
 $$
 E[y|x,S]=\int_y y p(y|x,S)dy
@@ -159,4 +159,4 @@ $$
 
 注意到了么，这个式子基本和对 $\theta$ 的最大似然估计(ML (maximum likelihood) estimate)是一样的方程，除了末尾多了 一个先验概率分布 $p(\theta)$。 
 
-实际应用里面，对先验概率分布 $p(\theta)$ 的常见选择是假设 $\theta\sim N(0 , \tau ^2I)$。使用这样的一个先验概率分布，拟合出来的参数 $\theta_{MAP}$ 将比最大似然得到的参数有更小的范数(norm)。 (更多细节参考习题集 #3。)在实践中，贝叶斯最大后验估计(Bayesian MAP estimate)比参数的最大似然估计 (ML estimate of the parameters)更易于避免过拟合。例如，贝叶斯逻辑回归(Bayesian logistic regression)就是一种非常有效率的文本分类(text classification)算法，即使文本分类中参数规模 n 通常是远远大于样本规模 m 的，即 $n\gg m$。 
+实际应用里面，对先验概率分布 $p(\theta)$ 的常见选择是假设 $\theta\sim N(0 , \tau ^2I)$。使用这样的一个先验概率分布，拟合出来的参数 $\theta_{MAP}$ 将比最大似然得到的参数有更小的范数(norm)。 (更多细节参考习题集 #3。)在实践中，贝叶斯最大后验估计(Bayesian MAP estimate)比参数的最大似然估计 (ML estimate of the parameters)更易于避免过拟合。例如，贝叶斯逻辑回归(Bayesian logistic regression)就是一种非常有效率的文本分类(text classification)算法，即使文本分类中参数规模 $n$ 通常是远远大于样本规模 $m$ 的，即 $n\gg m$。 
