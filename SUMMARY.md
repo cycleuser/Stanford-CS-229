@@ -11,6 +11,7 @@
 +   [第十部分 因子分析](Markdown/cs229-notes9.md)
 +   [第十一部分 主成分分析](Markdown/cs229-notes10.md)
 +   [第十二部分 独立成分分析](Markdown/cs229-notes11.md)
++   [第十二部分 强化学习和控制](Markdown/cs229-notes12.md)
 +   [线性二次调节，微分动态规划，线性二次高斯分布](Markdown/cs229-notes13.md)
 +   [深度学习](Markdown/cs229-notes-deep_learning.md)
 +   [反向传播](Markdown/cs229-notes-BP.md)
