@@ -1,4 +1,4 @@
-+   [CS229 课程讲义中文翻译](README.md)
++   [斯坦福 CS229 机器学习中文讲义](README.md)
 +   [第一部分到第三部分](Markdown/cs229-notes1.md)
 +   [第四部分 生成学习算法](Markdown/cs229-notes2.md)
 +   [第五部分 支持向量机](Markdown/cs229-notes3.md)
