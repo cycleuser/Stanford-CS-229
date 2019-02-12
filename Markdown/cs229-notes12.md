@@ -15,7 +15,7 @@
 
 # 第十二章
 
-### 第十二部分 强化学习（Reinforcement Learning）和控制（Control）
+### 第十三部分 强化学习（Reinforcement Learning）和控制（Control）
 
 这一章我们就要学习强化学习（reinforcement learning）和适应性控制（adaptive control）了。在监督学习（supervised learning）中，我们已经见过的一些算法，输出的标签类 $y$ 都是在训练集中已经存在的。这种情况下，对于每个输入特征 $x$，都有一个对应的标签作为明确的“正确答案（right answer）”。与之相反，在很多的连续判断（sequential decisions making）和控制（control）的问题中，很难提供这样的明确的显示监督（explicit supervision）给学习算法。例如，假设咱们制作了一个四条腿的机器人，然后要编程让它能走路，而我们并不知道怎么去采取“正确”的动作来进行四条腿的行走，所以就不能给他提供一个明确的监督学习算法来进行模仿。
 
@@ -94,7 +94,7 @@ V^*(s)=R(s)+\max_{a\in A}\gamma\sum_{s'\in S}P_{sa}(s')V^*(s')\qquad(2)
 $$
 
 上面这个等式中的第一项，还是跟之前一样的，还是即时奖励函数值。第二项是在采取了动作 $a$ 之后的所有动作 $a$ 的部分奖励（discounted rewards）的未来期望总和（expected future sum）的最大值。要确保理解这个等式，并且要明白为什么这个等式有意义。
-（译者注：抱歉，这里的这个 discounted rewards 弄得我不知道怎么翻译才顺，意思表达得很狗，非常抱歉。）
+`译者注：抱歉，这里的这个 discounted rewards 弄得我不知道怎么翻译才顺，意思表达得很狗，非常抱歉。`
 
 另外还定义了一个策略函数（policy） $\pi^* : S → A$，如下所示
 
@@ -153,7 +153,11 @@ $$
 例如，加入对倒立摆问题（inverted pendulum problem，参考习题集 4），在 MDP 中进行了一系列的试验，过程如下所示：
 
 $$
-
+\begin{aligned}
+&s_0^{(1)}\xrightarrow{a_0^{(1)}}s_1^{(1)}\xrightarrow{a_1^{(1)}}s_2^{(1)}\xrightarrow{a_2^{(1)}}s_3^{(1)}\xrightarrow{a_3^{(1)}}\dots \\
+&s_0^{(2)}\xrightarrow{a_0^{(2)}}s_1^{(2)}\xrightarrow{a_1^{(2)}}s_2^{(2)}\xrightarrow{a_2^{(2)}}s_3^{(2)}\xrightarrow{a_3^{(2)}}\dots  \\
+&\cdots
+\end{aligned}
 $$
 
 其中 $s_i^{(j)}$ 表示的是第 $j$ 次试验中第 $i$ 次的状态，而 $a_i^{(j)}$ 是该状态下的对应动作。在实践中，每个试验都会运行到 MDP 过程停止（例如在倒立摆问题（inverted pendulum problem）中杆落下（pole falls）），或者会运行到某个大但有限个数的时间步长（timesteps）。
@@ -161,107 +165,173 @@ $$
 有了在 MDP 中一系列试验得到的“经验”，就可以对状态转移概率（state transition probabilities）推导出最大似然估计（maximum likelihood estimates）了：
 
 $$
-P_{sa}(s')= (在状态 s 执行动作 a 而到达状态 s’ 花的时间)/(在状态 s 执行动作 a 花的时间)   (4)
+P_{sa}(s')= \frac{在状态 s 执行动作 a 而到达状态 s’ 花的时间}{在状态 s 执行动作 a 花的时间}\qquad(4)
 $$
 
-或者，如果上面这个比例出现了$“0/0”$的情况，对应的情况就是在状态 s 之前没进行过任何动作 a，这样就可以简单估计 Psa(s') 为 1/|S|。（也就是说把 Psa 估计为在所有状态上的均匀分布（uniform distribution）。）
-注意，如果在 MDP 过程中我们能获得更多经验信息（观察更多次数），就能利用新经验来更新估计的状态转移概率（estimated state transition probabilities），这样很有效率。具体来说，如果我们保存下来等式（4）中的分子（numerator）和分母（denominator）的计数（counts），那么观察到更多的试验的时候，就可以很简单地累积（accumulating）这些计数数值。计算这些数值的比例，就能够给出对 Psa 的估计。
-利用类似的程序（procedure），如果奖励函数（reward） R 未知，我们也可以选择在状态 s 下的期望即时奖励函数（expected immediate reward） R(s) 来当做是在状态 s 观测到的平均奖励函数（average reward）。
+或者，如果上面这个比例出现了$“0/0”$的情况，对应的情况就是在状态 $s$ 之前没进行过任何动作 $a$，这样就可以简单估计 $P_{sa}(s')$ 为 $1/|S|$。（也就是说把 $P_{sa}$ 估计为在所有状态上的均匀分布（uniform distribution）。）
+
+注意，如果在 MDP 过程中我们能获得更多经验信息（观察更多次数），就能利用新经验来更新估计的状态转移概率（estimated state transition probabilities），这样很有效率。具体来说，如果我们保存下来等式$(4)$中的分子（numerator）和分母（denominator）的计数（counts），那么观察到更多的试验的时候，就可以很简单地累积（accumulating）这些计数数值。计算这些数值的比例，就能够给出对 $P_{sa}$ 的估计。
+
+利用类似的程序（procedure），如果奖励函数（reward） $R$ 未知，我们也可以选择在状态 $s$ 下的期望即时奖励函数（expected immediate reward） R(s) 来当做是在状态 s 观测到的平均奖励函数（average reward）。
+
 学习了一个 MDP 模型之后，我们可以使用值迭代（value iteration）或者策略迭代（policy iteration），利用估计的状态转移概率（transition probabilities）和奖励函数，来去求解这个 MDP 问题。例如，结合模型学习（model learning）和值迭代（value iteration），就可以在未知状态转移概率（state transition probabilities）的情况下对 MDP 进行学习，下面就是一种可行的算法：
 
-1. 随机初始化 \pi 。 
+1. 随机初始化 $\pi$ 。 
 2. 重复 {
-(a) 在 MDP 中执行 \pi 作为若干次试验（trials）。
-(b) 利用上面在 MDP 积累的经验（accumulated experience），更新对 Psa 的估计（如果可以的话也对奖励函数 R 进行更新）。
-(c) 利用估计的状态转移概率（estimated state transition probabilities）和奖励函数（rewards），应用值迭代（value iteration），得到一个新的估计值函数（estimated value function） V。
-(d) 更新 \pi 为与 V 对应的贪婪策略（greedy policy）。
+(a) 在 MDP 中执行 $\pi$ 作为若干次试验（trials）。
+(b) 利用上面在 MDP 积累的经验（accumulated experience），更新对 $P_{sa}$ 的估计（如果可以的话也对奖励函数 $R$ 进行更新）。
+(c) 利用估计的状态转移概率（estimated state transition probabilities）和奖励函数（rewards），应用值迭代（value iteration），得到一个新的估计值函数（estimated value function） $V$。
+(d) 更新 $\pi$ 为与 $V$ 对应的贪婪策略（greedy policy）。
 }
-我们注意到，对于这个特定的算法，有一种简单的优化方法（optimization），可以让该算法运行得更快。具体来说，在上面算法的内部循环中，使用了值迭代（value iteration），如果初始化迭代的时候不令 V = 0 启动，而是使用算法中上一次迭代找到的解来初始化，这样就有了一个更好的迭代起点，能让算法更快收敛。
-
+我们注意到，对于这个特定的算法，有一种简单的优化方法（optimization），可以让该算法运行得更快。具体来说，在上面算法的内部循环中，使用了值迭代（value iteration），如果初始化迭代的时候不令 $V = 0$ 启动，而是使用算法中上一次迭代找到的解来初始化，这样就有了一个更好的迭代起点，能让算法更快收敛。
 
 #### 4 连续状态的马尔可夫决策过程（Continuous state MDPs）
 
-目前为止，我们关注的都是有限个状态（a finite number of states）的马尔可夫决策过程（MDPs）。接下来我们要讲的就是有无限个状态（an infinite number of states）的情况下的算法。例如，对于一辆车，我们可以将其状态表示为 (x, y, θ, x ?,y ?,θ ?)，其中包括位置（position）  (x, y)，方向（orientation）θ， 在 x 和 y 方向的速度分量 x ? 和 y ?，以及角速度（angular velocity）θ ?。这样，S = R6 就是一个有无限的状态集合，因为一辆车的位置和方向的个数是有无限可能的2。与此相似，在习题集4 中看到的倒立摆问题（inverted pendulum）中，状态也有，其中的 θ 是杆的角度。在直升机飞行的三维空间中，状态的形式则为，其中包含了滚动角（roll）φ，俯仰角（pitch）θ，以及偏航角（yaw）ψ，这几个角度确定了直升机在三维空间中的运动方向。在本节中，我们考虑状态空间为 S = Rn 的情况，并描述此种情况下解决 MDPs 的方法。
+目前为止，我们关注的都是有限个状态（a finite number of states）的马尔可夫决策过程（MDPs）。接下来我们要讲的就是有无限个状态（an infinite number of states）的情况下的算法。例如，对于一辆车，我们可以将其状态表示为 $(x, y, \theta, \dot x,\dot y,\dot\theta)$，其中包括位置（position）  $(x, y)$，方向（orientation）$\theta$， 在 $x$ 和 $y$ 方向的速度分量 $\dot x$ 和 $\dot y$，以及角速度（angular velocity）$\dot\theta$。这样，$S = R^6$ 就是一个无限的状态集合，因为一辆车的位置和方向的个数是有无限可能$^2$。与此相似，在习题集4 中看到的倒立摆问题（inverted pendulum）中，状态也有$(x,\theta,\dot x,\dot\theta)$，其中的 $\theta$ 是杆的角度。在直升机飞行的三维空间中，状态的形式则为$(x,y,x,\phi,\theta,\psi,\dot x,\dot y,\dot z,\dot\phi,\dot\theta,\dot\psi)$，其中包含了滚动角（roll）$\phi$，俯仰角（pitch）$\theta$，以及偏航角（yaw）$\psi$，这几个角度确定了直升机在三维空间中的运动方向。在本节中，我们考虑状态空间为 $S = R^n$ 的情况，并描述此种情况下解决 MDPs 的方法。
 
-2从理论上讲，θ 是一个方向（orientation），所以更应当把 θ 的取值空间写为 θ \in [?\pi, \pi]，而不是写为实数集合 θ \in R；不过在我们讨论的问题中，这种区别不要紧。
-
+>2从理论上讲，$\theta$ 是一个方向（orientation），所以更应当把 $\theta$ 的取值空间写为 $\theta \in [\pi, \pi)$，而不是写为实数集合 $\theta \in R$；不过在我们讨论的问题中，这种区别不要紧。
 
 ##### 4.1 离散化（Discretization）
 
 解决连续状态 MDP 问题最简单的方法可能就是将状态空间（state space）离散化（discretize），然后再使用之前讲过的算法，比如值迭代（value iteration）或者策略迭代（policy iteration）来求解。
-例如，假设我们有一个二维状态空间（s1，s2），就可以用下面的网格（grid）来将这个状态空间离散化：
 
-如上图所示，每个网格单元（grid cell）表示的都是一个独立的离散状态 s?。这样就可以把一个连续状态 MDP 用一个离散状态的 (S ?, A, {Ps ?a}, \gamma, R) 来进行逼近，其中的S ? 是离散状态集合，而{Ps ?a} 是此离散状态上的状态转移概率（state transition probabilities），其他项目同理。然后就可以使用值迭代（value iteration）或者策略迭代（policy iteration）来求解出离散状态的 MDP (S ?, A, {Ps ?a}, \gamma, R) 的 V^*(s ?) 和 \pi^*(s ?)。当真实系统是某种连续值的状态 s \in S，而有需要选择某个动作来执行，就可以计算对应的离散化的状态 s ?，然后执行对应的动作 \pi^*(s ?)。
-这种离散化方法（discretization approach）可以解决很多问题。然而，也有两个缺陷（downsides）。首先，这种方法使用了对 V^* 和 \pi^* 相当粗糙的表征方法。具体来说，这种方法中假设了在每个离散间隔（discretization intervals）中的值函数（value function）都去一个常数值（也就是说，值函数是在每个网格单元中分段的常数。）。
+例如，假设我们有一个二维状态空间$(s1，s2)$，就可以用下面的网格（grid）来将这个状态空间离散化：
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f1.png)
+
+如上图所示，每个网格单元（grid cell）表示的都是一个独立的离散状态 $\overline s$。这样就可以把一个连续状态 MDP 用一个离散状态的 $(\overline S, A, \{P_{s\overline a}\}, \gamma, R)$ 来进行逼近，其中的$\overline S$ 是离散状态集合，而$\{P_{s\overline a}\}$ 是此离散状态上的状态转移概率（state transition probabilities），其他项目同理。然后就可以使用值迭代（value iteration）或者策略迭代（policy iteration）来求解出离散状态的 MDP $(\overline S, A, \{P_{s\overline a}\}, \gamma, R)$ 的 $V^*(\overline s)$ 和 $\pi^*(\overline s)$。当真实系统是某种连续值的状态 $s \in S$，而有需要选择某个动作来执行，就可以计算对应的离散化的状态 $\overline s$，然后执行对应的动作 $\pi^*(\overline s)$。
+
+这种离散化方法（discretization approach）可以解决很多问题。然而，也有两个缺陷（downsides）。首先，这种方法使用了对 $V^*$ 和 $\pi^*$ 相当粗糙的表征方法。具体来说，这种方法中假设了在每个离散间隔（discretization intervals）中的值函数（value function）都是一个常数值（也就是说，值函数是在每个网格单元中分段的常数。）。
+
 要更好理解这样表征的的局限性，可以考虑对下面这一数据集进行函数拟合的监督学习问题：
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f2.png)
 
 很明显，上面这个数据适合使用线性回归。然而，如果我们对 x 轴进行离散化，那么在每个离散间隔中使用分段常数表示，对同样的数据进行拟合，得到的曲线则如下所示：
 
-This piecewise constant representation just isn’t a good representation for many smooth functions. It results in little smoothing over the inputs, and no generalization over the different grid cells. Using this sort of representation, we would also need a very fine discretization (very small grid cells) to get a good approximation. 
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f3.png)
+
 这种分段常数表示，对于很多的光滑函数，都不能算好。这会导致输入值缺乏平滑（little smoothing over the inputs），而且在不同的望各单元中间也没有进行扩展（generalization）。使用这种表示方法，我们还需要一种非常精细的离散化过程（也就是网格单元要非常小），才能得到一个比较好的近似估计。
-第二个缺陷可以称之为维度的诅咒（curse of dimensionality）。设 S = Rn ，然后我们队每个 n 维度状态离散成 k 个值。这样总共的离散状态的个数就是 kn。在状态空间 n 的维度中，这个值会呈指数级增长，对于大规模问题就不好缩放了。例如，对于一个 10 维的状态，如果我们把每个状态变量离散化成为 100 个值，那么就会有 10010 = 1020 个离散状态，这个维度太大了，远远超过了当前桌面电脑能应付的能力之外。
-根据经验法则（rule of thumb），离散化通常非常适合用于 1 维和 2 维的问题（而且有着简单和易于快速实现的优势）。对于 4 维状态的问题，如果使用一点小聪明，仔细挑选离散化方法，有时候效果也不错。如果你超级聪明，并且还得有点幸运，甚至也有可能将离散化方法使用于 6维问题。不过在更高维度的问题中，就更是极其难以使用这种方法了。
+
+第二个缺陷可以称之为**维度的诅咒（curse of dimensionality）。** 设 $S = R^n$ ，然后我们队每个 $n$ 维度状态离散成 $k$ 个值。这样总共的离散状态的个数就是 kn。在状态空间 $n$ 的维度中，这个值会呈指数级增长，对于大规模问题就不好缩放了。例如，对于一个 $10$ 维的状态，如果我们把每个状态变量离散化成为 $100$ 个值，那么就会有 $100^{10} = 10^{20}$ 个离散状态，这个维度太大了，远远超过了当前桌面电脑能应付的能力之外。
+
+根据经验法则（rule of thumb），离散化通常非常适合用于 $1$ 维和 $2$ 维的问题（而且有着简单和易于快速实现的优势）。对于 $4$ 维状态的问题，如果使用一点小聪明，仔细挑选离散化方法，有时候效果也不错。如果你超级聪明，并且还得有点幸运，甚至也有可能将离散化方法使用于 $6$ 维问题。不过在更高维度的问题中，就更是极其难以使用这种方法了。
 
 ##### 4.2 值函数近似（Value function approximation）
-现在我们来讲另外一种方法，能用于在连续状态的 MDPs 问题中找出策略，这种方法也就是直接对进行近似 V^*，而不使用离散化。这个方法就叫做值函数近似（value function approximation），在很多强化学习的问题中都有成功的应用。
-4.2.1 使用一个模型或模拟器（Using a model or simulator）
-要开发一个值函数近似算法，我们要假设已经有一个对于 MDP 的模型，或者模拟器。简单来看，一个模拟器就是一个黑箱子（black-box），接收输入的任意（连续值的）状态 st 和动作 at，然后输出下一个状态 st+1，这个新状态是根据状态转移概率（state transition probabilities） Pstat 取样（sampled）得来：
 
+现在我们来讲另外一种方法，能用于在连续状态的 MDPs 问题中找出策略，这种方法也就是直接对进行近似 $V^*$，而不使用离散化。这个方法就叫做值函数近似（value function approximation），在很多强化学习的问题中都有成功的应用。
 
-有很多种方法来获取这样的一个模型。其中一个方法就是使用物理模拟（physics simulation）。 例如，在习题集 4 中倒立摆模拟器，就是使用物理定律，给定当前时间 t 和采取的动作 a，假设制导系统的所有参数，比如杆的长度、质量等等，来模拟计算在 t+1 时刻杆所处的位置和方向。另外也可以使用现成的物理模拟软件包，这些软件包将一个机械系统的完整物理描述作为输入，当前状态 st 和动作 at，然后计算出未来几分之一秒的系统状态 st+1。3
-3开放动力引擎（Open Dynamics Engine，http://www.ode.com）就是一个开源物理模拟器，可以用来模拟例如倒立摆这样的系统，在强化学习研究领域中，已经相当流行了。
-另外一个获取模型的方法，就是从 MDP 中收集的数据来学习生成一个。例如，加入我们在一个 MDP 过程中重复进行了 m 次试验（trials），每一次试验的时间步长（time steps）为 T。这可以用如下方式实现，首先是随机选择动作，然后执行某些特定策略（specific policy），或者也可以用其他方法选择动作。接下来就能够观测到 m 个状态序列，如下所示：
+###### 4.2.1 使用一个模型或模拟器（Using a model or simulator）
 
-然后就可以使用学习算法，作为一个关于 st  和 at 的函数来预测 st+1。
+要开发一个值函数近似算法，我们要假设已经有一个对于 MDP 的模型，或者模拟器。简单来看，一个模拟器就是一个黑箱子（black-box），接收输入的任意（连续值的）状态 $s_t$ 和动作 $a_t$，然后输出下一个状态 $s_{t+1}$，这个新状态是根据状态转移概率（state transition probabilities） $P_{s_ta_t}$ 取样（sampled）得来：
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f4.png)
+
+有很多种方法来获取这样的一个模型。其中一个方法就是使用物理模拟（physics simulation）。 例如，在习题集 4 中倒立摆模拟器，就是使用物理定律，给定当前时间 $t$ 和采取的动作 $a$，假设制导系统的所有参数，比如杆的长度、质量等等，来模拟计算在 $t+1$ 时刻杆所处的位置和方向。另外也可以使用现成的物理模拟软件包，这些软件包将一个机械系统的完整物理描述作为输入，当前状态 $s_t$ 和动作 $a_t$，然后计算出未来几分之一秒的系统状态 $s_{t+1}$。$^3$
+
+>3 开放动力引擎（Open Dynamics Engine，http://www.ode.com）就是一个开源物理模拟器，可以用来模拟例如倒立摆这样的系统，在强化学习研究领域中，已经相当流行了。
+
+另外一个获取模型的方法，就是从 MDP 中收集的数据来学习生成一个。例如，加入我们在一个 MDP 过程中重复进行了 $m$ 次**试验（trials），** 每一次试验的时间步长（time steps）为 $T$。这可以用如下方式实现，首先是随机选择动作，然后执行某些特定策略（specific policy），或者也可以用其他方法选择动作。接下来就能够观测到 $m$ 个状态序列，如下所示：
+
+$$
+\begin{aligned}
+&s_0^{(1)}\xrightarrow{a_0^{(1)}}s_1^{(1)}\xrightarrow{a_1^{(1)}}s_2^{(1)}\xrightarrow{a_2^{(1)}}\dots\xrightarrow{a_{T-1}^{(1)}}s_T^{(1)} \\
+&s_0^{(2)}\xrightarrow{a_0^{(2)}}s_1^{(2)}\xrightarrow{a_1^{(2)}}s_2^{(2)}\xrightarrow{a_2^{(2)}}\dots\xrightarrow{a_{T-1}^{(2)}}s_T^{(2)}  \\
+&\cdots \\
+&s_0^{(m)}\xrightarrow{a_0^{(m)}}s_1^{(m)}\xrightarrow{a_1^{(m)}}s_2^{(m)}\xrightarrow{a_2^{(m)}}\dots\xrightarrow{a_{T-1}^{(m)}}s_T^{(m)}
+\end{aligned}
+$$
+
+然后就可以使用学习算法，作为一个关于 $s_t$  和 $a_t$ 的函数来预测 $s_{t+1}$。
+
 例如，对于线性模型的学习，可以选择下面的形式：
 
-然后使用类似线性回归（linear regression） 之类的算法。上面的式子中，模型的参数是两个矩阵 A 和 B，然后可以使用在 m 次试验中收集的数据来进行估计，选择：
+$$
+s_{t+1}=As_t+Ba_t\qquad(5)
+$$
 
-（者对应着对参数（parameters）的最大似然估计（maximum likelihood estimate）。）通过学习得到 A 和 B 之后，一种选择就是构建一个确定性模型（deterministic model），在此模型中，给定一个输入 st 和 at，输出的则是固定的 st+1。具体来说，也就是根据上面的等式（5）来计算 st+1。
-或者用另外一种办法，就是建立一个随机模型（stochastic model），在这个模型中，输出的 st+1 是关于输入值的一个随机函数，以如下方式建模：
+然后使用类似线性回归（linear regression）之类的算法。上面的式子中，模型的参数是两个矩阵 $A$ 和 $B$，然后可以使用在 $m$ 次试验中收集的数据来进行估计，选择：
 
-上面式子中的 εt 是噪音项（noise term），通常使用一个正态分布来建模，即 εt ? N (0, Σ)。（协方差矩阵（covariance matrix） Σ 也可以从数据中直接估计出来。）
-这里，我们把下一个状态 st+1 写成了当前状态和动作的一个线性函数；不过当然也有非线性函数的可能。比如我们学习一个模型 st+1 = Aφs(st) + Bφa(at)，其中的 φs 和 φa 就可以使某些映射了状态和动作的非线性特征。
-另外，我们也可以使用非线性的学习算法，例如局部加权线性回归（locally weighted linear regression）进行学习，来将 st+1 作为关于 st 和 at 的函数进行估计。 这些方法也可以用于建立确定性的（deterministic）或者随机的（stochastic）MDP 模拟器。
-4.2.2 拟合值迭代（Fitted value iteration）
-接下来我们要讲的是拟合值迭代算法（fitted value iteration algorithm），作为对一个连续状态 MDP 中值函数的近似。在这部分钟，我们假设学习问题有一个连续的状态空间 S = Rn，而动作空间 A 则是小规模的离散空间。4
-4在实践中，大多数的 MDPs 问题中，动作空间都要远远比状态空间小得多。例如，一辆汽车可能有 6维的状态空间，但是动作空间则只有 2维，即转向和速度控制；倒立的摆有 4维状态空间，而只有 1维的动作空间；一架直升机有 12维状态空间，只有 4维的动作空间。所以对动作空间进行离散化，相比对状态空间进行离散化，遇到的问题通常会少得多。
+$$
+arg\min_{A,B}\sum_{i=1}^m\sum_{t=0}^{T-1}||s_{t+1}^{(i)}-(A_{s_t}^{(i)}+B_{a_t}^{(i)})||^2
+$$
+
+（者对应着对参数（parameters）的最大似然估计（maximum likelihood estimate）。）通过学习得到 $A$ 和 $B$ 之后，一种选择就是构建一个**确定性** 模型（deterministic model），在此模型中，给定一个输入 $s_t$ 和 $a_t$，输出的则是固定的 $s_{t+1}$。具体来说，也就是根据上面的等式$(5)$来计算 $s_{t+1}$。或者用另外一种办法，就是建立一个**随机** 模型（stochastic model），在这个模型中，输出的 $s_{t+1}$ 是关于输入值的一个随机函数，以如下方式建模：
+
+$$
+s_{t+1}=A_{s_t}+B_{a_t}+\epsilon_t
+$$
+
+上面式子中的 $\epsilon_t$ 是噪音项（noise term），通常使用一个正态分布来建模，即 $\epsilon_t\sim N (0, \Sigma)$。（协方差矩阵（covariance matrix） $\Sigma$ 也可以从数据中直接估计出来。）
+
+这里，我们把下一个状态 $s_{t+1}$ 写成了当前状态和动作的一个线性函数；不过当然也有非线性函数的可能。比如我们学习一个模型 $s_{t+1} = A\phi_s(st) + B\phi_a(at)$，其中的 $\phi_s$ 和 $\phi_a$ 就可以使某些映射了状态和动作的非线性特征。另外，我们也可以使用非线性的学习算法，例如局部加权线性回归（locally weighted linear regression）进行学习，来将 $s_{t+1}$ 作为关于 $s_t$ 和 $a_t$ 的函数进行估计。 这些方法也可以用于建立确定性的（deterministic）或者随机的（stochastic）MDP 模拟器。
+
+###### 4.2.2 拟合值迭代（Fitted value iteration）
+
+接下来我们要讲的是拟合值迭代算法（fitted value iteration algorithm），作为对一个连续状态 MDP 中值函数的近似。在这部分钟，我们假设学习问题有一个连续的状态空间 $S = R^n$，而动作空间 $A$ 则是小规模的离散空间。$^4$
+
+>4 在实践中，大多数的 MDPs 问题中，动作空间都要远远比状态空间小得多。例如，一辆汽车可能有 $6$维的状态空间，但是动作空间则只有 $2$维，即转向和速度控制；倒立的摆有 $4$维状态空间，而只有 $1$维的动作空间；一架直升机有 $12$维状态空间，只有 $4$维的动作空间。所以对动作空间进行离散化，相比对状态空间进行离散化，遇到的问题通常会少得多。
+
 回忆一下值迭代（value iteration），其中我们使用的更新规则如下所示：
 
+$$
+\begin{aligned}
+V(s) &:= R(s)+\gamma\max_a \int_{s'}P_{sa}(s')V(s')ds' \qquad&(6)\\
+&= R(s)+\gamma\max_a E_{s'\sim P_{sa}}[V(s')]\qquad&(7)
+\end{aligned}
+$$
 
-（在第二节当中，我们把值迭代的更新规则写成了求和（summation）的形式：
+（在第二节当中，我们把值迭代的更新规则写成了求和（summation）的形式：$V(s) := R(s)+\gamma\max_a\sum_{s'}P_{sa}(s')V(s')$而没有像刚刚上面这样写成在状态上进行积分的形式；这里采用积分的形式来写，是为了表达我们现在面对的是连续状态的情况，而不再是离散状态。）
 
-而没有像刚刚上面这样写成在状态上进行积分的形式；这里采用积分的形式来写，是为了表达我们现在面对的是连续状态的情况，而不再是离散状态。）拟合值迭代（fitted value iteration）的主要思想就是，在一个有限的状态样本 s(1), ...  s(m) 上，近似执行这一步骤。具体来说，要用一种监督学习算法（supervised learning algorithm），比如下面选择的就是线性回归算法（linear regression），以此来对值函数（value function）进行近似，这个值函数可以使关于状态的线性或者非线性函数：
+拟合值迭代（fitted value iteration）的主要思想就是，在一个有限的状态样本 $s^{(1)}, ...  s^{(m)}$ 上，近似执行这一步骤。具体来说，要用一种监督学习算法（supervised learning algorithm），比如下面选择的就是线性回归算法（linear regression），以此来对值函数（value function）进行近似，这个值函数可以使关于状态的线性或者非线性函数：
 
-上面的式子中，φ 是对状态的某种适当特征映射（appropriate feature mapping）。对于有限个 m 状态的样本中的每一个状态 s，拟合值迭代算法将要首先计算一个量 y(i)，这个量可以用 R(s)+\gamma maxaEs'?Psa[V(s')] 来近似（根据等式（7）的右侧部分）。然后使用一个监督学习算法，通过逼近 R(s) + \gamma maxa Es'?Psa [V (s')] 来得到V (s)（或者也可以说是通过逼近到 y(i) 来获取 V (s)）。具体来说，算法如下所示：
+$$
+V(s)=\theta^T\phi(s)
+$$
 
-1. 从 S 中随机取样 m 个状态 s(1), s(2), . . . s(m) \in S。
-2. 初始化 θ := 0.
+上面的式子中，$\phi$ 是对状态的某种适当特征映射（appropriate feature mapping）。对于有限个 $m$ 状态的样本中的每一个状态 $s$，拟合值迭代算法将要首先计算一个量 $y^{(i)}$，这个量可以用 $R(s)+\gamma\max_aE_{s'\sim P_{sa}}[V(s')]$ 来近似（根据等式$(7)$的右侧部分）。然后使用一个监督学习算法，通过逼近 $R(s) + \gamma\max_a E_{s'\sim P_{sa}}[V (s')]$ 来得到$V(s)$（或者也可以说是通过逼近到 $y^{(i)}$ 来获取 $V(s)$）。
+
+具体来说，算法如下所示：
+
+1. 从 $S$ 中随机取样 $m$ 个状态 $s^{(1)}, s^{(2)}, . . . s^{(m)}\in S$。
+2. 初始化 $\theta := 0$.
 3. 重复 {
-	对 i = 1, ... , m {
-		对每一个动作 a \in A {
-				取样  s'1,... , s'k ? Ps(i)a   (使用一个 MDP 模型).
-				设 
- 				// 因此， q(a) 是对 的估计。
+	对 $i = 1, ... , m$ {
+		对每一个动作 $a \in A$ {
+				取样  $s_1',... , s_k'\sim P_{s^{(i)}a}$   (使用一个 MDP 模型).
+				设$q(a)=\frac 1k\sum_{j=1}^kR(s^{(i)})+\gamma V(s_j')$ 
+ 				// 因此， $q(a)$ 是对$R(s)^{(i)}+\gamma E_{s'\sim P_{sa}}[V(s')]$的估计。
 				}
-		设y(i) = maxa q(a).
-				// 因此， y(i) 是对的估计。
+		设$y^{(i)} = \max_a q(a)$.
+				// 因此， $y^{(i)}$ 是对$R(s^{(i)})+\gamma\max_aE_{s'\sim P_{sa}}[V(s')]$的估计。
 		}
 		// 在原始的值迭代算法（original value iteration algorithm）中，（离散状态的情况 ）
-		// 是根据 V (s(i)) = y(i) 来对值函数（value function）进行更新。
-		// 而在这里的这个算法中，我们需要的让二者近似相等，即 V (s(i)) ≈ y(i)，
+		// 是根据 $V(s^{(i)}) := y^{(i)}$ 来对值函数（value function）进行更新。
+		// 而在这里的这个算法中，我们需要的让二者近似相等，即 $V(s^{(i)}) \approx y^{(i)}$，
 		// 这可以通过使用监督学习算法（线性回归）来实现。
-		设 
+		设 $\theta := arg\min_\theta \frac 12\sum_{i=1}^m(\theta^T\phi(s^{(i)})-y^{(i)})^2$
 }
-以上，我们就写出了一个拟合值迭代算法（fitted value iteration），其中使用线性回归作为算法（linear regression），使 V (s(i)) 逼近 y(i)。这个步骤完全类似在标准监督学习问题（回归问题）中面对 m 个训练集 (x(1),y(1)),(x(2),y(2)),...,(x(m),y(m)) ，而要利用学习得到从 x 到 y 的映射函数的情况；唯一区别无非是这里的 s 扮演了当时 x 的角色。虽然我们上面描述的算法是线性回归，很显然其他的回归算法（例如局部加权线性回归）也都可以使用。
-与离散状态集合上进行的的值迭代（value iteration）不同，拟合值迭代（fitted value iteration）并不一定总会收敛（converge）。然而，在实践中，通常都还是能收敛的（或者近似收敛），而且能解决大多数问题。另外还要注意，如果我们使用一个 MDP 的确定性模拟器/模型的话，就可以对拟合值迭代进行简化，设置算法中的 k = 1。这是因为等式（7）当中的期望值成为了对确定性分布（deterministic distribution）的期望，所以一个简单样本（single example）就足够计算该期望了。否则的话，在上面的算法中，就还要取样出 k 个样本，然后取平均值，来作为对期望值的近似（参考在算法伪代码中的 q(a) 的定义）。
-最后，拟合值迭代输出的 V，也就是对 V? 的一个近似。这同时隐含着对策略函数（policy）的定义。 具体来说，当我们的系统处于某个状态 s 的时候，需要选择一个动作，我们可能会选择的动作为：
 
-这个计算/近似的过程很类似拟合值迭代算法的内部循环体，其中对于每一个动作，我们取样 s'1,...,s'k ? Psa 来获得近似期望值（expectation）。（当然，如果模拟器是确定性的，就可以设 k = 1。）
-在实际中，通常也有其他方法来实现近似这个步骤。例如，一种很常用的情况就是如果模拟器的形式为 st+1 = f(st,at) + εt，其中的 f 是某种关于状态 s 的确定性函数（例如 f(st,at) = Ast + Bat），而 ε 是均值为 0 的高斯分布的噪音。在这种情况下，可以通过下面的方法来挑选动作：
+以上，我们就写出了一个拟合值迭代算法（fitted value iteration），其中使用线性回归作为算法（linear regression），使 $V (s^{(i)})$ 逼近 $y^{(i)}$。这个步骤完全类似在标准监督学习问题（回归问题）中面对 $m$ 个训练集 $(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),...,(x^{(m)},y^{(m)})$ ，而要利用学习得到从$x$ 到 $y$ 的映射函数的情况；唯一区别无非是这里的 $s$ 扮演了当时 $x$ 的角色。虽然我们上面描述的算法是线性回归，很显然其他的回归算法（例如局部加权线性回归）也都可以使用。
 
-也就是说，这里只是设置 εt = 0（即忽略了模拟器中的噪音项），然后设 k = 1。同样地，这也可以通过在等式（8）中使用下面的近似而推出：
+与离散状态集合上进行的的值迭代（value iteration）不同，拟合值迭代（fitted value iteration）并不一定总会收敛（converge）。然而，在实践中，通常都还是能收敛的（或者近似收敛），而且能解决大多数问题。另外还要注意，如果我们使用一个 MDP 的确定性模拟器/模型的话，就可以对拟合值迭代进行简化，设置算法中的 $k = 1$。这是因为等式$(7)$当中的期望值成为了对确定性分布（deterministic distribution）的期望，所以一个简单样本（single example）就足够计算该期望了。否则的话，在上面的算法中，就还要取样出 $k$ 个样本，然后取平均值，来作为对期望值的近似（参考在算法伪代码中的 $q(a)$ 的定义）。
 
-这里的期望是关于随机分布 s' ? Psa 的。所以只要噪音项目 εt 很小，这样的近似通常也是合理的。 
-然而，对于那些不适用于这些近似的问题，就必须使用模型，取样 k|A| 个状态，以便对上面的期望值进行近似，当然这在计算上的开销就很大了。
+最后，拟合值迭代输出的 $V$，也就是对 $V^*$ 的一个近似。这同时隐含着对策略函数（policy）的定义。 具体来说，当我们的系统处于某个状态 $s$ 的时候，需要选择一个动作，我们可能会选择的动作为：
+
+$$
+arg\max_a E_{s'\sim P_{sa}}[V(s')]\qquad(8)
+$$
+
+这个计算/近似的过程很类似拟合值迭代算法的内部循环体，其中对于每一个动作，我们取样 $s_1',...,s_k'\sim P_{sa}$ 来获得近似期望值（expectation）。（当然，如果模拟器是确定性的，就可以设 $k = 1$。）
+
+在实际中，通常也有其他方法来实现近似这个步骤。例如，一种很常用的情况就是如果模拟器的形式为 $s_{t+1} = f(s_t,a_t) + \epsilon_t$，其中的 $f$ 是某种关于状态 $s$ 的确定性函数（例如 $f(st,at) = Ast + Bat$），而 $\epsilon$ 是均值为 $0$ 的高斯分布的噪音。在这种情况下，可以通过下面的方法来挑选动作：
+
+$$
+
+$$
+
+也就是说，这里只是设置 $\epsilon_t = 0$（即忽略了模拟器中的噪音项），然后设 $k = 1$。同样地，这也可以通过在等式（8）中使用下面的近似而推出：
+
+这里的期望是关于随机分布 $s'\sim P_{sa}$ 的。所以只要噪音项目 $\epsilon_t$ 很小，这样的近似通常也是合理的。 
+然而，对于那些不适用于这些近似的问题，就必须使用模型，取样 $k|A|$ 个状态，以便对上面的期望值进行近似，当然这在计算上的开销就很大了。
 
