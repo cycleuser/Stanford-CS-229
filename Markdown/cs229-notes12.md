@@ -296,21 +296,36 @@ $$
 1. 从 $S$ 中随机取样 $m$ 个状态 $s^{(1)}, s^{(2)}, . . . s^{(m)}\in S$。
 2. 初始化 $\theta := 0$.
 3. 重复 {
-对 $i = 1, ... , m$ {
-对每一个动作 $a \in A$ {
-取样  $s_1',... , s_k'\sim P_{s^{(i)}a}$   (使用一个 MDP 模型).
-设$q(a)=\frac 1k\sum_{j=1}^kR(s^{(i)})+\gamma V(s_j')$ 
-// 因此， $q(a)$ 是对$R(s)^{(i)}+\gamma E_{s'\sim P_{sa}}[V(s')]$的估计。
-}
-设$y^{(i)} = \max_a q(a)$.
-// 因此， $y^{(i)}$ 是对$R(s^{(i)})+\gamma\max_aE_{s'\sim P_{sa}}[V(s')]$的估计。
-}
-// 在原始的值迭代算法（original value iteration algorithm）中，（离散状态的情况 ）
-// 是根据 $V(s^{(i)}) := y^{(i)}$ 来对值函数（value function）进行更新。
-// 而在这里的这个算法中，我们需要的让二者近似相等，即 $V(s^{(i)}) \approx y^{(i)}$，
-// 这可以通过使用监督学习算法（线性回归）来实现。
-设 $\theta := arg\min_\theta \frac 12\sum_{i=1}^m(\theta^T\phi(s^{(i)})-y^{(i)})^2$
-}
+
+&emsp;&emsp;对 $i = 1, ... , m$ {
+
+&emsp;&emsp;&emsp;&emsp;对每一个动作 $a \in A$ {
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;取样  $s_1',... , s_k'\sim P_{s^{(i)}a}$   (使用一个 MDP 模型)
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;设$q(a)=\frac 1k\sum_{j=1}^kR(s^{(i)})+\gamma V(s_j')$
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 因此， $q(a)$ 是对$R(s)^{(i)}+\gamma E_{s'\sim P_{sa}}[V(s')]$的估计。
+
+&emsp;&emsp;&emsp;&emsp;}
+
+&emsp;&emsp;&emsp;&emsp;设$y^{(i)} = \max_a q(a)$.
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 因此， $y^{(i)}$是对$R(s^{(i)})+\gamma\max_aE_{s'\sim P_{sa}}[V(s')]$的估计。
+
+&emsp;&emsp;&emsp;&emsp;}
+
+&emsp;&emsp;&emsp;&emsp;// 在原始的值迭代算法（original value iteration algorithm）中，（离散状态的情况 ）
+
+&emsp;&emsp;&emsp;&emsp;// 是根据 $V(s^{(i)}) := y^{(i)}$ 来对值函数（value function）进行更新。
+
+&emsp;&emsp;&emsp;&emsp;// 而在这里的这个算法中，我们需要的让二者近似相等，即 $V(s^{(i)}) \approx y^{(i)}$，
+
+&emsp;&emsp;&emsp;&emsp;// 这可以通过使用监督学习算法（线性回归）来实现。
+
+&emsp;&emsp;&emsp;&emsp;设 $\theta := arg\min_\theta \frac 12\sum_{i=1}^m(\theta^T\phi(s^{(i)})-y^{(i)})^2$
+
+&emsp;&emsp;}
 
 以上，我们就写出了一个拟合值迭代算法（fitted value iteration），其中使用线性回归作为算法（linear regression），使 $V (s^{(i)})$ 逼近 $y^{(i)}$。这个步骤完全类似在标准监督学习问题（回归问题）中面对 $m$ 个训练集 $(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),...,(x^{(m)},y^{(m)})$ ，而要利用学习得到从$x$ 到 $y$ 的映射函数的情况；唯一区别无非是这里的 $s$ 扮演了当时 $x$ 的角色。虽然我们上面描述的算法是线性回归，很显然其他的回归算法（例如局部加权线性回归）也都可以使用。
 
