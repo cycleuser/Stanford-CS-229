@@ -54,7 +54,7 @@ Bagging这个词的意思是"Boostrap Aggregation"的缩写(可以直接翻译�
 
 加入我们有一个真实的群体$P$，想要对其计算一个估计器，然后又一个从$P$中取样得到的训练集$S$，$S\sim P$。虽然可以通过对$S$计算估计器(estimator)来找到一个近似，但还是不知道对应真实值的误差是多少。这需要我们多次从$P$中进行独立采样得到多个训练集$S_1,S_2,...$。
 
-可是如果我们假设$S=P$，就可以生成一个Bootstrap集合$Z$，从$S$中进行有放回的采样($Z\sim S,|Z|=|S|)。实际上我们看医生称很多这样的样本$Z_1,Z_2,...,Z_M$。然后就可以看一下各个Bootstrap集合上估计的方差(variability)来得到对误差(error)的衡量。
+可是如果我们假设$S=P$，就可以生成一个Bootstrap集合$Z$，从$S$中进行有放回的采样($Z\sim S,|Z|=|S|$)。实际上我们看医生称很多这样的样本$Z_1,Z_2,...,Z_M$。然后就可以看一下各个Bootstrap集合上估计的方差(variability)来得到对误差(error)的衡量。
 
 ### 1.2 聚合 (Aggregation)
 
@@ -64,7 +64,7 @@ $$
 G(X)=\sum_m\frac{G_m(x)}{M}
 $$
 
-这样上面的过程就叫做袋装(Bagging)。回到等式(4)，就有了$M$个相关联的预测器的方差是:
+这样上面的过程就叫做袋装(Bagging)。回到等式$(4)$，就有了$M$个相关联的预测器的方差是:
 
 $$
 Var(\bar X)=\rho\sigma^2+\frac{1-\rho}{M}\sigma^2
@@ -103,7 +103,6 @@ $$
 ### 2.1 直观理解 (Intuition)
 
 上文所讲的袋装法(Bagging)是一种将地方插的技术，而这次要讲的推进发(Boosting)则是降低偏差的(bias-reduction)。因此我们想要高偏差低方差的模型，也就是弱学习模型(weak learners)。考虑到在介绍决策树的时候做的解释，可以将决策树在进行预测之前只允许进行一次决策，就能使之成为弱学习模型;这样就成了决策树桩(decision stumps)。
-
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noteemf1.png)
 
@@ -154,7 +153,6 @@ $$
 $$
 \gamma_i =\arg \min_\gamma \sum^N_{i=1}(g_i-G(x_i;\gamma))^2
 $$
-
 
 ### 2.5 本节概要
 
