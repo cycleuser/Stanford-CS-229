@@ -65,7 +65,7 @@ $$
 \begin{aligned}
 \sum_i\log p(x^{(i)};\theta) &= \sum_i\log\sum_{z^{(i)}}p(x^{(i)},z^{(i)};\theta)&(1) \\
 &= \sum_i\log\sum_{z^{(i)}}Q_i(z^{(i)})\frac{p(x^{(i)},z^{(i)};\theta)}{Q_i(z^{(i)})} &(2)\\
-&= \sum_i\sum_{z^{(i)}}Q_i(z^{(i)})\log\frac{p(x^{(i)},z^{(i)};\theta)}{Q_i(z^{(i)})}&(3) 
+&\ge \sum_i\sum_{z^{(i)}}Q_i(z^{(i)})\log\frac{p(x^{(i)},z^{(i)};\theta)}{Q_i(z^{(i)})}&(3) 
 \end{aligned}
 $$
 
@@ -225,7 +225,7 @@ $$
 \mathcal L(\phi)=\sum_{i=1}^m\sum_{j=1}^kw_j^{(i)}log\phi_j+\beta(\sum^k_{j=1}\phi_j - 1)
 $$
 
-其中的 β 是 拉格朗日乘数（Lagrange multiplier）$^2$ 。求导，然后得到： 
+其中的 $\beta$ 是 拉格朗日乘数（Lagrange multiplier）$^2$ 。求导，然后得到： 
 
 $$
 \frac{\partial}{\partial{\phi_j}}\mathcal L(\phi)=\sum_{i=1}^m\frac{w_j^{(i)}}{\phi_j}+1

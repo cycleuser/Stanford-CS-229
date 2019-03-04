@@ -18,7 +18,7 @@
 ### 第十部分 因子分析（Factor analysis）
 如果有一个从多个高斯混合模型（a mixture of several Gaussians）而来的数据集 $x^{(i)} \in R^n$ ，那么就可以用期望最大化算法（EM algorithm）来对这个混合模型（mixture model）进行拟合。这种情况下，对于有充足数据（sufficient data）的问题，我们通常假设可以从数据中识别出多个高斯模型结构（multiple-Gaussian structure）。例如，如果我们的训练样本集合规模（training set size） $m$ 远远大于（significantly larger than）数据的维度（dimension） $n$，就符合这种情况。
 
-然后来考虑一下反过来的情况，也就是 $n$ 远远大于 $m$，即 $n >> m$。在这样的问题中，就可能用单独一个高斯模型来对数据建模都很难，更不用说多个高斯模型的混合模型了。由于 $m$ 个数据点所张开（span）的只是一个 $n$ 维空间 $R^n$ 的低维度子空间（low-dimensional subspace），如果用高斯模型（Gaussian）对数据进行建模，然后还是用常规的最大似然估计（usual maximum likelihood estimators）来估计（estimate）平均值（mean）和方差（covariance），得到的则是：
+然后来考虑一下反过来的情况，也就是 $n$ 远远大于 $m$，即 $n \gg m$。在这样的问题中，就可能用单独一个高斯模型来对数据建模都很难，更不用说多个高斯模型的混合模型了。由于 $m$ 个数据点所张成（span）的只是一个 $n$ 维空间 $R^n$ 的低维度子空间（low-dimensional subspace），如果用高斯模型（Gaussian）对数据进行建模，然后还是用常规的最大似然估计（usual maximum likelihood estimators）来估计（estimate）平均值（mean）和方差（covariance），得到的则是：
 
 $$
 \begin{aligned}
@@ -29,7 +29,7 @@ $$
 
 我们会发现这里的 $\Sigma$ 是一个奇异（singular）矩阵。这也就意味着其逆矩阵 $\Sigma^{-1}$ 不存在，而 $1/|\Sigma|^{1/2} = 1/0$。 但这几个变量都还是需要的，要用来计算一个多元高斯分布（multivariate Gaussian distribution）的常规密度函数（usual density）。还可以用另外一种方法来讲述清楚这个难题，也就是对参数（parameters）的最大似然估计（maximum likelihood estimates）会产生一个高斯分布（Gaussian），其概率分布在由样本数据$^1$所张成的仿射空间（affine space）中，对应着一个奇异的协方差矩阵（singular covariance matrix）。
 
->1 这是一个点集，对于某些 $\alpha_i$，此集合中的点 $x$ 都满足 $x = \sum_{i=1}^m x^{(i)}$, 因此 $\sum_{i=1}^m \alpha_1 = 1$。
+>1 这是一个点集，对于某些 $\alpha_i$，此集合中的点 $x$ 都满足 $x = \sum_{i=1}^m \alpha_i x^{(i)}$, 因此 $\sum_{i=1}^m \alpha_1 = 1$。
 
 通常情况下，除非 $m$ 比 $n$ 大出相当多（some reasonable amount），否则最大似然估计（maximum likelihood estimates）得到的均值（mean）和方差（covariance）都会很差（quite poor）。尽管如此，我们还是希望能用已有的数据，拟合出一个合理（reasonable）的高斯模型（Gaussian model），而且还希望能识别出数据中的某些有意义的协方差结构（covariance structure）。那这可怎么办呢？
 
@@ -242,7 +242,7 @@ $$
 $$
 
 我们在本文中仅仅对 $\Lambda$ 进行优化，关于 $\mu$ 和 $\Psi$ 的更新就作为练习留给读者自己进行推导了。
-把等式(4) 简化成下面的形式：
+把等式$(4)$ 简化成下面的形式：
 
 $$
 \begin{aligned}
@@ -274,7 +274,7 @@ $$
 \end{aligned}
 $$
 
-设置导数为 0，然后简化，就能得到：
+设置导数为 $0$，然后简化，就能得到：
 
 $$
 \sum_{i=1}^m\Lambda E_{z^{(i)}\sim Q_i}[z^{(i)}z^{(i)T}]=
@@ -304,7 +304,7 @@ E_{z^{(i)}\sim Q_i}[z^{(i)}z^{(i)T}]&= \mu_{z^{(i)}|x^{(i)}}\mu_{z^{(i)}|x^{(i)}
 \end{aligned}
 $$
 
-上面第二个等式的推导依赖于下面这个事实：对于一个随机变量 $Y$，协方差 $Cov(Y ) = E[Y Y^T ]-E[Y]E[Y]^T$ ，所以 $E[Y Y^T ] = E[Y ]E[Y ]^T +Cov(Y)$。把这个代入到等式(7)，就得到了 $M$ 步骤中 $\Lambda$ 的更新规则：
+上面第二个等式的推导依赖于下面这个事实：对于一个随机变量 $Y$，协方差 $Cov(Y ) = E[Y Y^T ]-E[Y]E[Y]^T$ ，所以 $E[Y Y^T ] = E[Y ]E[Y ]^T +Cov(Y)$。把这个代入到等式$(7)$，就得到了 $M$ 步骤中 $\Lambda$ 的更新规则：
 
 $$
 \Lambda=(\sum_{i=1}^m(x^{(i)}-\mu)\mu_{z^{(i)}|x^{(i)}}^T)(\sum_{i=1}^m\mu_{z^{(i)}|x^{(i)}} \mu_{z^{(i)}|x^{(i)}}^T + \Sigma_{z^{(i)}|x^{(i)}})^{-1}\qquad(8)
