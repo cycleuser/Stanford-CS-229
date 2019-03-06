@@ -110,7 +110,7 @@ $$
 $$
 \begin{aligned}
 &\mu_{1|2} = \mu_1 + \Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2)\qquad&(1) \\
-&\Sigma_{1|2} = \Sigma_{11} + \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}&(2)
+&\Sigma_{1|2} = \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}&(2)
 \end{aligned}
 $$
 
@@ -140,7 +140,9 @@ x &= \mu + \Lambda z + \epsilon
 \end{aligned}
 $$
 
-其中的 $\epsilon$ 和 $z$ 是互相独立的。然后咱们来确切地看看这个模型定义的分布（distribution our）。其中，随机变量 $z$ 和 $x$ 有一个联合高斯分布（joint Gaussian distribution）：
+其中的 $\epsilon$ 和 $z$ 是互相独立的。
+
+然后咱们来确切地看看这个模型定义的分布（distribution our）。其中，随机变量 $z$ 和 $x$ 有一个联合高斯分布（joint Gaussian distribution）：
 
 $$
 \begin{bmatrix}
@@ -150,7 +152,7 @@ $$
 
 然后咱们要找到 $\mu_{zx}$ 和 $\Sigma$。
 
-我们知道 $z$ 的期望 $E[z] = 0$，这是因为 $z$ 服从的是均值为 0 的正态分布 $z\sim N(0,I)$。 此外我们还知道：
+我们知道 $z$ 的期望 $E[z] = 0$，这是因为 $z$ 服从的是均值为 $0$ 的正态分布 $z\sim N(0,I)$。 此外我们还知道：
 
 $$
 \begin{aligned}
@@ -169,6 +171,7 @@ $$
 $$
 
 下一步就是要找出 $\Sigma$，我们需要计算出 $\Sigma_{zz} = E[(z - E[z])(z - E[z])^T]$（矩阵$\Sigma$的左上部分（upper-left block）），$\Sigma_{zx} = E[(z - E[z])(x - E[x])^T]$（右上部分(upper-right block)），以及$\Sigma_{xx}=E[(x - E[x])(x - E[x])^T]$ （右下部分(lower-right block)）。 
+
 由于 $z$ 是一个正态分布 $z \sim N (0, I)$，很容易就能知道 $\Sigma_{zz} = Cov(z) = I$。另外：
 
 $$
@@ -179,7 +182,7 @@ E[(z - E[z])(x - E[x])^T] &= E[z(\mu+\Lambda z+\epsilon-\mu)^T] \\
 \end{aligned}
 $$
 
-在上面的最后一步中，使用到了结论 $E[zz^T] = Cov(z)$（因为 $z$ 的均值为 0），而且 $E[z\epsilon^T ] = E[z]E[\epsilon^T ] = 0$）（因为 $z$ 和 $\epsilon$ 相互独立，因此乘积（product）的期望（expectation）等于期望的乘积）。
+在上面的最后一步中，使用到了结论 $E[zz^T] = Cov(z)$（因为 $z$ 的均值为 $0$），而且 $E[z\epsilon^T ] = E[z]E[\epsilon^T ] = 0$）（因为 $z$ 和 $\epsilon$ 相互独立，因此乘积（product）的期望（expectation）等于期望的乘积）。
 
 同样的方法，我们可以用下面的方法来找到 $\Sigma_{xx}$：
 
@@ -218,7 +221,7 @@ $$
 为了进行最大似然估计，我们就要最大化上面这个关于参数的函数。但确切地对上面这个方程式进行最大化，是很难的，不信你自己试试哈，而且我们都知道没有算法能够以封闭形式（closed-form）来实现这个最大化。所以，我们就改用期望最大化算法（EM algorithm）。下一节里面，咱们就来推导一下针对因子分析模型（factor analysis）的期望最大化算法（EM）。
 
 #### 4 针对因子分析模型（factor analysis）的期望最大化算法（EM） 
-$E$ 步骤的推导很简单。只需要计算出来 $Q_i(z^{(i)}) = p(z^{(i)}|x^{(i)}; \mu, \Lambda, \Psi)$。把等式(3) 当中给出的分布代入到方程（1-2），来找出一个高斯分布的条件分布，我们就能发现 $z^{(i)}|x^{(i)}; \mu, \Lambda, \Psi \sim N (\mu_{z^{(i)}|x^{(i)}} , \Sigma_{z^{(i)}|x^{(i)}} )$，其中：
+$E$ 步骤的推导很简单。只需要计算出来 $Q_i(z^{(i)}) = p(z^{(i)}|x^{(i)}; \mu, \Lambda, \Psi)$。把等式$(3)$ 当中给出的分布代入到方程$(1-2)$，来找出一个高斯分布的条件分布，我们就能发现 $z^{(i)}|x^{(i)}; \mu, \Lambda, \Psi \sim N (\mu_{z^{(i)}|x^{(i)}} , \Sigma_{z^{(i)}|x^{(i)}} )$，其中：
 
 $$
 \begin{aligned}
@@ -295,7 +298,7 @@ $$
 
 与之类似，这里的 $x$ 是一个关于 $z$（以及噪音 noise）的线性方程。考虑在 $E$ 步骤中对 $z$ 已经给出了猜测，接下来就可以尝试来对与 $x$ 和 $z$ 相关的未知线性量（unknown linearity）$\Lambda$ 进行估计。接下来不出意料，我们就会得到某种类似正则方程的结果。然而，这个还是和利用对 $z$ 的“最佳猜测（best guesses）” 进行最小二乘算法有一个很大的区别的；这一点我们很快就会看到了。
 
-为了完成 $M$ 步骤的更新，接下来我们要解出等式(7) 当中的期望值（values of the expectations）。由于我们定义 $Q_i$ 是均值（mean）为 $\mu_{z^{(i)}|x^{(i)}}$，协方差（covariance）为 $\Sigma_{z^{(i)}|x^{(i)}}$ 的一个高斯分布，所以很容易能得到：
+为了完成 $M$ 步骤的更新，接下来我们要解出等式$(7)$ 当中的期望值（values of the expectations）。由于我们定义 $Q_i$ 是均值（mean）为 $\mu_{z^{(i)}|x^{(i)}}$，协方差（covariance）为 $\Sigma_{z^{(i)}|x^{(i)}}$ 的一个高斯分布，所以很容易能得到：
 
 $$
 \begin{aligned}
@@ -310,7 +313,7 @@ $$
 \Lambda=(\sum_{i=1}^m(x^{(i)}-\mu)\mu_{z^{(i)}|x^{(i)}}^T)(\sum_{i=1}^m\mu_{z^{(i)}|x^{(i)}} \mu_{z^{(i)}|x^{(i)}}^T + \Sigma_{z^{(i)}|x^{(i)}})^{-1}\qquad(8)
 $$
 
-上面这个等式中，要特别注意等号右边这一侧的 $\Sigma_{z^{(i)}|x^{(i)}}$。这是一个根据 $z^{(i)}$ 给出的 $x^{(i)}$ 后验分布（posterior distribution）$p(z^{(i)}|x^{(i)})$ 的协方差，而在 M 步骤中必须要考虑到在这个后验分布中 $z^{(i)}$ 的不确定性（uncertainty）。推导 $EM$ 算法的一个常见错误就是在 $E$ 步骤进行假设，只需要算出潜在随机变量（latent random variable） $z$ 的期望 $E[z]$，然后把这个值放到 $M$ 步骤当中 $z$ 出现的每个地方来进行优化（optimization）。当然，这能解决简单问题，例如高斯混合模型（mixture of Gaussians），在因子模型的推导过程中，就同时需要 $E[zz^T ]$ 和 $E[z]$；而我们已经知道，$E[zz^T ]$ 和 $E[z]E[z]T$ 随着 $\Sigma_{z|x}$ 而变化。因此，在 $M$ 步骤就必须要考虑到后验分布（posterior distribution）$p(z^{(i)}|x^{(i)})$中 $z$ 的协方差（covariance）。
+上面这个等式中，要特别注意等号右边这一侧的 $\Sigma_{z^{(i)}|x^{(i)}}$。这是一个根据 $z^{(i)}$ 给出的 $x^{(i)}$ 后验分布（posterior distribution）$p(z^{(i)}|x^{(i)})$ 的协方差，而在 $M$ 步骤中必须要考虑到在这个后验分布中 $z^{(i)}$ 的不确定性（uncertainty）。推导 $EM$ 算法的一个常见错误就是在 $E$ 步骤进行假设，只需要算出潜在随机变量（latent random variable） $z$ 的期望 $E[z]$，然后把这个值放到 $M$ 步骤当中 $z$ 出现的每个地方来进行优化（optimization）。当然，这能解决简单问题，例如高斯混合模型（mixture of Gaussians），在因子模型的推导过程中，就同时需要 $E[zz^T ]$ 和 $E[z]$；而我们已经知道，$E[zz^T ]$ 和 $E[z]E[z]T$ 随着 $\Sigma_{z|x}$ 而变化。因此，在 $M$ 步骤就必须要考虑到后验分布（posterior distribution）$p(z^{(i)}|x^{(i)})$中 $z$ 的协方差（covariance）。
 
 最后，我们还可以发现，在 $M$ 步骤对参数 $\mu$ 和 $\Psi$ 的优化。不难发现其中的 $\mu$ 为：
 
