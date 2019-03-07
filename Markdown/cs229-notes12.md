@@ -17,7 +17,9 @@
 
 ### 第十三部分 强化学习（Reinforcement Learning）和控制（Control）
 
-这一章我们就要学习强化学习（reinforcement learning）和适应性控制（adaptive control）了。在监督学习（supervised learning）中，我们已经见过的一些算法，输出的标签类 $y$ 都是在训练集中已经存在的。这种情况下，对于每个输入特征 $x$，都有一个对应的标签作为明确的“正确答案（right answer）”。与之相反，在很多的连续判断（sequential decisions making）和控制（control）的问题中，很难提供这样的明确的显示监督（explicit supervision）给学习算法。例如，假设咱们制作了一个四条腿的机器人，然后要编程让它能走路，而我们并不知道怎么去采取“正确”的动作来进行四条腿的行走，所以就不能给他提供一个明确的监督学习算法来进行模仿。
+这一章我们就要学习强化学习（reinforcement learning）和适应性控制（adaptive control）了。
+
+在监督学习（supervised learning）中，我们已经见过的一些算法，输出的标签类 $y$ 都是在训练集中已经存在的。这种情况下，对于每个输入特征 $x$，都有一个对应的标签作为明确的“正确答案（right answer）”。与之相反，在很多的连续判断（sequential decisions making）和控制（control）的问题中，很难提供这样的明确的显示监督（explicit supervision）给学习算法。例如，假设咱们制作了一个四条腿的机器人，然后要编程让它能走路，而我们并不知道怎么去采取“正确”的动作来进行四条腿的行走，所以就不能给他提供一个明确的监督学习算法来进行模仿。
 
 在强化学习（reinforcement learning）的框架下，我们就并不提供监督学习中那种具体的动作方法，而是只给出一个奖励函数（reward function），这个函数会告知学习程序（learning agent） 什么时候的动作是好的，什么时候的是不好的。在四腿机器人这个样例中，奖励函数会在机器人有进步的时候给出正面回馈，即奖励，而有退步或者摔倒的时候给出负面回馈，可以理解成惩罚。接下来随着时间的推移，学习算法就会解决如何选择正确动作以得到最大奖励。
 
@@ -25,7 +27,7 @@
 
 #### 1 马尔可夫决策过程（Markov decision processes）
 
-一个马尔可夫决策过程（Markov decision process）由一个元组（tuple）： $(S, A, \{P_{sa}\}, \gamma, R)$组成，其中元素分别为：
+一个马尔可夫决策过程（Markov decision process）由一个元组（tuple） $(S, A, \{P_{sa}\}, \gamma, R)$组成，其中元素分别为：
 
 - $S$ 是一个**状态**集合（a set of states）。（例如，在无人直升机飞行的案例中，$S$ 就可以是直升机所有的位置和方向的集合。）
 - $A$ 是一个**动作**集合（a set of actions）。（例如，还以无人直升机为例，$A$ 就可以是遥控器上面能够操作的所有动作方向。） 
@@ -33,7 +35,7 @@
 - $\gamma \in [0, 1)$ 叫做**折扣因子（discount factor）。**
 - $R : S × A → R$ 就是**奖励函数（reward function）。**（奖励函数也可以写成仅对状态 $S$ 的函数，这样就可以写成 $R : S → R$。）
 
-马尔可夫决策过程（MDP）的动力学（dynamics）过程如下所示：于某个起始状态 $s_0$ 启动，然后选择某个动作 $a_0 \in A$ 来执行 MDP 过程。根据所选的动作会有对应的结果，MDP 的状态则转移到某个后继状态（successor state），表示为 $s_1$，根据 $s1 \sim P_{s_0a_0}$ 得到。然后再选择另外一个动作 $a_1$，接下来又有对应这个动作的状态转移，状态则为 $s_2 \sim P_{s_1a_1}$。接下来在选择一个动作 $a_2$，就这样进行下去。可以用下面的过程来作为表示：
+马尔可夫决策过程（MDP）的动力学（dynamics）过程如下所示：于某个起始状态 $s_0$ 启动，然后选择某个动作 $a_0 \in A$ 来执行 MDP 过程。根据所选的动作会有对应的结果，MDP 的状态则转移到某个后继状态（successor state），表示为 $s_1$，根据 $s_1 \sim P_{s_0a_0}$ 得到。然后再选择另外一个动作 $a_1$，接下来又有对应这个动作的状态转移，状态则为 $s_2 \sim P_{s_1a_1}$。接下来在选择一个动作 $a_2$，就这样进行下去。可以用下面的过程来作为表示：
 
 $$
 s_0\xrightarrow{a_0}s_1\xrightarrow{a_1}s_2\xrightarrow{a_2}s_3\xrightarrow{a_3}\dots
@@ -121,7 +123,9 @@ $$
 第一种算法，**值迭代（value iteration），** 过程如下所述：
 1. 对每个状态 $s$, 初始化 $V (s) := 0$.
 2. 重复直到收敛 {
-对每个状态，更新规则 
+
+&emsp;&emsp;对每个状态，更新规则$V(s):=R(s)+\max_{a\in A}\gamma\sum_{s'}P_{sa}(s')V(s')$ 
+
 }
 
 这个算法可以理解成，利用贝尔曼等式（Bellman Equations）$(2)$重复更新估计值函数（estimated value function）。
@@ -132,15 +136,18 @@ $$
 
 无论是同步还是异步的更新，都能发现最终值迭代（value iteration）会使 $V$ 收敛到 $V^*$ 。找到了 $V^*$ 之后，就可以利用等式$(3)$来找到最佳策略（optimal policy）。
 
-除了值迭代（value iteration）之外，还有另外一种标准算法可以用来在马尔可夫决策过程（MDP）中寻找一个最佳策略（optimal policy）。这个策略循环（policy iteration）算法如下所述：
+除了值迭代（value iteration）之外，还有另外一种标准算法可以用来在马尔可夫决策过程（MDP）中寻找一个最佳策略（optimal policy）。这个**策略迭代（policy iteration）** 算法如下所述：
 
 1. 随机初始化 $\pi$。
 2. 重复直到收敛{
-(a) 令 $V := V^\pi$. 
-(b) 对每个状态 $s$，令 
+
+&emsp;&emsp;$(a)$ 令 $V := V^\pi$. 
+
+&emsp;&emsp;$(b)$ 对每个状态 $s$，令 $\pi(s):=arg\max_{a\in A}\sum_{s'}P_{sa}(s')V(s')$
+
 }
 
-因此，在循环体内部就重复计算对于当前策略（current policy）的值函数（value function），然后使用当前的值函数（value function）来更新策略函数（policy）。（在步骤 $(b)$ 中找到的策略 $\pi$ 也被称为对应 $V$ 的贪心策略（greedy with respect to V）。）注意，步骤 $(a)$ 可以通过解贝尔曼等式（Bellman’s equation）来实现，之前已经说过了，在固定策略（fixed policy）的情况下，这个等式只是一系列有 |S| 个变量（variables）的 $|S|$ 个线性方程（linear equations）。
+因此，在循环体内部就重复计算对于当前策略（current policy）的值函数（value function），然后使用当前的值函数（value function）来更新策略函数（policy）。（在步骤 $(b)$ 中找到的策略 $\pi$ 也被称为对应 $V$ 的**贪心策略(greedy with respect to V)** ）注意，步骤 $(a)$ 可以通过解贝尔曼等式（Bellman’s equation）来实现，之前已经说过了，在固定策略（fixed policy）的情况下，这个等式只是一系列有 $|S|$ 个变量（variables）的 $|S|$ 个线性方程（linear equations）。
 
 在上面的算法迭代了某个最大迭代次数之后，$V$ 将会收敛到 $V^*$，而 $\pi$ 会收敛到 $\pi^*$。
 
@@ -165,7 +172,7 @@ $$
 有了在 MDP 中一系列试验得到的“经验”，就可以对状态转移概率（state transition probabilities）推导出最大似然估计（maximum likelihood estimates）了：
 
 $$
-P_{sa}(s')= \frac{在状态 s 执行动作 a 而到达状态 s’ 花的时间}{在状态 s 执行动作 a 花的时间}\qquad(4)
+P_{sa}(s')= \frac{在状态 s 执行动作 a 而到达状态 s' 花的时间}{在状态 s 执行动作 a 花的时间}\qquad(4)
 $$
 
 或者，如果上面这个比例出现了$“0/0”$的情况，对应的情况就是在状态 $s$ 之前没进行过任何动作 $a$，这样就可以简单估计 $P_{sa}(s')$ 为 $1/|S|$。（也就是说把 $P_{sa}$ 估计为在所有状态上的均匀分布（uniform distribution）。）
@@ -178,10 +185,16 @@ $$
 
 1. 随机初始化 $\pi$ 。 
 2. 重复 {
-(a) 在 MDP 中执行 $\pi$ 作为若干次试验（trials）。
-(b) 利用上面在 MDP 积累的经验（accumulated experience），更新对 $P_{sa}$ 的估计（如果可以的话也对奖励函数 $R$ 进行更新）。
-(c) 利用估计的状态转移概率（estimated state transition probabilities）和奖励函数（rewards），应用值迭代（value iteration），得到一个新的估计值函数（estimated value function） $V$。
-(d) 更新 $\pi$ 为与 $V$ 对应的贪婪策略（greedy policy）。
+
+&emsp;&emsp;$(a)$ 在 MDP 中执行 $\pi$ 作为若干次试验（trials）。
+
+&emsp;&emsp;$(b)$ 利用上面在 MDP 积累的经验（accumulated experience），更新对 $P_{sa}$ 的估计（如果可以的话也对奖励函数 $R$ 进行更新）。
+
+&emsp;&emsp;$(c)$ 利用估计的状态转移概率（estimated state transition probabilities）和奖励函数
+（rewards），应用值迭代（value iteration），得到一个新的估计值函数（estimated value function） $V$。
+
+&emsp;&emsp;$(d)$ 更新 $\pi$ 为与 $V$ 对应的贪婪策略（greedy policy）。
+
 }
 我们注意到，对于这个特定的算法，有一种简单的优化方法（optimization），可以让该算法运行得更快。具体来说，在上面算法的内部循环中，使用了值迭代（value iteration），如果初始化迭代的时候不令 $V = 0$ 启动，而是使用算法中上一次迭代找到的解来初始化，这样就有了一个更好的迭代起点，能让算法更快收敛。
 
@@ -189,17 +202,17 @@ $$
 
 目前为止，我们关注的都是有限个状态（a finite number of states）的马尔可夫决策过程（MDPs）。接下来我们要讲的就是有无限个状态（an infinite number of states）的情况下的算法。例如，对于一辆车，我们可以将其状态表示为 $(x, y, \theta, \dot x,\dot y,\dot\theta)$，其中包括位置（position）  $(x, y)$，方向（orientation）$\theta$， 在 $x$ 和 $y$ 方向的速度分量 $\dot x$ 和 $\dot y$，以及角速度（angular velocity）$\dot\theta$。这样，$S = R^6$ 就是一个无限的状态集合，因为一辆车的位置和方向的个数是有无限可能$^2$。与此相似，在习题集4 中看到的倒立摆问题（inverted pendulum）中，状态也有$(x,\theta,\dot x,\dot\theta)$，其中的 $\theta$ 是杆的角度。在直升机飞行的三维空间中，状态的形式则为$(x,y,x,\phi,\theta,\psi,\dot x,\dot y,\dot z,\dot\phi,\dot\theta,\dot\psi)$，其中包含了滚动角（roll）$\phi$，俯仰角（pitch）$\theta$，以及偏航角（yaw）$\psi$，这几个角度确定了直升机在三维空间中的运动方向。在本节中，我们考虑状态空间为 $S = R^n$ 的情况，并描述此种情况下解决 MDPs 的方法。
 
->2从理论上讲，$\theta$ 是一个方向（orientation），所以更应当把 $\theta$ 的取值空间写为 $\theta \in [\pi, \pi)$，而不是写为实数集合 $\theta \in R$；不过在我们讨论的问题中，这种区别不要紧。
+>2 从理论上讲，$\theta$ 是一个方向（orientation），所以更应当把 $\theta$ 的取值空间写为 $\theta \in [\pi, \pi)$，而不是写为实数集合 $\theta \in R$；不过在我们讨论的问题中，这种区别不要紧。
 
 ##### 4.1 离散化（Discretization）
 
 解决连续状态 MDP 问题最简单的方法可能就是将状态空间（state space）离散化（discretize），然后再使用之前讲过的算法，比如值迭代（value iteration）或者策略迭代（policy iteration）来求解。
 
-例如，假设我们有一个二维状态空间$(s1，s2)$，就可以用下面的网格（grid）来将这个状态空间离散化：
+例如，假设我们有一个二维状态空间$(s_1，s_2)$，就可以用下面的网格（grid）来将这个状态空间离散化：
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f1.png)
 
-如上图所示，每个网格单元（grid cell）表示的都是一个独立的离散状态 $\overline s$。这样就可以把一个连续状态 MDP 用一个离散状态的 $(\overline S, A, \{P_{s\overline a}\}, \gamma, R)$ 来进行逼近，其中的$\overline S$ 是离散状态集合，而$\{P_{s\overline a}\}$ 是此离散状态上的状态转移概率（state transition probabilities），其他项目同理。然后就可以使用值迭代（value iteration）或者策略迭代（policy iteration）来求解出离散状态的 MDP $(\overline S, A, \{P_{s\overline a}\}, \gamma, R)$ 的 $V^*(\overline s)$ 和 $\pi^*(\overline s)$。当真实系统是某种连续值的状态 $s \in S$，而有需要选择某个动作来执行，就可以计算对应的离散化的状态 $\overline s$，然后执行对应的动作 $\pi^*(\overline s)$。
+如上图所示，每个网格单元（grid cell）表示的都是一个独立的离散状态 $\overline s$。这样就可以把一个连续状态 MDP 用一个离散状态的 $(\overline S, A, \{P_{\overline sa}\}, \gamma, R)$ 来进行逼近，其中的$\overline S$ 是离散状态集合，而$\{P_{\overline sa}\}$ 是此离散状态上的状态转移概率（state transition probabilities），其他项目同理。然后就可以使用值迭代（value iteration）或者策略迭代（policy iteration）来求解出离散状态的 MDP $(\overline S, A, \{P_{\overline sa}\}, \gamma, R)$ 的 $V^*(\overline s)$ 和 $\pi^*(\overline s)$。当真实系统是某种连续值的状态 $s \in S$，而有需要选择某个动作来执行，就可以计算对应的离散化的状态 $\overline s$，然后执行对应的动作 $\pi^*(\overline s)$。
 
 这种离散化方法（discretization approach）可以解决很多问题。然而，也有两个缺陷（downsides）。首先，这种方法使用了对 $V^*$ 和 $\pi^*$ 相当粗糙的表征方法。具体来说，这种方法中假设了在每个离散间隔（discretization intervals）中的值函数（value function）都是一个常数值（也就是说，值函数是在每个网格单元中分段的常数。）。
 
@@ -207,7 +220,7 @@ $$
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f2.png)
 
-很明显，上面这个数据适合使用线性回归。然而，如果我们对 x 轴进行离散化，那么在每个离散间隔中使用分段常数表示，对同样的数据进行拟合，得到的曲线则如下所示：
+很明显，上面这个数据适合使用线性回归。然而，如果我们对 $x$ 轴进行离散化，那么在每个离散间隔中使用分段常数表示，对同样的数据进行拟合，得到的曲线则如下所示：
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f3.png)
 
@@ -223,11 +236,11 @@ $$
 
 ###### 4.2.1 使用一个模型或模拟器（Using a model or simulator）
 
-要开发一个值函数近似算法，我们要假设已经有一个对于 MDP 的模型，或者模拟器。简单来看，一个模拟器就是一个黑箱子（black-box），接收输入的任意（连续值的）状态 $s_t$ 和动作 $a_t$，然后输出下一个状态 $s_{t+1}$，这个新状态是根据状态转移概率（state transition probabilities） $P_{s_ta_t}$ 取样（sampled）得来：
+要开发一个值函数近似算法，我们要假设已经有一个对于 MDP 的**模型，** 或者**模拟器。** 简单来看，一个模拟器就是一个黑箱子（black-box），接收输入的任意（连续值的）状态 $s_t$ 和动作 $a_t$，然后输出下一个状态 $s_{t+1}$，这个新状态是根据状态转移概率（state transition probabilities） $P_{s_ta_t}$ 取样（sampled）得来：
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f4.png)
 
-有很多种方法来获取这样的一个模型。其中一个方法就是使用物理模拟（physics simulation）。 例如，在习题集 4 中倒立摆模拟器，就是使用物理定律，给定当前时间 $t$ 和采取的动作 $a$，假设制导系统的所有参数，比如杆的长度、质量等等，来模拟计算在 $t+1$ 时刻杆所处的位置和方向。另外也可以使用现成的物理模拟软件包，这些软件包将一个机械系统的完整物理描述作为输入，当前状态 $s_t$ 和动作 $a_t$，然后计算出未来几分之一秒的系统状态 $s_{t+1}$。$^3$
+有很多种方法来获取这样的一个模型。其中一个方法就是使用物理模拟（physics simulation）。 例如，在习题集 $4$ 中倒立摆模拟器，就是使用物理定律，给定当前时间 $t$ 和采取的动作 $a$，假设制导系统的所有参数，比如杆的长度、质量等等，来模拟计算在 $t+1$ 时刻杆所处的位置和方向。另外也可以使用现成的物理模拟软件包，这些软件包将一个机械系统的完整物理描述作为输入，当前状态 $s_t$ 和动作 $a_t$，然后计算出未来几分之一秒的系统状态 $s_{t+1}$。$^3$
 
 >3 开放动力引擎（Open Dynamics Engine，`http://www.ode.com`）就是一个开源物理模拟器，可以用来模拟例如倒立摆这样的系统，在强化学习研究领域中，已经相当流行了。
 
@@ -253,22 +266,22 @@ $$
 然后使用类似线性回归（linear regression）之类的算法。上面的式子中，模型的参数是两个矩阵 $A$ 和 $B$，然后可以使用在 $m$ 次试验中收集的数据来进行估计，选择：
 
 $$
-arg\min_{A,B}\sum_{i=1}^m\sum_{t=0}^{T-1}||s_{t+1}^{(i)}-(A_{s_t}^{(i)}+B_{a_t}^{(i)})||^2
+arg\min_{A,B}\sum_{i=1}^m\sum_{t=0}^{T-1}||s_{t+1}^{(i)}-(As_t^{(i)}+Ba_t^{(i)})||^2
 $$
 
 （者对应着对参数（parameters）的最大似然估计（maximum likelihood estimate）。）通过学习得到 $A$ 和 $B$ 之后，一种选择就是构建一个**确定性** 模型（deterministic model），在此模型中，给定一个输入 $s_t$ 和 $a_t$，输出的则是固定的 $s_{t+1}$。具体来说，也就是根据上面的等式$(5)$来计算 $s_{t+1}$。或者用另外一种办法，就是建立一个**随机** 模型（stochastic model），在这个模型中，输出的 $s_{t+1}$ 是关于输入值的一个随机函数，以如下方式建模：
 
 $$
-s_{t+1}=A_{s_t}+B_{a_t}+\epsilon_t
+s_{t+1}=As_t+Ba_t+\epsilon_t
 $$
 
 上面式子中的 $\epsilon_t$ 是噪音项（noise term），通常使用一个正态分布来建模，即 $\epsilon_t\sim N (0, \Sigma)$。（协方差矩阵（covariance matrix） $\Sigma$ 也可以从数据中直接估计出来。）
 
-这里，我们把下一个状态 $s_{t+1}$ 写成了当前状态和动作的一个线性函数；不过当然也有非线性函数的可能。比如我们学习一个模型 $s_{t+1} = A\phi_s(st) + B\phi_a(at)$，其中的 $\phi_s$ 和 $\phi_a$ 就可以使某些映射了状态和动作的非线性特征。另外，我们也可以使用非线性的学习算法，例如局部加权线性回归（locally weighted linear regression）进行学习，来将 $s_{t+1}$ 作为关于 $s_t$ 和 $a_t$ 的函数进行估计。 这些方法也可以用于建立确定性的（deterministic）或者随机的（stochastic）MDP 模拟器。
+这里，我们把下一个状态 $s_{t+1}$ 写成了当前状态和动作的一个线性函数；不过当然也有非线性函数的可能。比如我们学习一个模型 $s_{t+1} = A\phi_s(s_t) + B\phi_a(a_t)$，其中的 $\phi_s$ 和 $\phi_a$ 就可以使某些映射了状态和动作的非线性特征。另外，我们也可以使用非线性的学习算法，例如局部加权线性回归（locally weighted linear regression）进行学习，来将 $s_{t+1}$ 作为关于 $s_t$ 和 $a_t$ 的函数进行估计。 这些方法也可以用于建立确定性的（deterministic）或者随机的（stochastic）MDP 模拟器。
 
 ###### 4.2.2 拟合值迭代（Fitted value iteration）
 
-接下来我们要讲的是拟合值迭代算法（fitted value iteration algorithm），作为对一个连续状态 MDP 中值函数的近似。在这部分钟，我们假设学习问题有一个连续的状态空间 $S = R^n$，而动作空间 $A$ 则是小规模的离散空间。$^4$
+接下来我们要讲的是**拟合值迭代算法（fitted value iteration algorithm），** 作为对一个连续状态 MDP 中值函数的近似。在这部分钟，我们假设学习问题有一个连续的状态空间 $S = R^n$，而动作空间 $A$ 则是小规模的离散空间。$^4$
 
 >4 在实践中，大多数的 MDPs 问题中，动作空间都要远远比状态空间小得多。例如，一辆汽车可能有 $6$维的状态空间，但是动作空间则只有 $2$维，即转向和速度控制；倒立的摆有 $4$维状态空间，而只有 $1$维的动作空间；一架直升机有 $12$维状态空间，只有 $4$维的动作空间。所以对动作空间进行离散化，相比对状态空间进行离散化，遇到的问题通常会少得多。
 
