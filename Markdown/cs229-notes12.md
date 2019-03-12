@@ -35,19 +35,19 @@
 - $\gamma \in [0, 1)$ 叫做**折扣因子（discount factor）。**
 - $R : S × A → R$ 就是**奖励函数（reward function）。**（奖励函数也可以写成仅对状态 $S$ 的函数，这样就可以写成 $R : S → R$。）
 
-马尔可夫决策过程（MDP）的动力学（dynamics）过程如下所示：于某个起始状态 $s_0$ 启动，然后选择某个动作 $a_0 \in A$ 来执行 MDP 过程。根据所选的动作会有对应的结果，MDP 的状态则转移到某个后继状态（successor state），表示为 $s_1$，根据 $s_1 \sim P_{s_0a_0}$ 得到。然后再选择另外一个动作 $a_1$，接下来又有对应这个动作的状态转移，状态则为 $s_2 \sim P_{s_1a_1}$。接下来在选择一个动作 $a_2$，就这样进行下去。可以用下面的过程来作为表示：
+马尔可夫决策过程（MDP）的动力学（dynamics）过程如下所示：于某个起始状态 $s_0$ 启动，然后选择某个动作 $a_0 \in A$ 来执行 MDP 过程。根据所选的动作会有对应的结果，MDP 的状态则转移到某个后继状态（successor state），表示为 $s_1$，根据 $s_1 \sim P_{s_0a_0}$ 得到。然后再选择另外一个动作 $a_1$，接下来又有对应这个动作的状态转移，状态则为 $s_2 \sim P_{s_1a_1}$。接下来再选择一个动作 $a_2$，就这样进行下去。如果将这个过程绘制出来的话，结果如下所示：
 
 $$
 s_0\xrightarrow{a_0}s_1\xrightarrow{a_1}s_2\xrightarrow{a_2}s_3\xrightarrow{a_3}\dots
 $$
 
-通过序列中的所有状态 $s_0, s_1, \dots$  和对应的动作 $a_0, a_1,\dots$，就你能得到给出的总奖励值，即总收益函数（total payoff）为 
+通过序列中的所有状态 $s_0, s_1, \dots$  和对应的动作 $a_0, a_1,\dots$，你就能得到总奖励值，即总收益函数（total payoff）为 
 
 $$
 R(s_0,a_0) + \gamma R(s_1,a_1) + \gamma^2 R(s_2,a_2) + \dots
 $$
 
-如果把奖励函数只作为仅与状态相关的函数，那么这个值就简化成了 
+如果把奖励函数作为仅与状态相关的函数，那么这个值就简化成了 
 
 $$
 R(s_0) + \gamma R(s_1) + \gamma^2 R(s_2) + \dots
@@ -69,7 +69,7 @@ $$
 V^\pi(s)=E[R(s_0) + \gamma R(s_1) + \gamma^2 R(s_2) + \dots | s_0=s,\pi]
 $$
 
-$V^\pi(s)$ 就是从状态 $s$ 开始，根据 $\pi$ 给出的动作来积累的部分奖励函数（discounted rewards）的期望总和（expected sum）。$^1$
+$V^\pi(s)$ 就是从状态 $s$ 开始，根据 $\pi^1$ 给出的动作来积累的部分奖励函数（discounted rewards）的期望总和（expected sum）。
 
 >1 实际上这里我们用 $\pi$ 这个记号来表示，严格来说不太正确，因为 $\pi$ 并不是一个随机变量，不过在文献里面这样表示很多，已经成了某种事实上的标准了。
 
@@ -104,17 +104,17 @@ $$
 \pi^*(s)=arg\max_{a\in A}\sum_{s'\in S}P_{sa}(s')V^*(s')\qquad(3)
 $$
 
-注意，这里的 $\pi^*(s)$ 给出的动作 $a$ 给出的在上面等式$(2)$
+注意，这里的 $\pi^*(s)$ 给出的动作 $a$ 实现了上面等式$(2)$当中能够使 “max” 项取到最大值。
 
-当中能够使 “max” 项取最大值。对于每个状态 $s$ 和每个策略函数（policy）$\pi$，都有：
+事实上，对于每个状态 $s$ 和每个策略函数（policy）$\pi$，我们都可以得出：
 
 $$
 V^*(s)=V^{\pi^*}(s)\ge V^\pi(s)
 $$
 
-上面的第一个等式关系表明，对应策略函数（policy） $V^{\pi^*}$的值函数（value function）$\pi^*$ 等于对于每个状态 $s$ 的最优值函数 $V^*$。右边的不等式则表明，$\pi^*$ 的值至少也等于任意其他策略函数的值。也就是说，上面在等式$(3)$当中定义的这个 $\pi^*$ 就是最佳策略函数（optimal policy）。
+上面的第一个等式关系表明，在任何状态 $s$ 下，对应策略函数（policy） $V^{\pi^*}$的值函数（value function）$\pi^*$ 等于最优值函数 $V^*$。右边的不等式则表明，$\pi^*$ 的值至少也等于任意其他策略函数的值。也就是说，上面在等式$(3)$当中定义的这个 $\pi^*$ 就是最佳策略函数（optimal policy）。
 
-注意，这个 $\pi^*$ 有一个有趣的特性，它是所有状态 $s$ 下的最佳策略。具体来讲，并不是说只是如果从某个状态 $s$ 开始 MDP 过程，这个 $\pi^*$ 是对应这个状态的最佳策略，而如果从某个别的状态 $s'$ 开始就有其他的最佳策略。而是对于所有的状态 $s$，都是同样的一个策略函数 $\pi^*$ 能够使得等式$(1)$中的项目取得最大值。这也就意味着无论 MDP 过程的初始状态（initial state）如何，都可以使用同样的策略函数 $\pi^*$。
+注意，这个 $\pi^*$ 有一个有趣的特性，它是所有状态 $s$ 下的最佳策略。具体来讲，并不是说只是从某些状态 $s$ 开始的MDP过程才使得这个$\pi^*$是对应这些状态的最佳策略，而如果从某些别的状态 $s'$ 开始就有其他的最佳策略。而是对于所有的状态 $s$，都是同样的一个策略函数 $\pi^*$ 能够使得等式$(1)$中的项目取得最大值。这也就意味着无论 MDP 过程的初始状态（initial state）如何，都可以使用同样的策略函数 $\pi^*$。
 
 #### 2 值迭代（Value iteration）和策略迭代（policy iteration） 
 
@@ -130,9 +130,7 @@ $$
 
 这个算法可以理解成，利用贝尔曼等式（Bellman Equations）$(2)$重复更新估计值函数（estimated value function）。
 
-在上面的算法的内部循环体中，有两种进行更新的方法。首先，我们可以为每一个状态 $s$ 计算新的值 $V(s)$，然后用新的值覆盖掉所有的旧值。这也叫做同步更新（synchronous update）。在这种情况下，此算法可以看做是实现（implementing）了一个“贝尔曼备份运算符（Bellman backup operator）”，这个运算符接收值函数（value function）的当前估计（current estimate），然后映射到一个新的估计值（estimate）。（更多细节参考作业题目中的内容。）
-
-另外一种方法，就可以使用异步更新（asynchronous updates）。使用这种方法，就可以按照某种次序来遍历（loop over）所有的状态，然后每次更新其中一个的值。
+在上面的算法的内部循环体中，有两种进行更新的方法。首先，我们可以为每一个状态 $s$ 计算新的值 $V(s)$，然后用新的值覆盖掉所有的旧值。这也叫做**同步更新（synchronous update）。** 在这种情况下，此算法可以看做是实现（implementing）了一个“贝尔曼备份运算符（Bellman backup operator）”，这个运算符接收值函数（value function）的当前估计（current estimate），然后映射到一个新的估计值（estimate）。（更多细节参考作业题目中的内容。）另外一种方法，即我们可以使用**异步更新（asynchronous updates）。** 使用这种方法，就可以按照某种次序来遍历（loop over）所有的状态，然后每次更新其中一个的值。
 
 无论是同步还是异步的更新，都能发现最终值迭代（value iteration）会使 $V$ 收敛到 $V^*$ 。找到了 $V^*$ 之后，就可以利用等式$(3)$来找到最佳策略（optimal policy）。
 
@@ -157,7 +155,7 @@ $$
 
 目前为止，我们已经讲了 MDPs，以及用于 MDPs 的一些算法，这都是基于一个假设，即状态转移概率（state transition probabilities）以及奖励函数（rewards）都是已知的。在很多现实问题中，却未必知道这两样，而是必须从数据中对其进行估计。（通常 $S，A 和 \gamma$ 都是知道的。）
 
-例如，加入对倒立摆问题（inverted pendulum problem，参考习题集 4），在 MDP 中进行了一系列的试验，过程如下所示：
+例如，加入对倒立摆问题（inverted pendulum problem，参考习题集 $4$），在 MDP 中进行了一系列的试验，过程如下所示：
 
 $$
 \begin{aligned}
@@ -167,7 +165,7 @@ $$
 \end{aligned}
 $$
 
-其中 $s_i^{(j)}$ 表示的是第 $j$ 次试验中第 $i$ 次的状态，而 $a_i^{(j)}$ 是该状态下的对应动作。在实践中，每个试验都会运行到 MDP 过程停止（例如在倒立摆问题（inverted pendulum problem）中杆落下（pole falls）），或者会运行到某个大但有限个数的时间步长（timesteps）。
+其中 $s_i^{(j)}$ 表示的是第 $j$ 次试验中第 $i$ 次的状态，而 $a_i^{(j)}$ 是该状态下的对应动作。在实践中，每个试验都会运行到 MDP 过程停止（例如在倒立摆问题（inverted pendulum problem）中杆落下（pole falls）），或者会运行到某个很大但有限的一个数的时间步长（timesteps）。
 
 有了在 MDP 中一系列试验得到的“经验”，就可以对状态转移概率（state transition probabilities）推导出最大似然估计（maximum likelihood estimates）了：
 
@@ -179,7 +177,7 @@ $$
 
 注意，如果在 MDP 过程中我们能获得更多经验信息（观察更多次数），就能利用新经验来更新估计的状态转移概率（estimated state transition probabilities），这样很有效率。具体来说，如果我们保存下来等式$(4)$中的分子（numerator）和分母（denominator）的计数（counts），那么观察到更多的试验的时候，就可以很简单地累积（accumulating）这些计数数值。计算这些数值的比例，就能够给出对 $P_{sa}$ 的估计。
 
-利用类似的程序（procedure），如果奖励函数（reward） $R$ 未知，我们也可以选择在状态 $s$ 下的期望即时奖励函数（expected immediate reward） R(s) 来当做是在状态 s 观测到的平均奖励函数（average reward）。
+利用类似的程序（procedure），如果奖励函数（reward） $R$ 未知，我们也可以选择在状态 $s$ 下的期望即时奖励函数（expected immediate reward） $R(s)$ 来当做是在状态 $s$ 观测到的平均奖励函数（average reward）。
 
 学习了一个 MDP 模型之后，我们可以使用值迭代（value iteration）或者策略迭代（policy iteration），利用估计的状态转移概率（transition probabilities）和奖励函数，来去求解这个 MDP 问题。例如，结合模型学习（model learning）和值迭代（value iteration），就可以在未知状态转移概率（state transition probabilities）的情况下对 MDP 进行学习，下面就是一种可行的算法：
 
@@ -200,7 +198,7 @@ $$
 
 #### 4 连续状态的马尔可夫决策过程（Continuous state MDPs）
 
-目前为止，我们关注的都是有限个状态（a finite number of states）的马尔可夫决策过程（MDPs）。接下来我们要讲的就是有无限个状态（an infinite number of states）的情况下的算法。例如，对于一辆车，我们可以将其状态表示为 $(x, y, \theta, \dot x,\dot y,\dot\theta)$，其中包括位置（position）  $(x, y)$，方向（orientation）$\theta$， 在 $x$ 和 $y$ 方向的速度分量 $\dot x$ 和 $\dot y$，以及角速度（angular velocity）$\dot\theta$。这样，$S = R^6$ 就是一个无限的状态集合，因为一辆车的位置和方向的个数是有无限可能$^2$。与此相似，在习题集4 中看到的倒立摆问题（inverted pendulum）中，状态也有$(x,\theta,\dot x,\dot\theta)$，其中的 $\theta$ 是杆的角度。在直升机飞行的三维空间中，状态的形式则为$(x,y,x,\phi,\theta,\psi,\dot x,\dot y,\dot z,\dot\phi,\dot\theta,\dot\psi)$，其中包含了滚动角（roll）$\phi$，俯仰角（pitch）$\theta$，以及偏航角（yaw）$\psi$，这几个角度确定了直升机在三维空间中的运动方向。在本节中，我们考虑状态空间为 $S = R^n$ 的情况，并描述此种情况下解决 MDPs 的方法。
+目前为止，我们关注的都是有限个状态（a finite number of states）的马尔可夫决策过程（MDPs）。接下来我们要讲的就是有无限个状态（an infinite number of states）的情况下的算法。例如，对于一辆车，我们可以将其状态表示为 $(x, y, \theta, \dot x,\dot y,\dot\theta)$，其中包括位置（position）  $(x, y)$，方向（orientation）$\theta$， 在 $x$ 和 $y$ 方向的速度分量 $\dot x$ 和 $\dot y$，以及角速度（angular velocity）$\dot\theta$。这样，$S = R^6$ 就是一个无限的状态集合，因为一辆车的位置和方向的个数是有无限可能$^2$。与此相似，在习题集 $4$ 中看到的倒立摆问题（inverted pendulum）中，状态也有$(x,\theta,\dot x,\dot\theta)$，其中的 $\theta$ 是杆的角度。在直升机飞行的三维空间中，状态的形式则为$(x,y,x,\phi,\theta,\psi,\dot x,\dot y,\dot z,\dot\phi,\dot\theta,\dot\psi)$，其中包含了滚动角（roll）$\phi$，俯仰角（pitch）$\theta$，以及偏航角（yaw）$\psi$，这几个角度确定了直升机在三维空间中的运动方向。在本节中，我们考虑状态空间为 $S = R^n$ 的情况，并描述此种情况下解决 MDPs 的方法。
 
 >2 从理论上讲，$\theta$ 是一个方向（orientation），所以更应当把 $\theta$ 的取值空间写为 $\theta \in [\pi, \pi)$，而不是写为实数集合 $\theta \in R$；不过在我们讨论的问题中，这种区别不要紧。
 
@@ -208,7 +206,7 @@ $$
 
 解决连续状态 MDP 问题最简单的方法可能就是将状态空间（state space）离散化（discretize），然后再使用之前讲过的算法，比如值迭代（value iteration）或者策略迭代（policy iteration）来求解。
 
-例如，假设我们有一个二维状态空间$(s_1，s_2)$，就可以用下面的网格（grid）来将这个状态空间离散化：
+例如，假设我们有一个二维状态空间$(s_1,s_2)$，就可以用下面的网格（grid）来将这个状态空间离散化：
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note12f1.png)
 
@@ -269,7 +267,9 @@ $$
 arg\min_{A,B}\sum_{i=1}^m\sum_{t=0}^{T-1}||s_{t+1}^{(i)}-(As_t^{(i)}+Ba_t^{(i)})||^2
 $$
 
-（者对应着对参数（parameters）的最大似然估计（maximum likelihood estimate）。）通过学习得到 $A$ 和 $B$ 之后，一种选择就是构建一个**确定性** 模型（deterministic model），在此模型中，给定一个输入 $s_t$ 和 $a_t$，输出的则是固定的 $s_{t+1}$。具体来说，也就是根据上面的等式$(5)$来计算 $s_{t+1}$。或者用另外一种办法，就是建立一个**随机** 模型（stochastic model），在这个模型中，输出的 $s_{t+1}$ 是关于输入值的一个随机函数，以如下方式建模：
+（这对应着对参数（parameters）的最大似然估计（maximum likelihood estimate）。）
+
+通过学习得到 $A$ 和 $B$ 之后，一种选择就是构建一个**确定性** 模型（deterministic model），在此模型中，给定一个输入 $s_t$ 和 $a_t$，输出的则是固定的 $s_{t+1}$。具体来说，也就是根据上面的等式$(5)$来计算 $s_{t+1}$。或者用另外一种办法，就是建立一个**随机** 模型（stochastic model），在这个模型中，输出的 $s_{t+1}$ 是关于输入值的一个随机函数，以如下方式建模：
 
 $$
 s_{t+1}=As_t+Ba_t+\epsilon_t
