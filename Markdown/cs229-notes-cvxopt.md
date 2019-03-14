@@ -88,7 +88,7 @@ $$
 \theta x +(1-\theta) y\in\bigcap_{i=1}^kC_i
 $$
 
-然而要注意在通常情况下，凸集之间的并集并不是一个凸集
+然而要注意在通常情况下，凸集之间的并集并不是一个凸集。
 
 - **半正定矩阵**是一个凸集。所有对称正半定矩阵的集合，常称为正半定锥，记作$S^n_+$，其是一个凸集（通常情况下，$S^n\subset R^{n\times n}$代表$n\times n$对称矩阵的集合）。回忆一个概念，我们说一个矩阵$A\in R^{n\times n}$是对称半正定矩阵，当且仅当该矩阵满足$A=A^T$，并且给定任意一个$n$维向量$x\in R^n$，满足$x^TAx\ge 0$。现在考虑两个对称半正定矩阵$A,B\in S^n_+$，并且有$0\le\theta\le 1$。给定任意$n$维向量$x\in R^n$，则：
 
@@ -97,4 +97,147 @@ x^T(\theta A +(1-\theta) B)x=\theta x^TAx+(1-\theta)x^TBx\ge 0
 $$
 
 同样的逻辑可以用来证明所有正定、负定和负半定矩阵的集合也是凸集。
+
+#### 3. 凸函数
+
+凸优化的一个核心要素是**凸函数**的概念。
+
+**定义 $3.1$** 我们称一个函数$f:R^n\rightarrow R$是一个凸函数，需要满足其定义域（记作$\mathcal{D}(f)$）是一个凸集，同时给定任意$x,y\in \mathcal{D}(f)$以及$\theta\in R,0\le\theta\le 1$，满足：
+
+$$
+f(\theta x +(1-\theta) y)\le \theta f(x)+(1-\theta)f(y)
+$$
+
+**（注意这里函数的凸凹性和我们本科《高等数学》上册里面微分中值定理与导数应用章节中曲线的凸凹性是相反的，不过这里定义的凸凹的方向在机器学习中更常见）**
+
+直观地，考虑这个定义的方法是如果我们在凸函数的图上取任意两点并在两点之间画一条直线，那么函数在这两点之间的部分就会在这条直线下面。这种情况如图$2^2$所示。
+
+>2 不要太担心$f$的定义域是凸集的要求，这个要求仅仅是在技术上保证$f(\theta x +(1-\theta) y)$有定义（如果定义域$\mathcal{D}(f)$不是凸集，则即使$x,y\in\mathcal{D}(f)$，$f(\theta x +(1-\theta) y)$也有可能没有意义）
+
+如果在定义$3.1$的基础上增加严格的不等的条件$x\ne y$和$0<\theta<1$，则可以说一个函数是**严格凸函数**。如果$f$是凸函数则我们可以得到$-f$是**凹函数，** 同理如果$f$是严格凸函数则$-f$是**严格凹函数。**
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notecof2.png)
+
+##### 3.1 凸性的一阶条件
+
+假设函数$f:R^n\rightarrow R$可微（即其梯度$^3\nabla_xf(x)$在函数$f$的定义域内处处存在）。则$f$是一个凸函数，只要满足$\mathcal{D}(f)$是一个凸集，同时对所有的$x,y\in\mathcal{D}(f)$，有：
+
+>3 回忆一下梯度定义为$\nabla_xf(x)\in R^n,(\nabla_xf(x))_i=\frac{\partial f(x)}{\partial x_i}$。有关梯度和海森函数的知识，请参阅前面关于线性代数的部分的章节笔记。
+
+$$
+f(y)\ge f(x)+\nabla_xf(x)^T(y-x)
+$$
+
+函数$f(x)+\nabla_xf(x)^T(y-x)$称为函数$f(x)$在点$x$处的**一阶近似(first-order approximation)。** 直觉上来说，这个函数可以近似的认为是函数$f$在点$x$处的切线。凸性的一阶条件就是阐明了，$f$是凸函数当且仅当该函数的切线是一个全局下估计(global underestimator)。换句话说，如果我们根据函数的特性在任意一点绘制该函数的切线，那么这条直线上的每一点将低于函数$f$在相应位置的点。
+
+与凸性的定义类似，当严格不等条件成立时$f$是严格凸函数，当不等式符号颠倒时$f$是凹函数，当颠倒的不等式的严格不等条件成立时$f$是严格凹函数。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notecof3.png)
+
+##### 3.2 凸性的二阶条件
+
+假设函数$f:R^n\rightarrow R$二阶可微（即其海森矩阵$^4\nabla_x^2f(x)$在函数$f$的定义域内处处存在）。则$f$是一个凸函数，只要满足$\mathcal{D}(f)$是一个凸集，同时对所有的$x,y\in\mathcal{D}(f)$，有：
+
+>4 回忆一下海森矩阵定义为$\nabla_x^2f(x)\in R^{n\times n},(\nabla_x^2f(x))_{ij}=\frac{\partial^2 f(x)}{\partial x_i\partial x_j}$
+
+$$
+\nabla_x^2f(x)\succeq 0
+$$
+
+当符号“$\succeq$”在这里与矩阵结合使用时，指的是正半定矩阵，而不是分量不等式(componentwise inequality)$^5$。在一维中，这等价于二阶导数$f''(x)$总是非负的（即函数始终为绝对的非负值(positive non-negative)）。
+
+>5 与对称矩阵$X\in S^n$类似，$X\preceq 0$代表$X$是负定矩阵。对于向量不等式来说，有时可以用符号‘$\le$’和‘$\ge$’代替符号‘$\preceq$’和‘$\succeq$’。尽管这里的符号类似向量的符号，但是意义非常不一样。特别的，矩阵$X\succeq 0$并不意味着对于所有矩阵的元素下标$i,j$都有元素$X_{ij}\ge 0$
+
+同样，与凸性的定义以及一阶条件类似，如果海森矩阵是正定的，则函数$f$是严格凸函数，如果是半负定则函数是凹函数，是负定则函数是严格凹函数。
+
+##### 3.3 Jensen不等式
+
+假设我们从凸函数的基本定义中的不等式开始：
+
+$$
+f(\theta x +(1-\theta) y)\le \theta f(x)+(1-\theta)f(y)\quad 其中\quad 0\le\theta\le 1
+$$
+
+使用归纳法，这可以相当容易地扩展到多个点的凸组合：
+
+$$
+f(\sum_{i=1}^k\theta_ix_i)\le\sum_{i=1}^k\theta_if(x_i)\quad 其中\quad\sum_{i=1}^k\theta_i=1,\theta_i\ge 0\quad\forall i
+$$
+
+事实上，这也可以推广到无穷和或积分。在后一种情况下，不等式可以写成：
+
+$$
+f(\int p(x)xdx)\le\int p(x)f(x)dx\quad 其中\quad\int p(x)xdx=1,p(x)\ge0\quad\forall i
+$$
+
+由于$p(x)$积分为$1$，通常把它看作概率密度，在这种情况下，前面的方程可以用期望来表示：
+
+$$
+f(E[x])\le E[f(x)]
+$$
+
+最后一个不等式叫做Jensen不等式，后面的课上会讲到。$^6$
+
+>6 事实上，这四个方程有时都被称为Jensen不等式，因为它们都是等价的。但是，对于这门课，我们将使用该术语来具体指这里给出的最后一个不等式。
+
+##### 3.4 水平集
+
+凸函数产生一种特别重要的凸集称为 **$\alpha-sublevel$集。** 给出了凸函数$f:R^n\rightarrow R$和一个实数$\alpha\in R$，$\alpha-sublevel$集被定义为：
+
+$$
+\{x\in\mathcal{D}(f):f(x)\le\alpha\}
+$$
+
+换句话说，$\alpha-sublevel$集是所有满足$f(x)\le\alpha$的点$x$的集合。
+
+为了证明这是一个凸集，考虑任意$x,y\in\mathcal{D}(f)$，并且$f(x)\le\alpha,f(y)\le\alpha$，则：
+
+$$
+f(\theta x +(1-\theta) y)\le \theta f(x)+(1-\theta)f(y)\le\theta\alpha+(1-\theta)\alpha=\alpha
+$$
+
+##### 3.5 凸函数判断的实例
+
+我们从几个单变量凸函数的简单例子开始，然后继续讨论多元函数。
+
+- **指数函数**是凸函数。有函数$f:R\rightarrow R$，任意$a\in R$使得$f(x)=e^{ax}$。为了证明$f$是凸函数，我们可以简单的考虑二阶导数$f''(x)=a^2e^{ax}$，对于所有$x$都是正的。
+
+- **负对数函数**是凸函数。函数$f:R\rightarrow R,f(x)=-logx$，有定义域$\mathcal{D}(f)=R_{++}$（这里的$R_{++}$代表严格正实数的集合$\{x:x>0\}$）。则对于所有的$x$都满足$f''(x)=1/x^2>0$。
+
+- **仿射函数**。函数$f:R\rightarrow R,f(x)=b^Tx+c$，满足$b\in R^n,c\in R$。在这种情况下对于所有的$x$，该函数的海森矩阵$\nabla^2_xf(x)=0$。应为零矩阵即是半正定也是半负定矩阵，因此函数$f$即是凸函数，也是凹函数。事实上，这种形式的仿射函数是唯一既凸又凹的函数。
+
+- **二次函数**。函数$f:R\rightarrow R,f(x)=\frac12x^TAx+b^Tx+c$，系数的对称矩阵为$A\in S^n,b\in R^n$以及$c\in R$。在先前线性代数笔记中，我们展示了这个函数的海森函数为：
+
+$$
+\nabla^2_xf(x)=A
+$$
+
+因此，函数$f$的凸性或非凸性完全取决于A是否为半正定矩阵：如果$A$为半正定，则函数为凸函数（严格凸、凹、严格凹函数同样类比）；如果$A$是不定的矩阵，那么$f$既不是凸函数也不是凹函数。
+
+注意，平方欧几里得范数$f(x) = \parallel x\parallel^2_2=x^Tx$是二次函数的一个特例，其中$a = I, b = 0, c = 0$，因此它是一个严格凸函数。
+
+- **范数函数**是凸函数。函数$f:R\rightarrow R$为$R^n$上的某个范数。然后根据三角不等式和正范数的同质性，对于$x,y\in R^n,0\le\theta\le 1$，有：
+
+$$
+f(\theta x +(1-\theta) y)\le f(\theta x)+f((1-\theta)y) =\theta f(x)+(1-\theta)f(y)
+$$
+
+这是一个凸函数的例子，由于范数不是处处可微的（例如，$1$范数，$\parallel x\parallel_1 = \sum_{i=1}^n|x_i|$，在任意$x_i = 0$的点上都是不可微的），因此无法根据二阶或一阶条件证明凸性。
+
+- **凸函数的非负加权和**是凸函数。令$f_1,f_2,\dots,f_k$是凸函数，并且有$w_1,w_2,\dots,w_k$都是非负实数，则：
+
+$$
+f(x) = \sum_{i=1}^kw_if_i(x)
+$$
+
+是一个凸函数，因为：
+
+$$
+\begin{aligned}
+f(\theta x +(1-\theta) y)&=\sum_{i=1}^kw_if_i(\theta x +(1-\theta) y) \\
+&\le\sum_{i=1}^kw_i(\theta f_i(x))+(1-\theta)f_i(y)) \\
+&=\theta\sum_{i=1}^kw_if_i(x)+(1-\theta)\sum_{i=1}^kw_if_i(y) \\
+&=\theta f(x) + (1-\theta)f(x)
+\end{aligned}
+$$
 
