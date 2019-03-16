@@ -17,4 +17,5 @@
 +   [反向传播](Markdown/cs229-notes-BP.md)
 +   [决策树](Markdown/cs229-notes-dt.md)
 +   [集成学习](Markdown/cs229-notes-ensemble.md)
++   [凸优化1](Markdown/cs229-notes-cvxopt.md)
 
