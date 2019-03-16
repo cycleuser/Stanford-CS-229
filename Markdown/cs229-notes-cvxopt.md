@@ -370,7 +370,7 @@ $$
 
 $$
 \begin{aligned}
-minimize \quad & \frac 12 \parallel w\parallel_2 ^2+C\sum^m_{}\xi_i \\
+minimize \quad & \frac 12 \parallel w\parallel_2 ^2+C\sum^m_{i=1}\xi_i \\
 subject\quad to \quad& y^{(i)}(w^Tx^{(i)}+b) \geq1-\xi_i,\quad &i=1,...,m\\
 & \xi_i \geq 0, &i=1,...,m
 \end{aligned}
