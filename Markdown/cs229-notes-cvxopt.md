@@ -22,7 +22,7 @@ CS229 Section notes
 
 在一般情况下，很多案例的结果表明，想要找到一个函数的全局最优值是一项非常困难的任务。然而，对于一类特殊的优化问题——**凸优化问题，** 我们可以在很多情况下有效地找到全局最优解。在这里，有效率既有实际意义，也有理论意义：它意味着我们可以在合理的时间内解决任何现实世界的问题，它意味着理论上我们可以在一定的时间内解决该问题，而时间的多少只取决于问题的多项式大小。**（译者注：即算法的时间复杂度是多项式级别$O(n^k)$，其中$k$代表多项式中的最高次数）**
 
-这部分笔记和随附课程的目的是对凸优化领域做一个非常简要的概述。这里的大部分材料（包括一些数字）都是基于斯蒂芬·博伊德(Stephen Boyd)和利文·范登伯格(lieven Vandenberghe)的著作《凸优化》（凸优化<a href='#[1]'>[1]</a>在网上<a target='_blank' href='https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf'>免费提供下载</a>）以及斯蒂芬·博伊德(Stephen Boyd)在斯坦福教授的课程EE364。如果你对进一步研究凸优化感兴趣，这两种方法都是很好的资源。
+这部分笔记和随附课程的目的是对凸优化领域做一个非常简要的概述。这里的大部分材料（包括一些数字）都是基于斯蒂芬·博伊德(Stephen Boyd)和利文·范登伯格(lieven Vandenberghe)的著作《凸优化》（凸优化[1]`注：参考资料[1]见文章最下方`在网上<a target='_blank' href='https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf'>免费提供下载</a>）以及斯蒂芬·博伊德(Stephen Boyd)在斯坦福教授的课程EE364。如果你对进一步研究凸优化感兴趣，这两种方法都是很好的资源。
 
 #### 2. 凸集
 
@@ -487,7 +487,7 @@ $$
 
 >8 然而，根据优化问题的不同，这些现成的凸优化求解器会比最佳实现慢得多；因此，有时你可能不得不使用更定制的解决方案或实现自己的解决方案。
 
-在这些软件包中，我们以CVX<a href='#[2]'>[2]</a>为例。CVX是一种自由的基于matlab的求解一般凸优化问题的软件包;它可以解决多种凸优化问题，如LP、QP、QCQP、SDP等。作为一个例子，我们通过使用习题集1中的数据为二分类问题实现一个线性SVM分类器来结束本节。对于使用其他非线性内核的一般设置，也可以使用CVX求解对偶公式。
+在这些软件包中，我们以CVX[2]`注：参考资料[2]见文章最下方`为例。CVX是一种自由的基于matlab的求解一般凸优化问题的软件包;它可以解决多种凸优化问题，如LP、QP、QCQP、SDP等。作为一个例子，我们通过使用习题集1中的数据为二分类问题实现一个线性SVM分类器来结束本节。对于使用其他非线性内核的一般设置，也可以使用CVX求解对偶公式。
 
 ```
 % load data
@@ -529,4 +529,4 @@ title(sprintf(’decision boundary for a linear SVM classifier with C=%g’, C))
 
 <blockquote id='[1]'>[1] Stephen Boyd and Lieven Vandenberghe. Convex Optimization. Cambridge UP, 2004. Online: <a target='_blank' href='http://www.stanford.edu/~boyd/cvxbook/'>http://www.stanford.edu/~boyd/cvxbook/</a></blockquote>
 
-<blockquote id='[2]'>[2] M. Grant and S. Boyd. CVX: Matlab software for disciplined convex programming (web page and software). <a target='_blank' href='http://stanford.edu/~boyd/cvx/'>http://stanford.edu/~boyd/cvx/</a>, September 2008.</blockquote>
+<blockquote id='[2]'>[2] M. Grant and S. Boyd. CVX: Matlab software for disciplined convex programming (web page and software). <a target='_blank' href='http://cvxr.com/'>http://cvxr.com/</a>, September 2008.</blockquote>
