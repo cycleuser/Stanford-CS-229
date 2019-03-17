@@ -480,9 +480,9 @@ $$
 
 我们特别指出CVX作为一个易于使用的通用工具可以基于MATLAB求解凸优化问题，还有CVXOPT作为一个强大的基于Python库，其独立于MATLAB运行。$^8$ 如果你对上诉列表中出现的其他包感兴趣的话，可以很容易的在web中搜索到。简而言之，如果你需要一个特定的凸优化算法，现有的软件包提供了一种快速的原型化方法来让你实现该算法，而无需你自己完整的完成凸优化的所有数值计算。
 
->8 CVX 在网址 http://www.stanford.edu/~boyd/cvx/ 可以找到。CVXOPT 在网址 http://www.ee.ucla.edu/vandenbe/cvxopt/ 可以找到。
+>8 CVX 在网址 http://cvxr.com/cvx/ 可以找到。CVXOPT 在网址 http://cvxopt.org/ 可以找到。
 
-另外，如果你觉得本材料很有趣，一定要看看Stephen Boyd的课程EE364: Optimization I，它将在冬季学期提供。EE364的课程教材（在参考资料<a href='#[1]'>[1]</a>中列出）包含丰富的凸优化知识，可以在线浏览。
+另外，如果你觉得本材料很有趣，一定要看看Stephen Boyd的课程EE364: Optimization I，它将在冬季学期提供。EE364的课程教材（在参考资料[1]`注：参考资料[1]见文章最下方`中列出）包含丰富的凸优化知识，可以在线浏览。
 
 ##### 参考资料
 
