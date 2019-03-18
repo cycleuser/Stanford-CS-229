@@ -77,7 +77,7 @@ $$
 \min_x\underbrace{[\max_{\alpha,\beta:\alpha_i\ge0,\forall i}\mathcal{L}(x,\alpha,\beta)]}_{这部分称作\theta_\mathcal{P}(x)}=\min_x\theta_\mathcal{P}(x)\qquad\qquad(P)
 $$
 
-上面的等式中，函数$\theta_\mathcal{P}:R^n\rightarrow R$被称作**原目标(primal objective,)，** 右边的无约束极小化问题称为**原问题(primal problem)。** 在通常情况下，当$g_i(x)\le 0,i=1,\dots,m$以及$h_i(x)=0,i=1,\dots,p$时，一个点$x\in R^n$被称作**原可行域(primal feasible)。** 我们通常使用向量$x^*\in R^n$代表$(P)$式的解。我们令$p^*=\theta_\mathcal{P}(x^*)$代表原目标的优化值。
+上面的等式中，函数$\theta_\mathcal{P}:R^n\rightarrow R$被称作**原目标(primal objective,)，** 右边的无约束极小化问题称为**原问题(primal problem)。** 在通常情况下，当$g_i(x)\le 0,i=1,\dots,m$以及$h_i(x)=0,i=1,\dots,p$时，一个点$x\in R^n$被称作**原可行域(primal feasible)。** 我们通常使用向量$x^*\in R^n$代表$(P)$式的解。我们令$p^*=\theta_\mathcal{P}(x^*)$代表原目标的最优值。
 
 <u>对偶问题</u>
 
@@ -87,7 +87,7 @@ $$
 \max_{\alpha,\beta:\alpha_i\ge0,\forall i}\underbrace{[\min_x\mathcal{L}(x,\alpha,\beta)]}_{这部分称作\theta_\mathcal{D}(\alpha,\beta)}=\max_{\alpha,\beta:\alpha_i\ge 0,\forall i}\theta_\mathcal{D}(\alpha,\beta)\qquad\qquad(D)
 $$
 
-这里的函数$\theta_\mathcal{D}:R^m\times R^p\rightarrow R$被称作**对偶目标(dual objective)，** 右边的约束最大化问题称为**对偶问题(dual problem)。** 通常情况下，当$\alpha_i\ge 0,i=1,\dots,m$时，我们称$(\alpha,\beta)$为**对偶可行域(dual feasible)。** 我们通常使用向量对$(\alpha^*,\beta^*)\in R^m\times R^p$代表$(D)$式的解。我们令$\theta_\mathcal{D}(\alpha^*,\beta^*)$代表对偶目标的优化值。
+这里的函数$\theta_\mathcal{D}:R^m\times R^p\rightarrow R$被称作**对偶目标(dual objective)，** 右边的约束最大化问题称为**对偶问题(dual problem)。** 通常情况下，当$\alpha_i\ge 0,i=1,\dots,m$时，我们称$(\alpha,\beta)$为**对偶可行域(dual feasible)。** 我们通常使用向量对$(\alpha^*,\beta^*)\in R^m\times R^p$代表$(D)$式的解。我们令$\theta_\mathcal{D}(\alpha^*,\beta^*)$代表对偶目标的最优值。
 
 ##### 1.3 原问题的解释
 
@@ -113,7 +113,7 @@ $$
 
 可以看到这样一个事实：函数$f(x)$不依赖于$\alpha$或者$\beta$。只考虑括号内的符号，可以注意到：
 
-- 如果任意$g_i(x)>0$，则使括号内表达式最大化需要使对应的$\alpha_i$为任意大的正数；但是，如果$g_i(x)\le 0$，且需要$\alpha_i$非负，这就意味着调节$\alpha_i$达到整体最大值的设置为$\alpha_i= 0$，此时的最大值为0。
+- 如果任意$g_i(x)>0$，则使括号内表达式最大化需要使对应的$\alpha_i$为任意大的正数；但是，如果$g_i(x)\le 0$，且需要$\alpha_i$非负，这就意味着调节$\alpha_i$达到整体最大值的设置为$\alpha_i= 0$，此时的最大值为$0$。
 
 - 类似地，如果任意$h_i(x) \ne 0$，则要使括号内表达式最大化，需要选择与$h_i(x)$符号相同且任意大的对应$\beta_i$；但是，如果$h_i(x)=0$，则最大值与$\beta_i$无关，只能取$0$。
 
@@ -133,7 +133,7 @@ $$
 \max_{\alpha,\beta:\alpha_i\ge0,\forall i}[\sum_{i=1}^m\alpha_ig_i(x)+\sum_{i=1}^p\beta_ih_i(x)]=\begin{cases}
 0& 如果x在原始问题的可行域内\\
 \infin& 如果x不在原始问题可行域内
-\end{cases}
+\end{cases}\qquad(8)
 $$
 
 作为一种障碍函数(“barrier” function)，它防止我们将不可行点作为优化问题的候选解。
@@ -165,7 +165,7 @@ $$
 \end{aligned}
 $$
 
-这里，第一步和第三步分别直接遵循对偶目标函数和拉格朗日函数的定义。第二步是根据前面的表达式在$x$的可能值上取得最小化，最后一步是根据$x^*$是在原可行域内的这个事实得出的。因此等式$(8)$暗示等式$(12)$的后两项必须是非正数。
+这里，第一步和第三步分别直接遵循对偶目标函数和拉格朗日函数的定义。第二步是根据不能等号前面的表达式的意思是$x$在的所有可能值上使得函数$\mathcal{L}(x,\alpha,\beta)$为最小的那个值，最后一步是根据$x^*$是在原可行域内的这个事实得出的，并且等式$(8)$也暗示等式$(12)$的后两项必须是非正数。
 
 引理表明，给定任何对偶可行的$(\alpha,\beta)$，对偶目标$\theta_\mathcal{D}(\alpha,\beta)$提供了原问题优化值$p^*$的一个下界。由于对偶问题涉及到在所有对偶可行域$(\alpha,\beta)$上使对偶目标最大化。因此，对偶问题可以看作是对可能的最紧下界$p^*$的搜索。这就对任何原始和对偶优化问题对产生了一个性质，这个性质被称为**弱对偶(weak duality)：**
 
@@ -181,7 +181,7 @@ $$
 
 凸优化问题强对偶性的一个特别有趣的结果是**互补松弛性(complementary slackness)**（或KKT互补）：
 
-**引理 4** （互补松弛性）。如果强对偶成立，则对于每一个$i=1,\dots,m$都有$\alpha_i^*g(x_i^*)$
+**引理 4** （互补松弛性）。如果强对偶成立，则对于每一个$i=1,\dots,m$都有$\alpha_i^*g(x_i^*)=0$
 
 <i>证明。</i>假设强对偶性成立。主要是复制上一节的证明，注意这下面的式子：
 
@@ -200,7 +200,7 @@ $$
 \sum_{i=1}^m\alpha_i^*g_i(x^*)+\sum_{i=1}^p\beta_i^*h_i(x^*)=0\qquad\qquad(18)
 $$
 
-但是，回忆一下每个$\alpha_i^*$是非负的，每个$g_i(x^*)$是非负的，并且由于$x^*$和$(\alpha^*,\beta^*)$分别是原可行域和对偶可行域，所以每个$h_i(x^*)$都是零。因此，$(18)$表示的是所有非正项之和等于零的一个式子。很容易得出结论，求和中的所有单独项本身都必须为零（因为如果不为零，求和中就没有允许总体和保持为零的补偿正项）。
+但是，回忆一下由于$x^*$和$(\alpha^*,\beta^*)$分别都在原可行域和对偶可行域内，所以每个$\alpha_i^*$是非负的，每个$g_i(x^*)$是非负的，以及每个$h_i(x^*)$都是零。因此，$(18)$表示的是所有非正项之和等于零的一个式子。很容易得出结论，求和中的所有单独项本身都必须为零（因为如果不为零，求和中就没有允许总体和保持为零的补偿正项）。
 
 互补松弛性可以用许多等价的方式来表示。一种特别的方法是如下的条件对：
 
@@ -222,7 +222,7 @@ $$
 1. （原始的可行性）$g_i(x^*)\le 0,i=1,\dots,m$以及$h_i(x^*)=0,i=1,\dots,p$，
 2. （对偶可行性）$\alpha_i^*\ge 0,i= 1,\dots,m$，
 3. （互补松弛性）$\alpha_i^*g_i(x^*)=0,i= 1,\dots,m$，
-4. （拉格朗日平稳性）$\nabla_x\mathcal{L}(x^*,\alpha^*,\beta^*)=0$。
+4. （拉格朗日稳定性）$\nabla_x\mathcal{L}(x^*,\alpha^*,\beta^*)=0$。
 
 $x^*$是原优化，$(\alpha^*,\beta^*)$是对偶优化。更进一步，如果强对偶成立，则任意原优化$x^*$以及对偶优化$(\alpha^*,\beta^*)$必须满足条件$1$到条件$4$。
 
@@ -267,7 +267,7 @@ $$
 
 为了用只依赖于$\alpha$（而不是$x$）的形式来表示对偶目标，我们首先观察到拉格朗日函数关于$x$是可微的，事实上，$x_1$和$x_2$（即我们可以分别求出它们的最小值）是可以分离的。
 
-为了使函数关于$x_1$最小化，可以观察到拉格朗日函数是$x_1$的严格凸二次函数，因此通过将导数设为零可以找到关于$x_1$的最小值：
+为了使函数关于$x_1$最小化，可以观察到拉格朗日函数是关于$x_1$的严格凸二次函数，因此通过将导数设为零可以找到关于$x_1$的最小值：
 
 $$
 \frac{\partial}{\partial x_1}\mathcal{L}(x,\alpha)=2x_1-2\alpha_1=0\Longrightarrow x_1=\alpha_1\qquad\qquad (22)
