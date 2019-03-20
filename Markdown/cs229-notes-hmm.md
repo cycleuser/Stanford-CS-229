@@ -54,3 +54,89 @@ $$
 
 请注意，这些数字（我自己编的）表明了天气是自相关的，这是因为：如果天气晴朗，它将趋向于保持晴朗，如果天气多云将保持多云，等等。这种模式在许多马尔可夫模型中都很常见，可以作为转移矩阵中的强对角性来遵守。注意，在本例中，我们的初始状态$s_0$显示了过渡到天气系统中的三种状态的概率是一样的。
 
+##### 1.1 马尔可夫模型的两个问题
+
+结合马尔可夫假设和状态转移参数矩阵$A$，我们可以回答关于马尔可夫链中状态序列的两个基本问题。
+- 给定一个特定的状态序列$\vec{z}$，其概率是多少？
+- 给定一个观测序列$\vec{z}$，如何通过其进行最大似然估计得到状态转移参数矩阵$A$？
+
+###### 1.1.1 状态序列的概率
+
+我们可以利用概率的链式法则来计算某一特定状态序列$\vec{z}$的概率：
+
+$$
+\begin{aligned}
+P（\vec{z}) &= P(z_t,z_{t-1},\dots,z_1;A) \\
+&= P(z_t,z_{t-1},\dots,z_1,z_0;A) \\
+&= P(z_t|z_{t-1},z_{t-2},\dots,z_1;A)P(z_{t-1}|z_{t-2},\dots,z_1;A)\dots P(z_1|z_0;A) \\
+&= P(z_t|z_{t-1};A)P(z_{t-1}|z_{t-2};A)\dots P(z_2|z_1;A)P(z_1|z_0;A) \\
+&= \prod_{t=1}^TP(z_t|z_{t-1};A) \\
+&= \prod_{t=1}^TA_{z_{t-1} z_t}
+\end{aligned}
+$$
+
+在第二行，我们引入$z_0$进入我们公式中的联合概率密度，这使得该式子可以通过上面定义的$z_0$来计算。第三行的结果是通过概率链式法则或贝叶斯规则的重复应用在该联合概率密度上得到的。第四行遵循马尔可夫假设，最后一行表示这些项都来自于转换矩阵$A$中的元素。
+
+我们计算一下前面例子中的时间序列的概率。通过式子表达的话，即我们想要计算$P(z_1 = s_{sun} , z_2 = s_{cloud} , z_3 = s_{rain} , z_4 = s_{rain} , z_5 = s_{cloud})$，这个式子可以通过分解来计算，即$P(s_{sun}|s_0)P(s_{cloud}|s_{sun})P(s_{rain}|s_{cloud})P(s_{rain}|s_{rain})P(s_{cloud}|s_{rain}) =.33 \times .1 \times .2 \times .7 \times .2$。
+
+###### 1.1.2 最大似然参数赋值
+
+从学习的角度来看，我们可以通过观察序列$\vec{z}$的对数似然函数找到参数矩阵$A$。相应的找到从晴天到多云，以及相对的从晴天到晴天等转移的似然，这使得观察集合发生的概率最大。让我们定义一个马尔科夫模型的最大似然函数：
+
+$$
+\begin{aligned}
+l(A) &= logP(\vec{z};A) \\
+&= log\prod_{t=1}^TA_{z_{t-1} z_t} \\
+&= \sum_{t=1}^TlogA_{z_{t-1} z_t} \\
+&= \sum_{i=1}^{|S|}\sum_{j=1}^{|S|}\sum_{t=1}^{T}1\{z_{t-1}=s_i\wedge z_t=s_j\}logA_{ij}
+\end{aligned}
+$$
+
+在最后一行中，我们使用一个指示器函数，当条件保持不变时，它的值为$1$，否则为$0$，以在每个时间步长选择观察到的转换。在求解这一优化问题时，重要的是要保证所求解的参数矩阵$A$仍然是一个有效的转换矩阵。特别地，我们需要确保状态$i$的输出概率分布总是和为$1$，并且$A$的所有元素都是非负的。我们可以用拉格朗日乘子法来求解这个优化问题。
+
+$$
+\begin{aligned}
+\max_A\qquad &l(A) \\
+s.t.\qquad &\sum_{j=1}^{|S|}A_{ij}=1,\quad i=1..|S|\\
+&A_{ij}\ge 0,\quad i,j=1..|S|
+\end{aligned}
+$$
+
+该约束优化问题可以用拉格朗日乘子法以封闭形式求解。我们将把等式约束引入拉格朗日方程，但不等式约束可以放心地忽略——优化解任然能为$A_{ij}$产生一个正值。因此我们构建如下的拉格朗日函数：
+
+$$
+\mathcal{L}(A,\alpha)=\sum_{i=1}^{|S|}\sum_{j=1}^{|S|}\sum_{t=1}^{T}1\{z_{t-1}=s_i\wedge z_t=s_j\}logA_{ij}+\sum_{i=1}^{|S|}\alpha_i(1-\sum_{j=1}^{|S|}A_{ij})
+$$
+
+求偏导数，令它们等于零，得到:
+
+$$
+\begin{aligned}
+\frac{\partial\mathcal{L}(A,\alpha)}{\partial A_{ij}} &=\frac{\partial}{\partial A_{ij}}(\sum_{t=1}^{T}1\{z_{t-1}=s_i\wedge z_t=s_j\}logA_{ij}) + \frac{\partial}{\partial A_{ij}}\alpha_i(1-\sum_{j=1}^{|S|}A_{ij}) \\
+&= \frac 1{A_{ij}}\sum_{t=1}^{T}1\{z_{t-1}=s_i\wedge z_t=s_j\}-\alpha_i\equiv0\\
+&\Rightarrow \\
+A_{ij} &=\frac 1{\alpha_i}\sum_{t=1}^{T}1\{z_{t-1}=s_i\wedge z_t=s_j\}
+\end{aligned}
+$$
+
+带入，零偏导$\alpha$等于零：
+
+$$
+\begin{aligned}
+\frac{\partial\mathcal{L}(A,\alpha)}{\partial \alpha_i} &= 1-\sum_{j=1}^{|S|}A_{ij} \\
+&= 1-\sum_{j=1}^{|S|}\frac 1{\alpha_i}\sum_{t=1}^{T}1\{z_{t-1}=s_i\wedge z_t=s_j\}\equiv0 \\
+&\Rightarrow \\
+\alpha_i &= \sum_{j=1}^{|S|}\sum_{t=1}^{T}1\{z_{t-1}=s_i\wedge z_t=s_j\} \\
+&= \sum_{t=1}^{T}1\{z_{t-1}=s_i\}
+\end{aligned}
+$$
+
+把$\alpha_i$带入表达式，我们推导出$A_{ij}$的最大似然参数值$\hat{A_{ij}}$为：
+
+$$
+\hat{A_{ij}} = \frac{\sum_{t=1}^T 1\{z_{t-1}=s_i\wedge z_t=s_j\}}{\sum_{t=1}^T 1\{z_{t-1} = s_i\}}
+$$
+
+这个公式编码一个简单的解释是：从状态$i$到状态$j$转移的最大似然概率其实就是从状态$i$到状态$j$出现的次数数除以总次数。换句话说，最大似然参数对应我们从状态$i$到状态$j$的次数的分数。
+
+
