@@ -157,3 +157,51 @@ $$
 
 我们可能会问HMM三个基本问题。观察到的序列的概率是多少（比如我们观察到消耗了$3,2,3,2$个冰淇淋）？最有可能产生观测结果的一系列状态是什么（那四天的天气如何）？我们如何学习给定数据时的隐马尔可夫模型参数$A$和$B$的值？
 
+##### 2.2 观测序列的概率：正演过程
+
+在HMM中，我们假设数据是由以下过程生成的：假设存在一系列基于我们时间训序列长度的状态$\vec{z}$。该状态序列由状态转换矩阵$A$参数化的马尔可夫模型生成。在每个时间步$t$，我们选择一个输出$x_t$作为状态$z_t$出现下的函数。因此，为了得到一个观测序列的概率，我们需要将给定的每个可能状态序列的数据$\vec{x}$的似然概率相加。
+
+$$
+\begin{aligned}
+P(\vec{x};A,B) &= \sum_{\vec{z}}P(\vec{x},\vec{z};A,B) \\
+&= \sum_{\vec{z}}P(\vec{x}|\vec{z};A,B)P(\vec{z};A,B)
+\end{aligned}
+$$
+
+上述公式适用于任何概率分布。然而，HMM假设允许我们进一步简化表达式：
+
+$$
+\begin{aligned}
+P(\vec{x};A,B) &= \sum_{\vec{z}}P(\vec{x}|\vec{z};A,B)P(\vec{z};A,B) \\
+&= \sum_{\vec{z}}(\prod_{t=1}^TP(x_t|z_t;B))(\prod_{t=1}^TP(z_t|z_{t-1};A)) \\
+&= \sum_{\vec{z}}(\prod_{t=1}^TB_{z_tx_t})(\prod_{t=1}^TA_{z_{t-1}z_t})
+\end{aligned}
+$$
+
+好消息是，上式是一个关于参数的简单表达式。推导过程遵循HMM假设：输出独立假设、马尔可夫假设和平稳过程假设，这三个假设都用于推导第二行。坏消息是所有可能的产生序列$\vec{z}$任务的总和太大了。因为$z_t$在每个时间步都可能有$|S|$种可能值，直接结算期总和需要操作的时间复杂度是$O(|S|^T)$
+
+<hr style="height:1px;border:none;border-top:3px solid black;" />
+
+**算法 1** 正向计算$\alpha_i(t)$
+
+<hr style="height:1px;border:none;border-top:1px solid black;" />
+
+1. 基本情况：$\alpha_i(0) = A_{0i},i=1..|s|$
+
+2.  递归： $\alpha_j(t) = \sum_{i=1}^{|S|}\alpha_i(t-1)A_{ij}B_{jx_t},j=1..|S|,t=1..T$
+
+<hr style="height:1px;border:none;border-top:1px solid black;" />
+
+幸运的是，可以根据一个名叫前向算法(Forward Procedure)的算法更快的计算$P(\vec{x};A,B)$，该算法采用了动态规划的思想。首先让我们定义一个符号：$\alpha_i(t)=P(x_1,x_1,\dots,x_t,z_t=s_i;A,B)$。$\alpha_i(t)$代表随时间$t$（通过任意状态指定）变化的所有观测值和我们在时间$t$进入状态$s_i$的联合概率。在我们有了这个符号之后，所有观察到对象的全集的概率$P(\vec{x})$可以如下表达：
+
+$$
+\begin{aligned}
+P(\vec{x};A,B) &= P(x_1,x_2,\dots,x_T;A,B) \\
+&= \sum_{i=1}^{|S|}P(x_1,x_2,\dots,x_T,z_T=s_i;A,B) \\
+&= \sum_{i=1}^{|S|}\alpha_i(T)
+\end{aligned}
+$$
+
+算法$2.2$给出了一种有效的方法来计算$\alpha_i(t)$。在每个时间步，我们进行计算的时间复杂度仅仅是$O(|S|)$，这样得到最终计算观察到的状态序列的总概率$P(\vec{x};A,B)$算法的时间复杂度是$O(|S|\times T)$。
+
+一个类似称为向后过程(Backward Procedure)的算法可以用来计算类似的概率$\beta_i(t)=P(x_T,x_{T-1},\dots,x_{t+1},z_t=s_i;A,B)$。
