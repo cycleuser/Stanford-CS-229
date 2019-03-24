@@ -14,7 +14,7 @@ CS229 Section notes
 |[网易公开课中文字幕视频](http://open。163。com/movie/2008/1/M/C/M6SGF6VB4_M6SGHFBMC。html)|
 
 
-### 隐马尔可夫模型的基本原理
+### 隐马尔可夫模型基础
 
 #### 摘要
 
@@ -205,3 +205,39 @@ $$
 算法$2.2$给出了一种有效的方法来计算$\alpha_i(t)$。在每个时间步，我们进行计算的时间复杂度仅仅是$O(|S|)$，这样得到最终计算观察到的状态序列的总概率$P(\vec{x};A,B)$算法的时间复杂度是$O(|S|\times T)$。
 
 一个类似称为向后过程(Backward Procedure)的算法可以用来计算类似的概率$\beta_i(t)=P(x_T,x_{T-1},\dots,x_{t+1},z_t=s_i;A,B)$。
+
+##### 2.3 最大似然状态目标序列：维特比算法
+
+隐马尔可夫模型最常见的问题之一是想要知道在给定了一个观察到的输出序列$\vec{x}\in V^T$时，最有可能的状态序列$\vec{z}\in S^T$是什么。可以用如下公式表达：
+
+$$
+arg\max_{\vec{z}}P(\vec{z}|\vec{x};A,B)=arg\max_{\vec{z}} \frac{P(\vec{x}, \vec{z};A,B)}{\sum_{\vec{z}}P(\vec{x}, \vec{z};A,B)}=arg\max_{\vec{z}}P(\vec{x}, \vec{z};A,B)
+$$
+
+第一个化简遵循贝叶斯规则，第二个化简遵循分母不直接依赖$\vec{z}$的观察结果。简而言之，我们这里模型的意思是尝试所有可能产生目标序列$\vec{z}$，并取其中能使得联合概率最大的那个目标序列。然而，枚举一组可能的任务序列需要的时间复杂度是$O(|S|^T)$。在这一点上，你可能会想到使用上一小节的正向算法那样的动态规划方案来解决本节的问题可能会节约时间，没错。注意，如果将$arg\max_{\vec{z}}$替换为$\sum_{\vec{z}}$，那么我们当前的任务与向前过程的表达式完全类似。
+
+<hr style="height:1px;border:none;border-top:3px solid black;" />
+
+**算法 2** 基于EM算法解决隐马尔可夫模型普通应用的算法： 
+
+<hr style="height:1px;border:none;border-top:1px solid black;" />
+
+（$E$步）对于每一个可能的序列$\vec{z} \in S^T$，设：
+
+$$
+Q(\vec{z}):=p(\vec{z}|\vec{x};A, B)
+$$
+
+（$M$步）设：
+
+$$
+\begin{aligned}
+A, B &:= arg\max_{A,B}\sum_{\vec{z}}Q(\vec{z})log\frac{P(\vec{x}, \vec{z}; A, B)}{Q(\vec{z})} \\
+&s.t.\sum_{j=1}^{|S|}A_{ij}=1,i=1...|S|;A_{ij}\ge0,\quad i,j=1...|S| \\
+&\quad\sum_{k=1}^{|V|}B_{ik}=1,i=1...|S|;B_{ik}\ge0,\quad i=1...|S|,k=1...|V|
+\end{aligned}
+$$
+
+<hr style="height:1px;border:none;border-top:1px solid black;" />
+
+维特比算法(Viterbi Algorithm)与正向过程类似，不同之处在于，我们只需要跟踪最大概率并记录其对应的状态序列，而不是跟踪到目前为止所看到的生成观测结果的总概率。
