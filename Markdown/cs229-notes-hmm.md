@@ -241,3 +241,165 @@ $$
 <hr style="height:1px;border:none;border-top:1px solid black;" />
 
 维特比算法(Viterbi Algorithm)与正向过程类似，不同之处在于，我们只需要跟踪最大概率并记录其对应的状态序列，而不是跟踪到目前为止所看到的生成观测结果的总概率。
+
+##### 2.4 参数学习：基于EM算法的隐马尔可夫模型
+
+HMM模型的最后一个问题是：给定一组观察序列的集合，使这组集合最有可能出现的状态转移概率矩阵(state transition probabilities)$A$和状态生成概率矩阵(output emission probabilities)$B$的值是多少？例如，基于语音识别数据集求解最大似然参数可以使我们有效地训练HMM模型，之后在需要求得候选语音信号的最大似然状态序列时使用该模型。
+
+在本节中，我们推导了隐马尔可夫模型的期望最大化算法。这个证明来自于CS229课堂讲稿中给出的$EM$的一般公式。算法$2.4$给出了基本的$EM$算法。注意，$M$步中的优化问题现在受到约束，使得$A$和$B$包含有效的概率。就像我们为（非隐）马尔可夫模型找到的最大似然解一样，我们将能够用拉格朗日乘子来解决这个优化问题。还要注意，$E$步和$M$步都需要枚举所有$|S|^T$种可能的序列$\vec{z}$。我们将使用前面提到的前向和后向算法为我们的$E$步和$M$步计算一组有效的统计量。
+
+首先，我们用马尔可夫假设重写目标函数：
+
+$$
+\begin{aligned}
+A,B &= arg\max_{A,B}\sum_{\vec{z}}Q(\vec{z})log\frac{P(\vec{x},\vec{z};A,B)}{Q(\vec{z})} \\
+&= arg\max_{A,B}\sum_{\vec{z}}Q(\vec{z})log P(\vec{x},\vec{z};A,B) \\
+&= arg\max_{A,B}\sum_{\vec{z}}Q(\vec{z})log (\prod_{t=1}^TP(x_t|z_t;B))(\prod_{t=1}^TP(z_t|z_{t-1};A)) \\
+&= arg\max_{A,B}\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^TlogB_{z_tx_t}+logA_{z_{t-1}z_t} \\
+&= arg\max_{A,B}\sum_{\vec{z}}Q(\vec{z})\sum_{i=1}^{|S|}\sum_{j=1}^{|S|}\sum_{k=1}^{|V|}\sum_{t=1}^T1\{z_t=s_j\wedge x_t=v_k\}logB_{jk}+1\{z_{t-1}=s_i\wedge z_t=s_j\}logA_{ij}
+\end{aligned}
+$$
+
+在第一行中，我们将对数除法分解为减法，注意分母的项不依赖于参数$A,B$。第$3$行应用了马尔可夫假设。第$5$行使用示性函数按状态索引$A$和$B$。
+
+对于可见马尔可夫模型的最大似然参数，忽略不等式约束是安全的，因为解的形式自然只产生正解。构造拉格朗日函数：
+
+$$
+\begin{aligned}
+\mathcal{L}(A,B,\delta,\epsilon) = &\sum_{\vec{z}}Q(\vec{z})\sum_{i=1}^{|S|}\sum_{j=1}^{|S|}\sum_{k=1}^{|V|}\sum_{t=1}^T1\{z_t=s_j\wedge x_t=v_k\}logB_{jk}+1\{z_{t-1}=s_i\wedge z_t=s_j\}logA_{ij}\\
+&+ \sum_{j=1}^{|S|}\epsilon_j(1-\sum_{k=1}^{|V|}logB_{jk})+\sum_{i=1}^{|S|}\delta_i(1-\sum_{j=1}^{|S|}A_{ij})
+\end{aligned}
+$$
+
+求偏导并使它们等于零：
+
+$$
+\begin{aligned}
+\frac{\partial\mathcal{L}(A,B,\delta,\epsilon)}{\partial A_{ij}} &= \sum_{\vec{z}}Q(\vec{z})\frac 1{A_{ij}}\sum_{t=1}^T1\{z_{t-1}=s_i\wedge z_t=s_j\}-\delta_i\equiv 0 \\
+A_{ij} &= \frac 1{\delta_i}\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\wedge z_t=s_j\} \\
+\frac{\partial\mathcal{L}(A,B,\delta,\epsilon)}{\partial B_{jk}} &= \sum_{\vec{z}}Q(\vec{z})\frac 1{B_{jk}}\sum_{t=1}^T1\{z_t=s_j\wedge x_t=v_k\}-\epsilon_j\equiv 0 \\
+B_{jk} &= \frac 1{\epsilon_j}\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_t=s_j\wedge x_t=v_k\}
+\end{aligned}
+$$
+
+对拉格朗日乘子求导，代入上面$A_{ij}$和$B_{jk}$的值：
+
+$$
+\begin{aligned}
+\frac{\partial\mathcal{L}(A,B,\delta,\epsilon)}{\partial \delta_i} &= 1 - \sum_{j=1}^{|S|}A_{ij} \\
+&= 1 - \sum_{j=1}^{|S|}\frac 1{\delta_i}\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\wedge z_t=s_j\}\equiv 0 \\
+\delta_i &= \sum_{j=1}^{|S|}\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\wedge z_t=s_j\} \\
+&= \sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\}  \\
+\frac{\partial\mathcal{L}(A,B,\delta,\epsilon)}{\partial \epsilon_j} &= 1 - \sum_{k=1}^{|V|}B_{jk} \\
+&= 1 - \sum_{k=1}^{|V|}\frac 1{\epsilon_j}\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_t=s_j\wedge x_t=v_k\}\equiv 0 \\
+\epsilon_j &= \sum_{k=1}^{|V|}\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_t=s_j\wedge x_t=v_k\} \\
+&= \sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_t=s_j\}
+\end{aligned}
+$$
+
+代回上面的表达式，我们得到参数$\hat{A}$和$\hat{B}$使我们对数据集的预测计数最大化:
+
+$$
+\begin{aligned}
+\hat{A}_{ij} &= \frac{\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\wedge z_t=s_j\}}{\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\}} \\
+\hat{B}_{jk} &= \frac{\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_t=s_j\wedge x_t=v_k\}}{\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_t=s_j\}}
+\end{aligned}
+$$
+
+不幸的是，这些总和都超过了所有可能的标签$\vec{z}\in S^T$。但是回忆一下在最后一个时间步时，在有参数矩阵分别为$A,B$的情况下，$Q(\vec{z})$在E-step中被定义为$P(\vec{z}|\vec{x};A,B)$。首先，让我们来考虑如何根据向前向后概率，$\alpha_i(t)$以及$\beta_j(t)$来表达$\hat{A}_{ij}$的分子。
+
+$$
+\begin{aligned}
+& \sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\wedge z_t=s_j\} \\
+=& \sum_{t=1}^T\sum_{\vec{z}}1\{z_{t-1}=s_i\wedge z_t=s_j\}Q(\vec{z}) \\
+=& \sum_{t=1}^T\sum_{\vec{z}}1\{z_{t-1}=s_i\wedge z_t=s_j\}P(\vec{z}|\vec{x};A,B) \\
+=& \frac 1{P(\vec{x};A,B)}\sum_{t=1}^T\sum_{\vec{z}}1\{z_{t-1}=s_i\wedge z_t=s_j\}P(\vec{z},\vec{x};A,B) \\
+=& \frac 1{P(\vec{x};A,B)}\sum_{t=1}^T\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)
+\end{aligned}
+$$
+
+在前两步骤中，我们重新数学符号，并在式中代入$Q$的定义，然后我们在第$4$行的推导中使用了贝叶斯规则，随后在第$5$行中代入对$\alpha,\beta,A$和$B$的定义。类似地，分母可以用分子对$j$求和来表示。
+
+$$
+\begin{aligned}
+& \sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\} \\
+=& \sum_{j=1}^{|S|}\sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_{t-1}=s_i\wedge z_t=s_j\} \\
+=& \frac 1{P(\vec{x};A,B)}\sum_{j=1}^{|S|}\sum_{t=1}^T\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)
+\end{aligned}
+$$
+
+结合这些表达式，我们可以充分描述我们的最大似然状态转换$\hat{A}_{ij}$，而不需要枚举所有可能的标签:
+
+$$
+\hat{A}_{ij} = \frac{\sum_{t=1}^T\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)}{\sum_{j=1}^{|S|}\sum_{t=1}^T\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)}
+$$
+
+同样，$\hat{B}_{jk}$的分子可以表示为:
+
+$$
+\begin{aligned}
+& \sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_t=s_j\wedge x_t=v_k\} \\
+=& \frac 1{P(\vec{x};A,B)}\sum_{t=1}^T\sum_{\vec{z}}1\{z_t=s_j\wedge x_t=v_k\}P(\vec{z},\vec{x};A,B) \\
+=& \frac 1{P(\vec{x};A,B)}\sum_{i=1}^{|S|}\sum_{t=1}^T\sum_{\vec{z}}1\{z_{t-1}=s_i\wedge z_t=s_j\wedge x_t=v_k\}P(\vec{z},\vec{x};A,B) \\
+=& \frac 1{P(\vec{x};A,B)}\sum_{i=1}^{|S|}\sum_{t=1}^T1\{x_t=v_t\}\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)
+\end{aligned}
+$$
+
+$\hat{B}_{jk}$的分母是:
+
+$$
+\begin{aligned}
+& \sum_{\vec{z}}Q(\vec{z})\sum_{t=1}^T1\{z_t=s_j\} \\
+=& \frac 1{P(\vec{x};A,B)}\sum_{i=1}^{|S|}\sum_{t=1}^T\sum_{\vec{z}}1\{z_{t-1}=s_i\wedge z_t=s_j\}P(\vec{z},\vec{x};A,B) \\
+=& \frac 1{P(\vec{x};A,B)}\sum_{i=1}^{|S|}\sum_{t=1}^T\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)
+\end{aligned}
+$$
+
+结合这些表达式，得到最大似然发射概率的形式为:
+
+$$
+\hat{B}_{jk}=\frac{\sum_{i=1}^{|S|}\sum_{t=1}^T1\{x_t=v_t\}\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)}{\sum_{i=1}^{|S|}\sum_{t=1}^T\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)}
+$$
+
+<hr style="height:1px;border:none;border-top:3px solid black;" />
+
+**算法 3** HMM参数学习的前向后向算法： 
+
+<hr style="height:1px;border:none;border-top:1px solid black;" />
+
+初始化：设$A$和$B$为随机有效的概率矩阵，其中$A_{i0}=0,B_{0k}=0,i=1..|S|,k=1..|V|$
+
+重复直到收敛：{
+
+（$E$步）运行前向和后向算法进行计算$\alpha_i,\beta_i,i=1..|S|$，然后设：
+
+$$
+\gamma_t(i,j):=\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)
+$$
+
+（$M$步）重新估计最大似然参数为：
+
+$$
+\begin{aligned}
+A_{ij} &:= \frac{\sum_{t=1}^T\gamma_t(i,j)}{\sum_{j=1}^{|S|}\sum_{t=1}^T\gamma_t(i,j)} \\
+B_{jk} &:= \frac{\sum_{i=1}^{|S|}\sum_{t=1}^T1\{x_t=v_k\}\gamma_t(i,j)}{\sum_{i=1}^{|S|}\sum_{t=1}^T\gamma_t(i,j)}
+\end{aligned}
+$$
+
+}
+
+<hr style="height:1px;border:none;border-top:1px solid black;" />
+
+算法$3$展示了用于HMMs中参数学习的前向后向算法或Baum-Welch算法的变体。在$E$步，我们并没有对于所有的$\vec{z}\in S^T$来明确的计算$Q(\vec{z})$，而是计算一个充分统计量$\gamma_t(i,j):=\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)$。对于所有观察序列$\vec{x}$，这个统计量正比于时间步$t$从状态$x_i$转移到状态$x_j$的概率。$A_{ij}$和$B_{jk}$导出的表达式在直观上很有吸引力。$A_{ij}$计算式是从状态$s_i$到$s_j$的期望数除以$s_i$出现的期望次数。同样，$B_{jk}$的计算式是$v_k$转移到$s_j$的期望数量除以$s_j$出现的预期数量。
+
+与许多EM应用一样，HMMs的参数学习是一个具有许多局部极大值的非凸问题。EM将根据其初始参数收敛到最大值，因此可能需要多次迭代。此外，通常重要的是$A$和$B$表示的概率分布的平滑计算，以便没有转移或发射被分配为$0$的概率。
+
+##### 2.5 扩展阅读
+
+学习隐马尔可夫模型有很多很好的资源。对于NLP的应用，我推荐查看Jurafsky & Martin's写的《Speech and Language Processing》$^1$第二版或Manning & Schütze 写的《Foundations of Statistical Natural Language Processing.》。此外，Eisner写的HMM-in-a-spreadsheet[1]`注：参考资料[1]见文章最下方`是一种轻量级的交互方式，可以学习只需要电子表格应用程序的HMM。
+
+>1 <a target='_blank' href='http://www.cs.colorado.edu/~martin/slp2.html'>http://www.cs.colorado.edu/~martin/slp2.html</a>
+
+##### 参考资料
+
+<blockquote id='[1]'>[1] Jason Eisner.<a target='_blank' href='https://dl.acm.org/citation.cfm?id=1118110'>An interactive spreadsheet for teaching the forward-backward algorithm.</a>In Dragomir Radev and Chris Brew, editors, Proceedings of the ACL Workshop on Effective Tools and Methodologies for Teaching NLP and CL, pages 10-18, 2002.</blockquote>
