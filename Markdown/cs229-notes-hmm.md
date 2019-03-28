@@ -393,3 +393,13 @@ $$
 算法$3$展示了用于HMMs中参数学习的前向后向算法或Baum-Welch算法的变体。在$E$步，我们并没有对于所有的$\vec{z}\in S^T$来明确的计算$Q(\vec{z})$，而是计算一个充分统计量$\gamma_t(i,j):=\alpha_i(t)A_{ij}B_{jx_t}\beta_j(t+1)$。对于所有观察序列$\vec{x}$，这个统计量正比于时间步$t$从状态$x_i$转移到状态$x_j$的概率。$A_{ij}$和$B_{jk}$导出的表达式在直观上很有吸引力。$A_{ij}$计算式是从状态$s_i$到$s_j$的期望数除以$s_i$出现的期望次数。同样，$B_{jk}$的计算式是$v_k$转移到$s_j$的期望数量除以$s_j$出现的预期数量。
 
 与许多EM应用一样，HMMs的参数学习是一个具有许多局部极大值的非凸问题。EM将根据其初始参数收敛到最大值，因此可能需要多次迭代。此外，通常重要的是$A$和$B$表示的概率分布的平滑计算，以便没有转移或发射被分配为$0$的概率。
+
+##### 2.5 扩展阅读
+
+学习隐马尔可夫模型有很多很好的资源。对于NLP的应用，我推荐查看Jurafsky & Martin's写的《Speech and Language Processing》$^1$第二版或Manning & Schütze 写的《Foundations of Statistical Natural Language Processing.》。此外，Eisner写的HMM-in-a-spreadsheet[1]`注：参考资料[1]见文章最下方`是一种轻量级的交互方式，可以学习只需要电子表格应用程序的HMM。
+
+>1 <a target='_blank' href='http://www.cs.colorado.edu/~martin/slp2.html'>http://www.cs.colorado.edu/~martin/slp2.html</a>
+
+##### 参考资料
+
+<blockquote id='[1]'>[1] Jason Eisner.<a target='_blank' href='https://dl.acm.org/citation.cfm?id=1118110'>An interactive spreadsheet for teaching the forward-backward algorithm.</a>In Dragomir Radev and Chris Brew, editors, Proceedings of the ACL Workshop on Effective Tools and Methodologies for Teaching NLP and CL, pages 10-18, 2002.</blockquote>
