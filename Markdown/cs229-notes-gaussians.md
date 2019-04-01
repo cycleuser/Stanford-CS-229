@@ -38,3 +38,31 @@ $$
 
 我们可以将其简写做$X\sim\mathcal{N}(\mu,\Sigma)$。在我们的这部分笔记中，我们描述了多元高斯函数及其一些基本性质。
 
+#### 1. 与单变量高斯函数的关系
+
+回忆一下，**一元正态分布（或高斯分布）(univariate normal (or Gaussian) distribution)** 的密度函数是由下式给出：
+
+$$
+p(x;\mu,\sigma^2)=\frac 1{\sqrt{2\pi}\sigma}exp(-\frac 1{2\sigma^2}(x-\mu)^2)
+$$
+
+这里，指数函数的自变量$-\frac 1{2\sigma^2}(x-\mu)^2$是关于变量$x$的二次函数。此外，抛物线是向下的，因为二次项的系数是负的。前面的系数$\frac 1{\sqrt{2\pi}\sigma}$是不依赖$x$的常数。因此，我们可以简单地把这个系数当作保证下面的式子成立的“标准化因子”(normalization factor)。
+
+$$
+\frac 1{\sqrt{2\pi}\sigma}\int_{-\infin}^{\infin} exp(-\frac 1{2\sigma^2}(x-\mu)^2)=1
+$$
+
+![](https://github.com/Kivy-CN/Stanford-CS-229-CN/blob/master/img/cs229notegf1.png?raw=true)
+
+在多元高斯概率密度函数的情况下，指数函数的自变量$-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)$是一个以向量形式的$x$为变量的**二次形(quadratic form)**。因为$\Sigma$是正定矩阵，并且任何正定矩阵的逆也是正定的，那么对于任何非零向量$z$，有$z\Sigma^Tz>0$。这就暗示了任何向量$x\neq\mu$，有：
+
+$$
+(x-\mu)^T\Sigma^{-1}(x-\mu)>0 \\
+-\frac 12(x-\mu)^T\Sigma^{-1}(x-\mu)<0
+$$
+
+就像在单变量的情况下，你可以把指数函数的参数看成是一个开口向下的二次曲线。指数函数前面的系数（即，$\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}$）是一个比单变量情况下更复杂的一种形式。但是，它仍然不依赖于$x$，因此它只是一个用来保证下面的式子成立的标准化因子：
+
+$$
+\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\int_{-\infin}^{\infin}\int_{-\infin}^{\infin}\dots\int_{-\infin}^{\infin}exp(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))dx_1dx_2\dots dx_n=1
+$$
