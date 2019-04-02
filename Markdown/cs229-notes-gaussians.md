@@ -150,3 +150,46 @@ $$
 其中$c\in R$。$^4$
 
 >4 等值线通常也称为**等值线(level curves)。** 更一般地说，函数的一组**水平集(level set)** $f:R^2\rightarrow R$，其实一个对于一些$c\in R$形式为$\{x\in R^2:f(x)=c\}$的集合。
+
+##### 4.1 等高线的型状
+
+多元高斯函数的等值线是什么样的？和之前一样，我们考虑$n = 2$的情况，
+
+$$
+x=\begin{bmatrix}x_1\\x_2\end{bmatrix}\qquad\qquad \mu=\begin{bmatrix}\mu_1\\\mu_2\end{bmatrix}\qquad\qquad \Sigma=\begin{bmatrix}\sigma_1^2&0\\0&\sigma_2^2\end{bmatrix}
+$$
+
+正如我们在上一节所展示的，
+
+$$
+p(x;\mu,\Sigma) = \frac{1}{2\pi\sigma_1\sigma_2} exp(-\frac 1{2\sigma_1^2}(x_1-\mu_1)^2-\frac 1{2\sigma_2^2}(x_2-\mu_2)^2)\qquad\qquad(4)
+$$
+
+现在，让我们考虑由所有点组成的水平集，其中对于某个常数$c\in R$来说$p(x;\mu,\sigma)=c$。 特别的，考虑对于所有$x_1,x_2\in R$的集合，比如：
+
+$$
+\begin{aligned}
+c&=\frac{1}{2\pi\sigma_1\sigma_2} exp(-\frac 1{2\sigma_1^2}(x_1-\mu_1)^2-\frac 1{2\sigma_2^2}(x_2-\mu_2)^2) \\
+2\pi c\sigma_1\sigma_2 &= exp(-\frac 1{2\sigma_1^2}(x_1-\mu_1)^2-\frac 1{2\sigma_2^2}(x_2-\mu_2)^2)  \\
+log(2\pi c\sigma_1\sigma_2) &= -\frac 1{2\sigma_1^2}(x_1-\mu_1)^2-\frac 1{2\sigma_2^2}(x_2-\mu_2)^2 \\
+log(\frac 1{2\pi c\sigma_1\sigma_2}) &= \frac 1{2\sigma_1^2}(x_1-\mu_1)^2+\frac 1{2\sigma_2^2}(x_2-\mu_2)^2 \\
+1 &= \frac {(x_1-\mu_1)^2}{2\sigma_1^2log(\frac 1{2\pi c\sigma_1\sigma_2})}+\frac {(x_2-\mu_2)^2}{2\sigma_2^2log(\frac 1{2\pi c\sigma_1\sigma_2})}
+\end{aligned}
+$$
+
+定义：
+
+$$
+r_1= \sqrt{2\sigma_1^2log(\frac 1{2\pi c\sigma_1\sigma_2})}\qquad\qquad r_2= \sqrt{2\sigma_2^2log(\frac 1{2\pi c\sigma_1\sigma_2})}
+$$
+
+之后可得：
+
+$$
+1 = (\frac {x_1-\mu_1}{r_1})^2+(\frac {x_2-\mu_2}{r_2})^2\qquad\qquad (5)
+$$
+
+方程$(5)$在高中解析几何中应该很熟悉：它是一个**轴向椭圆(axis-aligned ellipse)** 的方程，其中心是$(\mu_1,\mu_2)$，并且$x_1$轴的长度是$2r_1$，$x_2$轴的长度是$2r_2$。
+
+![](https://github.com/Kivy-CN/Stanford-CS-229-CN/blob/master/img/cs229notegf2.png?raw=true)
+左边的图显示了一个热图，它表示具有均值为$\mu=\begin{bmatrix}3\\2\end{bmatrix}$，对角协方差矩阵为$\Sigma=\begin{bmatrix}25&0\\0&9\end{bmatrix}$的轴向多元高斯函数的概率密度函数值。注意到这个高斯分布的中心点为$(3,2)$，等高线均为椭圆形，长/短轴长之比为$5:3$。右边的图显示了一个热图，该图表示了一个非轴向对齐的具有平均值为$\mu=\begin{bmatrix}3\\2\end{bmatrix}$协方差矩阵为$\Sigma=\begin{bmatrix}25&5\\5&5\end{bmatrix}$的多元高斯概率密度函数值。这里，椭圆再次以$(3,2)$为中心，但现在通过线性变换旋转了主轴和副主轴。
