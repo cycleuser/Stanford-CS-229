@@ -20,3 +20,4 @@
 +   [凸优化1](Markdown/cs229-notes-cvxopt.md)  
 +   [凸优化2](Markdown/cs229-notes-cvxopt2.md)
 +   [隐马尔可夫模型基础](Markdown/cs229-notes-hmm.md)
++   [多元高斯分布](Markdown/cs229-notes-gaussians.md)

@@ -224,3 +224,66 @@ $$
 为了理解这个定理的意义，注意到如果$Z\sim\mathcal{N}(0,I)$，然后利用第$4$节的分析，$Z$可以看作是$n$个独立标准正态随机变量的集合（即，$Z_i\sim\mathcal{N}(0,1)$）。进一步，如果$Z=B^{-1}(X-\mu)$，则根据简单的代数知识可得$X=BZ+\mu$。
 
 因此，定理表明，任何具有多元高斯分布的随机变量$X$都可以解释为对$n$个独立标准正态随机变量$(Z)$集合进行线性变换$(X=BZ+\mu)$的结果。
+
+#### 附录 A.1
+
+证明。我们证明了$(1)$中的两个等式中的第一个等式；另一个等式的证明是相似的。
+
+$$
+\begin{aligned}
+\Sigma &= \begin{bmatrix}Cov[X_1,X_1]&\dots&Cov[X_1,X_n]\\\vdots&\ddots&\vdots\\Cov[X_n,X_1]&\dots&Cov[X_n,X_n]\end{bmatrix} \\
+&= \begin{bmatrix}E[(X_1-\mu_1)^2]&\dots&E[(X_1-\mu_1)(X_n-\mu_n)]\\\vdots&\ddots&\vdots\\E[(X_n-\mu_n)(X_1-\mu_1)]&\dots&E[(X_n-\mu_n)^2]\end{bmatrix} \\
+&= E\begin{bmatrix}(X_1-\mu_1)^2&\dots&(X_1-\mu_1)(X_n-\mu_n)\\\vdots&\ddots&\vdots\\(X_n-\mu_n)(X_1-\mu_1)&\dots&(X_n-\mu_n)^2\end{bmatrix} &(6) \\
+&= E\begin{bmatrix}\begin{bmatrix}X_1-\mu_1\\\vdots\\X_n-\mu_n\end{bmatrix}[X_1-\mu_1\dots X_n-\mu_n]\end{bmatrix} &(7) \\
+&= E[(X-\mu)(X-\mu)^T]
+\end{aligned}
+$$
+
+这里，公式中的$(6)$由“一个矩阵的期望仅仅是通过取每一项的分量期望而得到的矩阵”得到。同样，公式中的$(7)$由“对于任何向量$z\in R^n$，下面的式子成立”而得到。
+
+$$
+zz^T=\begin{bmatrix}z_1\\z_2\\\vdots\\z_n\end{bmatrix}[z_1\quad z_2\quad\dots z_n]=\begin{bmatrix}z_1z_1&z_1z_2&\dots&z_1z_n\\z_2z_1&z_2z_2&\dots&z_2z_n\\\vdots&\vdots&\ddots&\vdots\\z_nz_1&z_nz_2&\dots&z_nz_n\end{bmatrix}
+$$
+
+#### 附录 A.2
+
+我们重申以下定理：
+
+**定理 1** 给定$X\sim\mathcal{N}(\mu,\Sigma)$，其中$\mu\in R^n,\Sigma\in S_{++}^n$。则存在矩阵$B\in R^{n\times n}$如果我们定义$Z=B^{-1}(X-\mu)$，则满足$Z\sim\mathcal{N}(0,I)$。
+
+这个定理的推导需要一些高级线性代数和概率论，本课程的目的可以跳过。我们的论点将由两部分组成。首先，对于某个可逆矩阵$B$，我们会证明协方差矩阵$\Sigma$可以因式分解为$\Sigma=BB^T$。其次，我们将根据关系$Z=B^{-1}(X-\mu)$执行从变量$X$到另一个向量值随机变量$Z$的变量“换元(change-of-variable)”。
+
+**第一步：分解协方差矩阵。** ：回忆一下线性代数$^5$笔记中对称矩阵的两个性质:
+
+>5 参见“对称矩阵的特征值和特征向量”一节。
+
+1. 任意实对称矩阵$A\in R^{n\times n}$总是可以表示为$A=U\Lambda U^T$，其中$U$是一个满秩正交矩阵，其中$A$的特征向量作为它的列。$\Lambda$是一个包含$A$的特征值的对角矩阵。
+2. 如果A是对称正定的，它的所有特征值都是正的。
+
+因为协方差矩阵$\Sigma$是正定的，使用第一个性质，我们可以对于一些适当定义的矩阵$U,\Lambda$写出$\Sigma=U\Lambda U^T$。利用第二个性质，我们可以定义$\Lambda^{1/2}\in R^{n\times n}$是一个对角矩阵，它的元素是对应来自于$\Lambda$元素的平方根。因为$\Lambda=\Lambda^{1/2}(\Lambda^{1/2})^T$，我们可得：
+
+$$
+\Sigma=U\Lambda U^T=U\Lambda^{1/2}(\Lambda^{1/2})^TU^T=U\Lambda^{1/2}(U\Lambda^{1/2})^T=BB^T
+$$
+
+其中$B=U\Lambda^{1/2}$。$^6$那么在这种情况下$\Sigma^{-1}=B^{-T}B^{-1}$，所以我们可以把多元高斯函数的密度的标准公式重写为：
+
+>6 为了证明B是可逆的，只要观察到$U$是可逆矩阵，并且将$U$右乘一个对角矩阵（没有零对角元素）将重新排列它的列，但不会改变它的秩。
+
+$$
+p(x;\mu,\Sigma)=\frac{1}{(2\pi)^{n/2}|BB^T|^{1/2}} exp(-\frac{1}{2}(x-\mu)^TB^{-T}B^{-1}(x-\mu))\qquad\qquad(8)
+$$
+
+**第二步:变量替换。** 现在，定义向量值随机变量$Z=B^{-1}(X-\mu)$。概率论的一个基本公式是有关向量值随机变量的变量变换公式，我们在概率论的讲义中没有介绍这个公式。
+
+假设$X=[X_1\dots X_n]^T\in R^n$是联合概率密度函数$f_X:R^n\rightarrow R$的向量值随机变量。如果$Z=H(X)\in R^n$，其中$H$是一个一个双射的可微函数，则$Z$是一个联合概率密度函数$f_Z:R^n\rightarrow R$，其中：
+
+$$
+f_Z(z)=f_X(x)\cdot\begin{vmatrix}det\begin{pmatrix}\begin{bmatrix}\frac {\partial x_1}{\partial z_1}&\dots&\frac {\partial x_1}{\partial z_n}\\\vdots&\ddots&\vdots\\\frac{\partial x_n}{\partial z_1}&\dots&\frac{\partial x_n}{\partial z_n}\end{bmatrix}\end{pmatrix}\end{vmatrix}
+$$
+
+使用变量变换公式，我们可以证明（经过一些我们将跳过的代数运算）向量变量$Z$的联合概率密度如下：
+
+$$
+p_Z(z)=\frac 1{(2\pi)^{n/2}}exp(-\frac 12z^Tz)\qquad \qquad (9)
+$$
