@@ -105,3 +105,36 @@ $$
 要完成证明，请注意括号内的数量是形式$\sum_{i=1}^n\sum_{j=1}^nx_ix_jz_iz_j=(x^Tz)^2\ge 0$（见问题设定#1）。因此，期望中的量总是非负的，即得到期望本身必须是非负的。我们可以断定$z^T\Sigma z\ge 0$
 
 从上面的命题可以推出，为了使$\Sigma$成为一个有效的协方差矩阵，其必须是对称正半定的。然而，为了使$\Sigma^{-1}$存在（如多元高斯密度的定义所要求的），则$\Sigma$必须是可逆的，因此是满秩的。由于任何满秩对称正半定矩阵必然是对称正定的，因此$\Sigma$必然是对称正定的。
+
+####3. 对角协方差矩阵的情况
+
+为了直观地理解多元高斯函数是什么，考虑一个简单的例子 并且协方差矩阵 是对角阵，即：
+
+$$
+x=\begin{bmatrix}x_1\\x_2\end{bmatrix}\qquad\qquad \mu=\begin{bmatrix}\mu_1\\\mu_2\end{bmatrix}\qquad\qquad \Sigma=\begin{bmatrix}\sigma_1^2&0\\0&\sigma_2^2\end{bmatrix}
+$$
+
+在这种情况下，多元高斯密度的形式是：
+
+$$
+\begin{aligned}
+p(x;\mu,\Sigma) &=\frac{1}{2\pi\begin{vmatrix}\sigma_1^2&0\\0&\sigma_2^2\end{vmatrix}^{1/2}} exp(-\frac{1}{2}\begin{bmatrix}x_1-\mu_1\\x_2-\mu_2\end{bmatrix}^T\begin{bmatrix}\sigma_1^2&0\\0&\sigma_2^2\end{bmatrix}^{-1}\begin{bmatrix}x_1-\mu_1\\x_2-\mu_2\end{bmatrix}) \\
+&= \frac 1{2\pi(\sigma_1^2\cdot \sigma_2^2-0\cdot 0)^{1/2}}exp(-\frac{1}{2}\begin{bmatrix}x_1-\mu_1\\x_2-\mu_2\end{bmatrix}^T\begin{bmatrix}\frac 1{\sigma_1^2}&0\\0&\frac 1{\sigma_2^2}\end{bmatrix}^{-1}\begin{bmatrix}x_1-\mu_1\\x_2-\mu_2\end{bmatrix})
+\end{aligned}
+$$
+
+这里我们依赖于一个$2\times 2$矩阵$^3$的行列式的显式公式，事实上一个对角矩阵的逆就是通过取每个对角元素的倒数来找到的。之后可得：
+
+>3 即$\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc$
+
+$$
+\begin{aligned}
+p(x;\mu,\Sigma) &=\frac{1}{2\pi\sigma_1\sigma_2} exp(-\frac{1}{2}\begin{bmatrix}x_1-\mu_1\\x_2-\mu_2\end{bmatrix}^T\begin{bmatrix}\frac 1{\sigma_1^2}(x_1-\mu_1)\\\frac 1{\sigma_2^2}(x_2-\mu_2)\end{bmatrix}) \\
+&= \frac{1}{2\pi\sigma_1\sigma_2} exp(-\frac 1{2\sigma_1^2}(x_1-\mu_1)^2-\frac 1{2\sigma_2^2}(x_2-\mu_2)^2) \\
+&= \frac{1}{\sqrt{2\pi}\sigma_1} exp(-\frac 1{2\sigma_1^2}(x_1-\mu_1)^2)\cdot \frac{1}{\sqrt{2\pi}\sigma_2} exp(-\frac 1{2\sigma_2^2}(x_2-\mu_2)^2)
+\end{aligned}
+$$
+
+最后一个方程是两个独立的高斯登函数的乘积，其中一个具有均值$\mu_1$，方差$\sigma_1^2$。另一个具有均值$\mu_2$，方差$\sigma_2^2$。
+
+更一般地，我们可以证明$n$维高斯函数的均值$\mu\in R^n$并且对角协方差矩阵$\sigma=diag(\sigma_1^2,\sigma_2^2,\dots,\sigma_n^2)$与$n$个独立的均值和方差分别是$\mu_i,\sigma_i^2$的凹高斯随机变量的集合相同。
