@@ -193,3 +193,18 @@ $$
 
 ![](https://github.com/Kivy-CN/Stanford-CS-229-CN/blob/master/img/cs229notegf2.png?raw=true)
 左边的图显示了一个热图，它表示具有均值为$\mu=\begin{bmatrix}3\\2\end{bmatrix}$，对角协方差矩阵为$\Sigma=\begin{bmatrix}25&0\\0&9\end{bmatrix}$的轴向多元高斯函数的概率密度函数值。注意到这个高斯分布的中心点为$(3,2)$，等高线均为椭圆形，长/短轴长之比为$5:3$。右边的图显示了一个热图，该图表示了一个非轴向对齐的具有平均值为$\mu=\begin{bmatrix}3\\2\end{bmatrix}$协方差矩阵为$\Sigma=\begin{bmatrix}25&5\\5&5\end{bmatrix}$的多元高斯概率密度函数值。这里，椭圆再次以$(3,2)$为中心，但现在通过线性变换旋转了主轴和副主轴。
+
+##### 4.2 轴的长度
+
+为了更好地理解水平曲线的形状是如何随着多元高斯分布的方差变化的，也行我们会对当$c$等于高斯密度峰值高度的分数$1/e$时的$r_1$和$r_2$的值感兴趣。
+
+首先，观察式$(4)$式的最大值出现在$x_1=\mu_1,x_2=\mu_2$。将这些值代入式$(4)$，我们看到高斯密度的峰值高度为$\frac 1{2\pi\sigma_1\sigma_2}$。
+
+其次，我们将等式中的$r_1,r_2$的变量$c$替换为$c=\frac 1e(\frac 1{2\pi\sigma_1\sigma_2})$可以得到：
+
+$$
+r_1= \sqrt{2\sigma_1^2log(\frac 1{2\pi \sigma_1\sigma_2\cdot \frac 1e(\frac 1{2\pi\sigma_1\sigma_2})})}=\sigma_1\sqrt2 \\
+r_2= \sqrt{2\sigma_2^2log(\frac 1{2\pi c\sigma_1\sigma_2\cdot \frac 1e(\frac 1{2\pi\sigma_1\sigma_2})})}=\sigma_2\sqrt2
+$$
+
+从上式可以得出，轴的长度需要达到高斯概率密度函数锋值高度的$1/e$，该高斯概率密度函数在第$i$个维度上与标准差$\sigma_i$成正比增长。直观地说，这是有道理的：某个随机变量$x_i$的方差越小，在那个维度高斯分布的峰值越“紧密”，因此半径$r_i$越小。
