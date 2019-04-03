@@ -18,7 +18,7 @@ CS229 Section notes
 
 #### 介绍
 
-我们称一个概率密度函数是一个均值为$\mu\in R^n$，协方差矩阵为$\Sigma\in S_{++}^n$$^1$的一个**多元正态分布（或高斯分布）(multivariate normal (or Gaussian) distribution)，** 其随机变量是向量值$X=[X_1\dots X_n]^T$，该概率密度函数$^2$可以通过下式表达：
+我们称一个概率密度函数是一个均值为$\mu\in R^n$，协方差矩阵为$\Sigma\in S_{++}^n$的$^1$一个**多元正态分布（或高斯分布）(multivariate normal (or Gaussian) distribution)，** 其随机变量是向量值$X=[X_1\dots X_n]^T$，该概率密度函数$^2$可以通过下式表达：
 
 <blockquote><details><summary>上一小段上标1,2的说明（详情请点击本行）</summary>
 
