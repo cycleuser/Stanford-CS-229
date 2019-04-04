@@ -20,3 +20,22 @@ CS229 Section notes
 
 到目前为止的课堂上，多元高斯以及出现在许多应用中，比如线性回归的概率解释、高斯判别分析、高斯混合聚类，以及最近的因子分析。在本节的笔记中，我们试图揭开多元高斯函数在最近的因子分析课程中引入的一些奇特的性质。本节笔记的目的是让大家对这些性质的来源有一些直观的了解，这样你就可以在作业（提醒你写作业的线索！）中更加明确地使用这些性质。
 
+#### 1. 定义
+
+我们称一个概率密度函数是一个均值为$\mu\in R^n$，协方差矩阵为$\Sigma\in S_{++}^n$的$^1$一个**多元正态分布（或高斯分布）(multivariate normal (or Gaussian) distribution)，** 其随机变量是向量值$x\in R^n$，该概率密度函数可以通过下式表达：
+
+<blockquote><details><summary>上一小段上标1的说明（详情请点击本行）</summary>
+
+1 复习一下线性代数章节中介绍的$S_{++}^n$是一个对称正定的$n\times n$矩阵空间，定义为：
+
+$$
+S_{++}^n=\{A\in R^{n\times n}:A=A^T\quad and\quad x^TAx>0\quad for\quad all\quad x\in R^n\quad such\quad that\quad x\neq 0\}
+$$
+
+</details></blockquote>
+
+$$
+p(x;\mu,\Sigma)=\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}} exp(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))
+$$
+
+我们可以写作$x\sim\mathcal{N}(\mu,\Sigma)$
