@@ -39,3 +39,27 @@ p(x;\mu,\Sigma)=\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}} exp(-\frac{1}{2}(x-\mu)^T\S
 $$
 
 我们可以写作$x\sim\mathcal{N}(\mu,\Sigma)$
+
+#### 2. 高斯分布的特点
+
+多元高斯在实践中非常方便，原因如下:
+
+- **特点 #1：** 如果你知道以$x$为随机变量的高斯分布的均值$\mu$和协方差矩阵$\Sigma$。则你可以直接写出关于$x$的概率密度函数。
+
+- **特点 #2：** 下列高斯积分有闭式解(closed-form solutions)：
+
+$$
+\begin{aligned}
+\int_{x\in R^n}p(x;\mu,\Sigma)dx &= \int_{-\infin}^{\infin}\dots\int_{-\infin}^{\infin}p(x;\mu,\Sigma)dx_1\dots dx_2=1 \\
+\int_{x\in R^n}x_ip(x;\mu,\sigma)dx &= \mu_i \\
+\int_{x\in R^n}(x_i-\mu_i)(x_j-\mu_j)p(x;\mu,\sigma)dx &=\Sigma_{ij}
+\end{aligned}
+$$
+
+- **特点 #3：** 高斯函数遵循一些封闭性质(closure properties:)：
+    - 独立高斯随机变量的和是高斯分布。
+    - 联合高斯分布的边缘分布是高斯分布。
+    - 联合高斯分布的条件是高斯分布。
+
+乍一看，这些事实中的一些结论，尤其是第$1$和第$2$条，似乎要么是直观上显而易见的，要么至少是可信的。然而，我们可能不太清楚的是为什么这些特点如此有用。在本文档中，我们将提供一些直观解释说明如何在平常操作处理多元高斯随机变量时使用这些特点。
+
