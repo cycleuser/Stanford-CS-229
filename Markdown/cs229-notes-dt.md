@@ -20,7 +20,7 @@ CS229 Lecture notes
 ## 1 非线性(Non-linearity)
 
 决策树是我们要讲到的第一种内在非线性的机器学习技术(inherently non-linear machine
-learning techniques)，与之形成对比的就是支持向量机(SVMs)和通用线性模型(GLMs)这些方法。严格来说，如果一个方法满足下面的特性就称之为线性方法:对于一个输入$x\in R^n$(截距项 intercept term $x_0=1$)，只生成如下形式的假设函数(hypothesis functions)h:
+learning techniques)，与之形成对比的就是支持向量机(SVMs)和通用线性模型(GLMs)这些方法。严格来说，如果一个方法满足下面的特性就称之为线性方法：对于一个输入$x\in R^n$（截距项 intercept term $x_0=1$），只生成如下形式的假设函数(hypothesis functions)h:
 
 $$
 h(x)=\theta^Tx
@@ -37,7 +37,7 @@ $$
 $$
 \begin{aligned}
 X&= \bigcup ^n_{i=0} R_i\\
-s.t. R_i \bigcap R_j&= \not{0} \quad\text{for}\quad i \ne j
+s.t.\qquad R_i \bigcap R_j&= \not{0} \quad\text{for}\quad i \ne j
 \end{aligned}
 $$
 
@@ -45,16 +45,16 @@ $$
 
 ## 2 区域选择(Selecting Regions)
 
-通常来说，选择最有区域是很难的(intractable)。决策树会生通过贪心法，从头到尾，递归分区(greedy, top-down, recursive partitioning)成一种近似的解决方案。这个方法是从头到尾(top-down)是因为是从原始输入空间$X$开始，先利用单一特征为阈值切分成两个子区域。然后对两个子区域选择一个再利用一个新阈值来进行分区。然后以递归模式来持续对模型的训练，总是选择一个叶节点(leaf node)，一个特征(feature)，以及一个阈值(threshold)来生成新的分割(split)。严格来说，给定一个父区域$R_p$，一个特征索引$j$以及一个阈值$t\in R$，就可以得到两个子区域$R_1,R_2$，如下所示:
+通常来说，选择最有区域是很难的(intractable)。决策树会生通过**贪心法，从头到尾，递归分区(greedy, top-down, recursive partitioning)** 成一种近似的解决方案。这个方法是**从头到尾(top-down)** 是因为是从原始输入空间$X$开始，先利用单一特征为阈值切分成两个子区域。然后对两个子区域选择一个再利用一个新阈值来进行分区。然后以递归模式来持续对模型的训练，总是选择一个叶节点(leaf node)，一个特征(feature)，以及一个阈值(threshold)来生成新的分割(split)。严格来说，给定一个父区域$R_p$，一个特征索引$j$以及一个阈值$t\in R$，就可以得到两个子区域$R_1,R_2$，如下所示:
 
 $$
 \begin{aligned}
 R_1 &= \{ X|X_j<t,X\in R_p\}\\
-R_2 &= \{ X|X_j< \ge t,X\in R_p\}\\
+R_2 &= \{ X|X_j \ge t,X\in R_p\}\\
 \end{aligned}
 $$
 
-下面就着滑雪数据集来应用上面这样的过程。在步骤a当中，将输入空间$X$根据地理位置特征切分，阈值设置的是$15$，然后得到了子区域$R_1,R_2$。在步骤b，选择一个子区域(例子中选的是$R_2$)来递归进行同样的操作，选择时间特征，阈值设为$3$，然后生成了二级子区域$R_{21},R_{22}$。在步骤c，对剩下的叶节点($R_1,R_{21},R_{22}$)任选一饿，然后继续上面的过程，知道遇到了一个给定的停止条件(stop criterion，这个稍后再介绍)，然后再预测每个节点上的主要类别。
+下面就着滑雪数据集来应用上面这样的过程。在步骤a当中，将输入空间$\mathcal{X}$根据地理位置特征切分，阈值设置的是$15$，然后得到了子区域$R_1,R_2$。在步骤b，选择一个子区域(例子中选的是$R_2$)来递归进行同样的操作，选择时间特征，阈值设为$3$，然后生成了二级子区域$R_{21},R_{22}$。在步骤c，对剩下的叶节点($R_1,R_{21},R_{22}$)任选一饿，然后继续上面的过程，知道遇到了一个给定的停止条件(stop criterion，这个稍后再介绍)，然后再预测每个节点上的主要类别。
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notedtf2.png)
 
@@ -66,7 +66,7 @@ $$
 L(R_p)-\frac{|R_1|L(R_1)+|R_2|L(R_2)}{|R_1|+|R_2|}
 $$
 
-对一个分类问题，我们感兴趣的是误分类损失函数(misclassification loss)$L_{misclass}$。对于一个区域$R$，设$\hat p_c$是归于类别$c$的R中样本的分区。在R上的误分类损失函数可以写为:
+对一个分类问题，我们感兴趣的是**误分类损失函数(misclassification loss)** $L_{misclass}$。对于一个区域$R$，设$\hat p_c$是归于类别$c$的$R$中样本的分区。在$R$上的误分类损失函数可以写为:
 
 $$
 L_{misclass}(R)=1-\max_c(\hat p_c)
@@ -84,20 +84,19 @@ $$
 
 这样不仅能使两个切分的损失函数相同，还能使得任意一个分割都不会降低在父区域上的损失函数。(Thus, not only can we not only are the losses of the two splits identical, but neither of the splits decrease the loss over that of the parent.)
 
-因此我们有兴趣去定义一个更敏感的损失函数。前面已经给出过一些损失函数了，这里要用到的是交叉熵(cross-entropy)$L_{cross}$:
+因此我们有兴趣去定义一个更敏感的损失函数。前面已经给出过一些损失函数了，这里要用到的是**交叉熵(cross-entropy)** 损失函数$L_{cross}$:
 
 $$
 L_{cross}(R)=-\sum_c \hat p_c \log_2 \hat p_c
 $$
 
-如果$\hat p_c=0$，则$\hat p_c \log_2 \hat p_c=0$。从信息论角度来看，交叉熵要衡量的是给定已知分布的情况下要确定输出所需要的位数(number of bits)。更进一步说，从父区域到子区域的损失函数降低也就是信息获得(information gain)。
+如果$\hat p_c=0$，则$\hat p_c \log_2 \hat p_c\equiv 0$。从信息论角度来看，交叉熵要衡量的是给定已知分布的情况下要确定输出所需要的位数(number of bits)。更进一步说，从父区域到子区域的损失函数降低也就是信息增益(information gain)。
 
 要理解交叉熵损失函数比误分类损失函数相对更敏感，我们来看一下对同样一个二值化分类案例这两种损失函数的投图。从这些案例中，我们能够对损失函数进行简化，使之仅依赖一个区域$R_i$中正值分区的样本$\hat p_i$:
 
 $$
 \begin{aligned}
 L_{misclass}(R)= L_{misclass}(\hat p)=1-\max(\hat p,1-\hat p)\\
-
 L_{cross}(R)=L_{cross}(\hat p)=- \hat p\log \hat p -(1-\hat p)\log(1-\hat p)\\
 \end{aligned}
 $$
@@ -106,15 +105,15 @@ $$
 
 上图左侧中看到的是交叉熵损失函数在$\hat p$上的投图。从前文中样本中的第一个分割得到的区域$(R_p,R_1,R_2)$然后也对其损失函数进行了投图。交叉熵损失函数是严格的凹函数(concave)，可以从投图中明显看出(证明起来也很容易)只要$\hat p_1 \ne \hat p_2$以及两个子区域都是非空的，则子区域损失函数的加权和总会小于父区域。
 
-误分类损失函数，则不是严格凹函数，因此也不能保证子区域损失函数的加权和能够比父区域的小，如上图右侧所示，虽然有同样的分区方案。由于这一点额外的敏感性，交叉熵损失函数(或者与之密切相关的基尼损失函数(Gini loss))用于用于分类的生长决策树(growing decision trees)。
+误分类损失函数，则不是严格凹函数，因此也不能保证子区域损失函数的加权和能够比父区域的小，如上图右侧所示，虽然有同样的分区方案。由于这一点额外的敏感性，交叉熵损失函数（或者与之密切相关的基尼损失函数(Gini loss)）用于用于分类的生长决策树(growing decision trees)。
 
-在谈论其他内容之前，我们先简单介绍一些决策树的回归设定。对每个数据点$x_i$，我们现在有了一个关联值(associated value)也就是我们要去预测的$y_i\in R$。大部分树的生长过程都是相同的，区别只是在对于一个区域$R$的最终预测是所有值的平均:
+在谈论其他内容之前，我们先简单介绍一些决策树的回归设定。对每个数据点$x_i$，我们现在有了一个关联值(associated value)也就是我们要去预测的$y_i\in R$。大部分树的生长过程都是相同的，区别只是在对于一个区域$R$的最终预测是所有值的平均：
 
 $$
 \hat y =\frac{\sum_{i\in R}y_i}{|R|}
 $$
 
-然后在这个例子中直接使用平方损失函数(squared loss)来选择切分:
+然后在这个例子中直接使用**平方损失函数(squared loss)** 来选择切分:
 
 $$
 L_{squared}(R)=\frac{\sum_{i\in R}(y_i -\hat y)^2}{|R|}
@@ -122,12 +121,12 @@ $$
 
 ## 4 其他考虑(Other Considerations)
 
-决策树的流行很大一部分是由于好解释也好理解，另外就是高度的可解释性:我们可以看到生成的阈值集合来理解为什么模型做出了具体的预测。不过这还不仅仅是全部，接下来我们要讲到一些额外的优点。
+决策树的流行很大一部分是由于其好解释也好理解，另外就是高度的可解释性：我们可以看到生成的阈值集合来理解为什么模型做出了具体的预测。不过这还不仅仅是全部，接下来我们要讲到一些额外的优点。
 
 ### 4.1 分类变量(Categorical Variables)
 
 决策树的一大优点就是很适合用于处理分类变量。例如在滑雪数据集里面的地点就可以替代城任意的分类数据(Northern Hemisphere,
-Southern Hemisphere, 或者 Equator (也就是$loc in\{N,S,E\}$)。相比独热编码(one-hot encoding)或者类似的预处理步骤来讲数据转换到定量特征，这些方法对于之前见过的其他算法来说是必要的，但对于决策树算法来说，可以直接探测子集成员。本章第2节中的最终树形可以写成如下的形式:
+Southern Hemisphere, 或者 Equator （也就是$loc in\{N,S,E\}$）。相比独热编码(one-hot encoding)或者类似的预处理步骤来讲数据转换到定量特征，这些方法对于之前见过的其他算法来说是必要的，但对于决策树算法来说，可以直接探测子集成员。本章第2节中的最终树形可以写成如下的形式:
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notedtf5.png)
 
@@ -137,11 +136,11 @@ Southern Hemisphere, 或者 Equator (也就是$loc in\{N,S,E\}$)。相比独热�
 
 在第2节中我们顺便提到了各种停止条件(stopping criteria)来决定是否终止一个树的生长。最简单的判断条件就是让树"完全"生长:一直继续分类知道叶区域包含的只有单个的训练样本点。这个方法会导致高方差和低偏差的模型，因此我们改用其他的各种启发式的方法来规范化。下面是一些常用方法:
 
-* 最小叶规模(Minimum Leaf Size)- 直到基数(cardinality)落到一个固定的阈值内才停止切割$R$。
-* 最大深度(Maximum Depth)- 如果到达$R$已经经过了超过一个固定估值的阈值，就停止切割$R$。
-* 最大节点数(Maximum Number of Nodes)- 如果一个树到达了超过一个的叶节点阈值就停止。
+- **最小叶规模(Minimum Leaf Size)** —— 直到基数(cardinality)落到一个固定的阈值内才停止切割$R$。
+- **最大深度(Maximum Depth)** —— 如果到达$R$已经经过了超过一个固定估值的阈值，就停止切割$R$。
+- **最大节点数(Maximum Number of Nodes)** —— 如果一个树到达了超过一个的叶节点阈值就停止。
 
-一种启发式方法是在切分之后使用损失函数的最小降低发。这是一个有问题的方法，因为对决策树的贪心的每次单特正的方法可能意味着损失掉高阶互动(higher order interactions)。如果我们需要对多个特征设置阈值来达到一个良好的分割，就可能没办法在初始分割的损失上达到一个好的降低(decrease)，因此就可能过早停止(prematurely terminate)。更好的方法是让一个数完整声场，然后从众删除节点以最小降低误分类或者平方误差，正如在验证集上的测试。
+一种启发式方法是在切分之后使用损失函数的最小降低发。这是一个有问题的方法，因为对决策树的贪心的每次单特正的方法可能意味着损失掉高阶互动(higher order interactions)。如果我们需要对多个特征设置阈值来达到一个良好的分割，就可能没办法在初始分割的损失上达到一个好的降低(decrease)，因此就可能过早停止(prematurely terminate)。一种更好的方法是将树完全生长出来，然后修剪掉那些最小程度上减少错误分类或平方误差的节点，就跟在验证集上进行判断的方法一样。
 
 ### 4.3 运行(Runtime)
 
@@ -170,4 +169,4 @@ Southern Hemisphere, 或者 Equator (也就是$loc in\{N,S,E\}$)。相比独热�
 * 方差大
 * 对加性模型建模很差
 
-很不幸，这些问题都使得单独使用决策树会在整体上导致较低的预测精度。解决这个问题的常见(也是可行)的办法就是通过集成学习(ensembling methods)-留在下一章再讲了。
+很不幸，这些问题都使得单独使用决策树会在整体上导致较低的预测精度。解决这个问题的常见（也是可行）的办法就是通过集成学习(ensembling methods)——留在下一章再讲了。
