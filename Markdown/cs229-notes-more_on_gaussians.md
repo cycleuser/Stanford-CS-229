@@ -366,3 +366,15 @@ p\left(x_{B} | x_{A}\right) &=\frac{p\left(x_{A}, x_{B} ; \mu, \Sigma\right)}{\i
 $$
 
 其中$Z'$是一个归一化常数，我们用该常数表达不依赖于$x_B$的因子。注意，这一次，我们甚至不需要计算任何积分——积分的值不依赖于$x_B$，因此积分可以化简成归一化常数$Z'$。
+
+###### 3.3.2 通过划分逆协方差矩阵重写表达式
+
+和之前一样，我们用矩阵$V$重新参数化概率密度函数，由此得到下式：
+
+$$
+\begin{aligned}
+p\left(x_{B} | x_{A}\right) &=\frac{1}{Z^{\prime}} \exp \left(-\frac{1}{2} \left[ \begin{array}{c}{x_{A}-\mu_{A}} \\ {x_{B}-\mu_{B}}\end{array}\right]^{T} \left[ \begin{array}{cc}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right] \left[ \begin{array}{c}{x_{A}-\mu_{A}} \\ {x_{B}-\mu_{B}}\end{array}\right]\right) \\
+&=\frac{1}{Z^{\prime}} \exp (-[\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T} V_{A A}\left(x_{A}-\mu_{A}\right)+\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T} V_{A B}\left(x_{B}-\mu_{B}\right) \\
+&\qquad\qquad\qquad+\frac{1}{2}\left(x_{B}-\mu_{B}\right)^{T} V_{B A}\left(x_{A}-\mu_{A}\right)+\frac{1}{2}\left(x_{B}-\mu_{B}\right)^{T} V_{B B}\left(x_{B}-\mu_{B}\right) ] )
+\end{aligned}
+$$
