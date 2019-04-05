@@ -188,3 +188,14 @@ $$
 4. 论述得到的概率密度函数是高斯的。
 
 下面让我们分别研究一下上面提到的每一个步骤。
+
+###### 3.2.1 边缘概率密度函数的积分形式
+
+假设我们想直接计算$x_A$的密度函数。然后，我们需要计算积分：
+
+$$
+\begin{aligned}
+p(x_A) &= \int_{x_B\in R^n}p(x_A,x_B;\mu,\Sigma)dx_B \\
+&= \frac{1}{(2\pi)^{\frac{m+n}{2}} \begin{vmatrix}\Sigma_{AA}&\Sigma_{AB}\\\Sigma_{BA}&\Sigma_{BB}\end{vmatrix}^{1/2}}\int_{x_B\in R^n}exp(-\frac12\begin{bmatrix}x_A-\mu_A\\x_B-\mu_B\end{bmatrix}^T\begin{bmatrix}\Sigma_{AA}&\Sigma_{AB}\\\Sigma_{BA}&\Sigma_{BB}\end{bmatrix}^{-1}\begin{bmatrix}x_A-\mu_A\\x_B-\mu_B\end{bmatrix})dx_B
+\end{aligned}
+$$
