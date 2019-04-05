@@ -295,3 +295,30 @@ $$
 $$
 p\left(x_{A}\right)=\frac{1}{Z} \cdot(2 \pi)^{n / 2}\left|V_{B B}\right|^{1 / 2} \cdot \exp \left(-\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T}\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)\left(x_{A}-\mu_{A}\right)\right)
 $$
+
+###### 3.2.4 论述得到的概率密度函数是高斯函数
+
+这时我们几乎已经完成了全部计算！忽略前面的归一化常数，我们看到$x_A$的概率密度函数是$x_A$的二次形的指数。我们可以很快意识到概率密度函数就是均值向量为$\mu_A$，协方差矩阵为$(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A})^{-1}$的高数分布。虽然协方差矩阵的形式看起来有点复杂，但是我们已经完成了我们开始想要展示的概念——即$x_A$有一个边缘高斯分布。利用前面的逻辑，我们可以得出这个协方差矩阵必须以某种方式消去$\Sigma_{AA}$
+
+但是，如果你好奇，也可以证明我们的推导与之前的证明是一致的。为此，我们对分块矩阵使用以下结果:
+
+$$
+\left[ \begin{array}{cc}{A} & {B} \\ {C} & {D}\end{array}\right]^{-1}=\left[ \begin{array}{cc}{M^{-1}} & {-M^{-1} B D^{-1}} \\ {-D^{-1} C M^{-1}} & {D^{-1}+D^{-1} C M^{-1} B D^{-1}}\end{array}\right]
+$$
+
+其中$M=A-B D^{-1} C$。这个公式可以看作是$2\times 2$矩阵显式逆矩阵的多变量推广：
+
+$$
+\left[ \begin{array}{ll}{a} & {b} \\ {c} & {d}\end{array}\right]^{-1}=\frac{1}{a d-b c} \left[ \begin{array}{cc}{d} & {-b} \\ {-c} & {a}\end{array}\right]
+$$
+
+用这个公式，可以得出：
+
+$$
+\begin{aligned}
+\left[ \begin{array}{cc}{\Sigma_{A A}} & {\Sigma_{A B}} \\ {\Sigma_{B A}} & {\Sigma_{B B}}\end{array}\right] &=\left[ \begin{array}{ll}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right]^{-1} \\
+&=\left[ \begin{array}{cc}{\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1}} & {-\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1} V_{A B} V_{B B}^{-1}} \\ {-V_{B B}^{-1} V_{B A}\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1}} & {\left(V_{B B}-V_{B A} V_{A A}^{-1} V_{A B}\right)^{-1}}\end{array}\right]
+\end{aligned}
+$$
+
+正如我们所期望的那样，我们马上就能得出$\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1}=\Sigma_{A A}$。
