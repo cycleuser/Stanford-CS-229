@@ -232,3 +232,66 @@ x^TAx=\sum_i\sum_jA_{ij}x_ix_j=x_1A_{11}x_1+x_1A_{12}x_2+x_2A_{21}x_1+x_2A_{22}x
 $$
 
 花点时间自己研究一下，上面的矩阵推广也适用。
+
+##### 3.2.3 $x_B$上的积分
+
+为了求积分，我们要对$x_B$积分。然而，一般来说，高斯积分是很难手工计算的。我们能做些什么来节省计算时间吗？事实上，有许多高斯积分的答案是已知的（见事实#2）。那么，本节的基本思想是将上一节中的积分转换为一种形式，在这种形式中，我们可以应用事实#2中的一个结果，以便轻松地计算所需的积分。
+
+这其中的关键是一个数学技巧，称为“配方法(completion of squares)”。考虑二次函数  。其中
+
+$$
+\frac 12x^TAx+b^Tz+c=\frac 12(z+A^{-1}b)^TA(z+A^{-1}b)+c-\frac 12b^TA^{-1}b
+$$
+
+下面使用单变量代数中的“配方法”来泛华的多元变量的等式:
+
+$$
+\frac 12az^2+bz+c=\frac 12a(z+\frac bz)^2+c-\frac {b^2}{2a}
+$$
+
+若要将配方法应用于上述情形，令
+
+$$
+\begin{aligned}
+z &= x_B-\mu_B \\
+A &= V_{BB} \\
+b &=V_{BA}(x_A-\mu_A) \\
+c &=\frac 12(x_A-\mu_A)^TV_{AA}(x_A-\mu_A)
+\end{aligned}
+$$
+
+然后，这个积分可以重写为
+
+$$
+\begin{aligned}
+p(x_A)=\frac 1Z\int_{x_B\in R^n}exp(-&[\frac 12(x_B-\mu_B)^TV_{AA}(x_A-\mu_A)+\frac 12(x_A-\mu_A)^TV_{AB}(x_B-\mu_B) \\
+& +\frac 12(x_B-\mu_B)^TV_{BA}(x_A-\mu_A)+\frac 12(x_B-\mu_B)^TV_{BB}(x_B-\mu_B)])dx_B
+\end{aligned}
+$$
+
+我们可以提出不包括$x_B$的项，
+
+$$
+\begin{aligned}
+p(x_{A})&=\exp\left(-\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T} V_{A A}\left(x_{A}-\mu_{A}\right)+\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T} V_{A B} V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right)\right) \\ 
+&\quad \cdot \frac{1}{Z} \int_{x_{B} \in \mathbb{R}^{n}} \exp \left(-\frac{1}{2}\left[\left(x_{B}-\mu_{B}+V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right)\right)^{T} V_{B B}\left(x_{B}-\mu_{B}+V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right)\right)\right]\right) d x_{B}
+\end{aligned}
+$$
+
+现在，我们可以应用事实#2。特别的，我们知道通常情况下随机变量为$x$多元高斯分布，如果设均值$\mu$，协方差矩阵$\Sigma$，则概率密度函数可以得到如下式子：
+
+$$
+\frac{1}{(2 \pi)^{n / 2}|\Sigma|^{1 / 2}} \int_{\mathbf{R}^{n}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)=1
+$$
+
+或等价与下式：
+
+$$
+\int_{R^{n}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)=(2 \pi)^{n / 2}|\Sigma|^{1 / 2}
+$$
+
+我们用这个事实来消去表达式中剩下的积分以得到$p(x_A)$：
+
+$$
+p\left(x_{A}\right)=\frac{1}{Z} \cdot(2 \pi)^{n / 2}\left|V_{B B}\right|^{1 / 2} \cdot \exp \left(-\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T}\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)\left(x_{A}-\mu_{A}\right)\right)
+$$
