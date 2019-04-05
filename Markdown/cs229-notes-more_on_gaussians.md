@@ -322,3 +322,34 @@ $$
 $$
 
 正如我们所期望的那样，我们马上就能得出$\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1}=\Sigma_{A A}$。
+
+#### 3.3 联合高斯分布的条件函数是高斯分布
+
+本规则的正式表述为:
+
+假设：
+
+$$
+\left[ \begin{array}{l}{x_{A}} \\ {x_{B}}\end{array}\right]\sim\mathcal{N}\left(\left[ \begin{array}{l}{\mu_{A}} \\ {\mu_{B}}\end{array}\right], \left[ \begin{array}{cc}{\Sigma_{A A}} & {\Sigma_{A B}} \\ {\Sigma_{B A}} & {\Sigma_{B B}}\end{array}\right]\right)
+$$
+
+其中$x_{A} \in \mathbf{R}^{m}, x_{B} \in \mathbf{R}^{n}$，并选择均值向量和协方差矩阵子块的维数来匹配$x_A$和$x_B$。则条件概率密度函数为：
+
+$$
+\begin{aligned} p\left(x_{A} | x_{B}\right) &=\frac{p\left(x_{A}, x_{B} ; \mu, \Sigma\right)}{\int_{x_{A} \in \mathbb{R}^{m}} p\left(x_{A}, x_{B} ; \mu, \Sigma\right) d x_{A}} \\ p\left(x_{B} | x_{A}\right) &=\frac{p\left(x_{A}, x_{B} ; \mu, \Sigma\right)}{\int_{x_{B} \in \mathbb{R}^{n}} p\left(x_{A}, x_{B} ; \mu, \Sigma\right) d x_{B}} \end{aligned}
+$$
+
+同样是高斯分布：
+
+$$
+\begin{array}{l}{x_{A}\left|x_{B} \sim \mathcal{N}\left(\mu_{A}+\Sigma_{A B} \Sigma_{B B}^{-1}\left(x_{B}-\mu_{B}\right), \Sigma_{A A}-\Sigma_{A B} \Sigma_{B B}^{-1} \Sigma_{B A}\right)\right.} \\ {x_{B} | x_{A} \sim \mathcal{N}\left(\mu_{B}+\Sigma_{B A} \Sigma_{A A}^{-1}\left(x_{A}-\mu_{A}\right), \Sigma_{B B}-\Sigma_{B A} \Sigma_{A A}^{-1} \Sigma_{A B}\right)}\end{array}
+$$
+
+和之前一样，我们只研究条件分布$x_B|x_A$，另一个结果是对称的。我们的推导过程如下:
+
+1. 明确写出条件概率密度函数的表达式。
+2. 通过划分逆协方差矩阵重写表达式。
+3. 使用“平方和”参数。
+4. 论述得到的概率密度函数是高斯函数。
+
+下面让我们分别研究一下上面提到的每一个步骤。
