@@ -378,3 +378,35 @@ p\left(x_{B} | x_{A}\right) &=\frac{1}{Z^{\prime}} \exp \left(-\frac{1}{2} \left
 &\qquad\qquad\qquad+\frac{1}{2}\left(x_{B}-\mu_{B}\right)^{T} V_{B A}\left(x_{A}-\mu_{A}\right)+\frac{1}{2}\left(x_{B}-\mu_{B}\right)^{T} V_{B B}\left(x_{B}-\mu_{B}\right) ] )
 \end{aligned}
 $$
+
+###### 3.3.3 使用“平方和”参数
+
+回忆下面这个式子：
+
+$$
+\frac{1}{2} z^{T} A z+b^{T} z+c=\frac{1}{2}\left(z+A^{-1} b\right)^{T} A\left(z+A^{-1} b\right)+c-\frac{1}{2} b^{T} A^{-1} b
+$$
+
+假设$A$是一个对称的非奇异矩阵。如前所述，要将平方的补全应用于上述情况，令：
+
+$$
+\begin{aligned} 
+z &=x_{B}-\mu_{B} \\ 
+A &=V_{B B} \\ 
+b &=V_{B A}\left(x_{A}-\mu_{A}\right) \\ 
+c &=\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T} V_{A A}\left(x_{A}-\mu_{A}\right) 
+\end{aligned}
+$$
+
+然后，可以将$p(x_B | x_A)$的表达式重写为：
+
+$$
+\begin{array}{c}{p\left(x_{B} | x_{A}\right)=\frac{1}{Z^{\prime}} \exp \left(-\left[\frac{1}{2}\left(x_{B}-\mu_{B}+V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right)\right)^{T} V_{B B}\left(x_{B}-\mu_{B}+V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right)\right)\right.\right.} \\ 
+{+\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T} V_{A A}\left(x_{A}-\mu_{A}\right)-\frac{1}{2}\left(x_{A}-\mu_{A}\right)^{T} V_{A B} V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right) ] )}\end{array}
+$$
+
+将不依赖于$x_B$的指数部分化简到归一化常数中，得到：
+
+$$
+p\left(x_{B} | x_{A}\right)=\frac{1}{Z^{\prime \prime}} \exp \left(-\frac{1}{2}\left(x_{B}-\mu_{B}+V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right)\right)^{T} V_{B B}\left(x_{B}-\mu_{B}+V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right)\right)\right)
+$$
