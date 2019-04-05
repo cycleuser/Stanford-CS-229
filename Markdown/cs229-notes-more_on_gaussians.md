@@ -353,3 +353,16 @@ $$
 4. 论述得到的概率密度函数是高斯函数。
 
 下面让我们分别研究一下上面提到的每一个步骤。
+
+###### 3.3.1 明确写出条件概率密度函数的表达式
+
+假设我们想直接计算给定$x_A$下$x_B$的概率密度函数。则我们需要计算下式：
+
+$$
+\begin{aligned}
+p\left(x_{B} | x_{A}\right) &=\frac{p\left(x_{A}, x_{B} ; \mu, \Sigma\right)}{\int_{x_{B} \in R^m} p\left(x_{A}, x_{B} ; \mu, \Sigma\right) d x_{A}} \\
+&=\frac{1}{Z^{\prime}} \exp \left(-\frac{1}{2} \left[ \begin{array}{c}{x_{A}-\mu_{A}} \\ {x_{B}-\mu_{B}}\end{array}\right]^{T} \left[ \begin{array}{cc}{\Sigma_{A A}} & {\Sigma_{A B}} \\ {\Sigma_{B A}} & {\Sigma_{B B}}\end{array}\right]^{-1} \left[ \begin{array}{c}{x_{A}-\mu_{A}} \\ {x_{B}-\mu_{B}}\end{array}\right]\right)
+\end{aligned}
+$$
+
+其中$Z'$是一个归一化常数，我们用该常数表达不依赖于$x_B$的因子。注意，这一次，我们甚至不需要计算任何积分——积分的值不依赖于$x_B$，因此积分可以化简成归一化常数$Z'$。
