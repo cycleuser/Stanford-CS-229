@@ -199,3 +199,36 @@ p(x_A) &= \int_{x_B\in R^n}p(x_A,x_B;\mu,\Sigma)dx_B \\
 &= \frac{1}{(2\pi)^{\frac{m+n}{2}} \begin{vmatrix}\Sigma_{AA}&\Sigma_{AB}\\\Sigma_{BA}&\Sigma_{BB}\end{vmatrix}^{1/2}}\int_{x_B\in R^n}exp(-\frac12\begin{bmatrix}x_A-\mu_A\\x_B-\mu_B\end{bmatrix}^T\begin{bmatrix}\Sigma_{AA}&\Sigma_{AB}\\\Sigma_{BA}&\Sigma_{BB}\end{bmatrix}^{-1}\begin{bmatrix}x_A-\mu_A\\x_B-\mu_B\end{bmatrix})dx_B
 \end{aligned}
 $$
+
+###### 3.2.2 逆协方差矩阵的分块
+
+为了进一步推导，我们需要把指数中的矩阵乘积写成稍微不同的形式。特别地，让我们定义下面这个矩阵：
+
+$$
+V=\begin{bmatrix}V_{AA}&V_{AB}\\V_{BA}&V_{BB}\end{bmatrix}=\Sigma^{-1}
+$$
+
+这里我们可能会有下面这种诱人的推导想法：
+
+$$
+V=\begin{bmatrix}V_{AA}&V_{AB}\\V_{BA}&V_{BB}\end{bmatrix}=\begin{bmatrix}\Sigma_{AA}&\Sigma_{AB}\\\Sigma_{BA}&\Sigma_{BB}\end{bmatrix}^{-1}“=”\begin{bmatrix}\Sigma_{AA}^{-1}&\Sigma_{AB}^{-1}\\\Sigma_{BA}^{-1}&\Sigma_{BB}^{-1}\end{bmatrix}
+$$
+
+然而，最右边的等号并不成立！我们将在稍后的步骤中讨论这个问题；不过，现在只要将$V$定义为上述形式就足够了，而不必担心每个子矩阵的实际内容是什么。
+
+利用$V$的这个定义，积分扩展到下面的式子：
+
+$$
+\begin{aligned}
+p(x_A)=\frac 1Z\int_{x_B\in R^n}exp(-&[\frac 12(x_A-\mu_A)^TV_{AA}(x_A-\mu_A)+\frac 12(x_A-\mu_A)^TV_{AB}(x_B-\mu_B) \\
+& +\frac 12(x_B-\mu_B)^TV_{BA}(x_A-\mu_A)+\frac 12(x_B-\mu_B)^TV_{BB}(x_B-\mu_B)])dx_B
+\end{aligned}
+$$
+
+其中$Z$是一个常数，不依赖于$x_A$或$x_B$，我们暂时忽略它。如果你以前没有使用过分块矩阵，那么上面的展开对你来说可能有点神奇。这类似于当定义一个二次形式基于某个矩阵$A$时，则可得：
+
+$$
+x^TAx=\sum_i\sum_jA_{ij}x_ix_j=x_1A_{11}x_1+x_1A_{12}x_2+x_2A_{21}x_1+x_2A_{22}x_2
+$$
+
+花点时间自己研究一下，上面的矩阵推广也适用。
