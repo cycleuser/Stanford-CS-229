@@ -287,3 +287,53 @@ X_{*}=
 $$
 
 给定训练数据$S$，先验$p(h)$，以及测试输入$X_*$，我们如何计算测试输出的后验预测分布？对于第$2$节中的贝叶斯线性回归，我们使用贝叶斯规则来计算后验参数，然后对于新的测试点$x_*$使用后验参数计算后验预测分布$p\left(y_{*} | x_{*}, S\right)$。然而，对于高斯过程回归，结果是存在一个更简单的解决方案！
+
+##### 4.2 预测
+
+回想一下，对于从具有协方差函数$k(\cdot,\cdot)$的零均值高斯先验过程中得到的任何函数$f(\cdot)$，其任意一组输入点上的边缘分布必须是一个联合的多元高斯分布。特别是，这必须适用于训练和测试点，所以我们有下式：
+
+$$
+\left[ \begin{array}{c}{\vec{f}} \\ {\vec{f}_*}\end{array}\right] | X, X_{*} \sim \mathcal{N}\left(\overrightarrow{0}, \left[ \begin{array}{cc}{K(X, X)} & {K\left(X, X_{*}\right)} \\ {K\left(X_{*}, X\right)} & {K\left(X_{*}, X_{*}\right)}\end{array}\right]\right)
+$$
+
+其中：
+
+$$
+\vec{f} \in \mathbf{R}^{m} \text { such that } \vec{f}=\left[f\left(x^{(1)}\right) \cdots f\left(x^{(m)}\right)\right]^{T}\\
+\vec{f}_{*} \in \mathbf{R}^{m} \cdot \text { such that } \vec{f}_{*}=\left[f\left(x_{*}^{(1)}\right) \cdots f\left(x_{*}^{(m)}\right)\right]^{T} \\
+K(X, X) \in \mathbf{R}^{m \times m} \text { such that }(K(X, X))_{i j}=k\left(x^{(i)}, x^{(j)}\right) \\
+K\left(X, X_{*}\right) \in \mathbf{R}^{m \times m_*} \text { such that }\left(K\left(X, X_{*}\right)\right)_{i j}=k\left(x^{(i)}, x_{*}^{(j)}\right) \\
+K\left(X_{*}, X\right) \in \mathbf{R}^{m_* \times m} \text { such that }\left(K\left(X_{*}, X\right)\right)_{i j}=k\left(x_{*}^{(i)}, x^{(j)}\right) \\
+K\left(X_{*}, X_{*}\right) \in \mathbf{R}^{m_{*} \times m_{*}} \text { such that }\left(K\left(X_{*}, X_{*}\right)\right)_{i j}=k\left(x_{*}^{(i)}, x_{*}^{(j)}\right)
+$$
+
+根据我们独立同分布噪声假设，可以得到：
+
+$$
+\left[ \begin{array}{c}{\overrightarrow{\varepsilon}} \\ {\overrightarrow{\varepsilon}_{*}}\end{array}\right]\sim\mathcal{N}\left(0,\left[ \begin{array}{cc}{\sigma^{2} I} & {\overrightarrow{0}} \\ {\overrightarrow{0}^{T}} & {\sigma^{2} I}\end{array}\right]\right)
+$$
+
+独立高斯随机变量的和也是高斯的，所以有：
+
+$$
+\left[ \begin{array}{c}{\vec{y}} \\ {\vec{y}_{*}}\end{array}\right] | X, X_{*}=
+\left[ \begin{array}{c}{\vec{f}} \\ {\vec{f}}\end{array}\right]+\left[ \begin{array}{c}{\overrightarrow{\varepsilon}} \\ {\overrightarrow{\varepsilon}_{*}}\end{array}\right] \sim 
+\mathcal{N}\left(\overrightarrow{0}, \left[ \begin{array}{cc}{K(X, X)+\sigma^{2} I} & {K\left(X, X_{*}\right)} \\ {K\left(X_{*}, X\right)} & {K\left(X_{*}, X_{*}\right)+\sigma^{2} I}\end{array}\right]\right)
+$$
+
+现在，用高斯函数的条件设定规则，它遵循下面的式子：
+
+$$
+\overrightarrow{y_{*}} | \vec{y}, X, X_{*} \sim \mathcal{N}\left(\mu^{*}, \Sigma^{*}\right)
+$$
+
+其中：
+
+$$
+\begin{aligned} \mu^{*} &=K\left(X_{*}, X\right)\left(K(X, X)+\sigma^{2} I\right)^{-1} \vec{y} \\
+\Sigma^{*} &=K\left(X_{*}, X_{*}\right)+\sigma^{2} I-K\left(X_{*}, X\right)\left(K(X, X)+\sigma^{2} I\right)^{-1} K\left(X, X_{*}\right) \end{aligned}
+$$
+
+就是这样！值得注意的是，在高斯过程回归模型中进行预测非常简单，尽管高斯过程本身相当复杂！$^11$
+
+>11 有趣的是，贝叶斯线性回归，当以正确的方式进行核化时，结果与高斯过程回归完全等价！但贝叶斯线性回归的后验预测分布的推导要复杂得多，对算法进行核化的工作量更大。高斯过程透视图当然要简单得多。
