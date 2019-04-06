@@ -248,3 +248,42 @@ $$
 #### 4. 高斯过程回归
 
 正如上一节所讨论的，高斯过程为函数上的概率分布提供了一种建模方法。在这里，我们讨论了如何在贝叶斯回归的框架下使用函数上的概率分布。
+
+##### 4.1 高斯过程回归模型
+
+设$S=\left\{\left(x^{(i)}, y^{(i)}\right)\right\}_{i=1}^{m}$是一组来自未知分布的满足独立同分布的训练集。在高斯过程回归模型中公式说明了这一点：
+
+$$
+y^{(i)}=f\left(x^{(i)}\right)+\varepsilon^{(i)}, \quad i=1, \ldots, m
+$$
+
+其中$\varepsilon^{(i)}$是独立同分布的“噪声”变量并且服从分布$\mathcal{N}(0,\Sigma^2)$。就像在贝叶斯线性回归中，我们也假设一个函数$f(\cdot)$的**先验分布。** 特别地，我们假设一个零均值高斯过程先验：
+
+$$
+f(\cdot) \sim \mathcal{G} \mathcal{P}(0, k(\cdot, \cdot))
+$$
+
+对于一些有效的协方差函数$k(\cdot, \cdot)$。
+
+现在，设$T=\left\{\left(x_{*}^{(i)}, y_{*}^{(i)}\right)\right\}_{i=1}^{m_{*}}$是从一些未知分布$S$中取得的独立同分布的测试点集合。为了方便标记，我们定义：
+
+$$
+X=
+\left[ \begin{array}{c}{-\left(x^{(1)}\right)^{T}-} \\ {-\left(x^{(2)}\right)^{T}-} \\ {\vdots} \\ {-\left(x^{(m)}\right)^{T}-}\end{array}\right] \in \mathbf{R}^{m \times n} \quad 
+\vec{f}=
+\left[ \begin{array}{c}{f\left(x^{(1)}\right)} \\ {f\left(x^{(2)}\right)} \\ {\vdots} \\ {f\left(x^{(m)}\right)}\end{array}\right], \quad 
+\overrightarrow{\varepsilon}=
+\left[ \begin{array}{c}{\varepsilon^{(1)}} \\ {\varepsilon^{(2)}} \\ {\vdots} \\ {\varepsilon^{(m)}}\end{array}\right], \quad 
+\vec{y}=
+\left[ \begin{array}{c}{y^{(1)}} \\ {y^{(2)}} \\ {\vdots} \\ {y^{(m)}}\end{array}\right] \in \mathbf{R}^{m} \\
+X_{*}=
+\left[ \begin{array}{c}{-\left(x_{*}^{(1)}\right)^{T}-} \\ {-\left(x_{*}^{(2)}\right)^{T}-} \\ {\vdots} \\ {\left(x_{*}^{\left(m_{*}\right)}\right)^{T}-}\end{array}\right] \in \mathbf{R}^{m_{*} \times n} \quad 
+\overrightarrow{f_{*}}=
+\left[ \begin{array}{c}{f\left(x_{*}^{(1)}\right)} \\ {f\left(x_{*}^{(2)}\right)} \\ {\vdots} \\ {f\left(x_{*}^{\left(m_{*}\right)}\right)}\end{array}\right], \quad
+\overrightarrow{\varepsilon}_{*}=
+\left[ \begin{array}{c}{\varepsilon_{*}^{(1)}} \\ {\varepsilon_{*}^{(2)}} \\ {\vdots} \\ {\varepsilon_{*}^{\left(m_{*}\right)}}\end{array}\right], \quad 
+\vec{y}_{*}=
+\left[ \begin{array}{c}{y_{*}^{(1)}} \\ {y_{*}^{(2)}} \\ {\vdots} \\ {y_{*}^{\left(m_{*}\right)}}\end{array}\right] \in \mathbf{R}^{m}
+$$
+
+给定训练数据$S$，先验$p(h)$，以及测试输入$X_*$，我们如何计算测试输出的后验预测分布？对于第$2$节中的贝叶斯线性回归，我们使用贝叶斯规则来计算后验参数，然后对于新的测试点$x_*$使用后验参数计算后验预测分布$p\left(y_{*} | x_{*}, S\right)$。然而，对于高斯过程回归，结果是存在一个更简单的解决方案！
