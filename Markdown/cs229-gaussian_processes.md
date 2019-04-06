@@ -379,3 +379,57 @@ $$
 $$
 I(A, b, c)=\frac{(2 \pi)^{m / 2}\left|A^{-1}\right|^{1 / 2}}{\exp \left(c+b^{T} A^{-1} b\right)}
 $$
+
+##### 附录 A.2
+
+推导出给定$x_B$下$x_A$的分布形式；另一个结果可以立即根据对称性可以得到。注意到：
+
+$$
+\begin{aligned}
+p\left(x_{A} | x_{B}\right)&=\frac{1}{\int_{x_{A}} p\left(x_{A}, x_{B} ; \mu, \Sigma\right) d x_{A}} \cdot\left[\frac{1}{(2 \pi)^{m / 2}|\Sigma|^{1 / 2}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)\right] \\
+&=\frac{1}{Z_{1}} \exp \left\{-\frac{1}{2}\left(\left[ \begin{array}{c}{x_{A}} \\ {x_{B}}\end{array}\right]-\left[ \begin{array}{c}{\mu_{A}} \\ {\mu_{B}}\end{array}\right]\right)^{T} \left[ \begin{array}{cc}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right]\left(\left[ \begin{array}{c}{x_{A}} \\ {x_{B}}\end{array}\right]-\left[ \begin{array}{c}{\mu_{A}} \\ {\mu_{B}}\end{array}\right]\right)\right\}
+\end{aligned}
+$$
+
+其中$Z_1$是不依赖于$x_A$的比例常数，且：
+
+$$
+\Sigma^{-1}=V=\left[ \begin{array}{ll}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right]
+$$
+
+要简化这个表达式，请观察下面的式子：
+
+$$
+\begin{aligned}
+&\left(\left[ \begin{array}{c}{x_{A}} \\ {x_{B}}\end{array}\right]-\left[ \begin{array}{c}{\mu_{A}} \\ {\mu_{B}}\end{array}\right]\right)^{T} \left[ \begin{array}{cc}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right]\left(\left[ \begin{array}{c}{x_{A}} \\ {x_{B}}\end{array}\right]-\left[ \begin{array}{c}{\mu_{A}} \\ {\mu_{B}}\end{array}\right]\right) \\
+&\qquad =\left(x_{A}-\mu_{A}\right)^{T} V_{A A}\left(x_{A}-\mu_{A}\right)+\left(x_{A}-\mu_{A}\right)^{T} V_{A B}\left(x_{B}-\mu_{B}\right) \\
+&\qquad\qquad +\left(x_{B}-\mu_{B}\right)^{T} V_{B A}\left(x_{A}-\mu_{A}\right)+\left(x_{B}-\mu_{B}\right)^{T} V_{B B}\left(x_{B}-\mu_{B}\right)
+\end{aligned}
+$$
+
+只保留依赖于$x_A$的项（利用$V_{A B}=V_{B A}^{T}$），我们有：
+
+$$
+p\left(x_{A} | x_{B}\right)=\frac{1}{Z_{2}} \exp \left(-\frac{1}{2}\left[x_{A}^{T} V_{A A} x_{A}-2 x_{A}^{T} V_{A A} \mu_{A}+2 x_{A}^{T} V_{A B}\left(x_{B}-\mu_{B}\right)\right]\right)
+$$
+
+其中$Z_2$是一个同样不依赖于$x_A$新的比例常数。最后，使用“配方”参数（参见附录A.1），我们得到：
+
+$$
+p\left(x_{A} | x_{B}\right)=\frac{1}{Z_{3}} \exp \left(-\frac{1}{2}\left(x_{A}-\mu^{\prime}\right)^{T} V_{A A}\left(x_{A}-\mu^{\prime}\right)\right)
+$$
+
+其中$Z_3$是一个新的不依赖于$x_A$的比例常数，并且$\mu'=\mu_{A}-V_{A A}^{-1} V_{A B}\left(x_{B}-\mu_{B}\right)$。最后这个表述表明以$x_B$为条件下$x_A$的分布，同样是多元高斯函数的形式。事实上，从归一化性质可以直接得出：
+
+$$
+x_{A} | x_{B} \sim \mathcal{N}\left(\mu_{A}-V_{A A}^{-1} V_{A B}\left(x_{B}-\mu_{B}\right), V_{A A}^{-1}\right)
+$$
+
+为了完成证明，我们只需要注意：
+
+$$
+\left[ \begin{array}{cc}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right]=
+\left[ \begin{array}{c}{\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{B B}^{-1} \Sigma_{B A}\right)^{-1}}&-\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{B B}^{-1} \Sigma_{B A}\right)^{-1} \Sigma_{A B} \Sigma_{B B}^{-1} \\ {-\Sigma_{B B}^{-1} \Sigma_{B A}\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{B B}^{-1} \Sigma_{B A}\right)^{-1}}&\left(\Sigma_{B B}-\Sigma_{B A} \Sigma_{A A}^{-1} \Sigma_{A B}\right)^{-1}\end{array} \right]
+$$
+
+由分块矩阵的逆的标准公式推出。将相关的块替换到前面的表达式中就得到了想要的结果。
