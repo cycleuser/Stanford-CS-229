@@ -72,7 +72,7 @@ $$
 ||独立高斯分布的和|联合高斯分布的边缘分布|联合高斯分布的条件分布|
 |:-:|:-:|:-:|:-:|
 |为什么是高斯函数的解释|不介绍|介绍|介绍|
-|结果的概率密度函数|介绍|介绍|介绍|
+|概率密度函数的结果|介绍|介绍|介绍|
 
 ##### 3.1 独立高斯分布的和是高斯分布
 
@@ -416,7 +416,8 @@ $$
 看最后一个表达式，表达式$p(x_B|x_A)$是均值为$\mu_B-V_{B B}^{-1} V_{B A}\left(x_{A}-\mu_{A}\right)$，协方差矩阵为$V_{B B}^{-1}$的高斯概率密度函数。像往常一样，回忆一下矩阵等式：
 
 $$
-\left[ \begin{array}{cc}{\Sigma_{A A}} & {\Sigma_{A B}} \\ {\Sigma_{B A}} & {\Sigma_{B B}}\end{array}\right]=\left[ \begin{array}{c}{\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1}} \\ {-V_{B B}^{-1} V_{B A}\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1}}\end{array}\right. \quad-\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1} V_{A B} V_{B B}^{-1} ]
+\left[ \begin{array}{cc}{\Sigma_{A A}} & {\Sigma_{A B}} \\ {\Sigma_{B A}} & {\Sigma_{B B}}\end{array}\right]=
+\left[ \begin{array}{c}{\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1}}&-\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1} V_{A B} V_{B B}^{-1} \\ {-V_{B B}^{-1} V_{B A}\left(V_{A A}-V_{A B} V_{B B}^{-1} V_{B A}\right)^{-1}}&\left(V_{B B}-V_{B A} V_{A A}^{-1} V_{A B}\right)^{-1}\end{array}\right]
 $$
 
 从上式可以推出：
@@ -428,7 +429,8 @@ $$
 反过来，我们也可以利用矩阵恒等式得到：
 
 $$
-\left[ \begin{array}{cc}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right]=\left[ \begin{array}{c}{\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{B B}^{-1} \Sigma_{B A}\right)^{-1}} \\ {-\Sigma_{B B}^{-1} \Sigma_{B A}\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{B B}^{-1} \Sigma_{B A}\right)^{-1}}\end{array}\right. \quad-\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{A A}^{-1} \Sigma_{B B}\right)^{-1} \Sigma_{A B} \Sigma_{B B}^{-1} ]
+\left[ \begin{array}{cc}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right]=
+\left[ \begin{array}{c}{\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{B B}^{-1} \Sigma_{B A}\right)^{-1}}&-\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{A A}^{-1} \Sigma_{B B}\right)^{-1} \Sigma_{A B} \Sigma_{B B}^{-1} \\ {-\Sigma_{B B}^{-1} \Sigma_{B A}\left(\Sigma_{A A}-\Sigma_{A B} \Sigma_{B B}^{-1} \Sigma_{B A}\right)^{-1}}&\left(\Sigma_{B B}-\Sigma_{B A} \Sigma_{A A}^{-1} \sum_{A B}\right)^{-1}\end{array} \right]
 $$
 
 由此推出：
