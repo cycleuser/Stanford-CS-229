@@ -160,3 +160,19 @@ $$
 如第$1$节所述，多元高斯分布由于其良好的分析性质，对于实值变量的有限集合建模是有用的。高斯过程是多元高斯函数的推广，适用于无穷大小的实值变量集合。特别地，这个扩展将允许我们把高斯过程看作不仅仅是随机向量上的分布实际上是**随机函数**上的分布。
 
 >7 令$\mathcal{H}$是一类$\mathcal{X}\rightarrow\mathcal{Y}$的函数映射。一个来自$\mathcal{H}$的随机函数$f(\cdot)$代表根据$\mathcal{H}$的概率分布随机从$\mathcal{H}$中选择一个函数。一个潜在的困惑是：你可能倾向于认为随机函数的输出在某种程度上是随机的；事实并非如此。一个随机函数$f(\cdot)$，一旦有概率的从$\mathcal{H}$中选择，则表示从输入$\mathcal{X}$到输出$\mathcal{Y}$的确定性映射。
+
+##### 3.1 有限域函数上的概率分布
+
+要了解如何对函数上的概率分布进行参数化，请考虑下面的简单示例。设$\mathcal{X}=\left\{x_{1}, \dots, x_{m}\right\}$为任何有限元素集。现在，考虑集合$\mathcal{H}$，该集合代表所有可能的从$\mathcal{X}$到$R$的函数映射。例如，可以给出如下的函数$f_0(\cdot)\in\mathcal{H}$的例子：
+
+$$
+f_{0}\left(x_{1}\right)=5, \quad f_{0}\left(x_{2}\right)=2.3, \quad f_{0}\left(x_{2}\right)=-7, \quad \ldots, \quad f_{0}\left(x_{m-1}\right)=-\pi, \quad f_{0}\left(x_{m}\right)=8
+$$
+
+因为任意函数$f(\cdot) \in \mathcal{H}$的定义域仅有$m$个元素，所以我们可以简介的使用$m$维向量$\vec{f}=\left[f\left(x_{1}\right) \quad f\left(x_{2}\right) \quad \cdots \quad f\left(x_{m}\right)\right]^{T}$表达$f(\cdot)$。为了指定函数$f(\cdot) \in \mathcal{H}$上的概率分布，我们必须把一些“概率密度”与$\mathcal{H}$中的每个函数联系起来。一种自然的方法是利用函数$f(\cdot) \in \mathcal{H}$和他们的向量表示$\vec{f}$之间的一一对应关系。特别是，如果我们指定$\vec{f} \sim \mathcal{N}\left(\overrightarrow{\mu}, \sigma^{2} I\right)$，则意味着函数$f(\cdot)$上的概率分布，其中函数$f(\cdot)$的概率密度函数可以通过下面的式子给出：
+
+$$
+p(h)=\prod_{i=1}^{m} \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{1}{2 \sigma^{2}}\left(f\left(x_{i}\right)-\mu_{i}\right)^{2}\right)
+$$
+
+在上面的例子中，我们证明了有限域函数上的概率分布可以用函数输出$f\left(x_{1}\right), \ldots, f\left(x_{m}\right)$的有限数量的输入点$x_{1}, \dots, x_{m}$上的有限维多元高斯分布来表示。当定义域的大小可能是无穷大时，我们如何指定函数上的概率分布？为此，我们转向一种更奇特的概率分布类型，称为高斯过程。
