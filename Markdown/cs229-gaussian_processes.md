@@ -176,3 +176,42 @@ p(h)=\prod_{i=1}^{m} \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{1}{2 \sigma
 $$
 
 在上面的例子中，我们证明了有限域函数上的概率分布可以用函数输出$f\left(x_{1}\right), \ldots, f\left(x_{m}\right)$的有限数量的输入点$x_{1}, \dots, x_{m}$上的有限维多元高斯分布来表示。当定义域的大小可能是无穷大时，我们如何指定函数上的概率分布？为此，我们转向一种更奇特的概率分布类型，称为高斯过程。
+
+##### 3.2 无限域函数上的概率分布
+
+随机过程是随机变量的集合$\{f(x) : x \in \mathcal{X}\}$，其自某个集合$\mathcal{X}$的元素索引，称为索引集。$^8$ **高斯过程**是一个随机过程，任何有限子集合的随机变量都有一个多元高斯分布。
+
+>8 通常，当$\mathcal{X} = R$时，可以将标识符$x\in \mathcal{X}$解释为表示时间，因此变量$f(x)$表示随时间的随机量的时间演化。然而，在高斯过程回归模型中，将标识符集作为回归问题的输入空间。
+
+特别是一组随机变量集合$\{f(x) : x \in \mathcal{X}\}$被称为来自于一个具有**平均函数**$m(\cdot)$和**协方差函数**$k(\cdot, \cdot)$的高斯过程，满足对于任意元素是$x_{1}, \ldots, x_{m} \in \mathcal{X}$有限集合，相关的有限随机变量集$f\left(x_{1}\right), \ldots, f\left(x_{m}\right)$具有如下分布：
+
+$$
+\left[ \begin{array}{c}{f\left(x_{1}\right)} \\ {\vdots} \\ {f\left(x_{m}\right)}\end{array}\right]\sim
+\mathcal{N}\left(\left[ \begin{array}{c}{m\left(x_{1}\right)} \\ {\vdots} \\ {m\left(x_{m}\right)}\end{array}\right], \left[ \begin{array}{ccc}{k\left(x_{1}, x_{1}\right)} & {\cdots} & {k\left(x_{1}, x_{m}\right)} \\ {\vdots} & {\ddots} & {\vdots} \\ {k\left(x_{m}, x_{1}\right)} & {\cdots} & {k\left(x_{m}, x_{m}\right)}\end{array}\right]\right)
+$$
+
+我们用下面的符号来表示：
+
+$$
+f(\cdot) \sim \mathcal{G P}(m(\cdot), k(\cdot, \cdot))
+$$
+
+注意，均值函数和协方差函数的名称很恰当，因为上述性质意味着：
+
+$$
+\begin{aligned} m(x) &=E[x] \\ k\left(x, x^{\prime}\right) &=E\left[(x-m(x))\left(x^{\prime}-m\left(x^{\prime}\right)\right)\right.\end{aligned}
+$$
+
+对于任意$x,x'\in\mathcal{X}$。
+
+直观地说，我们可以把从高斯过程中得到的函数$f(\cdot)$看作是由高维多元高斯函数得到的高维向量。这里，高斯函数的每个维数对应于标识符集合$\mathcal{X}$中的一个元素$x$，随机向量的对应分量表示$f(x)$的值。利用多元高斯函数的边缘性，我们可以得到任意有限子集合所对应的多元高斯函数的边缘概率密度函数。
+
+什么样的函数$m(\cdot)$和$k(\cdot,\cdot)$产生有效的高斯过程？一般情况下，任何实值函数$m(\cdot)$都是可以接受的，但是对于$k(\cdot,\cdot)$，对于任何一组元素$x_{1}, \ldots, x_{m} \in \mathcal{X}$都必须是可以接受的，结果矩阵如下：
+
+$$
+K=\left[ \begin{array}{ccc}{k\left(x_{1}, x_{1}\right)} & {\cdots} & {k\left(x_{1}, x_{m}\right)} \\ {\vdots} & {\ddots} & {\vdots} \\ {k\left(x_{m}, x_{1}\right)} & {\cdots} & {k\left(x_{m}, x_{m}\right)}\end{array}\right]
+$$
+
+是一个有效的协方差矩阵，对应于某个多元高斯分布。概率论中的一个标准结果表明，如果$K$是正半定的，这是正确的。听起来很熟悉？
+
+基于任意输入点计算协方差矩阵的正半限定条件，实际上与核的Mercer条件相同！函数$k(\cdot,\cdot)$是一个有效的核，前提是对于任意一组输入点$x_{1}, \ldots, x_{m} \in \mathcal{X}$，因此，任何有效的核函数都可以用作协方差函数，这就是基于核的概率分布。
