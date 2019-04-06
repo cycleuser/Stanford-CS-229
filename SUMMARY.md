@@ -22,3 +22,4 @@
 +   [隐马尔可夫模型基础](Markdown/cs229-notes-hmm.md)
 +   [多元高斯分布](Markdown/cs229-notes-gaussians.md)
 +   [更多关于多元高斯分布](Markdown/cs229-notes-more_on_gaussians.md)
++   [高斯过程](Markdown/cs229-gaussian_processes.md)
