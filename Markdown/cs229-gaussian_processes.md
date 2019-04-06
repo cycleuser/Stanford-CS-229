@@ -350,3 +350,32 @@ $$
 ##### 参考资料
 
 >[1] Carl E. Rasmussen and Christopher K. I. Williams. Gaussian Processes for Machine Learning. MIT Press, 2006. Online: [http://www.gaussianprocess.org/gpml/](http://www.gaussianprocess.org/gpml/)
+
+##### 附录 A.1
+
+在这个例子中，我们展示了如何使用多元高斯的归一化特性来计算相当吓人的多元积分，而不需要执行任何真正的微积分！假设你想计算下面的多元积分：
+
+$$
+I(A, b, c)=\int_{x} \exp \left(-\frac{1}{2} x^{T} A x-x^{T} b-c\right) d x
+$$
+
+尽管可以直接执行多维积分（祝您好运！），但更简单的推理是基于一种称为“配方法”的数学技巧。特别的：
+
+$$
+\begin{aligned} I(A, b, c) 
+&=\exp (-c) \cdot \int_{x} \exp \left(-\frac{1}{2} x^{T} A x-x^{T} A A^{-1} b\right)d x \\ 
+&=\exp (-c) \cdot \int_{x} \exp \left(-\frac{1}{2}\left(x-A^{-1} b\right)^{T} A\left(x-A^{-1} b\right)-b^{T} A^{-1} b\right) d x \\ 
+&=\exp \left(-c-b^{T} A^{-1} b\right) \cdot \int_{x} \exp \left(-\frac{1}{2}\left(x-A^{-1} b\right)^{T} A\left(x-A^{-1} b\right)\right) d x \end{aligned}
+$$
+
+定义$\mu=A^{-1} b$ 和 $\Sigma=A^{-1}$，可以得到$I(A,b,c)$等于：
+
+$$
+\frac{(2 \pi)^{m / 2}|\Sigma|^{1 / 2}}{\exp \left(c+b^{T} A^{-1} b\right)} \cdot\left[\frac{1}{(2 \pi)^{m / 2}|\Sigma|^{1 / 2}} \int_{x} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right) d x\right]
+$$
+
+然而，括号中的项在形式上与多元高斯函数的积分是相同的！因为我们知道高斯密度可以归一化，所以括号里的项等于$1$。因此：
+
+$$
+I(A, b, c)=\frac{(2 \pi)^{m / 2}\left|A^{-1}\right|^{1 / 2}}{\exp \left(c+b^{T} A^{-1} b\right)}
+$$
