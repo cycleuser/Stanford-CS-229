@@ -155,3 +155,42 @@ $$
 #### 3 实现弱学习器(Implementing weak-learners)
 
 增强算法的一个主要优点是，它们可以自动从原始数据中为我们生成特性。此外，由于弱假设总是返回$\{1,1\}$中的值，所以在使用学习算法时不需要将特征标准化，使其具有相似的尺度，这在实践中会产生很大的差异。此外。虽然这不是理论上易于理解，许多类型的弱学习器程序中引入非线性智能分类器，可以产生比到目前为止我们已经看到的更多的表达模型的简单线性模型形式$\theta^Tx$。
+
+##### 3.1 决策树桩(Decision stumps)
+
+有很多策略对应学习能力差的弱学习器，这里我们只关注其中一种，即决策树桩。为了具体说明这个方法，让我们假设输入变量$x \in \mathbb{R}^{n}$是实值的。决策树桩是一个函数$f$，它由阈值$s$和索引$j\in\{1,2,\dots, n\}$确定，然后返回：
+
+$$
+\phi_{j, s}(x)=\operatorname{sign}\left(x_{j}-s\right)=\left\{\begin{array}{ll}{1} & {\text { if } x_{j} \geq s} \\ {-1} & {\text { otherwise }}\end{array}\right. \qquad\qquad(2)
+$$
+
+正如我们现在所描述的，这些分类器非常简单，我们甚至可以有效地将它们用于加权数据集。
+
+事实上，一个决策残障弱学习者的过程如下。我们从一个分布开始——权重$p^{(1)}, \ldots, p^{(m)}$的集合之和为$1$——在训练集上。我们希望选择公式$(2)$中的一个决策残差来最小化训练集上的误差，也就是说，我们希望找到一个阈值$s \in \mathbb{R}$和索引$j$，使得：
+
+$$
+\widehat{\operatorname{Err}}\left(\phi_{j, s}, p\right)=\sum_{i=1}^{m} p^{(i)} 1\left\{\phi_{j, s}\left(x^{(i)}\right) \neq y^{(i)}\right\}=\sum_{i=1}^{m} p^{(i)} 1\left\{y^{(i)}\left(x_{j}^{(i)}-s\right) \leq 0\right\}\qquad\qquad(3)
+$$
+
+达到最小。朴素地说，这可能是一个低效的计算，但是一个更智能的过程允许我们在大约$O(nmlogm)$时间内解决这个问题。为每一个特征$j=1,2, \dots, n$，我们对原始输入特性进行排序：
+
+$$
+x_{j}^{\left(i_{1}\right)} \geq x_{j}^{\left(i_{2}\right)} \geq \cdots \geq x_{j}^{\left(i_{m}\right)}
+$$
+
+由于决策残差的误差仅能改变$s$的值，所以决策残差只能改变$x_{j}^{(i)}$的值 一点巧妙的推导使我们能够计算：
+
+$$
+\sum_{i=1}^{m} p^{(i)} 1\left\{y^{(i)}\left(x_{j}^{(i)}-s\right) \leq 0\right\}=\sum_{k=1}^{m} p^{\left(i_{k}\right)} 1\left\{y^{\left(i_{k}\right)}\left(x_{j}^{\left(i_{k}\right)}-s\right) \leq 0\right\}
+$$
+
+以排序的顺序递增地修改和，这是有效的，在我们已经对值排序之后，这将花费$O(m)$的时间
+（这里我们不详细描述算法，留给感兴趣的读者来推导。）因此，对每个$n$个输入特性执行这种计算需要总时间$O(nmlogm)$ 我们可以选择指标$j$和阈值$s$来给出误差公式$(3)$的最佳决策残差。
+
+需要注意的一个非常重要的问题是，通过翻转重新排序的决策树桩的符号$\phi_{j, s}$，我们实现误差$1-\widehat{\operatorname{Err}}\left(\phi_{j, s}, p\right)$，即下式的误差：
+
+$$
+\widehat{\operatorname{Err}}\left(-\phi_{j, s}, p\right)=1-\widehat{\operatorname{Err}}\left(\phi_{j, s}, p\right)
+$$
+
+（你应该让自己相信这是真的。）因此，跟踪在所有阈值上$1-\widehat{\operatorname{Err}}\left(\phi_{j, s}, p\right)$的最小值也是很重要的，因为这个可能比$\widehat{\operatorname{Err}}\left(\phi_{j, s}, p\right)$小。这样可以给出一个更好的弱学习器。对我们的弱学习者使用这个过程（图1）给出了基本的，但非常有用的提升分类器。
