@@ -251,6 +251,10 @@ $$
 
 ##### 4.1 高斯过程回归模型
 
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notegpf3.png)
+
+图3：高斯过程回归使用一个零均值高斯先验过程，以$k_{S E}(\cdot, \cdot)$为协方差函数（其中$\tau=0.1$），其中噪声等级为$\sigma=1$以及$(a)m=10,(b) m=20，(c)m=40$训练样本。蓝线表示后验预测分布的均值，绿色阴影区域表示基于模型方差估计的$95%$置信区间。随着训练实例数量的增加，置信区域的大小会缩小，以反映模型估计中不确定性的减少。还请注意，在图像$(a)$中，$95%$置信区间在训练点附近缩小，但在远离训练点的地方要大得多，正如人们所期望的那样。
+
 设$S=\left\{\left(x^{(i)}, y^{(i)}\right)\right\}_{i=1}^{m}$是一组来自未知分布的满足独立同分布的训练集。在高斯过程回归模型中公式说明了这一点：
 
 $$
@@ -265,7 +269,9 @@ $$
 
 对于一些有效的协方差函数$k(\cdot, \cdot)$。
 
-现在，设$T=\left\{\left(x_{*}^{(i)}, y_{*}^{(i)}\right)\right\}_{i=1}^{m_{*}}$是从一些未知分布$S$中取得的独立同分布的测试点集合。为了方便标记，我们定义：
+现在，设$T=\left\{\left(x_{*}^{(i)}, y_{*}^{(i)}\right)\right\}_{i=1}^{m_{*}}$是从一些未知分布$S$中取得的独立同分布的测试点集合。$^10$为了方便标记，我们定义：
+
+>10 我们还假设$T$和$S$是相互独立的。
 
 $$
 X=
@@ -277,7 +283,7 @@ X=
 \vec{y}=
 \left[ \begin{array}{c}{y^{(1)}} \\ {y^{(2)}} \\ {\vdots} \\ {y^{(m)}}\end{array}\right] \in \mathbf{R}^{m} \\
 X_{*}=
-\left[ \begin{array}{c}{-\left(x_{*}^{(1)}\right)^{T}-} \\ {-\left(x_{*}^{(2)}\right)^{T}-} \\ {\vdots} \\ {\left(x_{*}^{\left(m_{*}\right)}\right)^{T}-}\end{array}\right] \in \mathbf{R}^{m_{*} \times n} \quad 
+\left[ \begin{array}{c}{-\left(x_{*}^{(1)}\right)^{T}-} \\ {-\left(x_{*}^{(2)}\right)^{T}-} \\ {\vdots} \\ {-\left(x_{*}^{\left(m_{*}\right)}\right)^{T}-}\end{array}\right] \in \mathbf{R}^{m_{*} \times n} \quad 
 \overrightarrow{f_{*}}=
 \left[ \begin{array}{c}{f\left(x_{*}^{(1)}\right)} \\ {f\left(x_{*}^{(2)}\right)} \\ {\vdots} \\ {f\left(x_{*}^{\left(m_{*}\right)}\right)}\end{array}\right], \quad
 \overrightarrow{\varepsilon}_{*}=
@@ -334,7 +340,7 @@ $$
 \Sigma^{*} &=K\left(X_{*}, X_{*}\right)+\sigma^{2} I-K\left(X_{*}, X\right)\left(K(X, X)+\sigma^{2} I\right)^{-1} K\left(X, X_{*}\right) \end{aligned}
 $$
 
-就是这样！值得注意的是，在高斯过程回归模型中进行预测非常简单，尽管高斯过程本身相当复杂！$^11$
+就是这样！值得注意的是，在高斯过程回归模型中进行预测非常简单，尽管高斯过程本身相当复杂！$^{11}$
 
 >11 有趣的是，贝叶斯线性回归，当以正确的方式进行核化时，结果与高斯过程回归完全等价！但贝叶斯线性回归的后验预测分布的推导要复杂得多，对算法进行核化的工作量更大。高斯过程透视图当然要简单得多。
 
@@ -433,3 +439,50 @@ $$
 $$
 
 由分块矩阵的逆的标准公式推出。将相关的块替换到前面的表达式中就得到了想要的结果。
+
+##### 附录 A.3
+
+在这一节中，我们提出了多元高斯分布条件分布的另一种（更简单的）推导方法。注意，正如附录A.2所示，我们可以这样写出$p\left(x_{A} | x_{B}\right)$的形式：
+
+$$
+\begin{aligned} 
+p\left(x_{A} | x_{B}\right) 
+&=\frac{1}{\int_{x_{A}} p\left(x_{A}, x_{B} ; \mu, \Sigma\right) d x_{A}} \cdot\left[\frac{1}{(2 \pi)^{m / 2}|\Sigma|^{1 / 2}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)\right] &(4)\\ 
+&=\frac{1}{Z_{1}} \exp \left\{-\frac{1}{2}\left(\left[ \begin{array}{c}{x_{A}-\mu_{A}} \\ {x_{B}-\mu_{B}}\end{array}\right]\right)^{T} \left[ \begin{array}{cc}{V_{A A}} & {V_{A B}} \\ {V_{B A}} & {V_{B B}}\end{array}\right] \left[ \begin{array}{c}{x_{A}-\mu_{A}} \\ {x_{B}-\mu_{B}}\end{array}\right]\right\} &(5)
+\end{aligned}
+$$
+
+其中$Z_1$是不依赖于$x_A$的比例常数。
+
+这个推导使用了一个附加的假设，即条件分布是一个多元高斯分布；换句话说，我们假设$p\left(x_{A} | x_{B}\right) \sim \mathcal{N}\left(\mu^{*}, \Sigma^{*}\right)$有一些参数$\mu^{*}, \Sigma^{*}$（或者，你可以把这个推导看作是寻找“配方法”另一种方法）。
+
+这个推导的关键直觉是当$x_{A}=\mu^{*} \triangleq x_{A}^{*}$时，$p\left(x_{A} | x_{B}\right)$将会最大化。我们计算$\log p\left(x_{A} | x_{B}\right)$关于$x_A$的梯度，并设其为零。利用等式$(5)$，我们可以得到：
+
+$$
+\begin{aligned}
+&\nabla_{x_{A}} \log p(x_A | x_B)|_{x_A=x_A^{*}}  &\qquad\qquad\qquad(6)\\ 
+&{=-V_{A A}\left(x_{A}^{*}-\mu_{A}\right)-V_{A B}\left(x_{B}-\mu_{B}\right)} &(7)\\ 
+&{=0}&(8)
+\end{aligned}
+$$
+
+这意味着：
+
+$$
+\mu^{*}=x_{A}^{*}=\mu_{A}-V_{A A}^{-1} V_{A B}\left(x_{B}-\mu_{B}\right)\qquad\qquad\qquad\qquad (9)
+$$
+
+类似地，我们利用高斯分布$p(\cdot)$的逆协方差矩阵是$\log p(\cdot)$的负海森矩阵。换句话说，高斯分布$p\left(x_{A} | x_{B}\right)$的逆协方差矩阵是$\log p\left(x_{A} | x_{B}\right)$的负海森矩阵。利用式$(5)$，我们有：
+
+$$
+\begin{aligned} 
+\Sigma^{*-1} &=-\nabla_{x_{A}} \nabla_{x_{A}}^{T} \log p\left(x_{A} | x_{B}\right)&\qquad\qquad\qquad(10) \\ 
+&=V_{A A} &(11)
+\end{aligned}
+$$
+
+因此，我们得到：
+
+$$
+\Sigma^{*}=V_{A A}^{-1} \qquad\qquad\qquad(11)
+$$
