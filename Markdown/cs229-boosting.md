@@ -194,3 +194,19 @@ $$
 $$
 
 （你应该让自己相信这是真的。）因此，跟踪在所有阈值上$1-\widehat{\operatorname{Err}}\left(\phi_{j, s}, p\right)$的最小值也是很重要的，因为这个可能比$\widehat{\operatorname{Err}}\left(\phi_{j, s}, p\right)$小。这样可以给出一个更好的弱学习器。对我们的弱学习者使用这个过程（图1）给出了基本的，但非常有用的提升分类器。
+
+##### 3.2 例子
+
+现在，我们给出一个示例，展示对简单数据集进行提升的行为。特别地，我们考虑一个数据点为$x \in \mathbb{R}^{2}$的问题，其中最优分类器是：
+
+$$
+y=\left\{\begin{array}{ll}{1} & {\text { if } x_{1}<.6 \text { and } x_{2}<.6} \\ {-1} & {\text { otherwise }}\end{array}\right.\qquad\qquad(4)
+$$
+
+这是一个简单的非线性决策规则，但标准线性分类器（如logistic回归）是不可能学习的。在图$3$中，我们展示了logistic回归学习的最佳决策线，其中正例为圆圈，负例为X。很明显，logistic回归对数据的拟合不是特别好。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notebf3.png)
+
+然而，对于简单的非线性分类问题$(4)$，使用提升决策树桩可以获得更好的拟合效果。图$4$显示了经过不同次数的提升迭代之后我们学习到的增强分类器，使用的训练集大小为$m = 150$。从图中可以看出，第一个决策残差是将特征$x_1$的阈值设为$s \approx .23$，即对于$s \approx .23$有$\phi(x)=\operatorname{sign}\left(x_{1}-s\right)$。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notebf4.png)
