@@ -102,3 +102,52 @@ $$
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notebf1.png)
 
+#### 2 提升的收敛性
+
+我们现在认为，提升程序达到$0$训练误差，我们也提供了收敛速度为零。为此，我们提出了一个保证取得提升的引理。
+
+**引理 2.1** 令：
+
+$$
+J\left(\theta^{(t)}\right)=\frac{1}{m} \sum_{i=1}^{m} \exp \left(-y^{(i)} \sum_{\tau=1}^{t} \theta_{\tau} \phi_{\tau}\left(x^{(i)}\right)\right)
+$$
+
+则：
+
+$$
+J\left(\theta^{(t)}\right) \leq \sqrt{1-4 \gamma^{2}} J\left(\theta^{(t-1)}\right)
+$$
+
+由于引理的证明是有点复杂的，而不是本节笔记的中心——尽管知道该算法会收敛是很重要的！——我们把证明推迟到附录A.1。让我们描述一下它如何保证增强过程收敛到一个训练误差为零的分类器。
+
+我们在$\theta^{(0)}=\overrightarrow{0}$处初始化过程，以便初始经验损失为$J\left(\theta^{(0)}\right)=1$。现在,我们注意到对于任何$\theta$，误分类误差满足：
+
+$$
+1\left\{\operatorname{sign}\left(\theta^{T} \phi(x)\right) \neq y\right\}=1\left\{y \theta^{T} \phi(x) \leq 0\right\} \leq \exp \left(-y \theta^{T} \phi(x)\right)
+$$
+
+因为对于所有$z\ge 0$有$e^z\ge 1$。由此可知，误分类错误率具有上界：
+
+$$
+\frac{1}{m} \sum_{i=1}^{m} 1\left\{\operatorname{sign}\left(\theta^{T} \phi\left(x^{(i)}\right)\right) \neq y^{(i)}\right\} \leq J(\theta)
+$$
+
+因此如果$J(\theta)<\frac{1}{m}$，则向量$\theta$在训练样本中没有错误。经过$t$次提升迭代，得到经验风险满足：
+
+$$
+J\left(\theta^{(t)}\right) \leq\left(1-4 \gamma^{2}\right)^{\frac{t}{2}} J\left(\theta^{(0)}\right)=\left(1-4 \gamma^{2}\right)^{\frac{t}{2}}
+$$
+
+查找得出多少次迭代才能保证$J\left(\theta^{(t)}\right)<\frac{1}{m}$。我们对$J\left(\theta^{(t)}\right)<1 / m$取对数：
+
+$$
+\frac{t}{2} \log \left(1-4 \gamma^{2}\right)<\log \frac{1}{m}, \quad \text { or } \quad t>\frac{2 \log m}{-\log \left(1-4 \gamma^{2}\right)}
+$$
+
+用一阶泰勒展开，得到$\log \left(1-4 \gamma^{2}\right) \leq-4 \gamma^{2}$，我们看到，如果我们使用提升的轮数——我们使用弱分类器的数量——满足下面的条件：
+
+$$
+t>\frac{\log m}{2 \gamma^{2}} \geq \frac{2 \log m}{-\log \left(1-4 \gamma^{2}\right)}
+$$
+
+则$J\left(\theta^{(t)}\right)<\frac{1}{m}$。
