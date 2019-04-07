@@ -100,3 +100,46 @@ $$
 
 粗略地，我们希望选择$\theta$最小化平均logistic损失，即产生的一个$\theta$对于大多数（甚至全部）训练样本，都可以使得$y^{(i)} \theta^{T} x^{(i)}>0$。
 
+##### 2.1 概率解释
+
+与线性回归（最小二乘）类似，逻辑回归也可以用概率解释。为此，我们定义sigmoid函数（也常称为逻辑函数）：
+
+$$
+g(z)=\frac{1}{1+e^{-z}}
+$$
+
+如图$3$所示。特别的，sigmoid函数满足：
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notelff3.png)
+
+$$
+g(z)+g(-z)=\frac{1}{1+e^{-z}}+\frac{1}{1+e^{z}}=\frac{e^{z}}{1+e^{z}}+\frac{1}{1+e^{z}}=1
+$$
+
+因此我们可以用它来定义一个概率模型进行二分类。特别的，对于$y \in\{-1,1\}$，我们将分类的逻辑模型定义为：
+
+$$
+p(Y=y | x ; \theta)=g\left(y x^{T} \theta\right)=\frac{1}{1+e^{-y x^{T} \theta}}
+$$
+
+对于积分，我们看到如果边界$y x^{T} \theta$很大——比如超过$5$等——则$p(Y=y | x ; \theta)=g\left(y x^{T} \theta\right) \approx 1$，也就是说，我们给标签为$y$的事件分配了接近$1$的概率。相反地，如果$y x^{T} \theta$很小，则$p(Y=y | x ; \theta) \approx 0$。
+
+通过将假设类重新定义为：
+
+$$
+h_{\theta}(x)=g\left(\theta^{T} x\right)=\frac{1}{1+e^{-\theta^{T} x}}
+$$
+
+然后我们得到训练数据的似然函数是：
+
+$$
+L(\theta)=\prod_{i=1}^{m} p\left(Y=y^{(i)} | x^{(i)} ; \theta\right)=\prod_{i=1}^{m} h_{\theta}\left(y^{(i)} x^{(i)}\right)
+$$
+
+对数似然函数的精确解是：
+
+$$
+\ell(\theta)=\sum_{i=1}^{m} \log h_{\theta}\left(y^{(i)} x^{(i)}\right)=-\sum_{i=1}^{m} \log \left(1+e^{-y^{(i)} \theta^{T} x^{(i)}}\right)=-m J(\theta)
+$$
+
+其中$J(\theta)$是来自等式$(3)$的准确的逻辑回归损失。也就是说，逻辑模型中的最大似然$(4)$是和平均逻辑损失同样最小化了，我们又一次得到了逻辑回归。
