@@ -84,5 +84,19 @@ $$
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notelff2.png)
 
+#### 2. 逻辑回归
 
+有了这一背景知识，我们现在对Andrew Ng课堂笔记中的逻辑回归给出了一个补充的观点。当我们使用二分标签$y \in\{-1,1\}$时，可以更简洁地编写逻辑回归。特别地，我们使用Logistic损失：
+
+$$
+\varphi_{\text { logistic }}\left(y x^{T} \theta\right)=\log \left(1+\exp \left(-y x^{T} \theta\right)\right)
+$$
+
+和逻辑回归算法对应于选择$\theta$，最小化下面的式子：
+
+$$
+J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \varphi_{\text {logistic}}\left(y^{(i)} \theta^{T} x^{(i)}\right)=\frac{1}{m} \sum_{i=1}^{m} \log \left(1+\exp \left(-y^{(i)} \theta^{T} x^{(i)}\right)\right)
+$$
+
+粗略地，我们希望选择$\theta$最小化平均logistic损失，即产生的一个$\theta$对于大多数（甚至全部）训练样本，都可以使得$y^{(i)} \theta^{T} x^{(i)}>0$。
 
