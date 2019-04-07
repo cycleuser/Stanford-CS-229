@@ -143,3 +143,28 @@ $$
 $$
 
 其中$J(\theta)$是来自等式$(3)$的准确的逻辑回归损失。也就是说，逻辑模型中的最大似然$(4)$是和平均逻辑损失同样最小化了，我们又一次得到了逻辑回归。
+
+##### 2.2 梯度下降法
+
+逻辑回归的最后一部分是拟合实际模型。通常情况下，我们考虑基于梯度下降的过程来执行这种最小化。考虑到这一点，我们现在展示如何对逻辑损失求导。对于函数$\varphi_{\text { logistic }}(z)=\log \left(1+e^{-z}\right)$我们有一维导数：
+
+$$
+\frac{d}{d z} \varphi_{\text { logistic }}(z)=\varphi_{\text { logistic }}^{\prime}(z)=\frac{1}{1+e^{-z}} \cdot \frac{d}{d z} e^{-z}=-\frac{e^{-z}}{1+e^{-z}}=-\frac{1}{1+e^{z}}=-g(-z)
+$$
+
+其中$g$是sigmoid函数。然后我们应用链式法则来找出单独的训练样本$(x, y)$的结果，我们有
+
+$$
+\frac{\partial}{\partial \theta_{k}} \varphi_{\text {logistic}}\left(y x^{T} \theta\right)=-g\left(-y x^{T} \theta\right) \frac{\partial}{\partial \theta_{k}}\left(y x^{T} \theta\right)=-g\left(-y x^{T} \theta\right) y x_{k}
+$$
+
+因此，随机梯度下降最小化$J(\theta)$算法对于$t=1,2, \ldots$，$\alpha_t$为在时间$t$时刻的步长，执行以下迭代：
+
+1. 随机均匀的从$i \in\{1, \ldots, m\}$中选择一个样本
+2. 执行梯度更新:
+
+$$
+\begin{aligned} \theta^{(t+1)} &=\theta^{(t)}-\alpha_{t} \cdot \nabla_{\theta} \varphi_{\text { logistic }}\left(y^{(i)} x^{(i)^{T}} \theta^{(t)}\right) \\ &=\theta^{(t)}+\alpha_{t} g\left(-y^{(i)} x^{(i)^{T}} \theta^{(t)}\right) y^{(i)} x^{(i)}=\theta^{(t)}+\alpha_{t} h_{\theta^{(t)}}\left(-y^{(i)} x^{(i)}\right) y^{(i)} x^{(i)} \end{aligned}
+$$
+
+这个更新是很直观的：如果当前的假设$h_{\theta^{(t)}}$为不正确的标签$-y^{(i)}$分配接近$1$的概率，则我们通过将$\theta$朝着$y^{(i)} x^{(i)}$方向移动来尽量减少损失。相反，如果当前的假设$h_{\theta^{(t)}}$为不正确的标签$-y^{(i)}$分配接近$0$的概率，则更新实际上什么也不做。
