@@ -46,5 +46,59 @@ $$
 
 在更一般的情况下，我们假设我们访问了一个弱学习器，这是一个算法，它以训练示例上的一个分布（权重）$p$作为输入，并返回一个性能略好于随机分类器的分类器。我们将展示了在给定弱学习算法的条件下，boost如何返回训练数据具有完美精度的分类器。（诚然，我们希望分类器能够很好地推广到不可见的数据，但目前我们忽略了这个问题。)
 
+##### 1.1 提升算法
 
+粗略地说，boost首先在数据集中为每个训练示例分配相等的权重。然后，它接收到一个弱假设，该弱假设根据当前训练实例的权重表现良好，并将其合并到当前的分类模型中。然后对训练实例进行权重调整，使出错的例子获得更高的权重，使弱学习算法集中于分类器对这些例子的处理，而没有错误的例子获得更低的权重。这种训练数据的重复权重调整，加上一个学习能力较差的学习者在分类器当前表现不佳的示例上做得很好，就产生了性能良好的分类器。
+
+该算法对分类问题的指数损失进行坐标下降，目标为：
+
+$$
+J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \exp \left(-y^{(i)} \theta^{T} \phi\left(x^{(i)}\right)\right)
+$$
+
+我们首先展示如何计算损失$J(\theta)$的坐标下降更新的确切形式，坐标下降迭代如下：
+
+(i) 选择一个坐标$j \in \mathbb{N}$
+
+(ii) 更新$\theta_j$为：
+
+$$
+\theta_{j}=\underset{\theta_{j}}{\operatorname{argmin}} J(\theta)
+$$
+
+对于所有$k\neq j$不相同时留下$\theta_k$。
+
+我们迭代上面的过程直到收敛。
+
+在提升的情况下，由于自然指数函数分析很方便，坐标更新的推导并不困难。现在我们展示如何进行更新。假设我们想要更新坐标$k$。定义：
+
+$$
+w^{(i)}=\exp \left(-y^{(i)} \sum_{j \neq k} \theta_{j} \phi_{j}\left(x^{(i)}\right)\right)
+$$
+
+为权重，并注意优化坐标$k$达到相应的最小化：
+
+$$
+\sum_{i=1}^{m} w^{(i)} \exp \left(-y^{(i)} \phi_{k}\left(x^{(i)}\right) \alpha\right)
+$$
+
+在$\alpha=\theta_k$时。现在定义：
+
+$$
+W^{+} :=\sum_{i : y^{(i)} \phi_{k}\left(x^{(i)}\right)=1} w^{(i)} \text { and } W^{-} :=\sum_{i : y^{(i)}\phi_{k}\left(x^{(i)}\right)=-1} w^{(i)}
+$$
+
+为了实例权值之和使得$\phi_k$分别分类正确和错误。找出$\theta_k$与下面的式子的选择相同：
+
+$$
+\alpha=\underset{\alpha}{\arg \min }\left\{W^{+} e^{-\alpha}+W^{-} e^{\alpha}\right\}=\frac{1}{2} \log \frac{W^{+}}{W^{-}}
+$$
+
+为了得到最终的等式，我们求导并将其设为零。我们得到$-W^{+} e^{-\alpha}+W^{-} e^{\alpha}=0$。即$W^{-} e^{2 \alpha}=W^{+}$或$\alpha=\frac{1}{2} \log \frac{W^{+}}{W^{-}}$。
+
+剩下的就是选择特定的坐标来执行坐标下降。我们假设我们已经使用了如图$1$所示的弱学习器算法，在迭代$t$分布作为输入$p$的训练集，并返回一个弱假设$\phi_t$满足边界条件$(1)$。我们提出总提升算法如图$2$所示。它在迭代$t=1,2,3, \ldots$中进行。我们表示弱学习算法返回的假设集在$t$时刻产生$\left\{\phi_{1}, \dots, \phi_{t}\right\}$。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notebf1.png)
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notebf1.png)
 
