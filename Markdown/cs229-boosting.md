@@ -222,3 +222,51 @@ $$
 如果$x_{j} \in C$，对于在标签下某些集合$C \subset\{1, \ldots, k\}$，与变量设定为$\phi_{j}(x)=1$一样。
 
 另一种自然的变种是提升决策树，在这种树中，我们考虑的不是针对弱学习者的单一层次决策，而是特征的组合或决策树。谷歌可以帮助您找到关于这类问题的示例和信息。
+
+#### A 附录
+
+##### A.1 引理2.1的证明
+
+现在我们返回来证明进展引理。我们通过直接展示$t$时刻权重与$t-1$时刻权重之间的关系来证明这个结果。我们尤其注意到这一点：
+
+$$
+J\left(\theta^{(t)}\right)=\min _{\alpha}\left\{W_{t}^{+} e^{-\alpha}+W_{t}^{-} e^{\alpha}\right\}=2 \sqrt{W_{t}^{+} W_{t}^{-}}
+$$
+
+以及：
+
+$$
+J\left(\theta^{(t-1)}\right)=\frac{1}{m} \sum_{i=1}^{m} \exp \left(-y^{(i)} \sum_{\tau=1}^{t-1} \theta_{\tau} \phi_{\tau}\left(x^{(i)}\right)\right)=W_{t}^{+}+W_{t}^{-}
+$$
+
+我们通过弱学习假设知道：
+
+$$
+\sum_{i=1}^{m} p^{(i)} 1\left\{y^{(i)} \neq \phi_{t}\left(x^{(i)}\right)\right\} \leq \frac{1}{2}-\gamma, \quad \text { or } \frac{1}{W_{t}^{+}+W_{t}^{-}}\underbrace{\sum_{i : y^{(i)} \phi_{t}\left(x^{(i)}\right)=-1} w^{(i)}}_{=W_{t}^{-}}\le\frac 12-\gamma
+$$
+
+重写这个表达式注意到右边的和就是$W_{t}^{-}$，我们有：
+
+$$
+W_{t}^{-} \leq\left(\frac{1}{2}-\gamma\right)\left(W_{t}^{+}+W_{t}^{-}\right), \quad \text { or } \quad W_{t}^{+} \geq \frac{1+2 \gamma}{1-2 \gamma} W_{t}^{-}
+$$
+
+通过在最小化定义$J\left(\theta^{(t)}\right)$中使用$\alpha=\frac{1}{2} \log \frac{1+2 \gamma}{1-2 \gamma}$，我们可以得到下式：
+
+$$
+\begin{aligned}
+ J\left(\theta^{(t)}\right) 
+ & \leq W_{t}^{+} \sqrt{\frac{1-2 \gamma}{1+2 \gamma}}+W_{t}^{-} \sqrt{\frac{1+2 \gamma}{1-2 \gamma}} \\ 
+ &=W_{t}^{+} \sqrt{\frac{1-2 \gamma}{1+2 \gamma}}+W_{t}^{-}(1-2 \gamma+2 \gamma) \sqrt{\frac{1+2 \gamma}{1-2 \gamma}} \\ 
+ & \leq W_{t}^{+} \sqrt{\frac{1-2 \gamma}{1+2 \gamma}}+W_{t}^{-}(1-2 \gamma) \sqrt{\frac{1+2 \gamma}{1-2 \gamma}}+2 \gamma \frac{1-2 \gamma}{1-2 \gamma} \sqrt{\frac{1+2 \gamma}{1-2 \gamma}} W_{t}^{+} \\ 
+ &=W_{t}^{+}\left[\sqrt{\frac{1-2 \gamma}{1+2 \gamma}}+2 \gamma \sqrt{\frac{1-2 \gamma}{1+2 \gamma}}\right]+W_{t}^{-} \sqrt{1-4 \gamma^{2}} 
+ \end{aligned}
+$$
+
+其中我们使用了$W_{t}^{-} \leq \frac{1-2 \gamma}{1+2 \gamma} W_{t}^{+}$。做一些代数运算，我们看到最后的表达式等于：
+
+$$
+\sqrt{1-4 \gamma^{2}}\left(W_{t}^{+}+W_{t}^{-}\right)
+$$
+
+即$J\left(\theta^{(t)}\right) \leq \sqrt{1-4 \gamma^{2}} J\left(\theta^{(t-1)}\right)$。
