@@ -25,3 +25,4 @@
 +   [高斯过程](Markdown/cs229-gaussian_processes.md)
 +   [损失函数](Markdown/cs229-loss-functions.md)
 +   [提升](Markdown/cs229-boosting.md)
++   [表示函数](Markdown/cs229-representer-function.md)
