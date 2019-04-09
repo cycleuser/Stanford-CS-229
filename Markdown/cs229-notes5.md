@@ -126,7 +126,7 @@ $$
 \begin{aligned}
 p(\theta|S)
 &=\frac{p(S|\theta)p(\theta)}{p(S)}\\ 
-&=\frac{(\prod_{i=1}^{m}p(y^{(i)}|x^{(i)},\theta)p(\theta))p(\theta)}{\int_{\theta} {\left(\prod_{i=1}^{m}p(y^{(i)}|x^{(i)},\theta)p(\theta)\right)}d\theta}\qquad (1)
+&=\frac{(\prod_{i=1}^{m}p(y^{(i)}|x^{(i)},\theta))p(\theta)}{\int_{\theta} {\left(\prod_{i=1}^{m}p(y^{(i)}|x^{(i)},\theta)p(\theta)\right)}d\theta}\qquad (1)
 \end{aligned}
 $$
 
@@ -150,7 +150,7 @@ $$
 
 这里我们简单概述的这个过程，可认为是一种“完全贝叶斯 (fully Bayesian)”预测，其中我们的预测是通过计算相对于 $\theta$ 上的后验概率 $p(\theta|S)$ 的平均值而得出的。然而很不幸，这 个后验分布的计算通常是比较困难的。这是因为如等式 (1) 所示，这个计算需要对 $\theta$ 进行积分(integral)，而 $\theta$ 通常是高维度的(high-dimensional)，这通常是不能以闭合形式 (closed-form)来实现的。 
 
-因此在实际应用中，我们都是用一个与 $\theta$ 的后验分布 (posterior distribution)近似的分布来替代。常用的一个近似是把对 $\theta$ 的后验分布(正如等式(2) 中所示)替换为一个单点估计(single point estimate)。对 $\theta$ 的最大后验估计 (MAP，maximum a posteriori estimate)为: 
+因此在实际应用中，我们都是用一个与 $\theta$ 的后验分布 (posterior distribution)近似的分布来替代。常用的一个近似是把对 $\theta$ 的后验分布（正如等式$(2)$中所示）替换为一个单点估计(single point estimate)。对 $\theta$ 的最大后验估计 (MAP，maximum a posteriori estimate)为: 
 
 $$
 \theta_{MAP}=\arg \max_\theta \prod_{i=1}^{m} p(y^{(i)}|x^{(i)})p(\theta)
