@@ -38,7 +38,7 @@ $$
 y \theta^{T} x
 $$
 
-为例子$(x,y)$的边界(margin)。尽管不总是这样，通常人们会将$h_{\theta}(x)=x^{T} \theta$的值解释为对参数向量$\theta$为点$x$分配标签的置信度的度量。标签的判别标准是：如果$x^{T} \theta$非常负（或非常正），则我们更坚信标签$y$是负例（正例）。
+为例子$(x,y)$的边界(margin)。尽管不总是这样，但是人们通常会将$h_{\theta}(x)=x^{T} \theta$的值解释为对参数向量$\theta$为点$x$分配标签的置信度的度量。标签的判别标准是：如果$x^{T} \theta$非常负（或非常正），则我们更坚信标签$y$是负例（正例）。
 
 既然选择了数据的表示形式，就必须选择损失函数。直观上，我们想要选择一些这样的损失函数，即对于我们的训练数据$\left\{\left(x^{(i)}, y^{(i)}\right)\right\}_{i=1}^{m}$来说，参数$\theta$的选择让边界$y^{(i)} \theta^{T} x^{(i)}$对于每一个训练样本都非常大。让我们修正一个假设的例子$(x,y)$，令$z=y x^{T} \theta$代表边界，并且设$\varphi : \mathbb{R} \rightarrow \mathbb{R}$为损失函数——也就是说，例子$(x, y)$的损失在边界$z=y x^{T} \theta$上是$\varphi(z)=\varphi\left(y x^{T} \theta\right)$。对于任何特定的损失函数，我们最小化的经验风险是：
 
@@ -46,13 +46,13 @@ $$
 J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \varphi\left(y^{(i)} \theta^{T} x^{(i)}\right)\qquad\qquad(2)
 $$
 
-考虑我们想要的行为：我们希望$y^{(i)} \theta^{T} x^{(i)}$对于每个训练样本$i=1, \ldots, m$都是正的，我们应该惩罚那些$\theta$，其中在训练数据中经常出现$y^{(i)} \theta^{T} x^{(i)}<0$。因此,一个直观的选择是，如果$z > 0$（边界是正的）我们的损失$\varphi(z)$小，而如果$z < 0$（边界是负的）则$\varphi(z)$大。也许最自然的这种损失是$0-1$损失，由下式得出：
+考虑我们想要的行为：我们希望$y^{(i)} \theta^{T} x^{(i)}$对于每个训练样本$i=1, \ldots, m$都是正的，我们应该惩罚那些$\theta$，它们使得训练数据中经常出现$y^{(i)} \theta^{T} x^{(i)}<0$。因此,一个直观的选择是，如果$z > 0$（边界是正的）我们的损失$\varphi(z)$小，而如果$z < 0$（边界是负的）则$\varphi(z)$大。也许最自然的这种损失是$0-1$损失，由下式得出：
 
 $$
 \varphi_{\mathrm{zo}}(z)=\left\{\begin{array}{ll}{1} & {\text { if } z \leq 0} \\ {0} & {\text { if } z>0}\end{array}\right.
 $$
 
-在这种情况下，损失$J(\theta)$是简单的平均数量的使得在训练数据错误分类的参数$\theta$。不幸的是，损失函数$\phi_{zo}$是不连续、非凸的（为什么会出现这种情况有点超出课程的范围了），甚至更令人烦恼的是，该问题是$NP$难到极致的。因此，我们更愿意选择具有图$1$中所示形状的损失。也就是说，我们基本上总是使用满足下面条件的损失:
+在这种情况下，损失$J(\theta)$是简单的参数$\theta$在训练集上使得结果错误（误分类）的平均数量。不幸的是，损失函数$\phi_{zo}$是不连续、非凸的（为什么会出现这种情况的解释有点超出本课程的范围了），甚至更令人烦恼的是，使其最小化是一个$NP$难问题。因此，我们更愿意选择具有图$1$中所示形状的损失。也就是说，我们基本上总是使用满足下面条件的损失:
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notelff1.png)
 
@@ -60,7 +60,7 @@ $$
 \varphi(z) \rightarrow 0 \text { as } z \rightarrow \infty, \quad \text { while } \varphi(z) \rightarrow \infty \text { as } z \rightarrow-\infty
 $$
 
-下面来一些不同的例子，这里有三个损失函数，我们将会在这门课或现在或以后上看到，所有这些损失函数都是在机器学习中很常用的。
+下面来一些不同的例子，这里有三个损失函数，我们将会在这门课或现在或以后上看到，这些损失函数都是在机器学习中很常用的。
 
 (i) logistic损失函数：
 
@@ -80,19 +80,19 @@ $$
 \varphi_{\exp }(z)=e^{-z}
 $$
 
-在图2中，我们把这些损失对边界$z=y x^{T} \theta$，注意每个趋于零的边界增长，并且每个往往趋近$+\infin$时边界是负的。不同的损失函数导致不同的机器学习过程；特别是logistic损失$\varphi_{\text { logistic }}$的逻辑回归问题，铰链损失$\varphi_{\text { hinge }}$产生所谓的支持向量机，以及指数损失产生的经典的提升版本，这两个我们以后将更深入地探讨。
+在图$2$中，我们画出了这些损失相对于边界$z=y x^{T} \theta$的图像，注意随着边界增长，每个损失函数都趋于零，并且每个损失函数往往随着边界负向增长而趋近$+\infin$。不同的损失函数将产生不同的机器学习过程；特别要指出，logistic损失$\varphi_{\text { logistic }}$对应于逻辑回归问题，铰链损失$\varphi_{\text { hinge }}$产生所谓的支持向量机，以及指数损失产生的经典的提升版本，这两个我们以后将更深入地探讨。
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229notelff2.png)
 
 #### 2. 逻辑回归
 
-有了这一背景知识，我们现在对Andrew Ng课堂笔记中的逻辑回归给出了一个补充的观点。当我们使用二分标签$y \in\{-1,1\}$时，可以更简洁地编写逻辑回归。特别地，我们使用Logistic损失：
+有了这一背景知识，我们现在对Andrew Ng课堂笔记中的逻辑回归给出了一个补充的观点。当我们使用二分标签$y \in\{-1,1\}$时，可以更简洁地编写逻辑回归算法。特别地，我们使用Logistic损失：
 
 $$
 \varphi_{\text { logistic }}\left(y x^{T} \theta\right)=\log \left(1+\exp \left(-y x^{T} \theta\right)\right)
 $$
 
-和逻辑回归算法对应于选择$\theta$，最小化下面的式子：
+和逻辑回归算法对应于选择$\theta$来最小化下面的式子：
 
 $$
 J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \varphi_{\text {logistic}}\left(y^{(i)} \theta^{T} x^{(i)}\right)=\frac{1}{m} \sum_{i=1}^{m} \log \left(1+\exp \left(-y^{(i)} \theta^{T} x^{(i)}\right)\right)
@@ -161,10 +161,13 @@ $$
 因此，随机梯度下降最小化$J(\theta)$算法对于$t=1,2, \ldots$，$\alpha_t$为在时间$t$时刻的步长，执行以下迭代：
 
 1. 随机均匀的从$i \in\{1, \ldots, m\}$中选择一个样本
-2. 执行梯度更新:
+2. 执行梯度更新：
 
 $$
-\begin{aligned} \theta^{(t+1)} &=\theta^{(t)}-\alpha_{t} \cdot \nabla_{\theta} \varphi_{\text { logistic }}\left(y^{(i)} x^{(i)^{T}} \theta^{(t)}\right) \\ &=\theta^{(t)}+\alpha_{t} g\left(-y^{(i)} x^{(i)^{T}} \theta^{(t)}\right) y^{(i)} x^{(i)}=\theta^{(t)}+\alpha_{t} h_{\theta^{(t)}}\left(-y^{(i)} x^{(i)}\right) y^{(i)} x^{(i)} \end{aligned}
+\begin{aligned} 
+\theta^{(t+1)} &=\theta^{(t)}-\alpha_{t} \cdot \nabla_{\theta} \varphi_{\text { logistic }}\left(y^{(i)} x^{(i)^{T}} \theta^{(t)}\right) \\ 
+&=\theta^{(t)}+\alpha_{t} g\left(-y^{(i)} x^{(i)^{T}} \theta^{(t)}\right) y^{(i)} x^{(i)}=\theta^{(t)}+\alpha_{t} h_{\theta^{(t)}}\left(-y^{(i)} x^{(i)}\right) y^{(i)} x^{(i)} 
+\end{aligned}
 $$
 
 这个更新是很直观的：如果当前的假设$h_{\theta^{(t)}}$为不正确的标签$-y^{(i)}$分配接近$1$的概率，则我们通过将$\theta$朝着$y^{(i)} x^{(i)}$方向移动来尽量减少损失。相反，如果当前的假设$h_{\theta^{(t)}}$为不正确的标签$-y^{(i)}$分配接近$0$的概率，则更新实际上什么也不做。
