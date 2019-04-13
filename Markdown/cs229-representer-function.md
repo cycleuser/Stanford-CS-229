@@ -193,3 +193,21 @@ $$
 上式是关于$J_{\lambda}(\alpha)$的随机梯度。这给我们一个核监督学习问题的随机梯度算法，如图$1$所示。关于算法$1$，有一点需要注意：因为我们为了保持梯度的无偏性而在$\lambda K^{(i)} \alpha_{i}$项上乘了$m$，所以参数$\lambda>0$不能太大，否则算法就会有点不稳定。此外，通常选择的步长是$\eta_{t}=1 / \sqrt{t}$，或者是它的常数倍。
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff1.png)
+
+#### 5 支持向量机
+
+现在我们讨论支持向量机(SVM)的一种方法，它适用于标签为$y \in\{-1,1\}$的二分类问题。并给出了损失函数$\mathrm{L}$的一种特殊选择，特别是在支持向量机中，我们使用了基于边缘的损失函数：
+
+$$
+\mathrm{L}(z, y)=[1-y z]_{+}=\max \{0,1-y z\}\qquad\qquad(3)
+$$
+
+因此，在某种意义上，支持向量机只是我们前面描述的一般理论结果的一个特例。特别的，我们有经验正则化风险：
+
+$$
+J_{\lambda}(\alpha)=\frac{1}{m} \sum_{i=1}^{m}\left[1-y^{(i)} K^{(i)^{T}} \alpha\right]_{+}+\frac{\lambda}{2} \alpha^{T} K \alpha
+$$
+
+其中矩阵$K=\left[K^{(1)} \cdots K^{(m)}\right]$通过$K_{i j}=K\left(x^{(i)}, x^{(j)}\right)$来定义。
+
+在课堂笔记中，你们可以看到另一种推导支持向量机的方法以及我们为什么称呼其为支持向量机的描述。
