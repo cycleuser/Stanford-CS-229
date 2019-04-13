@@ -211,3 +211,62 @@ $$
 其中矩阵$K=\left[K^{(1)} \cdots K^{(m)}\right]$通过$K_{i j}=K\left(x^{(i)}, x^{(j)}\right)$来定义。
 
 在课堂笔记中，你们可以看到另一种推导支持向量机的方法以及我们为什么称呼其为支持向量机的描述。
+
+#### 6 一个例子
+
+在本节中，我们考虑一个特殊的例子——核，称为高斯或径向基函数(RBF)核。这个核由下式给出：
+
+$$
+K(x, z)=\exp \left(-\frac{1}{2 \tau^{2}}\|x-z\|_{2}^{2}\right)\qquad\qquad(4)
+$$
+
+其中$\tau>0$是一个控制内核带宽的参数。直观地，当$\tau$非常小时，除非$x \approx z$我们将得到$K(x, z) \approx 0$。即$x$和$z$非常接近，在这种情况下我们有$K(x, z) \approx 1$。然而，当$\tau$非常大时，则我们有一个更平滑的核函数$K$。这个核的功能函数$\phi$是在无限维$^1$的空间中。即便如此，通过考虑一个新的例子$x$所做的分类，我们可以对内核有一些直观的认识：我们预测：
+
+<blockquote><details><summary>上一小段上标1的说明（详情请点击本行）</summary>
+
+如果你看过特征函数或者傅里叶变换，那么你可能会认出RBF核是均值为零，方差为$\tau^{2}$的高斯分布的傅里叶变换。也就是在$\mathbb{R}^{n}$中令$W\sim \mathrm{N}\left(0, \tau^{2} I_{n \times n}\right)$，使得$W$的概率密函数为$p(w)=\frac{1}{\left(2 \pi \tau^{2}\right)^{n / 2}} \exp \left(-\frac{\|w\|_{2}^{2}}{2 \tau^{2}}\right)$。令$i=\sqrt{-1}$为虚数单位，则对于任意向量$v$我们可得：
+
+$$
+\begin{aligned} 
+\mathbb{E}\left[\exp \left(i v^{T} W\right)\right]
+=\int \exp \left(i v^{T} w\right) p(w) d w 
+&=\int \frac{1}{\left(2 \pi \tau^{2}\right)^{n / 2}} \exp \left(i v^{T} w-\frac{1}{2 \tau^{2}}\|w\|_{2}^{2}\right) d w \\ 
+&=\exp \left(-\frac{1}{2 \tau^{2}}\|v\|_{2}^{2}\right) 
+\end{aligned}
+$$
+
+因此，如果我们定义“向量”（实际上是函数）$\phi(x, w)=e^{i x^{T} w}$并令$a^*$是$a \in \mathbb{C}$的共轭复数，则我们可得：
+
+$$
+\mathbb{E}\left[\phi(x, W) \phi(z, W)^{*}\right]=\mathbb{E}\left[e^{i x^{T} W} e^{-i x^{T} W}\right]=\mathbb{E}\left[\exp \left(i W^{T}(x-z)\right)\right]=\exp \left(-\frac{1}{2 \tau^{2}}\|x-z\|_{2}^{2}\right)
+$$
+
+特别地，我们看到$K(x, z)$是一个函数空间的内积这个函数空间可以对$p(w)$积分。
+
+</details></blockquote>
+
+$$
+\sum_{i=1}^{m} K\left(x^{(i)}, x\right) \alpha_{i}=\sum_{i=1}^{m} \exp \left(-\frac{1}{2 \tau^{2}}\left\|x^{(i)}-x\right\|_{2}^{2}\right) \alpha_{i}
+$$
+
+所以这就变成了一个权重，取决于$x$离每个$x^{(i)}$有多近，权重的贡献$\alpha_i$乘以$x$到$x^{(i)}$的相似度，由核函数决定。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff2.png)
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff3.png)
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff4.png)
+
+在图$2$、$3$和$4$中，我们通过最小化下式显示了训练$6$个不同内核分类器的结果：
+
+$$
+J_{\lambda}(\alpha)=\sum_{i=1}^{m}\left[1-y^{(i)} K^{(i)^{T}} \alpha\right]_{+}+\frac{\lambda}{2} \alpha^{T} K \alpha
+$$
+
+其中$m=200,\lambda=1/m$，核公式$(4)$中的$\tau$取不同的值。我们绘制了训练数据（正例为蓝色的x，负例为红色的o）以及最终分类器的决策面。也就是说，我们画的线由下式定义：
+
+$$
+\left\{x \in \mathbb{R}^{2} : \sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}=0\right\}
+$$
+
+给出了学习分类器进行预测$\sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}>0$和$\sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}<0$的区域。从图中我们看到，对于数值较大的$\tau$的一个非常简单的分类器：它几乎是线性的，而对于$τ=.1$，分类器有实质性的变化，是高度非线性的。为了便于参考，在图$5$中，我们根据训练数据绘制了最优分类器；在训练数据无限大的情况下，最优分类器能最大限度地减小误分类误差。
