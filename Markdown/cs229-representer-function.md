@@ -151,3 +151,45 @@ K(x, z)=\min \{x, z\}
 $$
 
 有关这些内核机器的更多信息，请参见[支持向量机(SVMs)的课堂笔记](https://kivy-cn.github.io/Stanford-CS-229-CN/#/Markdown/cs229-notes3)。
+
+#### 4 核机器学习的随机梯度下降算法
+
+如果我们定义$K \in \mathbb{R}^{m \times m}$为核矩阵，简而言之，定义向量：
+
+$$
+K^{(i)}=\left[ \begin{array}{c}{K\left(x^{(i)}, x^{(1)}\right)} \\ {K\left(x^{(i)}, x^{(2)}\right)} \\ {\vdots} \\ {K\left(x^{(i)}, x^{(m)}\right)}\end{array}\right]
+$$
+
+其中$K=\left[K^{(1)} K^{(2)} \cdots K^{(m)}\right]$，然后，我们可以将正则化风险写成如下简单的形式：
+
+$$
+J_{\lambda}(\alpha)=\frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(K^{(i)^{T}} \alpha, y^{(i)}\right)+\frac{\lambda}{2} \alpha^{T} K \alpha
+$$
+
+现在，让我们考虑对上述风险$J_{\lambda}$取一个随机梯度。也就是说，我们希望构造一个（易于计算的）期望为$\nabla J_{\lambda}(\alpha)$的随机向量，其没有太多的方差。为此,我们首先计算$J(\alpha)$的梯度。我们通过下式来计算单个损失项的梯度：
+
+$$
+\nabla_{\alpha} \mathrm{L}\left(K^{(i)^{T}} \alpha, y^{(i)}\right)=\mathrm{L}^{\prime}\left(K^{(i)^{T}} \alpha, y^{(i)}\right) K^{(i)}
+$$
+
+而：
+
+$$
+\nabla_{\alpha}\left[\frac{\lambda}{2} \alpha^{T} K \alpha\right]=\lambda K \alpha=\lambda \sum_{i=1}^{m} K^{(i)} \alpha_{i}
+$$
+
+因此我们可得：
+
+$$
+\nabla_{\alpha} J_{\lambda}(\alpha)=\frac{1}{m} \sum_{i=1}^{m} \mathrm{L}^{\prime}\left(K^{(i)^{T}} \alpha, y^{(i)}\right) K^{(i)}+\lambda \sum_{i=1}^{m} K^{(i)} \alpha_{i}
+$$
+
+因此，如果我们选择一个随机索引 ，我们有下式：
+
+$$
+\mathrm{L}^{\prime}\left(K^{(i)^{T}} \alpha, y^{(i)}\right) K^{(i)}+m \lambda K^{(i)} \alpha_{i}
+$$
+
+上式是关于$J_{\lambda}(\alpha)$的随机梯度。这给我们一个核监督学习问题的随机梯度算法，如图$1$所示。关于算法$1$，有一点需要注意：因为我们为了保持梯度的无偏性而在$\lambda K^{(i)} \alpha_{i}$项上乘了$m$，所以参数$\lambda>0$不能太大，否则算法就会有点不稳定。此外，通常选择的步长是$\eta_{t}=1 / \sqrt{t}$，或者是它的常数倍。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff1.png)
