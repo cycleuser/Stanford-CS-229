@@ -138,7 +138,7 @@ $$
 K=\left[K\left(x^{(i)}, x^{(j)}\right)\right]_{i, j=1}^{m} \in \mathbb{R}^{m \times m}
 $$
 
-现在，给定$\phi$，我们可以很容易地通过$\phi(x)$和$\phi(z)$和内积计算$K(x,z)$。但更有趣的是，通常$K(x,z)$可能非常廉价的计算，即使$\phi(x)$本身可能是非常难计算的（可能因为这是一个极高的维向量）。在这样的设置中，通过在我们的算法中一个有效的方法来计算$K(x,z)$，我们可以学习的高维特征空间空间由$\phi$给出，但没有明确的找到或表达向量$\phi(x)$。例如，一些核（对应于无限维的向量$\phi$）包括：
+现在，给定$\phi$，我们可以很容易地通过$\phi(x)$和$\phi(z)$和内积计算$K(x,z)$。但更有趣的是，通常$K(x,z)$可能非常廉价的计算，即使$\phi(x)$本身可能是非常难计算的（可能因为这是一个极高维的向量）。在这样的设置中，通过在我们的算法中一个有效的方法来计算$K(x,z)$，我们可以学习的高维特征空间空间由$\phi$给出，但没有明确的找到或表达向量$\phi(x)$。例如，一些核（对应于无限维的向量$\phi$）包括：
 
 $$
 K(x, z)=\exp \left(-\frac{1}{2 \tau^{2}}\|x-z\|_{2}^{2}\right)
@@ -263,10 +263,90 @@ $$
 J_{\lambda}(\alpha)=\sum_{i=1}^{m}\left[1-y^{(i)} K^{(i)^{T}} \alpha\right]_{+}+\frac{\lambda}{2} \alpha^{T} K \alpha
 $$
 
-其中$m=200,\lambda=1/m$，核公式$(4)$中的$\tau$取不同的值。我们绘制了训练数据（正例为蓝色的x，负例为红色的o）以及最终分类器的决策面。也就是说，我们画的线由下式定义：
+其中$m=200,\lambda=1/m$，核公式$(4)$中的$\tau$取不同的值。我们绘制了训练数据（正例为蓝色的x，负例为红色的o）以及最终分类器的决策面。也就是说，我们画的线由下式：
 
 $$
 \left\{x \in \mathbb{R}^{2} : \sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}=0\right\}
 $$
 
-给出了学习分类器进行预测$\sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}>0$和$\sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}<0$的区域。从图中我们看到，对于数值较大的$\tau$的一个非常简单的分类器：它几乎是线性的，而对于$τ=.1$，分类器有实质性的变化，是高度非线性的。为了便于参考，在图$5$中，我们根据训练数据绘制了最优分类器；在训练数据无限大的情况下，最优分类器能最大限度地减小误分类误差。
+定义给出了学习分类器进行预测$\sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}>0$和$\sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}<0$的区域。从图中我们看到，对于数值较大的$\tau$的一个非常简单的分类器：它几乎是线性的，而对于$τ=.1$，分类器有实质性的变化，是高度非线性的。为了便于参考，在图$5$中，我们根据训练数据绘制了最优分类器；在训练数据无限大的情况下，最优分类器能最大限度地减小误分类误差。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff5.png)
+
+#### A 一个更一般的表示定理
+
+在这一节中，我们给出了一个更一般版本的表示定理以及一个严格的证明。令$r : \mathbb{R} \rightarrow \mathbb{R}$为任何非降函数的自变量，并考虑正则化风险：
+
+$$
+J_{r}(\theta)=\frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(x^{(i)^{T}} \theta, y^{(i)}\right)+r\left(\|\theta\|_{2}\right)\qquad\qquad(5)
+$$
+
+通常，我们取$r(t)=\frac{\lambda}{2} t^{2}$，与通常的选择$l_2$-正则化相对应。但是下一个定理表明这对于表示定理来说是不必要的。事实上，我们可以对所有的$t$取$r(t) = 0$，这个定理仍然成立。
+
+**定理 A.1** （向量空间$R^n$中的表示定理）。令$\theta \in \mathbb{R}^{n}$为任意向量。则存在$\alpha \in \mathbb{R}^{m}$和$\theta^{(\alpha)}=\sum_{i=1}^{m} \alpha_{i} x^{(i)}$使得：
+
+$$
+J_{r}\left(\theta^{(\alpha)}\right) \leq J_{r}(\theta)
+$$
+
+特别的，没有普遍的损失函数总是假设我们可以最小化$J(\theta)$来写出优化问题，其中最小化$J(\theta)$时仅仅考虑$\theta$在数据的张成的空间中的情况。
+
+**证明** 我们的证明依赖于线性代数中的一些性质，它允许我们证明简洁，但是如果你觉得太过简洁，请随意提问。
+
+向量$\left\{x^{(i)}\right\}_{i=1}^{m}$在向量空间$\mathbb{R}^{n}$中。因此有$\mathbb{R}^{n}$中的子空间$V$使得：
+
+$$
+V=\left\{\sum_{i=1}^{m} \beta_{i} x^{(i)} : \beta_{i} \in \mathbb{R}\right\}
+$$
+
+那么$V$对于向量$v_{i} \in \mathbb{R}^{n}$有一个标准正交基$\left\{v_{1}, \dots, v_{n_{0}}\right\}$，其中标准正交基的长度（维度）是$n_{0} \leq n$。因此我们可以写出$V=\left\{\sum_{i=1}^{n_{0}} b_{i} v_{i}:b_{i} \in \mathbb{R} \right\}$，回忆一下正交性是是指向量$v_i$满足$\left\|v_{i}\right\|_{2}=1$和对于任意$i\neq j$有$v_{i}^{T} v_{j}=0$。还有一个正交子空间$V^{\perp}=\left\{u \in \mathbb{R}^{n} : u^{T} v=0\quad for\quad all\quad v \in V\right\}$，其有一个维度是$n_{\perp}=n-n_{0} \geq 0$的正交基，我们可以写作$\left\{u_{1}, \ldots, u_{n_{\perp}}\right\} \subset \mathbb{R}^{n}$，其对于所有$i,j$都满足$u_{i}^{T} v_{j}=0$。
+
+因为$\theta \in \mathbb{R}^{n}$，我们可以把它唯一地写成：
+
+$$
+\theta=\sum_{i=1}^{n_{0}} \nu_{i} v_{i}+\sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}, \quad \text { where } \nu_{i} \in \mathbb{R} \text { and } \mu_{i} \in \mathbb{R}
+$$
+
+其中$\mu, \nu$的值是唯一的。现在通过$\left\{x^{(i)}\right\}_{i=1}^{m}$张成的空间$V$的定义可知，存在$\alpha \in \mathbb{R}^{m}$使得：
+
+$$
+\sum_{i=1}^{n_{0}} \nu_{i} v_{i}=\sum_{i=1}^{m} \alpha_{i} x^{(i)}
+$$
+
+因此我们有：
+
+$$
+\theta=\sum_{i=1}^{m} \alpha_{i} x^{(i)}+\sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}
+$$
+
+定义$\theta^{(\alpha)}=\sum_{i=1}^{m} \alpha_{i} x^{(i)}$。现在对于任意数据点$x^{(j)}$，我们有：
+
+$$
+u_{i}^{T} x^{(j)}=0 \text { for all } i=1, \ldots, n_{\perp}
+$$
+
+使得$u_{i}^{T} \theta^{(\alpha)}=0$。因此我们可得：
+
+$$
+\|\theta\|_{2}^{2}=\left\|\theta^{(\alpha)}+\sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}\right\|_{2}^{2}=\left\|\theta^{(\alpha)}\right\|_{2}^{2}+\underbrace{2 \sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}^{T} \theta^{(\alpha)}}_{=0}+\left\|\sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}\right\|_{2}^{2} \geq\left\|\theta^{(\alpha)}\right\|_{2}^{2}\quad(6a)
+$$
+
+同时我们可得：
+
+$$
+\theta^{(\alpha)^{T}} x^{(i)}=\theta^{T} x^{(i)}\qquad\qquad(6b)
+$$
+
+对于所有点$x^{(i)}$都成立。
+
+即，通过使用$\|\theta\|_{2} \geq\left\|\theta^{(\alpha)}\right\|_{2}$以及等式$(6b)$，我们可得：
+
+$$
+\begin{aligned}
+J_{r}(\theta)=\frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(\theta^{T} x^{(i)}, y^{(i)}\right)+r\left(\|\theta\|_{2}\right) &\stackrel{(6 \mathrm{b})}{=} \frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(\theta^{(\alpha)^{T}} x^{(i)}, y^{(i)}\right)+r\left(\|\theta\|_{2}\right)\\
+&\stackrel{(6 \mathrm{a})}{ \geq} \frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(\theta^{(\alpha)^{T}} x^{(i)}, y^{(i)}\right)+r\left(\left\|\theta^{(\alpha)}\right\|_{2}\right)\\
+&=J_{r}\left(\theta^{(\alpha)}\right)
+\end{aligned}
+$$
+
+这是期望的结果。
