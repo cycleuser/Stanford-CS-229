@@ -138,7 +138,7 @@ $$
 K=\left[K\left(x^{(i)}, x^{(j)}\right)\right]_{i, j=1}^{m} \in \mathbb{R}^{m \times m}
 $$
 
-现在，给定$\phi$，我们可以很容易地通过$\phi(x)$和$\phi(z)$和内积计算$K(x,z)$。但更有趣的是，通常$K(x,z)$可能非常廉价的计算，即使$\phi(x)$本身可能是非常难计算的（可能因为这是一个极高的维向量）。在这样的设置中，通过在我们的算法中一个有效的方法来计算$K(x,z)$，我们可以学习的高维特征空间空间由$\phi$给出，但没有明确的找到或表达向量$\phi(x)$。例如，一些核（对应于无限维的向量$\phi$）包括：
+现在，给定$\phi$，我们可以很容易地通过$\phi(x)$和$\phi(z)$和内积计算$K(x,z)$。但更有趣的是，通常$K(x,z)$可能非常廉价的计算，即使$\phi(x)$本身可能是非常难计算的（可能因为这是一个极高维的向量）。在这样的设置中，通过在我们的算法中一个有效的方法来计算$K(x,z)$，我们可以学习的高维特征空间空间由$\phi$给出，但没有明确的找到或表达向量$\phi(x)$。例如，一些核（对应于无限维的向量$\phi$）包括：
 
 $$
 K(x, z)=\exp \left(-\frac{1}{2 \tau^{2}}\|x-z\|_{2}^{2}\right)
@@ -151,3 +151,202 @@ K(x, z)=\min \{x, z\}
 $$
 
 有关这些内核机器的更多信息，请参见[支持向量机(SVMs)的课堂笔记](https://kivy-cn.github.io/Stanford-CS-229-CN/#/Markdown/cs229-notes3)。
+
+#### 4 核机器学习的随机梯度下降算法
+
+如果我们定义$K \in \mathbb{R}^{m \times m}$为核矩阵，简而言之，定义向量：
+
+$$
+K^{(i)}=\left[ \begin{array}{c}{K\left(x^{(i)}, x^{(1)}\right)} \\ {K\left(x^{(i)}, x^{(2)}\right)} \\ {\vdots} \\ {K\left(x^{(i)}, x^{(m)}\right)}\end{array}\right]
+$$
+
+其中$K=\left[K^{(1)} K^{(2)} \cdots K^{(m)}\right]$，然后，我们可以将正则化风险写成如下简单的形式：
+
+$$
+J_{\lambda}(\alpha)=\frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(K^{(i)^{T}} \alpha, y^{(i)}\right)+\frac{\lambda}{2} \alpha^{T} K \alpha
+$$
+
+现在，让我们考虑对上述风险$J_{\lambda}$取一个随机梯度。也就是说，我们希望构造一个（易于计算的）期望为$\nabla J_{\lambda}(\alpha)$的随机向量，其没有太多的方差。为此,我们首先计算$J(\alpha)$的梯度。我们通过下式来计算单个损失项的梯度：
+
+$$
+\nabla_{\alpha} \mathrm{L}\left(K^{(i)^{T}} \alpha, y^{(i)}\right)=\mathrm{L}^{\prime}\left(K^{(i)^{T}} \alpha, y^{(i)}\right) K^{(i)}
+$$
+
+而：
+
+$$
+\nabla_{\alpha}\left[\frac{\lambda}{2} \alpha^{T} K \alpha\right]=\lambda K \alpha=\lambda \sum_{i=1}^{m} K^{(i)} \alpha_{i}
+$$
+
+因此我们可得：
+
+$$
+\nabla_{\alpha} J_{\lambda}(\alpha)=\frac{1}{m} \sum_{i=1}^{m} \mathrm{L}^{\prime}\left(K^{(i)^{T}} \alpha, y^{(i)}\right) K^{(i)}+\lambda \sum_{i=1}^{m} K^{(i)} \alpha_{i}
+$$
+
+因此，如果我们选择一个随机索引 ，我们有下式：
+
+$$
+\mathrm{L}^{\prime}\left(K^{(i)^{T}} \alpha, y^{(i)}\right) K^{(i)}+m \lambda K^{(i)} \alpha_{i}
+$$
+
+上式是关于$J_{\lambda}(\alpha)$的随机梯度。这给我们一个核监督学习问题的随机梯度算法，如图$1$所示。关于算法$1$，有一点需要注意：因为我们为了保持梯度的无偏性而在$\lambda K^{(i)} \alpha_{i}$项上乘了$m$，所以参数$\lambda>0$不能太大，否则算法就会有点不稳定。此外，通常选择的步长是$\eta_{t}=1 / \sqrt{t}$，或者是它的常数倍。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff1.png)
+
+#### 5 支持向量机
+
+现在我们讨论支持向量机(SVM)的一种方法，它适用于标签为$y \in\{-1,1\}$的二分类问题。并给出了损失函数$\mathrm{L}$的一种特殊选择，特别是在支持向量机中，我们使用了基于边缘的损失函数：
+
+$$
+\mathrm{L}(z, y)=[1-y z]_{+}=\max \{0,1-y z\}\qquad\qquad(3)
+$$
+
+因此，在某种意义上，支持向量机只是我们前面描述的一般理论结果的一个特例。特别的，我们有经验正则化风险：
+
+$$
+J_{\lambda}(\alpha)=\frac{1}{m} \sum_{i=1}^{m}\left[1-y^{(i)} K^{(i)^{T}} \alpha\right]_{+}+\frac{\lambda}{2} \alpha^{T} K \alpha
+$$
+
+其中矩阵$K=\left[K^{(1)} \cdots K^{(m)}\right]$通过$K_{i j}=K\left(x^{(i)}, x^{(j)}\right)$来定义。
+
+在课堂笔记中，你们可以看到另一种推导支持向量机的方法以及我们为什么称呼其为支持向量机的描述。
+
+#### 6 一个例子
+
+在本节中，我们考虑一个特殊的例子——核，称为高斯或径向基函数(RBF)核。这个核由下式给出：
+
+$$
+K(x, z)=\exp \left(-\frac{1}{2 \tau^{2}}\|x-z\|_{2}^{2}\right)\qquad\qquad(4)
+$$
+
+其中$\tau>0$是一个控制内核带宽的参数。直观地，当$\tau$非常小时，除非$x \approx z$我们将得到$K(x, z) \approx 0$。即$x$和$z$非常接近，在这种情况下我们有$K(x, z) \approx 1$。然而，当$\tau$非常大时，则我们有一个更平滑的核函数$K$。这个核的功能函数$\phi$是在无限维$^1$的空间中。即便如此，通过考虑一个新的例子$x$所做的分类，我们可以对内核有一些直观的认识：我们预测：
+
+<blockquote><details><summary>上一小段上标1的说明（详情请点击本行）</summary>
+
+如果你看过特征函数或者傅里叶变换，那么你可能会认出RBF核是均值为零，方差为$\tau^{2}$的高斯分布的傅里叶变换。也就是在$\mathbb{R}^{n}$中令$W\sim \mathrm{N}\left(0, \tau^{2} I_{n \times n}\right)$，使得$W$的概率密函数为$p(w)=\frac{1}{\left(2 \pi \tau^{2}\right)^{n / 2}} \exp \left(-\frac{\|w\|_{2}^{2}}{2 \tau^{2}}\right)$。令$i=\sqrt{-1}$为虚数单位，则对于任意向量$v$我们可得：
+
+$$
+\begin{aligned} 
+\mathbb{E}\left[\exp \left(i v^{T} W\right)\right]
+=\int \exp \left(i v^{T} w\right) p(w) d w 
+&=\int \frac{1}{\left(2 \pi \tau^{2}\right)^{n / 2}} \exp \left(i v^{T} w-\frac{1}{2 \tau^{2}}\|w\|_{2}^{2}\right) d w \\ 
+&=\exp \left(-\frac{1}{2 \tau^{2}}\|v\|_{2}^{2}\right) 
+\end{aligned}
+$$
+
+因此，如果我们定义“向量”（实际上是函数）$\phi(x, w)=e^{i x^{T} w}$并令$a^*$是$a \in \mathbb{C}$的共轭复数，则我们可得：
+
+$$
+\mathbb{E}\left[\phi(x, W) \phi(z, W)^{*}\right]=\mathbb{E}\left[e^{i x^{T} W} e^{-i x^{T} W}\right]=\mathbb{E}\left[\exp \left(i W^{T}(x-z)\right)\right]=\exp \left(-\frac{1}{2 \tau^{2}}\|x-z\|_{2}^{2}\right)
+$$
+
+特别地，我们看到$K(x, z)$是一个函数空间的内积这个函数空间可以对$p(w)$积分。
+
+</details></blockquote>
+
+$$
+\sum_{i=1}^{m} K\left(x^{(i)}, x\right) \alpha_{i}=\sum_{i=1}^{m} \exp \left(-\frac{1}{2 \tau^{2}}\left\|x^{(i)}-x\right\|_{2}^{2}\right) \alpha_{i}
+$$
+
+所以这就变成了一个权重，取决于$x$离每个$x^{(i)}$有多近，权重的贡献$\alpha_i$乘以$x$到$x^{(i)}$的相似度，由核函数决定。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff2.png)
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff3.png)
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff4.png)
+
+在图$2$、$3$和$4$中，我们通过最小化下式显示了训练$6$个不同内核分类器的结果：
+
+$$
+J_{\lambda}(\alpha)=\sum_{i=1}^{m}\left[1-y^{(i)} K^{(i)^{T}} \alpha\right]_{+}+\frac{\lambda}{2} \alpha^{T} K \alpha
+$$
+
+其中$m=200,\lambda=1/m$，核公式$(4)$中的$\tau$取不同的值。我们绘制了训练数据（正例为蓝色的x，负例为红色的o）以及最终分类器的决策面。也就是说，我们画的线由下式：
+
+$$
+\left\{x \in \mathbb{R}^{2} : \sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}=0\right\}
+$$
+
+定义给出了学习分类器进行预测$\sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}>0$和$\sum_{i=1}^{m} K\left(x, x^{(i)}\right) \alpha_{i}<0$的区域。从图中我们看到，对于数值较大的$\tau$的一个非常简单的分类器：它几乎是线性的，而对于$τ=.1$，分类器有实质性的变化，是高度非线性的。为了便于参考，在图$5$中，我们根据训练数据绘制了最优分类器；在训练数据无限大的情况下，最优分类器能最大限度地减小误分类误差。
+
+![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229noterff5.png)
+
+#### A 一个更一般的表示定理
+
+在这一节中，我们给出了一个更一般版本的表示定理以及一个严格的证明。令$r : \mathbb{R} \rightarrow \mathbb{R}$为任何非降函数的自变量，并考虑正则化风险：
+
+$$
+J_{r}(\theta)=\frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(x^{(i)^{T}} \theta, y^{(i)}\right)+r\left(\|\theta\|_{2}\right)\qquad\qquad(5)
+$$
+
+通常，我们取$r(t)=\frac{\lambda}{2} t^{2}$，与通常的选择$l_2$-正则化相对应。但是下一个定理表明这对于表示定理来说是不必要的。事实上，我们可以对所有的$t$取$r(t) = 0$，这个定理仍然成立。
+
+**定理 A.1** （向量空间$R^n$中的表示定理）。令$\theta \in \mathbb{R}^{n}$为任意向量。则存在$\alpha \in \mathbb{R}^{m}$和$\theta^{(\alpha)}=\sum_{i=1}^{m} \alpha_{i} x^{(i)}$使得：
+
+$$
+J_{r}\left(\theta^{(\alpha)}\right) \leq J_{r}(\theta)
+$$
+
+特别的，没有普遍的损失函数总是假设我们可以最小化$J(\theta)$来写出优化问题，其中最小化$J(\theta)$时仅仅考虑$\theta$在数据的张成的空间中的情况。
+
+**证明** 我们的证明依赖于线性代数中的一些性质，它允许我们证明简洁，但是如果你觉得太过简洁，请随意提问。
+
+向量$\left\{x^{(i)}\right\}_{i=1}^{m}$在向量空间$\mathbb{R}^{n}$中。因此有$\mathbb{R}^{n}$中的子空间$V$使得：
+
+$$
+V=\left\{\sum_{i=1}^{m} \beta_{i} x^{(i)} : \beta_{i} \in \mathbb{R}\right\}
+$$
+
+那么$V$对于向量$v_{i} \in \mathbb{R}^{n}$有一个标准正交基$\left\{v_{1}, \dots, v_{n_{0}}\right\}$，其中标准正交基的长度（维度）是$n_{0} \leq n$。因此我们可以写出$V=\left\{\sum_{i=1}^{n_{0}} b_{i} v_{i}:b_{i} \in \mathbb{R} \right\}$，回忆一下正交性是是指向量$v_i$满足$\left\|v_{i}\right\|_{2}=1$和对于任意$i\neq j$有$v_{i}^{T} v_{j}=0$。还有一个正交子空间$V^{\perp}=\left\{u \in \mathbb{R}^{n} : u^{T} v=0\quad for\quad all\quad v \in V\right\}$，其有一个维度是$n_{\perp}=n-n_{0} \geq 0$的正交基，我们可以写作$\left\{u_{1}, \ldots, u_{n_{\perp}}\right\} \subset \mathbb{R}^{n}$，其对于所有$i,j$都满足$u_{i}^{T} v_{j}=0$。
+
+因为$\theta \in \mathbb{R}^{n}$，我们可以把它唯一地写成：
+
+$$
+\theta=\sum_{i=1}^{n_{0}} \nu_{i} v_{i}+\sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}, \quad \text { where } \nu_{i} \in \mathbb{R} \text { and } \mu_{i} \in \mathbb{R}
+$$
+
+其中$\mu, \nu$的值是唯一的。现在通过$\left\{x^{(i)}\right\}_{i=1}^{m}$张成的空间$V$的定义可知，存在$\alpha \in \mathbb{R}^{m}$使得：
+
+$$
+\sum_{i=1}^{n_{0}} \nu_{i} v_{i}=\sum_{i=1}^{m} \alpha_{i} x^{(i)}
+$$
+
+因此我们有：
+
+$$
+\theta=\sum_{i=1}^{m} \alpha_{i} x^{(i)}+\sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}
+$$
+
+定义$\theta^{(\alpha)}=\sum_{i=1}^{m} \alpha_{i} x^{(i)}$。现在对于任意数据点$x^{(j)}$，我们有：
+
+$$
+u_{i}^{T} x^{(j)}=0 \text { for all } i=1, \ldots, n_{\perp}
+$$
+
+使得$u_{i}^{T} \theta^{(\alpha)}=0$。因此我们可得：
+
+$$
+\|\theta\|_{2}^{2}=\left\|\theta^{(\alpha)}+\sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}\right\|_{2}^{2}=\left\|\theta^{(\alpha)}\right\|_{2}^{2}+\underbrace{2 \sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}^{T} \theta^{(\alpha)}}_{=0}+\left\|\sum_{i=1}^{n_{\perp}} \mu_{i} u_{i}\right\|_{2}^{2} \geq\left\|\theta^{(\alpha)}\right\|_{2}^{2}\quad(6a)
+$$
+
+同时我们可得：
+
+$$
+\theta^{(\alpha)^{T}} x^{(i)}=\theta^{T} x^{(i)}\qquad\qquad(6b)
+$$
+
+对于所有点$x^{(i)}$都成立。
+
+即，通过使用$\|\theta\|_{2} \geq\left\|\theta^{(\alpha)}\right\|_{2}$以及等式$(6b)$，我们可得：
+
+$$
+\begin{aligned}
+J_{r}(\theta)=\frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(\theta^{T} x^{(i)}, y^{(i)}\right)+r\left(\|\theta\|_{2}\right) &\stackrel{(6 \mathrm{b})}{=} \frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(\theta^{(\alpha)^{T}} x^{(i)}, y^{(i)}\right)+r\left(\|\theta\|_{2}\right)\\
+&\stackrel{(6 \mathrm{a})}{ \geq} \frac{1}{m} \sum_{i=1}^{m} \mathrm{L}\left(\theta^{(\alpha)^{T}} x^{(i)}, y^{(i)}\right)+r\left(\left\|\theta^{(\alpha)}\right\|_{2}\right)\\
+&=J_{r}\left(\theta^{(\alpha)}\right)
+\end{aligned}
+$$
+
+这是期望的结果。
