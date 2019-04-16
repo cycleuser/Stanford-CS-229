@@ -83,7 +83,55 @@ $$
 通常，我们希望对随机变量$Z$超出其期望的概率有更精确的（甚至是指数）边界。考虑到这一点，我们需要一个比有限方差更强的条件，对于有限方差，矩母函数是自然的候选条件。（方便的是，我们将看到它们也能很好地处理和。）回忆一下，对于随机变量$Z$, $Z$的矩母函数是下面这个函数：
 
 $$
-M_{Z}(\lambda) :=\mathbb{E}[\exp (\lambda Z)]
+M_{Z}(\lambda) :=\mathbb{E}[\exp (\lambda Z)]\qquad\qquad(2)
 $$
 
 其中对于一些$\lambda$来说是无限的。
+
+##### 2.1 切尔诺夫边界
+
+切尔诺夫边界利用矩母函数的基本方法给出指数偏差界限。
+
+**命题3** （切尔诺夫边界）。设$Z$为任意随机变量。然后对任何$t\ge 0$有：
+
+$$
+\mathbb{P}(Z \geq \mathbb{E}[Z]+t) \leq \min _{\lambda \geq 0} \mathbb{E}\left[e^{\lambda(Z-\mathbb{E}[Z])}\right] e^{-\lambda t}=\min _{\lambda \geq 0} M_{Z-\mathbb{E}[Z]}(\lambda) e^{-\lambda t}
+$$
+
+以及：
+
+$$
+\mathbb{P}(Z \leq \mathbb{E}[Z]-t) \leq \min _{\lambda \geq 0} \mathbb{E}\left[e^{\lambda(\mathbb{E}[Z]-Z)}\right] e^{-\lambda t}=\min _{\lambda \geq 0} M_{\mathbb{E}[Z]-Z}(\lambda) e^{-\lambda t}
+$$
+
+**证明** 我们只证明了第一个不等式，因为第二个不等式是完全等价的。我们使用马尔可夫不等式。对于任意$\lambda > 0$，当且仅当$e^{\lambda Z} \geq e^{\lambda \mathbb{E}[Z]+\lambda t}$或$e^{\lambda(Z-\mathbb{E}[Z])} \geq e^{\lambda t}$时我们有$Z \geq \mathbb{E}[Z]+t$。因此可得：
+
+$$
+\mathbb{P}(Z-\mathbb{E}[Z] \geq t)=\mathbb{P}\left(e^{\lambda(Z-\mathbb{E}[Z])} \geq e^{\lambda t}\right) \stackrel{(i)}{ \leq} \mathbb{E}\left[e^{\lambda(Z-\mathbb{E}[Z])}\right] e^{-\lambda t}
+$$
+
+其中不等式$(i)$来自马尔科夫不等式。既然我们选择的$\lambda > 0$无关紧要，因此我们可以通过最小化边界的右边来得到最好的一个。（要注意的是，这个界限在$\lambda = 0$处是成立的。）
+
+重要的结果是切诺夫边界很好地处理了求和，这是矩母函数的结果。假设$Z_i$是独立的。则我们可得：
+
+$$
+M_{Z_{1}+\cdots+Z_{n}}(\lambda)=\prod_{i=1}^{n} M_{Z_{i}}(\lambda)
+$$
+
+这是因为：
+
+$$
+\mathbb{E}\left[\exp \left(\lambda \sum_{i=1}^{n} Z_{i}\right)\right]=\mathbb{E}\left[\prod_{i=1}^{n} \exp \left(\lambda Z_{i}\right)\right]=\prod_{i=1}^{n} \mathbb{E}\left[\exp \left(\lambda Z_{i}\right)\right]
+$$
+
+由于$Z_i$是独立的。这意味着当我们计算一个独立同分布变量和的切尔诺夫边界界时，我们只需要计算其中一个变量的矩母函数。事实上，假设$Z_i$是独立同分布的，并且（为了简单起见）均值为零。则可得：
+
+$$
+\begin{aligned} 
+\mathbb{P}\left(\sum_{i=1}^{n} Z_{i} \geq t\right) 
+& \leq \frac{\prod_{i=1}^{n} \mathbb{E}\left[\exp \left(\lambda Z_{i}\right)\right]}{e^{\lambda t}} \\ 
+&=\left(\mathbb{E}\left[e^{\lambda Z_{1}}\right]\right)^{n} e^{-\lambda t} 
+\end{aligned}
+$$
+
+根据切尔诺夫边界。
