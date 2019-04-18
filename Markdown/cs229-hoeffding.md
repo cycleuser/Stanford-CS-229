@@ -135,3 +135,70 @@ $$
 $$
 
 根据切尔诺夫边界。
+
+##### 2.2 矩母函数例子
+
+现在我们给出几个矩母函数的例子，这些例子能让我们得到一些很好的偏差不等式。后面我们给出的所有例子都可以用如下的非常方便的边界形式：
+
+$$
+M_{Z}(\lambda)=\mathbb{E}\left[e^{\lambda Z}\right] \leq \exp \left(\frac{C^{2} \lambda^{2}}{2}\right) \text { for all } \lambda \in \mathbb{R}
+$$
+
+对于一些$C\in \mathbb{R}$（这取决于$Z$的分布）；这个形式非常适合应用切尔诺夫边界。
+
+我们从经典正态分布开始，其中$Z \sim \mathcal{N}\left(0, \sigma^{2}\right)$。则我们可得：
+
+$$
+\mathbb{E}[\exp (\lambda Z)]=\exp \left(\frac{\lambda^{2} \sigma^{2}}{2}\right)
+$$
+
+我们省略了计算过程。（如果你好奇的话，应该自己把它算出来！）
+
+第二个例子使用的是Rademacher随机变量，或者随机符号变量。令$S=1$有概率$\frac 12$，$S=-1$有概率$\frac 12$，则我们可以声明：
+
+$$
+\mathbb{E}\left[e^{\lambda S}\right] \leq \exp \left(\frac{\lambda^{2}}{2}\right) \quad \text { for all } \lambda \in \mathbb{R}\qquad\qquad(3)
+$$
+
+要理解不等式$(3)$，我们来用指数函数的泰勒展开式，即$e^{x}=\sum_{k=0}^{\infty} \frac{x^{k}}{k !}$。注意当$k$是奇数的时候$\mathbb{E}\left[S^{k}\right]=0$。当$k$是偶数的时候$\mathbb{E}\left[S^{k}\right]=1$。则我们可得：
+
+$$
+\begin{aligned} 
+\mathbb{E}\left[e^{\lambda S}\right] &=\sum_{k=0}^{\infty} \frac{\lambda^{k} \mathbb{E}\left[S^{k}\right]}{k !} \\ 
+&=\sum_{k=0,2,4, \ldots} \frac{\lambda^{k}}{k !}=\sum_{k=0}^{\infty} \frac{\lambda^{2 k}}{(2 k) !} 
+\end{aligned}
+$$
+
+最后，对于所有的$k=0,1,2, \ldots$我们使用$(2 k) ! \geq 2^{k} \cdot k !$。因此：
+
+$$
+\mathbb{E}\left[e^{\lambda S}\right] \leq \sum_{k=0}^{\infty} \frac{\left(\lambda^{2}\right)^{k}}{2^{k} \cdot k !}=\sum_{k=0}^{\infty}\left(\frac{\lambda^{2}}{2}\right)^{k} \frac{1}{k !}=\exp \left(\frac{\lambda^{2}}{2}\right)
+$$
+
+让我们把不等式$(3)$代入到一个切尔诺夫函数中，看看独立同分布随机符号的和有多大。
+
+我们知道如果$Z=\sum_{i=1}^{n} S_{i}$，其中$S_{i} \in\{ \pm 1\}$是随机符号，则$\mathbb{E}[Z]=0$。根据切尔诺夫边界，很明显可得：
+
+$$
+\mathbb{P}(Z \geq t) \leq \mathbb{E}\left[e^{\lambda Z}\right] e^{-\lambda t}=\mathbb{E}\left[e^{\lambda S_{1}}\right]^{n} e^{-\lambda t} \leq \exp \left(\frac{n \lambda^{2}}{2}\right) e^{-\lambda t}
+$$
+
+应用切诺夫边界定理，我们可以在$\lambda \geq 0$时将其最小化，等价于下式：
+
+$$
+\min _{\lambda \geq 0}\left\{\frac{n \lambda^{2}}{2}-\lambda t\right\}
+$$
+
+幸运的是，这是一个很容易最小化的函数，对该函数求导并将其设为零，我们可得$n \lambda-t=0$或$\lambda=t / n$，这样给出了：
+
+$$
+\mathbb{P}(Z \geq t) \leq \exp \left(-\frac{t^{2}}{2 n}\right)
+$$
+
+特别的，取$t=\sqrt{2 n \log \frac{1}{\delta}}$，我们可得：
+
+$$
+\mathbb{P}\left(\sum_{i=1}^{n} S_{i} \geq \sqrt{2 n \log \frac{1}{\delta}}\right) \leq \delta
+$$
+
+因此有很高的概率得出$Z=\sum_{i=1}^{n} S_{i}=O(\sqrt{n})$——$n$个独立随机符号的和基本上不会大于$O(\sqrt{n})$。
