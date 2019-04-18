@@ -26,3 +26,4 @@
 +   [损失函数](Markdown/cs229-loss-functions.md)
 +   [提升](Markdown/cs229-boosting.md)
 +   [表示函数](Markdown/cs229-representer-function.md)
++   [Hoeffding不等式](Markdown/cs229-hoeffding.md)
