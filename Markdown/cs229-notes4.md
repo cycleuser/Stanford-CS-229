@@ -242,14 +242,14 @@ $$
 此外，有至少为 $1-\delta$ 的概率：
 
 $$
-\hat\epsilon(h)\le \epsilon(h^*)+O(\sqrt{\frac{d}{m}log\frac{d}{m}+\frac 1mlog\frac 1\delta})
+\epsilon(\hat h)\le \epsilon(h^*)+O(\sqrt{\frac{d}{m}log\frac{d}{m}+\frac 1mlog\frac 1\delta})
 $$
 
 换句话说，如果一个假设类有有限的 $VC$ 维，那么只要训练样本规模 $m$ 增大，就能够保证联合收敛成立（uniform convergence occurs）。和之前一样，这就能够让我们以 $\epsilon(h)$ 的形式来给 $\epsilon(h^∗)$ 建立一个约束（bound）。此外还有下面的推论（corollary）：
 
-Corollary. For |ε(h) - \hat\epsilon(h)| ≤ \gamma to hold for all h ∈ H (and hence $\epsilon(hat{h}) ≤ \epsilon(h^∗) + 2\gamma$) with probability at least 1 - δ, it suffices that $m = O_{\gamma,\delta}(d)$.
+Corollary. For |ε(h) - \hat\epsilon(h)| ≤ \gamma to hold for all h ∈ H (and hence $\epsilon(\hat{h}) ≤ \epsilon(h^∗) + 2\gamma$) with probability at least 1 - δ, it suffices that $m = O_{\gamma,\delta}(d)$.
 
-**推论（Corollary）：** 对于所有的 $h \in H$ 成立的 $|\epsilon(h) - \hat\epsilon(h)| \le \gamma$ （因此也有 $\epsilon(\hat h) ≤ \epsilon(h^∗) + 2\gamma$），则有至少为 $1 – \delta$ 的概率，满足 $m = O_{\gamma,\delta}(d)$。
+**推论（Corollary）：** 对于所有的 $h \in H$ 成立的 $|\epsilon(h) - \epsilon(\hat h)| \le \gamma$ （因此也有 $\epsilon(\hat h) ≤ \epsilon(h^∗) + 2\gamma$），则有至少为 $1 – \delta$ 的概率，满足 $m = O_{\gamma,\delta}(d)$。
 
 In other words, the number of training examples needed to learn “well” using H is linear in the VC dimension of H. It turns out that, for “most” hypothesis classes, the VC dimension (assuming a “reasonable” parameterization) is also roughly linear in the number of parameters. Putting these together, we conclude that (for an algorithm that tries to minimize training error) the number of training examples needed is usually roughly linear in the number of parameters of H.
 
