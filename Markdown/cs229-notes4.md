@@ -45,7 +45,7 @@ $$
 P(A_1\cup...\cup A_k)\leq P(A_1)+...+P(A_k)
 $$
 
-在概率论中，联合约束通常被当做是公理（所以我们就不尝试证明了），实际上也很直观的： $k$ 个事件同时发生的概率最多是 $k$ 个不同的事件每个都发生的概率的总和。
+在概率论中，联合约束通常被当做是公理（所以我们就不尝试证明了），实际上也很直观的： $k$ 个事件至少发生一个的概率最多是 $k$ 个不同的事件各自发生的概率总和。
 
 引理2 (Hoeffding 不等式) 。设 $Z_1,...,Z_m$ 是 $m$ 个独立的并且共同遵循伯努利分布（Bernoulli($\phi$) distribution）的随机变量（independent and identically distributed (iid) random variables）。例如：$P(Z_i =1)=\phi$ 而 $P(Z_i =0)= 1 - \phi$. 设 $\hat\phi=(\frac1m)\sum^m_{i=1}Z_i$ 是这些随机变量的平均值，然后设任意的 $\gamma \geq 0$ 为某一固定值（fixed），则有：
 
@@ -201,7 +201,7 @@ $$
 
 The fact that we relied on 64-bit floating point makes this argument not entirely satisfying, but the conclusion is nonetheless roughly correct: If what we’re going to do is try to minimize training error, then in order to learn “well” using a hypothesis class that has d parameters, generally we’re going to need on the order of a linear number of training examples in d.
 
-由于我们要依赖 64 bit 浮点数，所以上面的论证还不能完全令人满意，但这个结论大致上是正确的：如果我们试图使训练误差（training error）最小化，那么为了使用具有 $d$ 个参数的假设类（hypothesis class）的学习效果“较好（well）”，通常就需要按照 $d$ 的线性数量来确定训练样本规模。（译者注：这句话的翻译肯定是错的，因为原文的语法我根本不能理解， 我第一次见到动词 need 后面用介词短语，而那个介词短语在此处我也不能确定具体意义，希望大家给提出指正，抱歉了。）
+上述论证依赖于假定参数是 64 位浮点数（但是实际上实数参数不一定如此实现），因此还不能完全令人满意，但这个结论大致上是正确的：如果我们试图使训练误差（training error）最小化，那么为了使用具有 $d$ 个参数的假设类（hypothesis class）的学习效果“较好（well）”，通常就需要 $d$ 的线性规模个训练样本。
 
 （在这里要注意的是，对于使用经验风险最小化（empirical risk minimization ，ERM）的学习算法，上面这些结论已经被证明适用。因此，样本复杂度（sample complexity）对 $d$ 的线性依赖性通常适用于大多数分类识别学习算法（discriminative learning algorithms），但训练误差或者训练误差近似值的最小化，就未必适用于分类识别了。对很多的非 ERM 学习算法提供可靠的理论论证，仍然是目前很活跃的一个研究领域。）
 
@@ -227,7 +227,7 @@ The fact that we relied on 64-bit floating point makes this argument not entirel
 
 ![](https://raw.githubusercontent.com/Kivy-CN/Stanford-CS-229-CN/master/img/cs229note4f4.png)
 
-换个方式来说，在 $VC$ 维 的定义之下，要保证 $VC(H)$ 至少为 $D$，只需要证明至少有一个规模为 $d$ 的集合能够被 $H$ 打散 就可以了。
+换个方式来说，在 $VC$ 维 的定义之下，要保证 $VC(H)$ 至少为 $d$，只需要证明至少有一个规模为 $d$ 的集合能够被 $H$ 打散 就可以了。
 
 这样就能够给出下面的定理（theorem）了，该定理来自 Vapnik。（有不少人认为这是所有学习理论中最重要的一个定理。）
 
@@ -247,7 +247,7 @@ $$
 
 换句话说，如果一个假设类有有限的 $VC$ 维，那么只要训练样本规模 $m$ 增大，就能够保证联合收敛成立（uniform convergence occurs）。和之前一样，这就能够让我们以 $\epsilon(h)$ 的形式来给 $\epsilon(h^∗)$ 建立一个约束（bound）。此外还有下面的推论（corollary）：
 
-Corollary. For |ε(h) - \hat\epsilon(h)| ≤ \gamma to hold for all h ∈ H (and hence $\epsilon(\hat{h}) ≤ \epsilon(h^∗) + 2\gamma$) with probability at least 1 - δ, it suffices that $m = O_{\gamma,\delta}(d)$.
+Corollary. For $|ε(h) - \hat\epsilon(h)| ≤ \gamma$ to hold for all h ∈ H (and hence $\epsilon(\hat{h}) ≤ \epsilon(h^∗) + 2\gamma$) with probability at least 1 - δ, it suffices that $m = O_{\gamma,\delta}(d)$.
 
 **推论（Corollary）：** 对于所有的 $h \in H$ 成立的 $|\epsilon(h) - \epsilon(\hat h)| \le \gamma$ （因此也有 $\epsilon(\hat h) ≤ \epsilon(h^∗) + 2\gamma$），则有至少为 $1 – \delta$ 的概率，满足 $m = O_{\gamma,\delta}(d)$。
 
