@@ -41,3 +41,4 @@
 + [stdcoutzyx](https://github.com/Kivy-CN/Stanford-CS-229-CN/files/2343330/cs229-stdcoutzyx.pdf)
 + [JerryLead](https://github.com/Kivy-CN/Stanford-CS-229-CN/files/2343386/cs229-JerryLead.pdf)
 + [黄海广](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes)
++ [Zhcz](https://github.com/zhoucz97/CS229-LearningNotes)
