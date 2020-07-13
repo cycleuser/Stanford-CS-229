@@ -85,7 +85,7 @@ $$
 推广一下，若 $s$ 是一个向量值的分布，密度函数为 $p_s$，而 $x = As$，其中的 $A$ 是一个可逆的正方形矩阵，那么 $x$ 的密度函数则为：
 
 $$
-px(x) = p_s(Wx) · |W|
+p_x(x) = p_s(Wx) · |W|
 $$
 
 上式中 $W = A^{-1}$。
@@ -107,7 +107,7 @@ $$
 这里要注意，通过在建模中将联合分布（joint distribution）拆解为边界分布（marginal）的乘积（product），就能得出每个声源都是独立的假设（assumption）。利用上一节推导的共识，这就表明对 $x = As = W^{-1}s$ 的密度函数为：
 
 $$
-p(s)=\prod_{i=1}^n p_s(w_i^T x)\cdot |w|
+p(x)=\prod_{i=1}^n p_s(w_i^T x)\cdot |w|
 $$
 
 剩下的就只需要去确定每个独立的声源的密度函数 $p_s$ 了。
@@ -124,7 +124,7 @@ $$
 l(W)=\sum_{i=1}^m(\sum_{j=1}^n log g'(w_j^Tx^{(i)})+log|W|))
 $$
 
-我们要做的就是上面这个函数找出关于 $W$ 的最大值。通过求导，然后利用前面讲义中给出的定理 $\nabla_W|W| = |W|(W^{-1})^T$，就可以很容易推导出随机梯度上升（stochastic gradient ascent）学习规则（leaR^ning rule）。对于一个给定的训练样本 $x^{(i)}$，这个更新规则为：
+我们要做的就是上面这个函数找出关于 $W$ 的最大值。通过求导，然后利用前面讲义中给出的定理 $\nabla_W|W| = |W|(W^{-1})^T$，就可以很容易推导出随机梯度上升（stochastic gradient ascent）学习规则（learning rule）。对于一个给定的训练样本 $x^{(i)}$，这个更新规则为：
 
 $$
 W:=W+\alpha\begin{pmatrix}
@@ -137,7 +137,7 @@ W:=W+\alpha\begin{pmatrix}
 \end{pmatrix}
 $$
 
-上式中的 $\alpha$ 是学习速率（leaR^ning rate）。
+上式中的 $\alpha$ 是学习速率（learning rate）。
 
 在算法收敛（converges）之后，就能计算出 $s^{(i)} = Wx^{(i)}$，这样就能恢复出原始的音源了。
 
