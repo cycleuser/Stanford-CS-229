@@ -170,7 +170,7 @@ $$
 有了在 MDP 中一系列试验得到的“经验”，就可以对状态转移概率（state transition probabilities）推导出最大似然估计（maximum likelihood estimates）了：
 
 $$
-P_{sa}(s')= \frac{在状态 s 执行动作 a 而到达状态 s' 花的时间}{在状态 s 执行动作 a 花的时间}\qquad(4)
+P_{sa}(s')= \frac{在状态 s 执行动作 a 而到达状态 s' 的次数}{在状态 s 执行动作 a 的次数}\qquad(4)
 $$
 
 或者，如果上面这个比例出现了$“0/0”$的情况，对应的情况就是在状态 $s$ 之前没进行过任何动作 $a$，这样就可以简单估计 $P_{sa}(s')$ 为 $1/|S|$。（也就是说把 $P_{sa}$ 估计为在所有状态上的均匀分布（uniform distribution）。）
