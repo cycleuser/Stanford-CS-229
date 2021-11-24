@@ -284,7 +284,7 @@ $$
 
 $$
 \begin{aligned}
-p(y=1|x) &= \frac{ \prod^n_{i=1} p(x_i|y=1)p(y=1) }   {\prod^n_{i=1} p(x_i|y=1)p(y=1) +\prod^n_{i=1} p(x_i|y=1)p(y=0)    }\\
+p(y=1|x) &= \frac{ \prod^n_{i=1} p(x_i|y=1)p(y=1) }   {\prod^n_{i=1} p(x_i|y=1)p(y=1) +\prod^n_{i=1} p(x_i|y=0)p(y=0)    }\\
 &= \frac00\\
 \end{aligned}
 $$
